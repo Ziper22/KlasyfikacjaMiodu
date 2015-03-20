@@ -33,8 +33,8 @@ namespace KlasyfikacjaMiodu
 
         private float scale;
         private TimeSpan timeSpan;
-        private List<HoneyType> honeyTypes;
-        private List<Marker> markers;
+        private List<HoneyType> honeyTypes = new List<HoneyType>();
+        private List<Marker> markers = new List<Marker>();
         private Image image;
 
         public float Scale
