@@ -18,7 +18,6 @@ namespace KlasyfikacjaMiodu
             DB baza = new DB();
             List<HoneyType> honeyList = baza.GetHoneyList;
 
-            baza.DeleteHoneyType("Cipowy");
             baza.SaveHoneyTypesToFile();
            
             Application.EnableVisualStyles();
