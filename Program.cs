@@ -14,6 +14,10 @@ namespace KlasyfikacjaMiodu
         [STAThread]
         static void Main()
         {
+            DB baza = new DB();
+            List<HoneyType> honeyList = baza.GetHoneyList;
+            MessageBox.Show(Convert.ToString(honeyList.Count));
+           
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
