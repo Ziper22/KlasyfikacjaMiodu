@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace KlasyfikacjaMiodu
 {
@@ -16,7 +17,9 @@ namespace KlasyfikacjaMiodu
         {
             DB baza = new DB();
             List<HoneyType> honeyList = baza.GetHoneyList;
-            MessageBox.Show(Convert.ToString(honeyList.Count));
+
+            baza.DeleteHoneyType("Cipowy");
+            baza.SaveHoneyTypesToFile();
            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

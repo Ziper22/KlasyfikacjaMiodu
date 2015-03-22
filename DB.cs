@@ -35,7 +35,6 @@ namespace KlasyfikacjaMiodu
         }
         public List<HoneyType> GetAllHoneyTypesFromFile()
         {
-            //TO DO: do poprawy
             List<HoneyType> HoneyList = new List<HoneyType>();
 
             string HoneyName = "";
@@ -43,19 +42,18 @@ namespace KlasyfikacjaMiodu
             Color HoneyMarkerColor = Color.Empty;
             int HoneyID = 0;
 
-           
-                using (StreamReader reader = new StreamReader(this.FilePath))
+            using (StreamReader reader = new StreamReader(this.FilePath))
+            {
+                while (true)
                 {
-                    while (true)
-                    {
-                    HoneyName = reader.ReadLine();
-                    if (HoneyName == null) break;
-                    HoneyDescriptionName = reader.ReadLine();
-                    HoneyMarkerColor = Color.FromName(reader.ReadLine());
-                    HoneyID = Convert.ToInt32(reader.ReadLine());
-                    HoneyType tmp = new HoneyType(HoneyID, HoneyName, HoneyDescriptionName, HoneyMarkerColor);
-                    HoneyList.Add(tmp);
-                    }
+                HoneyName = reader.ReadLine();
+                if (HoneyName == null) break;
+                HoneyDescriptionName = reader.ReadLine();
+                HoneyMarkerColor = Color.FromName(reader.ReadLine());
+                HoneyID = Convert.ToInt32(reader.ReadLine());
+                HoneyType tmp = new HoneyType(HoneyID, HoneyName, HoneyDescriptionName, HoneyMarkerColor);
+                HoneyList.Add(tmp);
+                }
             }
             return HoneyList;
         }
@@ -65,27 +63,19 @@ namespace KlasyfikacjaMiodu
 
             if (this.HoneyList.Exists(element => element == NewHoneyType)) return false;
 
-            //TO DO: dopisanie nowego typu miodu na koniec pliku + inkrementacja liczby typów miodu
-            using (StreamWriter writer = new StreamWriter(this.FilePath))
-            {
-                writer.WriteLine(HoneyName);
-                writer.WriteLine(HoneyDescriptionName);
-                writer.WriteLine(HoneyMarkerColor);
-                writer.WriteLine(this.HoneyList.Count + 1);
-            }
-            HoneyList.Add(new HoneyType(this.HoneyList.Count + 1,HoneyName,HoneyDescriptionName,HoneyMarkerColor));
+            HoneyList.Add(new HoneyType(this.HoneyList.Count + 1, HoneyName, HoneyDescriptionName, HoneyMarkerColor));
+
             return true;
         }
         public bool EditHoneyType(string HoneyNameToEdit,string NewName, string NewDescriptionName, Color NewMarkerColor)
         {
            int OldHoneyIndex = this.GetHoneyTypeIndexByName(HoneyNameToEdit);
-            if (OldHoneyIndex == 0) return false;
+            if (OldHoneyIndex == -1) return false;
 
             this.HoneyList[OldHoneyIndex].Name = NewName;
             this.HoneyList[OldHoneyIndex].DescriptionName = NewDescriptionName;
             this.HoneyList[OldHoneyIndex].MarkerColor = NewMarkerColor;
 
-            //TO DO: edytowanie wybranego miodu w pliku
             return true;
         }
 
@@ -94,20 +84,26 @@ namespace KlasyfikacjaMiodu
             if (this.HoneyList.Exists(element => element.Name == HoneyName)) 
                 return HoneyList.FindIndex(element => element.Name == HoneyName);
 
-            return 0;
+            return -1;
         }
         public void SaveHoneyTypesToFile()
         {
-            foreach(HoneyType honey in HoneyList)
+            using (StreamWriter writer = new StreamWriter(this.FilePath))
             {
-                using (StreamWriter writer = new StreamWriter(this.FilePath))
+                foreach(HoneyType honey in HoneyList)
                 {
+                
                     writer.WriteLine(honey.Name);
                     writer.WriteLine(honey.DescriptionName);
-                    writer.WriteLine(honey.MarkerColor);
+                    writer.WriteLine(honey.MarkerColor.Name);
                     writer.WriteLine(honey.ID);
                 }
             }
+        }
+        public void DeleteHoneyType(string HoneyName)
+        {
+            if (this.HoneyList.Exists(element => element.Name == HoneyName))
+                this.HoneyList.RemoveAt(this.HoneyList.FindIndex(element => element.Name == HoneyName));
         }
     }
 }
