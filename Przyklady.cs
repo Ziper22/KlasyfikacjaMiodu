@@ -38,7 +38,8 @@ namespace KlasyfikacjaMiodu
             //np w klasie TimeCounter jest to wykorzystane do wczytania ilości czasu z nowego kontekstu.
 
             //Dodanie nowego typu miodu do kontekstu:
-            Session.Context.AddHoneyType(new HoneyType("Wrzos", "Wrzosowy", Color.DarkViolet));
+            //TO DO: dodanie licznika gatunków miodu
+            Session.Context.AddHoneyType(new HoneyType(1,"Wrzos", "Wrzosowy", Color.DarkViolet));
             //akurat kolor powinien byc podany przez uzytkownika, tu dla przyklady wartosc stala
         }
 
