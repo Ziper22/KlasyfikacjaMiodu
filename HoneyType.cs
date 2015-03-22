@@ -13,15 +13,18 @@ namespace KlasyfikacjaMiodu
     /// </summary>
     public class HoneyType
     {
+        public int ID { get; }
         public string Name { get; set; }
         public string DescriptionName { get; set; }
         public Color MarkerColor { get; set; }
 
-        public HoneyType(string name, string descriptionName, Color markerColor)
+        public HoneyType(int ID,string name, string descriptionName, Color markerColor)
         {
+            this.ID = ID;
             DescriptionName = descriptionName;
             Name = name;
             MarkerColor = markerColor;
+
         }
     }
 }
