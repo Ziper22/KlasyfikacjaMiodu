@@ -23,6 +23,7 @@ namespace KlasyfikacjaMiodu
                 FileStream fs = File.Create(FilePath);
                 fs.Close();
             }
+
             HoneyList = this.GetAllHoneyTypesFromFile();
         }
         public List<HoneyType> GetHoneyList
@@ -34,14 +35,15 @@ namespace KlasyfikacjaMiodu
         }
         public List<HoneyType> GetAllHoneyTypesFromFile()
         {
+            //TO DO: do poprawy
             List<HoneyType> HoneyList = new List<HoneyType>();
 
             string HoneyName = "";
             string HoneyDescriptionName = "";
             Color HoneyMarkerColor = Color.Empty;
             int HoneyID = 0;
-            string s;
-            do
+
+            while (true)
             {
                 using (StreamReader reader = new StreamReader(this.FilePath))
                 {
@@ -50,12 +52,10 @@ namespace KlasyfikacjaMiodu
                     HoneyDescriptionName = reader.ReadLine();
                     HoneyMarkerColor = Color.FromName(reader.ReadLine());
                     HoneyID = Convert.ToInt32(reader.ReadLine());
-                    s = reader.ReadLine();
-
                 }
                 HoneyType tmp = new HoneyType(HoneyID, HoneyName, HoneyDescriptionName, HoneyMarkerColor);
                 HoneyList.Add(tmp);
-            } while (s != null);
+            }
             return HoneyList;
         }
         public bool AddNewHoneyType(string HoneyName, string HoneyDescriptionName, Color HoneyMarkerColor)
