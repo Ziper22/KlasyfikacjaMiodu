@@ -39,7 +39,7 @@ namespace KlasyfikacjaMiodu
 
             //Dodanie nowego typu miodu do kontekstu:
             //TO DO: dodanie licznika gatunków miodu
-            Session.Context.AddHoneyType(new HoneyType(1,"Wrzos", "Wrzosowy", Color.DarkViolet));
+            Session.Context.AddHoneyType(new HoneyType("Wrzos", "Wrzosowy", Color.DarkViolet));
             //akurat kolor powinien byc podany przez uzytkownika, tu dla przyklady wartosc stala
         }
 

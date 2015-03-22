@@ -11,16 +11,12 @@ namespace KlasyfikacjaMiodu
     {
         /// <summary>
         /// Główny punkt wejścia dla aplikacji.
+        /// Nic nie zmieniać w tej klasie!
         /// </summary>
         [STAThread]
         static void Main()
         {
-            DB baza = new DB();
-            List<HoneyType> honeyList = baza.GetHoneyList;
-
-            baza.SaveHoneyTypesToFile();
-           
-            Application.EnableVisualStyles();
+            Application.EnableVisualStyles(); //Nic nie zmieniać w tej klasie!
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
