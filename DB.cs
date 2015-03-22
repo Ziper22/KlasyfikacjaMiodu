@@ -43,18 +43,19 @@ namespace KlasyfikacjaMiodu
             Color HoneyMarkerColor = Color.Empty;
             int HoneyID = 0;
 
-            while (true)
-            {
+           
                 using (StreamReader reader = new StreamReader(this.FilePath))
                 {
+                    while (true)
+                    {
                     HoneyName = reader.ReadLine();
                     if (HoneyName == null) break;
                     HoneyDescriptionName = reader.ReadLine();
                     HoneyMarkerColor = Color.FromName(reader.ReadLine());
                     HoneyID = Convert.ToInt32(reader.ReadLine());
-                }
-                HoneyType tmp = new HoneyType(HoneyID, HoneyName, HoneyDescriptionName, HoneyMarkerColor);
-                HoneyList.Add(tmp);
+                    HoneyType tmp = new HoneyType(HoneyID, HoneyName, HoneyDescriptionName, HoneyMarkerColor);
+                    HoneyList.Add(tmp);
+                    }
             }
             return HoneyList;
         }
