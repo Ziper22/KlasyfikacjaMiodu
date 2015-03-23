@@ -13,9 +13,10 @@ namespace KlasyfikacjaMiodu
     /// <summary>
     /// Author: Agata Hammermeister<para/>
     /// </summary>
- 
+
     public partial class SidePanel : Form
     {
+        //powinien zawierać listę pollenModule?
         public SidePanel()
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace KlasyfikacjaMiodu
 
         private void dodajNowyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            //PollenModule module = new PollenModule(0,0,new HoneyType());
         }
 
         private void usuńToolStripMenuItem_Click(object sender, EventArgs e)
