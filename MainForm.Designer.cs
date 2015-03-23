@@ -34,21 +34,36 @@ namespace KlasyfikacjaMiodu
             this.imagePanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.workTimeDesc = new System.Windows.Forms.Label();
-            this.workTime = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.scaleDesc = new System.Windows.Forms.Label();
-            this.scale = new System.Windows.Forms.Label();
+            this.scale = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.honeyTypeDesc = new System.Windows.Forms.Label();
             this.honeyType = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.workTimeDesc = new System.Windows.Forms.Label();
+            this.workTime = new System.Windows.Forms.Label();
+            this.topMenu = new System.Windows.Forms.MenuStrip();
+            this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.newProjectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveProjectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadProjectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.loadImageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.quitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.undoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.showPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imagePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.bottomPanel.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.topMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // imagePanel
@@ -79,8 +94,8 @@ namespace KlasyfikacjaMiodu
             // 
             this.bottomPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.bottomPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.bottomPanel.Controls.Add(this.tableLayoutPanel1);
             this.bottomPanel.Controls.Add(this.flowLayoutPanel3);
-            this.bottomPanel.Controls.Add(this.flowLayoutPanel2);
             this.bottomPanel.Controls.Add(this.flowLayoutPanel1);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomPanel.Location = new System.Drawing.Point(0, 409);
@@ -88,59 +103,24 @@ namespace KlasyfikacjaMiodu
             this.bottomPanel.Size = new System.Drawing.Size(784, 32);
             this.bottomPanel.TabIndex = 1;
             // 
-            // workTimeDesc
+            // tableLayoutPanel1
             // 
-            this.workTimeDesc.AutoSize = true;
-            this.workTimeDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.workTimeDesc.Location = new System.Drawing.Point(0, 6);
-            this.workTimeDesc.Margin = new System.Windows.Forms.Padding(0);
-            this.workTimeDesc.Name = "workTimeDesc";
-            this.workTimeDesc.Size = new System.Drawing.Size(91, 20);
-            this.workTimeDesc.TabIndex = 0;
-            this.workTimeDesc.Text = "Czas pracy:";
-            // 
-            // workTime
-            // 
-            this.workTime.AutoSize = true;
-            this.workTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.workTime.Location = new System.Drawing.Point(91, 6);
-            this.workTime.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.workTime.Name = "workTime";
-            this.workTime.Size = new System.Drawing.Size(71, 20);
-            this.workTime.TabIndex = 1;
-            this.workTime.Text = "00:00:00";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel1.Controls.Add(this.workTimeDesc);
-            this.flowLayoutPanel1.Controls.Add(this.workTime);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(619, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(165, 32);
-            this.flowLayoutPanel1.TabIndex = 3;
-            this.flowLayoutPanel1.WrapContents = false;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.AutoSize = true;
-            this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel2.Controls.Add(this.scaleDesc);
-            this.flowLayoutPanel2.Controls.Add(this.scale);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(106, 32);
-            this.flowLayoutPanel2.TabIndex = 4;
-            this.flowLayoutPanel2.WrapContents = false;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel1.Controls.Add(this.scaleDesc, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.scale, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(154, 32);
+            this.tableLayoutPanel1.TabIndex = 6;
             // 
             // scaleDesc
             // 
+            this.scaleDesc.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.scaleDesc.AutoSize = true;
             this.scaleDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.scaleDesc.Location = new System.Drawing.Point(3, 6);
@@ -149,17 +129,28 @@ namespace KlasyfikacjaMiodu
             this.scaleDesc.Size = new System.Drawing.Size(53, 20);
             this.scaleDesc.TabIndex = 0;
             this.scaleDesc.Text = "Skala:";
+            this.scaleDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // scale
             // 
-            this.scale.AutoSize = true;
-            this.scale.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.scale.Location = new System.Drawing.Point(56, 6);
-            this.scale.Margin = new System.Windows.Forms.Padding(0);
+            this.scale.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.scale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.scale.FormattingEnabled = true;
+            this.scale.Items.AddRange(new object[] {
+            "10%",
+            "25%",
+            "50%",
+            "75%",
+            "100%",
+            "125%",
+            "150%",
+            "200%",
+            "400%",
+            "800%"});
+            this.scale.Location = new System.Drawing.Point(64, 4);
             this.scale.Name = "scale";
-            this.scale.Size = new System.Drawing.Size(50, 20);
+            this.scale.Size = new System.Drawing.Size(83, 24);
             this.scale.TabIndex = 1;
-            this.scale.Text = "100%";
             // 
             // flowLayoutPanel3
             // 
@@ -196,6 +187,143 @@ namespace KlasyfikacjaMiodu
             this.honeyType.TabIndex = 1;
             this.honeyType.Text = "Niesklasyfikowany";
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel1.Controls.Add(this.workTimeDesc);
+            this.flowLayoutPanel1.Controls.Add(this.workTime);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(619, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(165, 32);
+            this.flowLayoutPanel1.TabIndex = 3;
+            this.flowLayoutPanel1.WrapContents = false;
+            // 
+            // workTimeDesc
+            // 
+            this.workTimeDesc.AutoSize = true;
+            this.workTimeDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.workTimeDesc.Location = new System.Drawing.Point(0, 6);
+            this.workTimeDesc.Margin = new System.Windows.Forms.Padding(0);
+            this.workTimeDesc.Name = "workTimeDesc";
+            this.workTimeDesc.Size = new System.Drawing.Size(91, 20);
+            this.workTimeDesc.TabIndex = 0;
+            this.workTimeDesc.Text = "Czas pracy:";
+            // 
+            // workTime
+            // 
+            this.workTime.AutoSize = true;
+            this.workTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.workTime.Location = new System.Drawing.Point(91, 6);
+            this.workTime.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.workTime.Name = "workTime";
+            this.workTime.Size = new System.Drawing.Size(71, 20);
+            this.workTime.TabIndex = 1;
+            this.workTime.Text = "00:00:00";
+            // 
+            // topMenu
+            // 
+            this.topMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileMenu,
+            this.editMenu,
+            this.viewMenu});
+            this.topMenu.Location = new System.Drawing.Point(0, 0);
+            this.topMenu.Name = "topMenu";
+            this.topMenu.Size = new System.Drawing.Size(784, 24);
+            this.topMenu.TabIndex = 2;
+            this.topMenu.Text = "menuStrip1";
+            // 
+            // fileMenu
+            // 
+            this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newProjectMenuItem,
+            this.saveProjectMenuItem,
+            this.loadProjectMenuItem,
+            this.toolStripSeparator1,
+            this.loadImageMenuItem,
+            this.toolStripSeparator2,
+            this.quitMenuItem});
+            this.fileMenu.Name = "fileMenu";
+            this.fileMenu.Size = new System.Drawing.Size(38, 20);
+            this.fileMenu.Text = "Plik";
+            // 
+            // newProjectMenuItem
+            // 
+            this.newProjectMenuItem.Name = "newProjectMenuItem";
+            this.newProjectMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.newProjectMenuItem.Text = "Nowy projekt";
+            // 
+            // saveProjectMenuItem
+            // 
+            this.saveProjectMenuItem.Name = "saveProjectMenuItem";
+            this.saveProjectMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.saveProjectMenuItem.Text = "Zapisz Projekt (Ctrl+S)";
+            // 
+            // loadProjectMenuItem
+            // 
+            this.loadProjectMenuItem.Name = "loadProjectMenuItem";
+            this.loadProjectMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.loadProjectMenuItem.Text = "Wczytaj projekt...";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(188, 6);
+            // 
+            // loadImageMenuItem
+            // 
+            this.loadImageMenuItem.Name = "loadImageMenuItem";
+            this.loadImageMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.loadImageMenuItem.Text = "Wczytaj zdjęcie...";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(188, 6);
+            // 
+            // quitMenuItem
+            // 
+            this.quitMenuItem.Name = "quitMenuItem";
+            this.quitMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.quitMenuItem.Text = "Wyjście";
+            // 
+            // editMenu
+            // 
+            this.editMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undoMenuItem,
+            this.redoMenuItem});
+            this.editMenu.Name = "editMenu";
+            this.editMenu.Size = new System.Drawing.Size(53, 20);
+            this.editMenu.Text = "Edycja";
+            // 
+            // undoMenuItem
+            // 
+            this.undoMenuItem.Name = "undoMenuItem";
+            this.undoMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.undoMenuItem.Text = "Cofnij (Ctrl+Z)";
+            // 
+            // redoMenuItem
+            // 
+            this.redoMenuItem.Name = "redoMenuItem";
+            this.redoMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.redoMenuItem.Text = "Dalej (Ctrl+Y)";
+            // 
+            // viewMenu
+            // 
+            this.viewMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showPanelMenuItem});
+            this.viewMenu.Name = "viewMenu";
+            this.viewMenu.Size = new System.Drawing.Size(53, 20);
+            this.viewMenu.Text = "Widok";
+            // 
+            // showPanelMenuItem
+            // 
+            this.showPanelMenuItem.Name = "showPanelMenuItem";
+            this.showPanelMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.showPanelMenuItem.Text = "Pokaż panel (Ctrl+P)";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,6 +331,8 @@ namespace KlasyfikacjaMiodu
             this.ClientSize = new System.Drawing.Size(784, 441);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.imagePanel);
+            this.Controls.Add(this.topMenu);
+            this.MainMenuStrip = this.topMenu;
             this.MinimumSize = new System.Drawing.Size(400, 240);
             this.Name = "MainForm";
             this.Text = "Form1";
@@ -210,13 +340,16 @@ namespace KlasyfikacjaMiodu
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.bottomPanel.ResumeLayout(false);
             this.bottomPanel.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            this.topMenu.ResumeLayout(false);
+            this.topMenu.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -228,12 +361,26 @@ namespace KlasyfikacjaMiodu
         private Label workTimeDesc;
         private Label workTime;
         private FlowLayoutPanel flowLayoutPanel1;
-        private FlowLayoutPanel flowLayoutPanel2;
         private Label scaleDesc;
-        private Label scale;
         private FlowLayoutPanel flowLayoutPanel3;
         private Label honeyTypeDesc;
         private Label honeyType;
+        private TableLayoutPanel tableLayoutPanel1;
+        private ComboBox scale;
+        private MenuStrip topMenu;
+        private ToolStripMenuItem fileMenu;
+        private ToolStripMenuItem newProjectMenuItem;
+        private ToolStripMenuItem saveProjectMenuItem;
+        private ToolStripMenuItem loadProjectMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem loadImageMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem quitMenuItem;
+        private ToolStripMenuItem editMenu;
+        private ToolStripMenuItem undoMenuItem;
+        private ToolStripMenuItem redoMenuItem;
+        private ToolStripMenuItem viewMenu;
+        private ToolStripMenuItem showPanelMenuItem;
     }
 }
 

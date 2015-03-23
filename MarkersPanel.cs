@@ -13,18 +13,19 @@ namespace KlasyfikacjaMiodu
     /// Author: Mariusz Gorzycki<para/>
     /// Class responsible for handling Markers placement and image movement/scale
     /// </summary>
+    
     public class MarkersPanel
     {
         private Panel panel;
         private PictureBox image;
-        private Label scaleLabel;
+        private ComboBox scaleComboBox;
         private bool mouseDown = false;
         private int xOffset, yOffset;
 
-        public MarkersPanel(Panel panel, Label scaleLabel, PictureBox image)
+        public MarkersPanel(Panel panel, ComboBox scaleComboBox, PictureBox image)
         {
             this.panel = panel;
-            this.scaleLabel = scaleLabel;
+            this.scaleComboBox = scaleComboBox;
             this.image = image;
             panel.MouseDown += new MouseEventHandler(MarkersPanel_MouseDown);
             panel.MouseUp += new MouseEventHandler(MarkersPanel_MouseUp);
@@ -139,7 +140,7 @@ namespace KlasyfikacjaMiodu
         private void UpdateScaleText()
         {
             float scale = image.Width / (float)image.Image.Width;
-            scaleLabel.Text = (int)(scale * 100) + "%";
+            scaleComboBox.Text = (int)(scale * 100) + "%";
 
             Session.Context.Scale = scale;
         }

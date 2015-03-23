@@ -12,6 +12,7 @@ namespace KlasyfikacjaMiodu
     /// Author: Mariusz Gorzycki<para/>
     /// Represents a type of honey.
     /// </summary>
+    [Serializable]
     public class HoneyType
     {
         public string Name { get; set; }

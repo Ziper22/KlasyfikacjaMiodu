@@ -59,6 +59,9 @@
     <Compile Include="Przyklady.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="TimeCounter.cs" />
+    <Compile Include="TopMenu\TopMenuEdit.cs" />
+    <Compile Include="TopMenu\TopMenuFile.cs" />
+    <Compile Include="TopMenu\TopMenuView.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -88,6 +91,7 @@
   <ItemGroup>
     <None Include="Resources\ulan.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
