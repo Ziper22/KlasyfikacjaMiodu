@@ -13,7 +13,6 @@ namespace KlasyfikacjaMiodu
     /// Author: Mariusz Gorzycki<para/>
     /// Class responsible for handling Markers placement and image movement/scale
     /// </summary>
-    
     public class MarkersPanel
     {
         private Panel panel;
@@ -33,6 +32,7 @@ namespace KlasyfikacjaMiodu
             panel.MouseEnter += new EventHandler(MarkersPanel_MouseEnter);
             panel.MouseClick += new MouseEventHandler(MarkersPanel_Click);
             panel.MouseWheel += new MouseEventHandler(MarkersPanel_MouseWheel);
+            Session.Context.ImageChanged += MarkersPanel_ImageChanged;
             UpdateScaleText();
         }
 
@@ -132,6 +132,11 @@ namespace KlasyfikacjaMiodu
 
                 UpdateScaleText();
             }
+        }
+
+        private void MarkersPanel_ImageChanged(Image image)
+        {
+            this.image.Image = image;
         }
 
         /// <summary>
