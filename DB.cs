@@ -31,8 +31,8 @@ namespace KlasyfikacjaMiodu
                     if (HoneyName == null) break;
                     HoneyDescriptionName = reader.ReadLine();
                     HoneyMarkerColor = Color.FromName(reader.ReadLine());
-                    HoneyType tmp = new HoneyType(HoneyName, HoneyDescriptionName, HoneyMarkerColor);
-                    HoneyList.Add(tmp);
+
+                    HoneyList.Add(new HoneyType(HoneyName, HoneyDescriptionName, HoneyMarkerColor));
                 }
             }
             return HoneyList;
