@@ -7,10 +7,13 @@ using System.Windows.Forms;
 
 namespace KlasyfikacjaMiodu.TopMenu
 {
+<<<<<<< HEAD
     /// <summary>
     /// Author: Dawid Ferszter. <para/>
     /// Class responsible for handling "Edit" menu.
     /// </summary>
+=======
+>>>>>>> origin/master
     public class TopMenuEdit
     {
         private ToolStripMenuItem undo;

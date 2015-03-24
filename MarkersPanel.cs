@@ -18,6 +18,7 @@ namespace KlasyfikacjaMiodu
     {
         private Panel panel;
         private PictureBox image;
+<<<<<<< HEAD
         private NumericUpDown scaleNumericUpDown;
         private bool mouseDown = false;
         private int xOffset, yOffset;
@@ -26,6 +27,16 @@ namespace KlasyfikacjaMiodu
         {
             this.panel = panel;
             this.scaleNumericUpDown = scaleNumericUpDown;
+=======
+        private ComboBox scaleComboBox;
+        private bool mouseDown = false;
+        private int xOffset, yOffset;
+
+        public MarkersPanel(Panel panel, ComboBox scaleComboBox, PictureBox image)
+        {
+            this.panel = panel;
+            this.scaleComboBox = scaleComboBox;
+>>>>>>> origin/master
             this.image = image;
             panel.MouseDown += new MouseEventHandler(MarkersPanel_MouseDown);
             panel.MouseUp += new MouseEventHandler(MarkersPanel_MouseUp);
@@ -140,7 +151,11 @@ namespace KlasyfikacjaMiodu
         private void UpdateScaleText()
         {
             float scale = image.Width / (float)image.Image.Width;
+<<<<<<< HEAD
             scaleNumericUpDown.Text = (int)(scale * 100) + "";
+=======
+            scaleComboBox.Text = (int)(scale * 100) + "%";
+>>>>>>> origin/master
 
             Session.Context.Scale = scale;
         }
