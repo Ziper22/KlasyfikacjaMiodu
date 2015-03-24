@@ -1,8 +1,10 @@
-﻿using System;
+﻿using KlasyfikacjaMiodu.TopMenu;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,9 @@ namespace KlasyfikacjaMiodu
     {
         private MarkersPanel markersPanel;
         private TimeCounter timeCounter;
+        private TopMenuFile topMenuFile;
+        private TopMenuEdit topMenuEdit;
+        private TopMenuView topMenuView;
 
         public MainForm()
         {
@@ -21,6 +26,10 @@ namespace KlasyfikacjaMiodu
             ResizeRedraw = true;
             markersPanel = new MarkersPanel(imagePanel, scale, pictureBox1);
             timeCounter = new TimeCounter(workTime);
+            topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, 
+                loadProjectMenuItem, loadImageMenuItem, quitMenuItem);
+            topMenuEdit = new TopMenuEdit(undoMenuItem, redoMenuItem);
+            topMenuView = new TopMenuView(showPanelMenuItem);
         }
 
         protected override CreateParams CreateParams

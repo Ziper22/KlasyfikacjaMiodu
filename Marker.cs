@@ -11,6 +11,7 @@ namespace KlasyfikacjaMiodu
     /// Author: Mariusz Gorzycki<para/>
     /// Represents a marker with <see cref="HoneyType"/>.
     /// </summary>
+    [Serializable]
     public class Marker
     {
         public int X { get; private set; }
