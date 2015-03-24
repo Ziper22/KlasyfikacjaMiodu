@@ -33,6 +33,7 @@ namespace KlasyfikacjaMiodu
             panel.MouseClick += new MouseEventHandler(MarkersPanel_Click);
             panel.MouseWheel += new MouseEventHandler(MarkersPanel_MouseWheel);
             Session.Context.ImageChanged += MarkersPanel_ImageChanged;
+            Session.Changed += MarkersPanel_ContextChanged;
             UpdateScaleText();
         }
 
@@ -137,6 +138,11 @@ namespace KlasyfikacjaMiodu
         private void MarkersPanel_ImageChanged(Image image)
         {
             this.image.Image = image;
+        }
+
+        private void MarkersPanel_ContextChanged(Context context)
+        {
+            image.Image = context.Image;
         }
 
         /// <summary>
