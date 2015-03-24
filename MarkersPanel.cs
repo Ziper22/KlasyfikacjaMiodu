@@ -32,6 +32,7 @@ namespace KlasyfikacjaMiodu
             panel.MouseEnter += new EventHandler(MarkersPanel_MouseEnter);
             panel.MouseClick += new MouseEventHandler(MarkersPanel_Click);
             panel.MouseWheel += new MouseEventHandler(MarkersPanel_MouseWheel);
+            scaleNumericUpDown.ValueChanged += new EventHandler(MarkersPanel_ScaleChanged);
             Session.Context.ImageChanged += MarkersPanel_ImageChanged;
             Session.Changed += MarkersPanel_ContextChanged;
             UpdateScaleText();
@@ -133,6 +134,25 @@ namespace KlasyfikacjaMiodu
 
                 UpdateScaleText();
             }
+        }
+
+        private void MarkersPanel_ScaleChanged(object sender, EventArgs e)
+        {
+            float scale = (float)scaleNumericUpDown.Value/100f;
+
+            Point loc = panel.Location;
+            float width2 = panel.Size.Width;
+            float height2 = panel.Size.Height;
+
+            int width = (int) (image.Image.PhysicalDimension.Width*scale);
+            int height = (int)(image.Image.PhysicalDimension.Height * scale);
+            panel.Size = new Size(width, height);
+
+            int x = (int)(loc.X + (width2 - panel.Size.Width) / 2);
+            int y = (int)(loc.Y + (height2 - panel.Size.Height) / 2);
+            panel.Location = new Point(x, y);
+
+            Session.Context.Scale = scale;
         }
 
         private void MarkersPanel_ImageChanged(Image image)
