@@ -16,20 +16,27 @@ namespace KlasyfikacjaMiodu
     public class Context
     {
         public delegate void ScaleEventHandler(float newScale);
+        [field: NonSerialized]
         public event ScaleEventHandler ScaleChanged;
 
         public delegate void TimeEventHandler(TimeSpan newTimeSpan);
+        [field: NonSerialized]
         public event TimeEventHandler TimeChanged;
 
         public delegate void HoneyTypeEventHandler(HoneyType honeyType);
+        [field: NonSerialized]
         public event HoneyTypeEventHandler HoneyTypeAdded;
+        [field: NonSerialized]
         public event HoneyTypeEventHandler HoneyTypeRemoved;
 
         public delegate void MarkerEventHandler(Marker marker);
+        [field: NonSerialized]
         public event MarkerEventHandler MarkerAdded;
+        [field: NonSerialized]
         public event MarkerEventHandler MarkerRemoved;
 
         public delegate void ImageEventHandler(Image image);
+        [field: NonSerialized]
         public event ImageEventHandler ImageChanged;
 
         private float scale;

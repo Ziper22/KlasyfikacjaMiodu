@@ -52,8 +52,16 @@ namespace KlasyfikacjaMiodu.TopMenu
             sfd.Filter = "Miodek project file (.ulan)|*.ulan";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                using (Stream output = File.Create(sfd.FileName))
-                { formatter.Serialize(output, Session.Context); }
+                try
+                {
+                    using (Stream output = File.Create(sfd.FileName))
+                    { formatter.Serialize(output, Session.Context); }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
         }
 
