@@ -10,10 +10,19 @@ using System.Drawing;
 
 namespace KlasyfikacjaMiodu.TopMenu
 {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
     /// <summary>
     /// Author: Dawid Ferszter. <para/>
     /// Class responsible for handling "File" menu.
     /// </summary>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
     public class TopMenuFile
     {
         BinaryFormatter formatter = new BinaryFormatter(); // potrzebne do serializacji
@@ -42,6 +51,13 @@ namespace KlasyfikacjaMiodu.TopMenu
             quit.Click += Quit_Click;
         }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
+>>>>>>> origin/master
         private void NewProject_Click(object sender, EventArgs e)
         {
             Session.New();
@@ -71,7 +87,15 @@ namespace KlasyfikacjaMiodu.TopMenu
                 }
                 catch (Exception ex)
                 {
+<<<<<<< HEAD
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+=======
+<<<<<<< HEAD
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+=======
+                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+>>>>>>> origin/master
+>>>>>>> origin/master
                 }
 
                 Session.Load(newContext);
