@@ -10,6 +10,11 @@ namespace KlasyfikacjaMiodu
 {
     class DB
     {
+        /// <summary>
+        /// Author: Arek Mackiewicz<para/>
+        /// All project data and current state is kept as a program Context.
+        /// Every Context realted action as new project, loading new data etc. can by listened with events.
+        /// </summary>
         public static List<HoneyType> GetAllHoneyTypesFromFile()
         {
             List<HoneyType> HoneyList = new List<HoneyType>();
