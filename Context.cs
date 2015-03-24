@@ -12,6 +12,7 @@ namespace KlasyfikacjaMiodu
     /// All project data and current state is kept as a program Context.
     /// Every Context realted action as new project, loading new data etc. can by listened with events.
     /// </summary>
+    [Serializable]
     public class Context
     {
         public delegate void ScaleEventHandler(float newScale);
