@@ -7,19 +7,10 @@ using System.Windows.Forms;
 
 namespace KlasyfikacjaMiodu.TopMenu
 {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
     /// <summary>
     /// Author: Dawid Ferszter. <para/>
     /// Class responsible for handling "View" menu.
     /// </summary>
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/master
->>>>>>> origin/master
     public class TopMenuView
     {
         private ToolStripMenuItem showPanel;
