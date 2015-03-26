@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEditWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditWindow.Designer.cs">
+      <DependentUpon>AddEditWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Context.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="HoneyType.cs" />
@@ -69,6 +75,9 @@
       <DependentUpon>SidePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="TimeCounter.cs" />
+    <EmbeddedResource Include="AddEditWindow.resx">
+      <DependentUpon>AddEditWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
