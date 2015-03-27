@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KlasyfikacjaMiodu
+namespace KlasyfikacjaMiodu.BottomBar
 {
     /// <summary>
     /// Author: Mariusz Gorzycki<para/>
@@ -19,11 +15,11 @@ namespace KlasyfikacjaMiodu
         public TimeCounter(Label time)
         {
             this.time = time;
-            setOneSecondTimer();
+            SetOneSecondTimer();
             Session.Changed += Session_Changed;
         }
 
-        private void setOneSecondTimer()
+        private void SetOneSecondTimer()
         {
             timer = new Timer();
             timer.Tick += TimeChanged;

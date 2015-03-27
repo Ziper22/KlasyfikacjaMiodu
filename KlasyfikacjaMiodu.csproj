@@ -44,15 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\Action.cs" />
-    <Compile Include="Actions\Actions.cs" />
-    <Compile Include="Actions\RemoveMarkerAction.cs" />
-    <Compile Include="Actions\AddMarkerAction.cs" />
-    <Compile Include="AddEditWindow.cs">
+    <Compile Include="ActionsModule\Action.cs" />
+    <Compile Include="ActionsModule\Actions.cs" />
+    <Compile Include="ActionsModule\RemoveMarkerAction.cs" />
+    <Compile Include="ActionsModule\AddMarkerAction.cs" />
+    <Compile Include="HoneyTypeEditWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEditWindow.Designer.cs">
-      <DependentUpon>AddEditWindow.cs</DependentUpon>
+    <Compile Include="HoneyTypeEditWindow.Designer.cs">
+      <DependentUpon>HoneyTypeEditWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Context.cs" />
     <Compile Include="DB.cs" />
@@ -64,7 +64,8 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Marker.cs" />
-    <Compile Include="MarkersPanel.cs" />
+    <Compile Include="ViewPanel\ImagePanel.cs" />
+    <Compile Include="ViewPanel\MarkersPanel.cs" />
     <Compile Include="PollenModule.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -78,12 +79,12 @@
     <Compile Include="SidePanel.Designer.cs">
       <DependentUpon>SidePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="TimeCounter.cs" />
+    <Compile Include="BottomBar\TimeCounter.cs" />
     <Compile Include="TopMenu\TopMenuEdit.cs" />
     <Compile Include="TopMenu\TopMenuFile.cs" />
     <Compile Include="TopMenu\TopMenuView.cs" />
-    <EmbeddedResource Include="AddEditWindow.resx">
-      <DependentUpon>AddEditWindow.cs</DependentUpon>
+    <EmbeddedResource Include="HoneyTypeEditWindow.resx">
+      <DependentUpon>HoneyTypeEditWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

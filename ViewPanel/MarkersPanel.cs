@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using KlasyfikacjaMiodu.ActionsModule;
 
-namespace KlasyfikacjaMiodu
+namespace KlasyfikacjaMiodu.ViewPanel
 {
     /// <summary>
     /// Author: Mariusz Gorzycki<para/>
@@ -18,7 +14,7 @@ namespace KlasyfikacjaMiodu
         private Panel panel;
         private PictureBox image;
         private NumericUpDown scaleNumericUpDown;
-        private bool mouseDown = false;
+        private bool mouseDown = false, mouseMoved = false;
         private int xOffset, yOffset;
 
         public MarkersPanel(Panel panel, NumericUpDown scaleNumericUpDown, PictureBox image)
@@ -36,6 +32,7 @@ namespace KlasyfikacjaMiodu
             Session.Context.ImageChanged += MarkersPanel_ImageChanged;
             Session.Changed += MarkersPanel_ContextChanged;
             Session.Context.MarkerAdded += Context_MarkerAdded;
+            Session.Context.MarkerRemoved += Context_MarkerRemoved;
             UpdateScaleText();
         }
 
@@ -44,9 +41,22 @@ namespace KlasyfikacjaMiodu
             panel.Controls.Remove((Control)sender);
         }
 
+        private void Context_MarkerRemoved(Marker marker)
+        {
+            foreach (Control control in panel.Controls)
+            {
+                MarkerPictureBox box =  control as MarkerPictureBox;
+                if (box != null && box.Marker.Equals(marker))
+                {
+                    panel.Controls.Remove(box);
+                    break;
+                }
+            }
+        }
+
         private void Context_MarkerAdded(Marker marker)
         {
-            PictureBox p = new PictureBox();
+            MarkerPictureBox p = new MarkerPictureBox(marker);
 
             Image im = image.Image;
             Bitmap b = new Bitmap(im);
@@ -60,8 +70,8 @@ namespace KlasyfikacjaMiodu
             p.Image = (Image)b;
 
             p.Size = new Size(32, 32);
-            int x = Math.Min(image.Location.X + image.Size.Width - p.Size.Width, (Math.Max(0, e.X - p.Size.Width / 2)));
-            int y = Math.Min(image.Location.Y + image.Size.Height - p.Size.Height, (Math.Max(0, e.Y - p.Size.Height / 2)));
+            int x = Math.Min(image.Location.X + image.Size.Width - p.Size.Width, (Math.Max(0, marker.X - p.Size.Width / 2)));
+            int y = Math.Min(image.Location.Y + image.Size.Height - p.Size.Height, (Math.Max(0, marker.Y - p.Size.Height / 2)));
             p.Location = new Point(x, y);
             panel.Controls.Add(p);
             p.BringToFront();
@@ -70,9 +80,11 @@ namespace KlasyfikacjaMiodu
 
         private void MarkersPanel_Click(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (!mouseMoved && e.Button == MouseButtons.Left)
             {
-
+                Marker marker = new Marker(e.Location, 32, null);
+                AddMarkerAction action = new AddMarkerAction(marker);
+                Actions.RunAction(action);
             }
         }
 
@@ -82,7 +94,7 @@ namespace KlasyfikacjaMiodu
         /// </summary>
         private void MarkersPanel_MouseEnter(object sender, EventArgs e)
         {
-            panel.Focus();
+//            panel.Focus();
         }
 
         /// <summary>
@@ -91,9 +103,7 @@ namespace KlasyfikacjaMiodu
         /// </summary>
         private void MarkersPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            //Console.WriteLine(e.Location);
-            if (mouseDown && e.Button == MouseButtons.Right)
-                panel.Location = new Point(panel.Location.X + e.X - xOffset, panel.Location.Y + e.Y - yOffset);
+            mouseMoved = true;
         }
 
         /// <summary>
@@ -103,8 +113,7 @@ namespace KlasyfikacjaMiodu
         private void MarkersPanel_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
-            xOffset = e.X;
-            yOffset = e.Y;
+            mouseMoved = false;
         }
 
         /// <summary>
@@ -113,7 +122,7 @@ namespace KlasyfikacjaMiodu
         /// </summary>
         private void MarkersPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            mouseDown = false;
+            
         }
 
         /// <summary>
@@ -122,23 +131,7 @@ namespace KlasyfikacjaMiodu
         /// </summary>
         private void MarkersPanel_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (Session.Context.Scale > 0.1f || e.Delta > 0)
-            {
-                Point loc = panel.Location;
-                float width = panel.Size.Width;
-                float height = panel.Size.Height;
-
-                if (e.Delta > 0)
-                    panel.Scale(new SizeF(1.1f, 1.1f));
-                else
-                    panel.Scale(new SizeF(0.95f, 0.95f));
-
-                int x = (int)(loc.X + (width - panel.Size.Width) / 2);
-                int y = (int)(loc.Y + (height - panel.Size.Height) / 2);
-                panel.Location = new Point(x, y);
-
-                UpdateScaleText();
-            }
+            
         }
 
         private void MarkersPanel_ScaleChanged(object sender, EventArgs e)
@@ -179,6 +172,16 @@ namespace KlasyfikacjaMiodu
             scaleNumericUpDown.Text = (int)(scale * 100) + "";
 
             Session.Context.Scale = scale;
+        }
+
+        public class MarkerPictureBox : PictureBox
+        {
+            public Marker Marker { get; private set; }
+
+            public MarkerPictureBox(Marker marker)
+            {
+                this.Marker = marker;
+            }
         }
     }
 }

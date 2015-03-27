@@ -14,16 +14,33 @@ namespace KlasyfikacjaMiodu
     /// Author: Marek Borski<para/>
     /// </summary>
     /// 
-    public partial class AddEditWindow : Form
+    public partial class HoneyTypeEditWindow : Form
     {
-        public AddEditWindow()
+        public delegate void OkButtonClickedDelegate(HoneyType honeyType);
+        public event OkButtonClickedDelegate OkButtonClicked;
+        private HoneyType honeyType;
+
+        public HoneyTypeEditWindow()
         {
             InitializeComponent();
+            honeyType = new HoneyType("", "", Color.White);
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        public HoneyTypeEditWindow(HoneyType honeyType)
         {
+            InitializeComponent();
+            this.honeyType = honeyType;
+        }
 
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            OnOkButtonClicked();
+        }
+
+        protected virtual void OnOkButtonClicked()
+        {
+            if (OkButtonClicked != null)
+                OkButtonClicked(honeyType);
         }
 
         //private List<PollenModule> PollensList = new List<PollenModule>();
@@ -173,6 +190,5 @@ namespace KlasyfikacjaMiodu
 
         //    y1 = 25;
         //}
-
     }
 }

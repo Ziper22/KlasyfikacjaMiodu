@@ -33,7 +33,7 @@ namespace KlasyfikacjaMiodu
 
         protected bool Equals(Marker other)
         {
-            return X == other.X && Y == other.Y && Equals(HoneyType, other.HoneyType);
+            return X == other.X && Y == other.Y && Size == other.Size && Equals(HoneyType, other.HoneyType);
         }
 
         public override bool Equals(object obj)
@@ -41,7 +41,7 @@ namespace KlasyfikacjaMiodu
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((Marker)obj);
+            return Equals((Marker) obj);
         }
 
         public override int GetHashCode()
@@ -49,8 +49,9 @@ namespace KlasyfikacjaMiodu
             unchecked
             {
                 var hashCode = X;
-                hashCode = (hashCode * 397) ^ Y;
-                hashCode = (hashCode * 397) ^ (HoneyType != null ? HoneyType.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ Y;
+                hashCode = (hashCode*397) ^ Size;
+                hashCode = (hashCode*397) ^ (HoneyType != null ? HoneyType.GetHashCode() : 0);
                 return hashCode;
             }
         }

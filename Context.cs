@@ -28,6 +28,8 @@ namespace KlasyfikacjaMiodu
         public event HoneyTypeEventHandler HoneyTypeAdded;
         [field: NonSerialized]
         public event HoneyTypeEventHandler HoneyTypeRemoved;
+        [field: NonSerialized]
+        public event HoneyTypeEventHandler HoneyTypeSelected;
 
         public delegate void MarkerEventHandler(Marker marker);
         [field: NonSerialized]
@@ -43,6 +45,7 @@ namespace KlasyfikacjaMiodu
         private TimeSpan timeSpan;
         private List<HoneyType> honeyTypes = new List<HoneyType>();
         private List<Marker> markers = new List<Marker>();
+        private HoneyType selectedHoneyType;
         private Image image;
 
         public float Scale
@@ -75,6 +78,26 @@ namespace KlasyfikacjaMiodu
             }
         }
 
+        public HoneyType SelectedHoneyType
+        {
+            get { return selectedHoneyType; }
+            set
+            {
+                selectedHoneyType = value;
+                OnHoneyTypeSelected();
+            }
+        }
+
+        public IList<Marker> Markers
+        {
+            get { return markers.AsReadOnly(); }
+        }
+
+        public IList<HoneyType> HoneyTypes
+        {
+            get { return honeyTypes.AsReadOnly(); }
+        }
+
         public HoneyType GetHoneyType(string name)
         {
             foreach (HoneyType honeyType in honeyTypes)
@@ -96,7 +119,6 @@ namespace KlasyfikacjaMiodu
             honeyTypes.Remove(honeyType);
             OnHoneyTypeRemoved(honeyType);
         }
-
 
         public void AddMArker(Marker marker)
         {
@@ -150,6 +172,12 @@ namespace KlasyfikacjaMiodu
         {
             if (TimeChanged != null)
                 TimeChanged(timeSpan);
+        }
+
+        protected virtual void OnHoneyTypeSelected()
+        {
+            if (HoneyTypeSelected != null)
+                HoneyTypeSelected(selectedHoneyType);
         }
     }
 }

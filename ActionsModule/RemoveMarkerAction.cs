@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KlasyfikacjaMiodu.Actions
+﻿namespace KlasyfikacjaMiodu.ActionsModule
 {
     /// <summary>
     /// Author: Mariusz Gorzycki<para/>
     /// Action responsible for removing a Marker.
     /// </summary>
-    class RemoveMarkerAction : Action
+    public class RemoveMarkerAction : Action
     {
         private Marker marker;
 

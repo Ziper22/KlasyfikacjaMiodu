@@ -9,27 +9,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KlasyfikacjaMiodu.BottomBar;
+using KlasyfikacjaMiodu.ViewPanel;
 
 namespace KlasyfikacjaMiodu
 {
     public partial class MainForm : Form
     {
         private MarkersPanel markersPanel;
+        private ImagePanel imagePanel;
         private TimeCounter timeCounter;
         private TopMenuFile topMenuFile;
         private TopMenuEdit topMenuEdit;
         private TopMenuView topMenuView;
+        private SidePanel sidePanel;
 
         public MainForm()
         {
             InitializeComponent();
-            ResizeRedraw = true;
-            markersPanel = new MarkersPanel(imagePanel, scale, pictureBox1);
+            PrepareSidePanel();
+            markersPanel = new MarkersPanel(viewPanel, scale, pollensImage);
+            imagePanel = new ImagePanel(viewPanel, pollensImage);
             timeCounter = new TimeCounter(workTime);
             topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, loadProjectMenuItem, loadImageMenuItem, quitMenuItem);
             topMenuEdit = new TopMenuEdit(undoMenuItem, redoMenuItem);
-            topMenuView = new TopMenuView(showPanelMenuItem);
-            SidePanel sidePanel = new SidePanel();
+            topMenuView = new TopMenuView(showPanelMenuItem, sidePanel);
+        }
+
+        private void PrepareSidePanel()
+        {
+            sidePanel = new SidePanel();
+            sidePanel.Size = new Size(sidePanel.Size.Width, Size.Height);
+            sidePanel.StartPosition = FormStartPosition.Manual;
+
+            CenterToScreen();
+            Location = new Point(Left - sidePanel.Width/2, Top);
+
+            sidePanel.Location = new Point(Right,Top);
             sidePanel.Show();
         }
 

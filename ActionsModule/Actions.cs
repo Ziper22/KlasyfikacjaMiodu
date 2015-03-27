@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace KlasyfikacjaMiodu.Actions
+namespace KlasyfikacjaMiodu.ActionsModule
 {
     /// <summary>
     /// Author: Mariusz Gorzycki<para/>
     /// Manage all Actions performed and cancelled during the Session lifecycle.
     /// </summary>
-    class Actions
+    public class Actions
     {
         private static Stack<Action> doneActions = new Stack<Action>();
         private static Stack<Action> unDoneActions = new Stack<Action>();
@@ -42,7 +38,7 @@ namespace KlasyfikacjaMiodu.Actions
         /// </summary>
         public static void RedoLastUndoneAction()
         {
-            if (doneActions.Count > 0)
+            if (unDoneActions.Count > 0)
             {
                 Action last = unDoneActions.Pop();
                 doneActions.Push(last);

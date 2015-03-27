@@ -58,7 +58,7 @@ namespace KlasyfikacjaMiodu
 
         public void Edit()
         {
-            AddEditWindow addEditWindow = new AddEditWindow();
+            HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
             addEditWindow.Show();
         }
     }

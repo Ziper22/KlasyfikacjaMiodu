@@ -14,17 +14,19 @@ namespace KlasyfikacjaMiodu.TopMenu
     public class TopMenuView
     {
         private ToolStripMenuItem showPanel;
+        private SidePanel sidePanel;
 
-        public TopMenuView(ToolStripMenuItem showPanel)
+        public TopMenuView(ToolStripMenuItem showPanel, SidePanel sidePanel)
         {
             this.showPanel = showPanel;
+            this.sidePanel = sidePanel;
 
             showPanel.Click += ShowPanel_Click;
         }
 
         void ShowPanel_Click(object sender, EventArgs e)
         {
-            // pokazuje panel
+            sidePanel.Visible = !sidePanel.Visible;
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KlasyfikacjaMiodu.ActionsModule;
 
 namespace KlasyfikacjaMiodu.TopMenu
 {
@@ -27,12 +28,12 @@ namespace KlasyfikacjaMiodu.TopMenu
 
         private void undo_Click(object sender, EventArgs e)
         {
-            // cofnięcie zmiany
+            Actions.UndoLastAction();
         }
 
         private void redo_Click(object sender, EventArgs e)
         {
-            // ponowienie zmiany
+            Actions.RedoLastUndoneAction();
         }
     }
 }
