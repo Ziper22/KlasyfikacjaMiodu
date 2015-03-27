@@ -48,21 +48,17 @@ namespace KlasyfikacjaMiodu
             DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz usunąć wybrany znacznik?", "Znacznik zostanie usunięty", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                panel1.Container.Remove(pm);
+                return;
             }
             else if (dialogResult == DialogResult.No)
             {
+                panel1.Container.Remove(pm);
             }
         }
 
-        private void pionowaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            panel1.FlowDirection = FlowDirection.TopDown;
-        }
 
-        private void poziomaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            panel1.FlowDirection = FlowDirection.LeftToRight;
         }
     }
 }

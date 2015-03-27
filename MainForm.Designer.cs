@@ -31,15 +31,11 @@ namespace KlasyfikacjaMiodu
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.imagePanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.scaleDesc = new System.Windows.Forms.Label();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.scale = new System.Windows.Forms.NumericUpDown();
-            this.percentDesc = new System.Windows.Forms.Label();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.honeyTypeDesc = new System.Windows.Forms.Label();
             this.honeyType = new System.Windows.Forms.Label();
@@ -60,15 +56,18 @@ namespace KlasyfikacjaMiodu
             this.redoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.showPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.percentDesc = new System.Windows.Forms.Label();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.scale = new System.Windows.Forms.NumericUpDown();
             this.imagePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.bottomPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scale)).BeginInit();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.topMenu.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scale)).BeginInit();
             this.SuspendLayout();
             // 
             // imagePanel
@@ -112,7 +111,7 @@ namespace KlasyfikacjaMiodu
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 113F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel1.Controls.Add(this.scaleDesc, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -135,53 +134,6 @@ namespace KlasyfikacjaMiodu
             this.scaleDesc.TabIndex = 0;
             this.scaleDesc.Text = "Skala:";
             this.scaleDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Controls.Add(this.scale);
-            this.flowLayoutPanel2.Controls.Add(this.percentDesc);
-            this.flowLayoutPanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(60, 3);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(97, 26);
-            this.flowLayoutPanel2.TabIndex = 1;
-            // 
-            // scale
-            // 
-            this.scale.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.scale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.scale.Location = new System.Drawing.Point(3, 3);
-            this.scale.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.scale.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.scale.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.scale.Name = "scale";
-            this.scale.Size = new System.Drawing.Size(51, 22);
-            this.scale.TabIndex = 3;
-            this.scale.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // percentDesc
-            // 
-            this.percentDesc.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.percentDesc.AutoSize = true;
-            this.percentDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.percentDesc.Location = new System.Drawing.Point(54, 6);
-            this.percentDesc.Margin = new System.Windows.Forms.Padding(0);
-            this.percentDesc.Name = "percentDesc";
-            this.percentDesc.Size = new System.Drawing.Size(20, 16);
-            this.percentDesc.TabIndex = 1;
-            this.percentDesc.Text = "%";
             // 
             // flowLayoutPanel3
             // 
@@ -359,6 +311,53 @@ namespace KlasyfikacjaMiodu
             this.showPanelMenuItem.Size = new System.Drawing.Size(222, 26);
             this.showPanelMenuItem.Text = "Pokaż panel (Ctrl+P)";
             // 
+            // percentDesc
+            // 
+            this.percentDesc.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.percentDesc.AutoSize = true;
+            this.percentDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.percentDesc.Location = new System.Drawing.Point(54, 6);
+            this.percentDesc.Margin = new System.Windows.Forms.Padding(0);
+            this.percentDesc.Name = "percentDesc";
+            this.percentDesc.Size = new System.Drawing.Size(20, 16);
+            this.percentDesc.TabIndex = 1;
+            this.percentDesc.Text = "%";
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.scale);
+            this.flowLayoutPanel2.Controls.Add(this.percentDesc);
+            this.flowLayoutPanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(60, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(97, 26);
+            this.flowLayoutPanel2.TabIndex = 1;
+            // 
+            // scale
+            // 
+            this.scale.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.scale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.scale.Location = new System.Drawing.Point(3, 3);
+            this.scale.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.scale.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.scale.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.scale.Name = "scale";
+            this.scale.Size = new System.Drawing.Size(51, 22);
+            this.scale.TabIndex = 3;
+            this.scale.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -367,7 +366,6 @@ namespace KlasyfikacjaMiodu
             this.Controls.Add(this.topMenu);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.imagePanel);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.topMenu;
             this.MinimumSize = new System.Drawing.Size(400, 240);
             this.Name = "MainForm";
@@ -378,15 +376,15 @@ namespace KlasyfikacjaMiodu
             this.bottomPanel.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scale)).EndInit();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.topMenu.ResumeLayout(false);
             this.topMenu.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scale)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
