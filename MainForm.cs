@@ -21,6 +21,8 @@ namespace KlasyfikacjaMiodu
             ResizeRedraw = true;
             markersPanel = new MarkersPanel(imagePanel, scale, pictureBox1);
             timeCounter = new TimeCounter(workTime);
+            SidePanel sidePanel = new SidePanel();
+            sidePanel.Show();
         }
 
         protected override CreateParams CreateParams
