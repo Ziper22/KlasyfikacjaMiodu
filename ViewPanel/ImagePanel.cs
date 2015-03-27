@@ -108,15 +108,18 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Context_ScaleChanged(float scale)
         {
+            Point loc = new Point(panel.Location.X, panel.Location.Y);
+
             float width2 = panel.Size.Width;
             float height2 = panel.Size.Height;
 
-            float width = (pollensImage.Image.PhysicalDimension.Width * scale);
-            float height = (pollensImage.Image.PhysicalDimension.Height * scale);
-            panel.Size = new Size((int)width, (int)height);
+            float neededWidth = pollensImage.Image.PhysicalDimension.Width * scale;
+            float newScale = neededWidth/panel.Width;
 
-            int x = (int)(panel.Location.X + (width2 - width) / 2f);
-            int y = (int)(panel.Location.Y + (height2 - height) / 2f);
+            panel.Scale(new SizeF(newScale, newScale));
+
+            int x = (int)(loc.X + (width2 - panel.Size.Width) / 2f);
+            int y = (int)(loc.Y + (height2 - panel.Size.Height) / 2f);
             panel.Location = new Point(x, y);
         }
 
