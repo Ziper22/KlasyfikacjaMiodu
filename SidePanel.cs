@@ -24,14 +24,13 @@ namespace KlasyfikacjaMiodu
         {
             //AddEditWindow addEditWindow = new AddEditWindow();
             //addEditWindow.Show();
-            PollenModule pm = new PollenModule("Nowy Pyłek", Color.DarkMagenta);
-                //tylko do testów 
-            panel1.Controls.Add(pm);
-
-            PollenModule pm1 = new PollenModule("Kolejny Pyłek", Color.Magenta);
+            
             //tylko do testów    
-            panel1.Controls.Add(pm1);
-
+            panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
+            panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
+            panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
+            panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
+            panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
         }
 
         private void edytujToolStripMenuItem_Click(object sender, EventArgs e)
@@ -46,7 +45,15 @@ namespace KlasyfikacjaMiodu
         {
             ///???????????
             PollenModule pm = new PollenModule(); //tylko do testów
-            panel1.Container.Remove(pm);
+            DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz usunąć wybrany znacznik?", "Znacznik zostanie usunięty", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                return;
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                panel1.Container.Remove(pm);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
