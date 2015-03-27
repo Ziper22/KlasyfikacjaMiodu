@@ -35,6 +35,7 @@ namespace KlasyfikacjaMiodu
             scaleNumericUpDown.ValueChanged += new EventHandler(MarkersPanel_ScaleChanged);
             Session.Context.ImageChanged += MarkersPanel_ImageChanged;
             Session.Changed += MarkersPanel_ContextChanged;
+            Session.Context.MarkerAdded += Context_MarkerAdded;
             UpdateScaleText();
         }
 
@@ -43,31 +44,35 @@ namespace KlasyfikacjaMiodu
             panel.Controls.Remove((Control)sender);
         }
 
+        private void Context_MarkerAdded(Marker marker)
+        {
+            PictureBox p = new PictureBox();
+
+            Image im = image.Image;
+            Bitmap b = new Bitmap(im);
+            for (int i = 0; i < b.Width; i++)
+            {
+                for (int j = 0; j < b.Height; j++)
+                {
+                    b.SetPixel(i, j, Color.DeepSkyBlue);
+                }
+            }
+            p.Image = (Image)b;
+
+            p.Size = new Size(32, 32);
+            int x = Math.Min(image.Location.X + image.Size.Width - p.Size.Width, (Math.Max(0, e.X - p.Size.Width / 2)));
+            int y = Math.Min(image.Location.Y + image.Size.Height - p.Size.Height, (Math.Max(0, e.Y - p.Size.Height / 2)));
+            p.Location = new Point(x, y);
+            panel.Controls.Add(p);
+            p.BringToFront();
+            p.MouseClick += Marker_Click;
+        }
+
         private void MarkersPanel_Click(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                PictureBox p = new PictureBox();
 
-                Image im = image.Image;
-                Bitmap b = new Bitmap(im);
-                for (int i = 0; i < b.Width; i++)
-                {
-                    for (int j = 0; j < b.Height; j++)
-                    {
-                        b.SetPixel(i, j, Color.DeepSkyBlue);
-                    }
-                }
-                p.Image = (Image)b;
-
-                p.Size = new Size(32, 32);
-                int x = Math.Min(image.Location.X + image.Size.Width - p.Size.Width, (Math.Max(0, e.X - p.Size.Width / 2)));
-                int y = Math.Min(image.Location.Y + image.Size.Height - p.Size.Height,
-                    (Math.Max(0, e.Y - p.Size.Height / 2)));
-                p.Location = new Point(x, y);
-                panel.Controls.Add(p);
-                p.BringToFront();
-                p.MouseClick += Marker_Click;
             }
         }
 
@@ -138,13 +143,13 @@ namespace KlasyfikacjaMiodu
 
         private void MarkersPanel_ScaleChanged(object sender, EventArgs e)
         {
-            float scale = (float)scaleNumericUpDown.Value/100f;
+            float scale = (float)scaleNumericUpDown.Value / 100f;
 
             Point loc = panel.Location;
             float width2 = panel.Size.Width;
             float height2 = panel.Size.Height;
 
-            int width = (int) (image.Image.PhysicalDimension.Width*scale);
+            int width = (int)(image.Image.PhysicalDimension.Width * scale);
             int height = (int)(image.Image.PhysicalDimension.Height * scale);
             panel.Size = new Size(width, height);
 

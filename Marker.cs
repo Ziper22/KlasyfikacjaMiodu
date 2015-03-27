@@ -16,21 +16,20 @@ namespace KlasyfikacjaMiodu
     {
         public int X { get; private set; }
         public int Y { get; private set; }
+        public int Size { get; private set; }
         public HoneyType HoneyType { get; private set; }
 
-        public Marker(int x, int y, HoneyType honeyType)
+        public Marker(int x, int y, int size, HoneyType honeyType)
         {
             X = x;
             Y = y;
+            Size = size;
             HoneyType = honeyType;
         }
 
-        public Marker(Point position, HoneyType honeyType)
-        {
-            X = position.X;
-            Y = position.Y;
-            HoneyType = honeyType;
-        }
+        public Marker(Point position, int size, HoneyType honeyType)
+            : this(position.X, position.Y, size, honeyType)
+        {}
 
         protected bool Equals(Marker other)
         {
@@ -54,6 +53,16 @@ namespace KlasyfikacjaMiodu
                 hashCode = (hashCode * 397) ^ (HoneyType != null ? HoneyType.GetHashCode() : 0);
                 return hashCode;
             }
+        }
+
+        public int XMinusHalfSize
+        {
+            get { return X-Size/2; }
+        }
+
+        public int YMinusHalfSize
+        {
+            get { return Y-Size/2; }
         }
     }
 }

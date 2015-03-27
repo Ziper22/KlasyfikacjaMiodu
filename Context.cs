@@ -148,7 +148,7 @@ namespace KlasyfikacjaMiodu
 
         private void OnTimeChanged()
         {
-            if (TimeChanged != null) 
+            if (TimeChanged != null)
                 TimeChanged(timeSpan);
         }
     }
