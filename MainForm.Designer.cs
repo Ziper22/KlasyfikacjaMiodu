@@ -73,9 +73,10 @@ namespace KlasyfikacjaMiodu
             // viewPanel
             // 
             this.viewPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.viewPanel.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.viewPanel.BackColor = System.Drawing.SystemColors.Control;
             this.viewPanel.Controls.Add(this.pollensImage);
             this.viewPanel.Location = new System.Drawing.Point(51, 73);
+            this.viewPanel.Margin = new System.Windows.Forms.Padding(0);
             this.viewPanel.Name = "viewPanel";
             this.viewPanel.Size = new System.Drawing.Size(370, 243);
             this.viewPanel.TabIndex = 0;
@@ -88,6 +89,7 @@ namespace KlasyfikacjaMiodu
             this.pollensImage.Enabled = false;
             this.pollensImage.Image = global::KlasyfikacjaMiodu.Properties.Resources.ulan;
             this.pollensImage.Location = new System.Drawing.Point(0, 0);
+            this.pollensImage.Margin = new System.Windows.Forms.Padding(0);
             this.pollensImage.Name = "pollensImage";
             this.pollensImage.Size = new System.Drawing.Size(370, 243);
             this.pollensImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
