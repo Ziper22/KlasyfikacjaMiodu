@@ -44,7 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEditWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditWindow.Designer.cs">
+      <DependentUpon>AddEditWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Context.cs" />
+    <Compile Include="DB.cs" />
     <Compile Include="HoneyType.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -54,14 +61,26 @@
     </Compile>
     <Compile Include="Marker.cs" />
     <Compile Include="MarkersPanel.cs" />
+    <Compile Include="PollenModule.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Przyklady.cs" />
     <Compile Include="Session.cs" />
+    <Compile Include="SidePanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SidePanel.Designer.cs">
+      <DependentUpon>SidePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="TimeCounter.cs" />
     <Compile Include="TopMenu\TopMenuEdit.cs" />
     <Compile Include="TopMenu\TopMenuFile.cs" />
     <Compile Include="TopMenu\TopMenuView.cs" />
+    <EmbeddedResource Include="AddEditWindow.resx">
+      <DependentUpon>AddEditWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -75,6 +94,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SidePanel.resx">
+      <DependentUpon>SidePanel.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
 using System.IO;
+using System.Drawing;
 
 namespace KlasyfikacjaMiodu
 {
-    /// <summary>
-    /// Author: Arek Mackiewicz<para/>
-    /// All project data and current state is kept as a program Context.
-    /// Every Context realted action as new project, loading new data etc. can by listened with events.
-    /// </summary>
     class DB
     {
+        /// <summary>
+        /// Author: Arek Mackiewicz<para/>
+        /// All project data and current state is kept as a program Context.
+        /// Every Context realted action as new project, loading new data etc. can by listened with events.
+        /// </summary>
         public static List<HoneyType> GetAllHoneyTypesFromFile()
         {
             List<HoneyType> HoneyList = new List<HoneyType>();
@@ -23,7 +23,7 @@ namespace KlasyfikacjaMiodu
             string HoneyDescriptionName = "";
             Color HoneyMarkerColor = Color.Empty;
 
-            using (StreamReader reader = new StreamReader("honeyTypes.txt"))
+            using (StreamReader reader = new StreamReader("HoneyTypes.txt"))
             {
                 while (true)
                 {

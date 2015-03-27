@@ -26,6 +26,8 @@ namespace KlasyfikacjaMiodu
             ResizeRedraw = true;
             markersPanel = new MarkersPanel(imagePanel, scale, pictureBox1);
             timeCounter = new TimeCounter(workTime);
+            SidePanel sidePanel = new SidePanel();
+            sidePanel.Show();
             topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, 
                 loadProjectMenuItem, loadImageMenuItem, quitMenuItem);
             topMenuEdit = new TopMenuEdit(undoMenuItem, redoMenuItem);
