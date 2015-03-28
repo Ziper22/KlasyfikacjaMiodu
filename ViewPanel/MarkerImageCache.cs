@@ -17,7 +17,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         public static void Initialize()
         {
-            
+            cache.Clear();
         }
     }
 }

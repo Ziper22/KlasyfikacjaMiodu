@@ -112,7 +112,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 float y = (e.Y) / scale;
 //                x = Math.Max(lastMarkerSize / 2, Math.Min(image.Image.PhysicalDimension.Width - lastMarkerSize / 2, x));
 //                y = Math.Max(lastMarkerSize / 2, Math.Min(image.Image.PhysicalDimension.Height - lastMarkerSize / 2, y));
-                Marker marker = new Marker((int)x, (int)y, (int)lastMarkerSize, null);
+                HoneyType t = new HoneyType("Lipa", "Lipowy", "Lipowo", Color.SaddleBrown, 4, 0.5f);
+                Marker marker = new Marker((int)x, (int)y, (int)lastMarkerSize, t);
                 AddMarkerAction action = new AddMarkerAction(marker);
                 Actions.RunAction(action);
             }

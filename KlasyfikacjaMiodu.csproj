@@ -48,6 +48,7 @@
     <Compile Include="ActionsModule\Actions.cs" />
     <Compile Include="ActionsModule\RemoveMarkerAction.cs" />
     <Compile Include="ActionsModule\AddMarkerAction.cs" />
+    <Compile Include="BottomBar\HoneyTypeInformer.cs" />
     <Compile Include="BottomBar\ScaleHandler.cs" />
     <Compile Include="HoneyTypeEditWindow.cs">
       <SubType>Form</SubType>
