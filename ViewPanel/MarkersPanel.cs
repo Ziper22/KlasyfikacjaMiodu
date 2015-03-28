@@ -76,6 +76,11 @@ namespace KlasyfikacjaMiodu.ViewPanel
             panel.Controls.Add(p);
             p.BringToFront();
             p.MouseClick += Marker_Click;
+            p.MouseWheel += Marker_MouseWheel;
+            p.MouseDown += Marker_MouseDown;
+            p.MouseUp += Marker_MouseUp;
+            p.MouseEnter += Marker_MouseEnter;
+            p.MouseLeave += Marker_MouseLeave;
         }
 
         private void MarkersPanel_Click(object sender, MouseEventArgs e)
@@ -88,7 +93,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 float x = (e.X) / scale;
                 float y = (e.Y) / scale;
                 x = Math.Max(markerSize / 2, Math.Min(image.Image.PhysicalDimension.Width - markerSize / 2, x));
-                y = Math.Max(markerSize/2, Math.Min(image.Image.PhysicalDimension.Height - markerSize/2, y));
+                y = Math.Max(markerSize / 2, Math.Min(image.Image.PhysicalDimension.Height - markerSize / 2, y));
                 Marker marker = new Marker((int)x, (int)y, (int)markerSize, null);
                 AddMarkerAction action = new AddMarkerAction(marker);
                 Actions.RunAction(action);
@@ -101,7 +106,12 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseEnter(object sender, EventArgs e)
         {
-            ((MarkerPictureBox) sender).Focus();
+            ((MarkerPictureBox)sender).Focus();
+        }
+
+        private void Marker_MouseLeave(object sender, EventArgs e)
+        {
+            ((MarkerPictureBox)sender).Focus();
         }
 
         /// <summary>
@@ -138,7 +148,19 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseWheel(object sender, MouseEventArgs e)
         {
-
+            MarkerPictureBox box = sender as MarkerPictureBox;
+            if (box != null)
+            {
+                if (e.Delta > 0)
+                    box.Scale(new SizeF(1.1f, 1.1f));
+                else
+                {
+                    box.Scale(new SizeF(0.9f, 0.9f));
+                    if (box.Width < 8)
+                        box.Size = new Size(8,8);
+                }
+                box.Marker.Size = box.Width;
+            }
         }
 
         /// <summary>
