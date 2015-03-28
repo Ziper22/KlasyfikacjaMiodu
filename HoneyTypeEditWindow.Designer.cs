@@ -1,6 +1,6 @@
 ﻿namespace KlasyfikacjaMiodu
 {
-    partial class AddEditWindow
+    partial class HoneyTypeEditWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.valueTextBox = new System.Windows.Forms.TextBox();
+            this.percentTextBox = new System.Windows.Forms.TextBox();
+            this.linkedNameTextBox = new System.Windows.Forms.TextBox();
             this.specimenPictureBox = new System.Windows.Forms.PictureBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
@@ -44,6 +50,12 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.valueTextBox);
+            this.panel1.Controls.Add(this.percentTextBox);
+            this.panel1.Controls.Add(this.linkedNameTextBox);
             this.panel1.Controls.Add(this.specimenPictureBox);
             this.panel1.Controls.Add(this.cancelButton);
             this.panel1.Controls.Add(this.okButton);
@@ -59,10 +71,59 @@
             this.panel1.Size = new System.Drawing.Size(284, 261);
             this.panel1.TabIndex = 0;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 113);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Ilość:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 87);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Procent:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 61);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(62, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Nazwa link:";
+            // 
+            // valueTextBox
+            // 
+            this.valueTextBox.Location = new System.Drawing.Point(77, 110);
+            this.valueTextBox.Name = "valueTextBox";
+            this.valueTextBox.Size = new System.Drawing.Size(29, 20);
+            this.valueTextBox.TabIndex = 11;
+            // 
+            // percentTextBox
+            // 
+            this.percentTextBox.Location = new System.Drawing.Point(77, 84);
+            this.percentTextBox.MaxLength = 3;
+            this.percentTextBox.Name = "percentTextBox";
+            this.percentTextBox.Size = new System.Drawing.Size(29, 20);
+            this.percentTextBox.TabIndex = 10;
+            // 
+            // linkedNameTextBox
+            // 
+            this.linkedNameTextBox.Location = new System.Drawing.Point(77, 58);
+            this.linkedNameTextBox.Name = "linkedNameTextBox";
+            this.linkedNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.linkedNameTextBox.TabIndex = 9;
+            // 
             // specimenPictureBox
             // 
             this.specimenPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.specimenPictureBox.Location = new System.Drawing.Point(183, 61);
+            this.specimenPictureBox.Location = new System.Drawing.Point(183, 136);
             this.specimenPictureBox.Name = "specimenPictureBox";
             this.specimenPictureBox.Size = new System.Drawing.Size(26, 23);
             this.specimenPictureBox.TabIndex = 8;
@@ -70,7 +131,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(15, 105);
+            this.cancelButton.Location = new System.Drawing.Point(15, 176);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 7;
@@ -80,7 +141,7 @@
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(102, 105);
+            this.okButton.Location = new System.Drawing.Point(102, 176);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 6;
@@ -90,7 +151,7 @@
             // 
             // chooseColorButton
             // 
-            this.chooseColorButton.Location = new System.Drawing.Point(77, 61);
+            this.chooseColorButton.Location = new System.Drawing.Point(77, 136);
             this.chooseColorButton.Name = "chooseColorButton";
             this.chooseColorButton.Size = new System.Drawing.Size(100, 23);
             this.chooseColorButton.TabIndex = 5;
@@ -101,7 +162,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 66);
+            this.label3.Location = new System.Drawing.Point(12, 141);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 4;
@@ -109,7 +170,7 @@
             // 
             // descriptionTextBox
             // 
-            this.descriptionTextBox.Location = new System.Drawing.Point(77, 34);
+            this.descriptionTextBox.Location = new System.Drawing.Point(77, 32);
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.Size = new System.Drawing.Size(100, 20);
             this.descriptionTextBox.TabIndex = 3;
@@ -117,7 +178,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 37);
+            this.label2.Location = new System.Drawing.Point(12, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 2;
@@ -139,13 +200,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nazwa:";
             // 
-            // AddEditWindow
+            // HoneyTypeEditWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.panel1);
-            this.Name = "AddEditWindow";
+            this.Name = "HoneyTypeEditWindow";
             this.Text = "AddEditWindow";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -166,5 +227,11 @@
         private System.Windows.Forms.PictureBox specimenPictureBox;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.TextBox valueTextBox;
+        private System.Windows.Forms.TextBox percentTextBox;
+        private System.Windows.Forms.TextBox linkedNameTextBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
     }
 }

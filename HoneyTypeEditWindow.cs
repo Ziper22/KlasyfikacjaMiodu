@@ -14,25 +14,22 @@ namespace KlasyfikacjaMiodu
     /// Author: Marek Borski<para/>
     /// </summary>
     /// 
-    public partial class AddEditWindow : Form
+    public partial class HoneyTypeEditWindow : Form
     {
         public delegate void OkButtonClickedDelegate(HoneyType honeyType);
         public event OkButtonClickedDelegate OkButtonClicked;
         private HoneyType honeyType;
 
-        public Color Color { get; set; }
-        new public string Name { get; set; }
-        public string Description { get; set; }
         private Color color;
 
-        public AddEditWindow()
+        public HoneyTypeEditWindow()
         {
             InitializeComponent();
             Name = null;
             honeyType = new HoneyType("", "", Color.White);
         }
 
-        public AddEditWindow(HoneyType honeyType)
+        public HoneyTypeEditWindow(HoneyType honeyType)
         {
             InitializeComponent();
             this.honeyType = honeyType;
@@ -54,10 +51,6 @@ namespace KlasyfikacjaMiodu
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            //Name = nameTextBox.Text;
-            //Description = descriptionTextBox.Text;
-            //Color = color;
-
             honeyType.Name = nameTextBox.Text;
             honeyType.DescriptionName = descriptionTextBox.Text;
             honeyType.MarkerColor = color;

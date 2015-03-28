@@ -44,11 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddEditWindow.cs">
+    <Compile Include="HoneyTypeEditWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEditWindow.Designer.cs">
-      <DependentUpon>AddEditWindow.cs</DependentUpon>
+    <Compile Include="HoneyTypeEditWindow.Designer.cs">
+      <DependentUpon>HoneyTypeEditWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Context.cs" />
     <Compile Include="HoneyType.cs" />
@@ -77,8 +77,8 @@
     <Compile Include="TopMenu\TopMenuEdit.cs" />
     <Compile Include="TopMenu\TopMenuFile.cs" />
     <Compile Include="TopMenu\TopMenuView.cs" />
-    <EmbeddedResource Include="AddEditWindow.resx">
-      <DependentUpon>AddEditWindow.cs</DependentUpon>
+    <EmbeddedResource Include="HoneyTypeEditWindow.resx">
+      <DependentUpon>HoneyTypeEditWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
