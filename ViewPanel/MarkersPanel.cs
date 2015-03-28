@@ -13,7 +13,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
     {
         private Panel panel;
         private PictureBox image;
-        private bool mouseDown = false, mouseMoved = false;
+        private bool mouseDown = false, mouseMovedOnMarker = false, mouseMovedOnPanel = false;
         private int xOffset, yOffset, lastMarkerSize = 32;
 
         public MarkersPanel(Panel panel, PictureBox image)
@@ -21,8 +21,26 @@ namespace KlasyfikacjaMiodu.ViewPanel
             this.panel = panel;
             this.image = image;
             panel.MouseClick += new MouseEventHandler(MarkersPanel_Click);
+            panel.MouseDown += panel_MouseDown;
+            panel.MouseUp += PanelOnMouseUp;
+            panel.MouseMove += panel_MouseMove;
             Session.Changed += MarkersPanel_ContextChanged;
             SetContextEvents();
+        }
+
+        void panel_MouseMove(object sender, MouseEventArgs e)
+        {
+            mouseMovedOnPanel = true;
+        }
+
+        private void PanelOnMouseUp(object sender, MouseEventArgs mouseEventArgs)
+        {
+            mouseMovedOnPanel = false;
+        }
+
+        void panel_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseMovedOnPanel = false;
         }
 
         /// <summary>
@@ -36,6 +54,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         private void Marker_Click(object sender, MouseEventArgs e)
         {
+            if (!mouseMovedOnMarker)
             panel.Controls.Remove((Control)sender);
         }
 
@@ -69,7 +88,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
             int size = (int)(32 * Session.Context.Scale);
             p.Size = new Size(32, 32);
-            p.Scale(Session.Context.Scale);
+            p.Scale(new SizeF(Session.Context.Scale, Session.Context.Scale));
 
             p.Update();
             p.Location = new Point(marker.X, marker.Y);
@@ -80,11 +99,12 @@ namespace KlasyfikacjaMiodu.ViewPanel
             p.MouseDown += Marker_MouseDown;
             p.MouseUp += Marker_MouseUp;
             p.MouseEnter += Marker_MouseEnter;
+            p.MouseMove += Marker_MouseMove;
         }
 
         private void MarkersPanel_Click(object sender, MouseEventArgs e)
         {
-            if (!mouseMoved && e.Button == MouseButtons.Left)
+            if (!mouseMovedOnPanel && e.Button == MouseButtons.Left)
             {
                 float scale = Session.Context.Scale;
 
@@ -113,7 +133,25 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseMove(object sender, MouseEventArgs e)
         {
-            mouseMoved = true;
+            mouseMovedOnMarker = true;
+            MarkerPictureBox box = sender as MarkerPictureBox;
+            if (box != null && mouseDown)
+            {
+                int x = box.Marker.X + e.X - xOffset;
+                int y = box.Marker.Y + e.Y - yOffset;
+
+                x = Math.Max(box.Marker.Size/2, x);
+                x = (int) Math.Min(image.Image.PhysicalDimension.Width - box.Marker.Size/2f, x);
+
+                y = Math.Max(box.Marker.Size / 2, y);
+                y = (int)Math.Min(image.Image.PhysicalDimension.Height - box.Marker.Size / 2f, y);
+
+                box.Marker.X = x;
+                box.Marker.Y = y;
+
+                box.Location = new Point(1, 1);
+                box.Update();
+            }
         }
 
         /// <summary>
@@ -123,7 +161,9 @@ namespace KlasyfikacjaMiodu.ViewPanel
         private void Marker_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
-            mouseMoved = false;
+            mouseMovedOnMarker = false;
+            xOffset = e.X;
+            yOffset = e.Y;
         }
 
         /// <summary>
@@ -133,6 +173,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         private void Marker_MouseUp(object sender, MouseEventArgs e)
         {
             mouseDown = false;
+            mouseMovedOnMarker = false;
         }
 
         /// <summary>
