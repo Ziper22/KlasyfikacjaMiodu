@@ -11,7 +11,7 @@ namespace KlasyfikacjaMiodu
     class DB
     {
         /// <summary>
-        /// Author: Arek Mackiewicz<para/>
+        /// Author: Arek Mackiewicz,Krzysztof Kalisz<para/>
         /// All project data and current state is kept as a program Context.
         /// Every Context realted action as new project, loading new data etc. can by listened with events.
         /// </summary>
@@ -21,7 +21,10 @@ namespace KlasyfikacjaMiodu
 
             string HoneyName = "";
             string HoneyDescriptionName = "";
+            string HoneyLinkedName = "";
             Color HoneyMarkerColor = Color.Empty;
+            float HoneyMinimalPollensAmount = 0;
+            float HoneyMinimalPollensPercentageAmount = 0;
 
             using (StreamReader reader = new StreamReader("HoneyTypes.txt"))
             {
@@ -30,9 +33,11 @@ namespace KlasyfikacjaMiodu
                     HoneyName = reader.ReadLine();
                     if (HoneyName == null) break;
                     HoneyDescriptionName = reader.ReadLine();
+                    HoneyLinkedName = reader.ReadLine();
                     HoneyMarkerColor = Color.FromName(reader.ReadLine());
-
-                    HoneyList.Add(new HoneyType(HoneyName, HoneyDescriptionName, HoneyMarkerColor));
+                    HoneyMinimalPollensAmount = Convert.ToSingle(reader.ReadLine());
+                    HoneyMinimalPollensPercentageAmount = Convert.ToSingle(reader.ReadLine());
+                    HoneyList.Add(new HoneyType(HoneyName, HoneyDescriptionName,HoneyLinkedName, HoneyMarkerColor,HoneyMinimalPollensAmount,HoneyMinimalPollensPercentageAmount));
                 }
             }
             return HoneyList;
