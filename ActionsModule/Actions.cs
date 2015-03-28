@@ -49,7 +49,7 @@ namespace KlasyfikacjaMiodu.ActionsModule
         /// <summary>
         /// Returns the amount of actions performed since the program Session start
         /// </summary>
-        public int DoneActionsAmount
+        public static int DoneActionsAmount
         {
             get { return doneActions.Count; }
         }
@@ -57,7 +57,7 @@ namespace KlasyfikacjaMiodu.ActionsModule
         /// <summary>
         /// Returns the amount of actions cancelled since the program Session start
         /// </summary>
-        public int UnDoneActionsAmount
+        public static int UnDoneActionsAmount
         {
             get { return unDoneActions.Count; }
         }
