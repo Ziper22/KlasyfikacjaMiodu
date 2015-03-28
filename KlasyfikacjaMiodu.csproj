@@ -51,7 +51,6 @@
       <DependentUpon>AddEditWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Context.cs" />
-    <Compile Include="DB.cs" />
     <Compile Include="HoneyType.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
