@@ -20,13 +20,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         {
             this.panel = panel;
             this.image = image;
-            panel.MouseDown += new MouseEventHandler(MarkersPanel_MouseDown);
-            panel.MouseUp += new MouseEventHandler(MarkersPanel_MouseUp);
-            panel.MouseMove += new MouseEventHandler(MarkersPanel_MouseMove);
-            panel.MouseEnter += new EventHandler(MarkersPanel_MouseEnter);
             panel.MouseClick += new MouseEventHandler(MarkersPanel_Click);
-            panel.MouseWheel += new MouseEventHandler(MarkersPanel_MouseWheel);
-            Session.Context.ImageChanged += MarkersPanel_ImageChanged;
             Session.Changed += MarkersPanel_ContextChanged;
             SetContextEvents();
         }
@@ -49,7 +43,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         {
             foreach (Control control in panel.Controls)
             {
-                MarkerPictureBox box =  control as MarkerPictureBox;
+                MarkerPictureBox box = control as MarkerPictureBox;
                 if (box != null && box.Marker.Equals(marker))
                 {
                     panel.Controls.Remove(box);
@@ -73,10 +67,12 @@ namespace KlasyfikacjaMiodu.ViewPanel
             }
             p.Image = (Image)b;
 
+            int size = (int)(32 * Session.Context.Scale);
             p.Size = new Size(32, 32);
-            int x = Math.Min(image.Location.X + image.Size.Width - p.Size.Width, (Math.Max(0, marker.X - p.Size.Width / 2)));
-            int y = Math.Min(image.Location.Y + image.Size.Height - p.Size.Height, (Math.Max(0, marker.Y - p.Size.Height / 2)));
-            p.Location = new Point(x, y);
+            p.Scale(Session.Context.Scale);
+
+            p.Update();
+            p.Location = new Point(marker.X, marker.Y);
             panel.Controls.Add(p);
             p.BringToFront();
             p.MouseClick += Marker_Click;
@@ -86,7 +82,14 @@ namespace KlasyfikacjaMiodu.ViewPanel
         {
             if (!mouseMoved && e.Button == MouseButtons.Left)
             {
-                Marker marker = new Marker(e.Location, 32, null);
+                float scale = Session.Context.Scale;
+                float markerSize = 32;
+
+                float x = (e.X) / scale;
+                float y = (e.Y) / scale;
+                x = Math.Max(markerSize / 2, Math.Min(image.Image.PhysicalDimension.Width - markerSize / 2, x));
+                y = Math.Max(markerSize/2, Math.Min(image.Image.PhysicalDimension.Height - markerSize/2, y));
+                Marker marker = new Marker((int)x, (int)y, (int)markerSize, null);
                 AddMarkerAction action = new AddMarkerAction(marker);
                 Actions.RunAction(action);
             }
@@ -96,16 +99,16 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// Function responsible for handling Mouse events.
         /// Should not be invoked manually.
         /// </summary>
-        private void MarkersPanel_MouseEnter(object sender, EventArgs e)
+        private void Marker_MouseEnter(object sender, EventArgs e)
         {
-//            panel.Focus();
+            ((MarkerPictureBox) sender).Focus();
         }
 
         /// <summary>
         /// Function responsible for handling Mouse events.
         /// Should not be invoked manually.
         /// </summary>
-        private void MarkersPanel_MouseMove(object sender, MouseEventArgs e)
+        private void Marker_MouseMove(object sender, MouseEventArgs e)
         {
             mouseMoved = true;
         }
@@ -114,7 +117,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// Function responsible for handling Mouse events.
         /// Should not be invoked manually.
         /// </summary>
-        private void MarkersPanel_MouseDown(object sender, MouseEventArgs e)
+        private void Marker_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
             mouseMoved = false;
@@ -124,26 +127,18 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// Function responsible for handling Mouse events.
         /// Should not be invoked manually.
         /// </summary>
-        private void MarkersPanel_MouseUp(object sender, MouseEventArgs e)
+        private void Marker_MouseUp(object sender, MouseEventArgs e)
         {
-            
+            mouseDown = false;
         }
 
         /// <summary>
         /// Function responsible for handling Mouse events.
         /// Should not be invoked manually.
         /// </summary>
-        private void MarkersPanel_MouseWheel(object sender, MouseEventArgs e)
+        private void Marker_MouseWheel(object sender, MouseEventArgs e)
         {
-            
-        }
 
-        /// <summary>
-        /// Called when Image in current Context is changing
-        /// </summary>
-        private void MarkersPanel_ImageChanged(Image image)
-        {
-            this.image.Image = image;
         }
 
         /// <summary>
@@ -152,7 +147,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
         private void MarkersPanel_ContextChanged(Context context)
         {
             SetContextEvents();
-            image.Image = context.Image;
         }
 
 
@@ -163,6 +157,26 @@ namespace KlasyfikacjaMiodu.ViewPanel
             public MarkerPictureBox(Marker marker)
             {
                 this.Marker = marker;
+                this.LocationChanged += MarkerPictureBox_LocationChanged;
+                this.SizeChanged += MarkerPictureBox_SizeChanged;
+                this.Layout += MarkerPictureBox_SizeChanged;
+                this.Layout += MarkerPictureBox_LocationChanged;
+            }
+
+            void MarkerPictureBox_SizeChanged(object sender, EventArgs e)
+            {
+                float scale = Session.Context.Scale;
+                Size = new Size((int)(Marker.Size * scale), (int)(Marker.Size * scale));
+            }
+
+            void MarkerPictureBox_LocationChanged(object sender, EventArgs e)
+            {
+                float scale = Session.Context.Scale;
+
+                int x = (int)(Marker.CenterX * scale);
+                int y = (int)(Marker.CenterY * scale);
+
+                Location = new Point(x, y);
             }
         }
     }

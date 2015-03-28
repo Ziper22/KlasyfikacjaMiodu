@@ -28,9 +28,18 @@ namespace KlasyfikacjaMiodu.ViewPanel
             panel.MouseMove += new MouseEventHandler(PollensImage_MouseMove);
             panel.MouseEnter += new EventHandler(PollensImage_MouseEnter);
             panel.MouseWheel += new MouseEventHandler(PollensImage_MouseWheel);
+            pollensImage.Layout += pollensImage_Layout;
             SetContextEvents();
             Session.Changed += Session_ContextChanged;
             AdjustScaleToRealImageSize();
+        }
+
+        private void pollensImage_Layout(object sender, LayoutEventArgs e)
+        {
+            float scale = Session.Context.Scale;
+            int width = (int) (pollensImage.Image.PhysicalDimension.Width*scale);
+            int height = (int)(pollensImage.Image.PhysicalDimension.Height * scale);
+            pollensImage.Size = new Size(width, height);
         }
 
         /// <summary>
@@ -97,9 +106,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
             else
                 scale *= 0.9f;
 
-            if (scale < 0.01f)
-                scale = 0.01f;
-
             Session.Context.Scale = scale;
         }
 
@@ -110,16 +116,16 @@ namespace KlasyfikacjaMiodu.ViewPanel
         {
             Point loc = new Point(panel.Location.X, panel.Location.Y);
 
-            float width2 = panel.Size.Width;
-            float height2 = panel.Size.Height;
+            float CenterX = panel.Location.X + panel.Width / 2;
+            float CenterY = panel.Location.Y + panel.Height / 2;
 
             float neededWidth = pollensImage.Image.PhysicalDimension.Width * scale;
-            float newScale = neededWidth/panel.Width;
+            float newScale = neededWidth / panel.Width;
 
             panel.Scale(new SizeF(newScale, newScale));
 
-            int x = (int)(loc.X + (width2 - panel.Size.Width) / 2f);
-            int y = (int)(loc.Y + (height2 - panel.Size.Height) / 2f);
+            int x = (int)(CenterX - panel.Width / 2);
+            int y = (int)(CenterY - panel.Height / 2);
             panel.Location = new Point(x, y);
         }
 
