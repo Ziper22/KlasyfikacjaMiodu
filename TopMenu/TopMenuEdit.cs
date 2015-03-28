@@ -17,7 +17,7 @@ namespace KlasyfikacjaMiodu.TopMenu
         private ToolStripMenuItem undo;
         private ToolStripMenuItem redo;
 
-        public TopMenuEdit(Form form, ToolStripMenuItem undo, ToolStripMenuItem redo)
+        public TopMenuEdit(Form form, ToolStripMenuItem editMenu, ToolStripMenuItem undo, ToolStripMenuItem redo)
         {
             this.undo = undo;
             this.redo = redo;
@@ -25,8 +25,15 @@ namespace KlasyfikacjaMiodu.TopMenu
             form.KeyPreview = true;
             form.KeyDown += new KeyEventHandler(Form_KeyDown);
 
-            undo.Click += undo_Click;
-            redo.Click += redo_Click;
+            undo.Click += Undo_Click;
+            redo.Click += Redo_Click;
+            editMenu.Click += EditMenu_Click;
+            
+        }
+
+        void EditMenu_Click(object sender, EventArgs e)
+        {
+            ChangeEnabledProperty();
         }
 
         private void Form_KeyDown(object sender, KeyEventArgs e)
@@ -44,12 +51,12 @@ namespace KlasyfikacjaMiodu.TopMenu
             }
         }
 
-        private void undo_Click(object sender, EventArgs e)
+        private void Undo_Click(object sender, EventArgs e)
         {
             Actions.UndoLastAction();
         }
 
-        private void redo_Click(object sender, EventArgs e)
+        private void Redo_Click(object sender, EventArgs e)
         {
             Actions.RedoLastUndoneAction();
         }
@@ -59,8 +66,11 @@ namespace KlasyfikacjaMiodu.TopMenu
         /// </summary>
         private void ChangeEnabledProperty()
         {
-            if (Actions.DoneActionsAmount > 0) undo.Enabled = false;
-            else undo.Enabled = true;
+            if (Actions.DoneActionsAmount > 0) undo.Enabled = true;
+            else undo.Enabled = false;
+
+            if (Actions.UnDoneActionsAmount > 0) redo.Enabled = true;
+            else redo.Enabled = false;
         }
     }
 }

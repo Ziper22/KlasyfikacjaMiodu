@@ -34,7 +34,7 @@ namespace KlasyfikacjaMiodu
             scaleHandler = new ScaleHandler(scale);
             timeCounter = new TimeCounter(workTime);
             topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, loadProjectMenuItem, loadImageMenuItem, quitMenuItem);
-            topMenuEdit = new TopMenuEdit(this, undoMenuItem, redoMenuItem);
+            topMenuEdit = new TopMenuEdit(this, editMenu, undoMenuItem, redoMenuItem);
             topMenuView = new TopMenuView(showPanelMenuItem, sidePanel);
         }
 
