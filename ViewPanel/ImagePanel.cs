@@ -40,6 +40,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
             int width = (int) (pollensImage.Image.PhysicalDimension.Width*scale);
             int height = (int)(pollensImage.Image.PhysicalDimension.Height * scale);
             pollensImage.Size = new Size(width, height);
+
+            panel.Size = pollensImage.Size;
         }
 
         /// <summary>
@@ -96,17 +98,20 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void PollensImage_MouseWheel(object sender, MouseEventArgs e)
         {
-            float scale = pollensImage.Width / (float)pollensImage.Image.PhysicalDimension.Width;
-            if (e.Delta > 0)
+            if (panel.Focused)
             {
-                if (scale < 0.1f)
-                    scale += 0.01f;
-                scale *= 1.1f;
-            }
-            else
-                scale *= 0.9f;
+                float scale = pollensImage.Width/(float) pollensImage.Image.PhysicalDimension.Width;
+                if (e.Delta > 0)
+                {
+                    if (scale < 0.1f)
+                        scale += 0.01f;
+                    scale *= 1.1f;
+                }
+                else
+                    scale *= 0.9f;
 
-            Session.Context.Scale = scale;
+                Session.Context.Scale = scale;
+            }
         }
 
         /// <summary>

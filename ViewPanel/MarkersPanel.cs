@@ -14,7 +14,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         private Panel panel;
         private PictureBox image;
         private bool mouseDown = false, mouseMoved = false;
-        private int xOffset, yOffset;
+        private int xOffset, yOffset, lastMarkerSize = 32;
 
         public MarkersPanel(Panel panel, PictureBox image)
         {
@@ -80,7 +80,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
             p.MouseDown += Marker_MouseDown;
             p.MouseUp += Marker_MouseUp;
             p.MouseEnter += Marker_MouseEnter;
-            p.MouseLeave += Marker_MouseLeave;
         }
 
         private void MarkersPanel_Click(object sender, MouseEventArgs e)
@@ -88,13 +87,12 @@ namespace KlasyfikacjaMiodu.ViewPanel
             if (!mouseMoved && e.Button == MouseButtons.Left)
             {
                 float scale = Session.Context.Scale;
-                float markerSize = 32;
 
                 float x = (e.X) / scale;
                 float y = (e.Y) / scale;
-                x = Math.Max(markerSize / 2, Math.Min(image.Image.PhysicalDimension.Width - markerSize / 2, x));
-                y = Math.Max(markerSize / 2, Math.Min(image.Image.PhysicalDimension.Height - markerSize / 2, y));
-                Marker marker = new Marker((int)x, (int)y, (int)markerSize, null);
+//                x = Math.Max(lastMarkerSize / 2, Math.Min(image.Image.PhysicalDimension.Width - lastMarkerSize / 2, x));
+//                y = Math.Max(lastMarkerSize / 2, Math.Min(image.Image.PhysicalDimension.Height - lastMarkerSize / 2, y));
+                Marker marker = new Marker((int)x, (int)y, (int)lastMarkerSize, null);
                 AddMarkerAction action = new AddMarkerAction(marker);
                 Actions.RunAction(action);
             }
@@ -105,11 +103,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// Should not be invoked manually.
         /// </summary>
         private void Marker_MouseEnter(object sender, EventArgs e)
-        {
-            ((MarkerPictureBox)sender).Focus();
-        }
-
-        private void Marker_MouseLeave(object sender, EventArgs e)
         {
             ((MarkerPictureBox)sender).Focus();
         }
@@ -152,14 +145,19 @@ namespace KlasyfikacjaMiodu.ViewPanel
             if (box != null)
             {
                 if (e.Delta > 0)
-                    box.Scale(new SizeF(1.1f, 1.1f));
+                {
+                    box.Marker.Size = (int) (box.Marker.Size*1.05f);
+                    box.Marker.Size++;
+                }
                 else
                 {
-                    box.Scale(new SizeF(0.9f, 0.9f));
-                    if (box.Width < 8)
-                        box.Size = new Size(8,8);
+                    box.Marker.Size = (int) (box.Marker.Size*0.95f);
+                    box.Marker.Size--;
+                    if (box.Marker.Size < 16)
+                        box.Marker.Size = 16;
                 }
-                box.Marker.Size = box.Width;
+                lastMarkerSize = box.Marker.Size;
+                box.Scale(new SizeF(1,1));
             }
         }
 
