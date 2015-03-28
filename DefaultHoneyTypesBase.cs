@@ -8,10 +8,10 @@ using System.Drawing;
 
 namespace KlasyfikacjaMiodu
 {
-    class DB
+    class DefaultHoneyTypesBase
     {
         /// <summary>
-        /// Author: Arek Mackiewicz, Krzysztof Kalisz<para/>
+        /// Author: Arek Mackiewicz,Krzysztof Kalisz<para/>
         /// All project data and current state is kept as a program Context.
         /// Every Context realted action as new project, loading new data etc. can by listened with events.
         /// </summary>
