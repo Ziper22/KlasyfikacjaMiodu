@@ -31,7 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.specimenPictureBox = new System.Windows.Forms.PictureBox();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.acceptButton = new System.Windows.Forms.Button();
+            this.okButton = new System.Windows.Forms.Button();
             this.chooseColorButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
@@ -46,7 +46,7 @@
             // 
             this.panel1.Controls.Add(this.specimenPictureBox);
             this.panel1.Controls.Add(this.cancelButton);
-            this.panel1.Controls.Add(this.acceptButton);
+            this.panel1.Controls.Add(this.okButton);
             this.panel1.Controls.Add(this.chooseColorButton);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.descriptionTextBox);
@@ -78,15 +78,15 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // acceptButton
+            // okButton
             // 
-            this.acceptButton.Location = new System.Drawing.Point(102, 105);
-            this.acceptButton.Name = "acceptButton";
-            this.acceptButton.Size = new System.Drawing.Size(75, 23);
-            this.acceptButton.TabIndex = 6;
-            this.acceptButton.Text = "OK";
-            this.acceptButton.UseVisualStyleBackColor = true;
-            this.acceptButton.Click += new System.EventHandler(this.acceptButton_Click);
+            this.okButton.Location = new System.Drawing.Point(102, 105);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(75, 23);
+            this.okButton.TabIndex = 6;
+            this.okButton.Text = "OK";
+            this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // chooseColorButton
             // 
@@ -165,6 +165,6 @@
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.PictureBox specimenPictureBox;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button acceptButton;
+        private System.Windows.Forms.Button okButton;
     }
 }

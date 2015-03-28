@@ -16,6 +16,10 @@ namespace KlasyfikacjaMiodu
     /// 
     public partial class AddEditWindow : Form
     {
+        public delegate void OkButtonClickedDelegate(HoneyType honeyType);
+        public event OkButtonClickedDelegate OkButtonClicked;
+        private HoneyType honeyType;
+
         public Color Color { get; set; }
         new public string Name { get; set; }
         public string Description { get; set; }
@@ -25,6 +29,17 @@ namespace KlasyfikacjaMiodu
         {
             InitializeComponent();
             Name = null;
+            honeyType = new HoneyType("", "", Color.White);
+        }
+
+        public AddEditWindow(HoneyType honeyType)
+        {
+            InitializeComponent();
+            this.honeyType = honeyType;
+
+            nameTextBox.Text = honeyType.Name;
+            descriptionTextBox.Text = honeyType.DescriptionName;
+            specimenPictureBox.BackColor = honeyType.MarkerColor;
         }
 
         private void chooseColorButton_Click(object sender, EventArgs e)
@@ -37,13 +52,26 @@ namespace KlasyfikacjaMiodu
             }
         }
 
-        private void acceptButton_Click(object sender, EventArgs e)
+        private void okButton_Click(object sender, EventArgs e)
         {
-            Name = nameTextBox.Text;
-            Description = descriptionTextBox.Text;
-            Color = color;
+            //Name = nameTextBox.Text;
+            //Description = descriptionTextBox.Text;
+            //Color = color;
+
+            honeyType.Name = nameTextBox.Text;
+            honeyType.DescriptionName = descriptionTextBox.Text;
+            honeyType.MarkerColor = color;
+
+            OnOkButtonClicked();
+
             this.Close();
         }
+
+        protected virtual void OnOkButtonClicked()
+        {
+            if (OkButtonClicked != null)
+                OkButtonClicked(honeyType);
+        } 
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
