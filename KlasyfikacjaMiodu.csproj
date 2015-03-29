@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>bee2.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,7 +60,6 @@
       <DependentUpon>HoneyTypeEditWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Context.cs" />
-    <Compile Include="DB.cs" />
     <Compile Include="HoneyType.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -122,6 +124,7 @@
     <None Include="Resources\ulan.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bee2.ico" />
     <Content Include="Resources\marker128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
