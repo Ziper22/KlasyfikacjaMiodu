@@ -28,7 +28,7 @@ namespace KlasyfikacjaMiodu
         public FlowDirection FlowDirection;
         public FlowDirection FlowDirectionValues;
 
-        public PollenModule():base()
+        public PollenModule()
         {
             MarkerColor = new PictureBox();
             HoneyName = new Label();
@@ -47,6 +47,7 @@ namespace KlasyfikacjaMiodu
             PollenValues.Size = new Size(30,40);
             PollenNumber.Size = new Size(30, 20);
             PollenPercentage.Size = new Size(30, 20);
+            AutoSize = true;
             FlowDirection = FlowDirection.LeftToRight;
             FlowDirectionValues = FlowDirection.TopDown;
         }
@@ -73,6 +74,41 @@ namespace KlasyfikacjaMiodu
         {
             HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
             addEditWindow.Show();
+        }
+
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            //Color backColor = Color.FromArgb((int)(BackColor.GetHue()*1.1f));
+            //MarkerColor.BackColor = backColor;
+            Color color = MarkerColor.BackColor;
+            float correctionFactor = 0.4f;
+            float red = (255 - color.R) * correctionFactor + color.R;
+            float green = (255 - color.G) * correctionFactor + color.G;
+            float blue = (255 - color.B) * correctionFactor + color.B;
+            Color lighterColor = Color.FromArgb(color.A, (int)red, (int)green, (int)blue);
+            MarkerColor.BackColor = lighterColor;
+        }
+
+        //protected override void OnMouseHover(EventArgs e)
+        //{
+        //    Color color = MarkerColor.BackColor;
+        //    float correctionFactor = 0.2f;
+        //    float red = (255 - color.R) * correctionFactor + color.R;
+        //    float green = (255 - color.G) * correctionFactor + color.G;
+        //    float blue = (255 - color.B) * correctionFactor + color.B;
+        //    Color lighterColor = Color.FromArgb(color.A, (int)red, (int)green, (int)blue);
+        //    MarkerColor.BackColor = lighterColor;
+        //}
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            Color color = MarkerColor.BackColor;
+            float correctionFactor = -0.4f;
+            float red = (255 - color.R) * correctionFactor + color.R;
+            float green = (255 - color.G) * correctionFactor + color.G;
+            float blue = (255 - color.B) * correctionFactor + color.B;
+            Color lighterColor = Color.FromArgb(color.A, (int)red, (int)green, (int)blue);
+            MarkerColor.BackColor = lighterColor;
         }
     }
 }

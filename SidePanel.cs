@@ -18,13 +18,14 @@ namespace KlasyfikacjaMiodu
         public SidePanel()
         {
             InitializeComponent();
+            //FormClosingEventHandler += SidePanel_FormClosing;
         }
 
         private void dodajToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //AddEditWindow addEditWindow = new AddEditWindow();
             //addEditWindow.Show();
-            
+
             //tylko do testów    
             panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
             panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
@@ -48,17 +49,35 @@ namespace KlasyfikacjaMiodu
             DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz usunąć wybrany znacznik?", "Znacznik zostanie usunięty", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                return;
+                panel1.Container.Remove(pm);
             }
             else if (dialogResult == DialogResult.No)
             {
-                panel1.Container.Remove(pm);
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void pionowaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            panel1.FlowDirection = FlowDirection.TopDown;
         }
-    }
+
+        private void poziomaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel1.FlowDirection = FlowDirection.LeftToRight;
+        }
+        //private void SidePanel_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    this.Hide();
+        //    e.Cancel = true; // this cancels the close event
+        //}
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+        }
+   }
 }
