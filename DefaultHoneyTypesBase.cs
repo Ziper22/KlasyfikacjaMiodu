@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace KlasyfikacjaMiodu
 {
-    class DB
+    class DefaultHoneyTypesBase
     {
         /// <summary>
         /// Author: Arek Mackiewicz,Krzysztof Kalisz<para/>
