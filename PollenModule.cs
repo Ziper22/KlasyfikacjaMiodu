@@ -12,7 +12,7 @@ namespace KlasyfikacjaMiodu
     /// Author: Agata Hammermeister<para/>
     /// Contains information on number/percentage of each marked <see cref="HoneyType"/>. Displayed on the side panel.
     /// </summary>
-    public class PollenModule:FlowLayoutPanel
+    public class PollenModule : FlowLayoutPanel
     {
         public HoneyType HoneyType { get; private set; }
         public double Number;
@@ -25,6 +25,8 @@ namespace KlasyfikacjaMiodu
         public Label PollenNumber;
         public Label PollenPercentage;
 
+        //public FlowLayoutPanel MainPanel;
+
         public FlowDirection FlowDirection;
         public FlowDirection FlowDirectionValues;
 
@@ -35,32 +37,42 @@ namespace KlasyfikacjaMiodu
             PollenValues = new FlowLayoutPanel();
             PollenNumber = new Label();
             PollenPercentage = new Label();
+            //MainPanel=new FlowLayoutPanel();
 
             Controls.Add(MarkerColor);
             Controls.Add(HoneyName);
             Controls.Add(PollenValues);
             PollenValues.Controls.Add(PollenNumber);
             PollenValues.Controls.Add(PollenPercentage);
-           
-            MarkerColor.Size = new Size(40,40);
+            //MainPanel.Controls.Add(MarkerColor);
+            //MainPanel.Controls.Add(HoneyName);
+            //MainPanel.Controls.Add(PollenValues);
+
+            //MainPanel.Size=new Size(130,40);
+            MarkerColor.Size = new Size(40, 40);
             HoneyName.Size = new Size(60, 40);
-            PollenValues.Size = new Size(30,40);
+            PollenValues.Size = new Size(30, 40);
             PollenNumber.Size = new Size(30, 20);
             PollenPercentage.Size = new Size(30, 20);
             AutoSize = true;
             FlowDirection = FlowDirection.LeftToRight;
             FlowDirectionValues = FlowDirection.TopDown;
-        }
+        }       
 
-        public PollenModule(double pollenNumber, double pollenPercentage, HoneyType honeyType):this()
+        public PollenModule(double pollenNumber, double pollenPercentage, HoneyType honeyType) : this()
         {
             HoneyName.Text = honeyType.Name;
             MarkerColor.BackColor = honeyType.MarkerColor;
             Number = pollenNumber;
             Percentage = pollenPercentage;
         }
-
-        public PollenModule(string honeyName, Color color):this()
+        public PollenModule(HoneyType honeyType)
+            : this()
+        {
+            HoneyName.Text = honeyType.Name;
+            MarkerColor.BackColor = honeyType.MarkerColor;
+        }
+        public PollenModule(string honeyName, Color color) : this() //tylko do testów
         {
             HoneyName.Text = honeyName;
             MarkerColor.BackColor = color;
@@ -70,45 +82,24 @@ namespace KlasyfikacjaMiodu
             PollenPercentage.Text = Percentage.ToString();
         }
 
-        public void Edit()
+        public void Add(HoneyType honey)
         {
-            HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
-            addEditWindow.Show();
+            
+        }
+        public void Edit(HoneyType honey)
+        {
+            
+        }
+
+        public void Remove()
+        {
+            
         }
 
         protected override void OnMouseEnter(EventArgs e)
         {
-            //Color backColor = Color.FromArgb((int)(BackColor.GetHue()*1.1f));
-            //MarkerColor.BackColor = backColor;
-            Color color = MarkerColor.BackColor;
-            float correctionFactor = 0.4f;
-            float red = (255 - color.R) * correctionFactor + color.R;
-            float green = (255 - color.G) * correctionFactor + color.G;
-            float blue = (255 - color.B) * correctionFactor + color.B;
-            Color lighterColor = Color.FromArgb(color.A, (int)red, (int)green, (int)blue);
-            MarkerColor.BackColor = lighterColor;
+            //MainPanel.BackColor = Color.FloralWhite;
         }
 
-        //protected override void OnMouseHover(EventArgs e)
-        //{
-        //    Color color = MarkerColor.BackColor;
-        //    float correctionFactor = 0.2f;
-        //    float red = (255 - color.R) * correctionFactor + color.R;
-        //    float green = (255 - color.G) * correctionFactor + color.G;
-        //    float blue = (255 - color.B) * correctionFactor + color.B;
-        //    Color lighterColor = Color.FromArgb(color.A, (int)red, (int)green, (int)blue);
-        //    MarkerColor.BackColor = lighterColor;
-        //}
-
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            Color color = MarkerColor.BackColor;
-            float correctionFactor = -0.4f;
-            float red = (255 - color.R) * correctionFactor + color.R;
-            float green = (255 - color.G) * correctionFactor + color.G;
-            float blue = (255 - color.B) * correctionFactor + color.B;
-            Color lighterColor = Color.FromArgb(color.A, (int)red, (int)green, (int)blue);
-            MarkerColor.BackColor = lighterColor;
-        }
     }
 }

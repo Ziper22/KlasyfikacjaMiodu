@@ -103,6 +103,7 @@
             // 
             // panel1
             // 
+            this.panel1.AutoScroll = true;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.panel1.Location = new System.Drawing.Point(0, 24);
@@ -115,6 +116,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(233, 324);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
