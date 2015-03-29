@@ -1,0 +1,91 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace KlasyfikacjaMiodu
+{
+    /// <summary>
+    /// Author: Marek Borski<para/>
+    /// </summary>
+    /// 
+    public partial class HoneyTypeEditWindow : Form
+    {
+        public delegate void OkButtonClickedDelegate(HoneyType honeyType);
+        public event OkButtonClickedDelegate OkButtonClicked;
+        private HoneyType honeyType;
+
+<<<<<<< HEAD
+        public HoneyTypeEditWindow()
+        {
+            InitializeComponent();
+=======
+        private Color color;
+
+        public HoneyTypeEditWindow()
+        {
+            InitializeComponent();
+            Name = null;
+>>>>>>> origin/OkienkoBoczneV2Backup
+            honeyType = new HoneyType("", "", Color.White);
+        }
+
+        public HoneyTypeEditWindow(HoneyType honeyType)
+        {
+            InitializeComponent();
+            this.honeyType = honeyType;
+<<<<<<< HEAD
+=======
+
+            nameTextBox.Text = honeyType.Name;
+            descriptionTextBox.Text = honeyType.DescriptionName;
+            specimenPictureBox.BackColor = honeyType.MarkerColor;
+        }
+
+        private void chooseColorButton_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                color = dlg.Color;
+                specimenPictureBox.BackColor = color;
+            }
+>>>>>>> origin/OkienkoBoczneV2Backup
+        }
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+<<<<<<< HEAD
+            OnOkButtonClicked();
+=======
+            honeyType.Name = nameTextBox.Text;
+            honeyType.DescriptionName = descriptionTextBox.Text;
+            honeyType.MarkerColor = color;
+
+            OnOkButtonClicked();
+
+            this.Close();
+>>>>>>> origin/OkienkoBoczneV2Backup
+        }
+
+        protected virtual void OnOkButtonClicked()
+        {
+            if (OkButtonClicked != null)
+                OkButtonClicked(honeyType);
+<<<<<<< HEAD
+        }        
+=======
+        } 
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+>>>>>>> origin/OkienkoBoczneV2Backup
+    }
+}
