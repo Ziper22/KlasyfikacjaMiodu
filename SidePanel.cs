@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Tracing;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,16 +16,28 @@ namespace KlasyfikacjaMiodu
     /// </summary>
     public partial class SidePanel : Form
     {
+        private PollenModule chosenModule;
         public SidePanel()
         {
             InitializeComponent();
+            MouseClick += PollenModule_Clicked;
+            PollenModule chosenModule = null;
+                       
+           //FormClosing += new FormClosingEventHandler(SidePanel_FormClosing);
         }
 
+        private void PollenModule_Clicked(object sender, EventArgs e)
+        {
+            chosenModule = sender as PollenModule;
+        }
+        
         private void dodajToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //AddEditWindow addEditWindow = new AddEditWindow();
+            //HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
             //addEditWindow.Show();
-            
+           // addEditWindow.OkButtonClicked += chosenModule.Add(HoneyType honeyType);
+
+
             //tylko do testów    
             panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
             panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
@@ -34,31 +47,48 @@ namespace KlasyfikacjaMiodu
         }
 
         private void edytujToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //wybór pollenmodule do edycji
-            //pm - wybrany
-            PollenModule pm = new PollenModule(); //tylko do testów
-            pm.Edit();
+        {         
+            HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
+            addEditWindow.Show();
+            //addEditWindow.OkButtonClicked+=chosenModule.Edit(HoneyType);
         }
 
         private void usuńToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ///???????????
-            PollenModule pm = new PollenModule(); //tylko do testów
             DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz usunąć wybrany znacznik?", "Znacznik zostanie usunięty", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                return;
+                panel1.Container.Remove(chosenModule);
             }
             else if (dialogResult == DialogResult.No)
             {
-                panel1.Container.Remove(pm);
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void pionowaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            panel1.FlowDirection = FlowDirection.TopDown;
+        }
 
+        private void poziomaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel1.FlowDirection = FlowDirection.LeftToRight;
+        }
+
+        //private void SidePanel_FormClosing(object sender, EventArgs e)
+        //{
+        //    this.Hide();
+        //    e.Cancel = true; // this cancels the close event
+        //}
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
         }
     }
 }

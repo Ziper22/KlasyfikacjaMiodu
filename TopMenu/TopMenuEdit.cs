@@ -17,23 +17,60 @@ namespace KlasyfikacjaMiodu.TopMenu
         private ToolStripMenuItem undo;
         private ToolStripMenuItem redo;
 
-        public TopMenuEdit(ToolStripMenuItem undo, ToolStripMenuItem redo)
+        public TopMenuEdit(Form form, ToolStripMenuItem editMenu, ToolStripMenuItem undo, ToolStripMenuItem redo)
         {
             this.undo = undo;
             this.redo = redo;
 
-            undo.Click += undo_Click;
-            redo.Click += redo_Click;
+            form.KeyPreview = true;
+            form.KeyDown += new KeyEventHandler(Form_KeyDown);
+
+            undo.Click += Undo_Click;
+            redo.Click += Redo_Click;
+            editMenu.Click += EditMenu_Click;
+            
         }
 
-        private void undo_Click(object sender, EventArgs e)
+        void EditMenu_Click(object sender, EventArgs e)
+        {
+            ChangeEnabledProperty();
+        }
+
+        private void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.Z)
+            {
+                Actions.UndoLastAction();
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.Control && e.KeyCode == Keys.Y)
+            {
+                Actions.RedoLastUndoneAction();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void Undo_Click(object sender, EventArgs e)
         {
             Actions.UndoLastAction();
         }
 
-        private void redo_Click(object sender, EventArgs e)
+        private void Redo_Click(object sender, EventArgs e)
         {
             Actions.RedoLastUndoneAction();
+        }
+
+        /// <summary>
+        /// Changes "Enabled" property for ToolStripMenuItem controls.
+        /// </summary>
+        private void ChangeEnabledProperty()
+        {
+            if (Actions.DoneActionsAmount > 0) undo.Enabled = true;
+            else undo.Enabled = false;
+
+            if (Actions.UnDoneActionsAmount > 0) redo.Enabled = true;
+            else redo.Enabled = false;
         }
     }
 }

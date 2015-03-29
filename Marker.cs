@@ -14,9 +14,9 @@ namespace KlasyfikacjaMiodu
     [Serializable]
     public class Marker
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
-        public int Size { get; private set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Size { get; set; }
         public HoneyType HoneyType { get; private set; }
 
         public Marker(int x, int y, int size, HoneyType honeyType)
@@ -56,12 +56,12 @@ namespace KlasyfikacjaMiodu
             }
         }
 
-        public int XMinusHalfSize
+        public int CenterX
         {
             get { return X-Size/2; }
         }
 
-        public int YMinusHalfSize
+        public int CenterY
         {
             get { return Y-Size/2; }
         }

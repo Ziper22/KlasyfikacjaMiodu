@@ -84,7 +84,12 @@ namespace KlasyfikacjaMiodu
 
         public void Add(HoneyType honey)
         {
+<<<<<<< HEAD
+            HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
+            addEditWindow.Show();
+=======
             
+>>>>>>> origin/OkienkoBoczneV2Backup
         }
         public void Edit(HoneyType honey)
         {

@@ -8,6 +8,10 @@ using System.Windows.Forms;
 
 namespace KlasyfikacjaMiodu.ViewPanel
 {
+    /// <summary>
+    /// Author: Mariusz Gorzycki<para/>
+    /// Class responsible for handling image movement/scale
+    /// </summary>
     class ImagePanel
     {
         private Panel panel;
@@ -24,13 +28,29 @@ namespace KlasyfikacjaMiodu.ViewPanel
             panel.MouseMove += new MouseEventHandler(PollensImage_MouseMove);
             panel.MouseEnter += new EventHandler(PollensImage_MouseEnter);
             panel.MouseWheel += new MouseEventHandler(PollensImage_MouseWheel);
+            pollensImage.Layout += pollensImage_Layout;
             SetContextEvents();
             Session.Changed += Session_ContextChanged;
+            AdjustScaleToRealImageSize();
         }
 
+        private void pollensImage_Layout(object sender, LayoutEventArgs e)
+        {
+            float scale = Session.Context.Scale;
+            int width = (int) (pollensImage.Image.PhysicalDimension.Width*scale);
+            int height = (int)(pollensImage.Image.PhysicalDimension.Height * scale);
+            pollensImage.Size = new Size(width, height);
+
+            panel.Size = pollensImage.Size;
+        }
+
+        /// <summary>
+        /// Sets Context events. Listeners should be set again after every Context change in current Session
+        /// </summary>
         private void SetContextEvents()
         {
             Session.Context.ImageChanged += Context_ImageChanged;
+            Session.Context.ScaleChanged += Context_ScaleChanged;
         }
 
         /// <summary>
@@ -78,43 +98,66 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void PollensImage_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (Session.Context.Scale > 0.1f || e.Delta > 0)
+            if (panel.Focused)
             {
-                Point loc = panel.Location;
-                float width = panel.Size.Width;
-                float height = panel.Size.Height;
-
+                float scale = pollensImage.Width/(float) pollensImage.Image.PhysicalDimension.Width;
                 if (e.Delta > 0)
-                    pollensImage.Scale(new SizeF(1.1f, 1.1f));
+                {
+                    if (scale < 0.1f)
+                        scale += 0.01f;
+                    scale *= 1.1f;
+                }
                 else
-                    pollensImage.Scale(new SizeF(0.90f, 0.90f));
+                    scale *= 0.9f;
 
-                int x = (int)(loc.X + (width - panel.Size.Width) / 2);
-                int y = (int)(loc.Y + (height - panel.Size.Height) / 2);
-                panel.Location = new Point(x, y);
-
-                float scale = pollensImage.Width / (float)pollensImage.Image.Width;
                 Session.Context.Scale = scale;
             }
         }
 
         /// <summary>
+        /// Scales the pollensImage with proper scale coefficient
+        /// </summary>
+        private void Context_ScaleChanged(float scale)
+        {
+            Point loc = new Point(panel.Location.X, panel.Location.Y);
+
+            float CenterX = panel.Location.X + panel.Width / 2;
+            float CenterY = panel.Location.Y + panel.Height / 2;
+
+            float neededWidth = pollensImage.Image.PhysicalDimension.Width * scale;
+            float newScale = neededWidth / panel.Width;
+
+            panel.Scale(new SizeF(newScale, newScale));
+
+            int x = (int)(CenterX - panel.Width / 2);
+            int y = (int)(CenterY - panel.Height / 2);
+            panel.Location = new Point(x, y);
+        }
+
+        /// <summary>
+        /// Adjust scale value in current Context.
+        /// </summary>
+        private void AdjustScaleToRealImageSize()
+        {
+            Session.Context.Scale = pollensImage.Width / (float)pollensImage.Image.PhysicalDimension.Width;
+        }
+
+        /// <summary>
         /// Called when Image in current Context is changing
         /// </summary>
-        /// <param name="image"></param>
         private void Context_ImageChanged(Image image)
         {
             this.pollensImage.Image = image;
+            AdjustScaleToRealImageSize();
         }
-
 
         /// <summary>
         /// Called when Context in current session is changing
         /// </summary>
-        /// <param name="context"></param>
         private void Session_ContextChanged(Context context)
         {
             pollensImage.Image = context.Image;
+            SetContextEvents();
         }
     }
 }

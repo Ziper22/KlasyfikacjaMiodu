@@ -41,7 +41,7 @@ namespace KlasyfikacjaMiodu
         [field: NonSerialized]
         public event ImageEventHandler ImageChanged;
 
-        private float scale;
+        private float scale = 1;
         private TimeSpan timeSpan;
         private List<HoneyType> honeyTypes = new List<HoneyType>();
         private List<Marker> markers = new List<Marker>();

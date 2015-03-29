@@ -32,8 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>bee2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -48,12 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="ActionsModule\Action.cs" />
     <Compile Include="ActionsModule\Actions.cs" />
     <Compile Include="ActionsModule\RemoveMarkerAction.cs" />
     <Compile Include="ActionsModule\AddMarkerAction.cs" />
     <Compile Include="BottomBar\HoneyTypeInformer.cs" />
     <Compile Include="BottomBar\ScaleHandler.cs" />
+=======
+>>>>>>> origin/OkienkoBoczneV2Backup
     <Compile Include="HoneyTypeEditWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,7 +127,11 @@
     <None Include="Resources\ulan.jpg" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="Resources\marker128.png" />
+=======
+    <Content Include="bee2.ico" />
+>>>>>>> origin/OkienkoBoczneV2Backup
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

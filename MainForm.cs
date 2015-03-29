@@ -18,6 +18,8 @@ namespace KlasyfikacjaMiodu
     {
         private MarkersPanel markersPanel;
         private ImagePanel imagePanel;
+        private ScaleHandler scaleHandler;
+        private HoneyTypeInformer honeyTypeInformer;
         private TimeCounter timeCounter;
         private TopMenuFile topMenuFile;
         private TopMenuEdit topMenuEdit;
@@ -28,11 +30,13 @@ namespace KlasyfikacjaMiodu
         {
             InitializeComponent();
             PrepareSidePanel();
-            markersPanel = new MarkersPanel(viewPanel, scale, pollensImage);
+            markersPanel = new MarkersPanel(viewPanel, pollensImage);
             imagePanel = new ImagePanel(viewPanel, pollensImage);
+            scaleHandler = new ScaleHandler(scale);
+            honeyTypeInformer = new HoneyTypeInformer(honeyType);
             timeCounter = new TimeCounter(workTime);
             topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, loadProjectMenuItem, loadImageMenuItem, quitMenuItem);
-            topMenuEdit = new TopMenuEdit(undoMenuItem, redoMenuItem);
+            topMenuEdit = new TopMenuEdit(this, editMenu, undoMenuItem, redoMenuItem);
             topMenuView = new TopMenuView(showPanelMenuItem, sidePanel);
         }
 

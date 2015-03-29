@@ -49,7 +49,7 @@ namespace KlasyfikacjaMiodu.TopMenu
 
         private void SaveProject_Click(object sender, EventArgs e)
         {
-            sfd.Filter = "Miodek project file (.ulan)|*.ulan";
+            sfd.Filter = "Klasyfikacja Miodu project file (.ulan)|*.ulan";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -69,7 +69,7 @@ namespace KlasyfikacjaMiodu.TopMenu
         {
             Context newContext = new Context();
 
-            ofd.Filter = "Miodek project file (.ulan)|*.ulan";
+            ofd.Filter = "Klasyfikacja Miodu project file (.ulan)|*.ulan";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 try

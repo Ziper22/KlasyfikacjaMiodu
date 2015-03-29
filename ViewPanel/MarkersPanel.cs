@@ -7,37 +7,54 @@ namespace KlasyfikacjaMiodu.ViewPanel
 {
     /// <summary>
     /// Author: Mariusz Gorzycki<para/>
-    /// Class responsible for handling Markers placement and image movement/scale
+    /// Class responsible for handling Markers placement and movement/scale
     /// </summary>
     public class MarkersPanel
     {
         private Panel panel;
         private PictureBox image;
-        private NumericUpDown scaleNumericUpDown;
-        private bool mouseDown = false, mouseMoved = false;
-        private int xOffset, yOffset;
+        private bool mouseDown = false, mouseMovedOnMarker = false, mouseMovedOnPanel = false;
+        private int xOffset, yOffset, lastMarkerSize = 32;
 
-        public MarkersPanel(Panel panel, NumericUpDown scaleNumericUpDown, PictureBox image)
+        public MarkersPanel(Panel panel, PictureBox image)
         {
             this.panel = panel;
-            this.scaleNumericUpDown = scaleNumericUpDown;
             this.image = image;
-            panel.MouseDown += new MouseEventHandler(MarkersPanel_MouseDown);
-            panel.MouseUp += new MouseEventHandler(MarkersPanel_MouseUp);
-            panel.MouseMove += new MouseEventHandler(MarkersPanel_MouseMove);
-            panel.MouseEnter += new EventHandler(MarkersPanel_MouseEnter);
             panel.MouseClick += new MouseEventHandler(MarkersPanel_Click);
-            panel.MouseWheel += new MouseEventHandler(MarkersPanel_MouseWheel);
-            scaleNumericUpDown.ValueChanged += new EventHandler(MarkersPanel_ScaleChanged);
-            Session.Context.ImageChanged += MarkersPanel_ImageChanged;
+            panel.MouseDown += panel_MouseDown;
+            panel.MouseUp += PanelOnMouseUp;
+            panel.MouseMove += panel_MouseMove;
             Session.Changed += MarkersPanel_ContextChanged;
+            SetContextEvents();
+        }
+
+        void panel_MouseMove(object sender, MouseEventArgs e)
+        {
+            mouseMovedOnPanel = true;
+        }
+
+        private void PanelOnMouseUp(object sender, MouseEventArgs mouseEventArgs)
+        {
+            mouseMovedOnPanel = false;
+        }
+
+        void panel_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseMovedOnPanel = false;
+        }
+
+        /// <summary>
+        /// Sets Context events. Listeners should be set again after every Context change in current Session
+        /// </summary>
+        private void SetContextEvents()
+        {
             Session.Context.MarkerAdded += Context_MarkerAdded;
             Session.Context.MarkerRemoved += Context_MarkerRemoved;
-            UpdateScaleText();
         }
 
         private void Marker_Click(object sender, MouseEventArgs e)
         {
+            if (!mouseMovedOnMarker)
             panel.Controls.Remove((Control)sender);
         }
 
@@ -45,7 +62,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         {
             foreach (Control control in panel.Controls)
             {
-                MarkerPictureBox box =  control as MarkerPictureBox;
+                MarkerPictureBox box = control as MarkerPictureBox;
                 if (box != null && box.Marker.Equals(marker))
                 {
                     panel.Controls.Remove(box);
@@ -69,20 +86,34 @@ namespace KlasyfikacjaMiodu.ViewPanel
             }
             p.Image = (Image)b;
 
+            int size = (int)(32 * Session.Context.Scale);
             p.Size = new Size(32, 32);
-            int x = Math.Min(image.Location.X + image.Size.Width - p.Size.Width, (Math.Max(0, marker.X - p.Size.Width / 2)));
-            int y = Math.Min(image.Location.Y + image.Size.Height - p.Size.Height, (Math.Max(0, marker.Y - p.Size.Height / 2)));
-            p.Location = new Point(x, y);
+            p.Scale(new SizeF(Session.Context.Scale, Session.Context.Scale));
+
+            p.Update();
+            p.Location = new Point(marker.X, marker.Y);
             panel.Controls.Add(p);
             p.BringToFront();
             p.MouseClick += Marker_Click;
+            p.MouseWheel += Marker_MouseWheel;
+            p.MouseDown += Marker_MouseDown;
+            p.MouseUp += Marker_MouseUp;
+            p.MouseEnter += Marker_MouseEnter;
+            p.MouseMove += Marker_MouseMove;
         }
 
         private void MarkersPanel_Click(object sender, MouseEventArgs e)
         {
-            if (!mouseMoved && e.Button == MouseButtons.Left)
+            if (!mouseMovedOnPanel && e.Button == MouseButtons.Left)
             {
-                Marker marker = new Marker(e.Location, 32, null);
+                float scale = Session.Context.Scale;
+
+                float x = (e.X) / scale;
+                float y = (e.Y) / scale;
+//                x = Math.Max(lastMarkerSize / 2, Math.Min(image.Image.PhysicalDimension.Width - lastMarkerSize / 2, x));
+//                y = Math.Max(lastMarkerSize / 2, Math.Min(image.Image.PhysicalDimension.Height - lastMarkerSize / 2, y));
+                HoneyType t = new HoneyType("Lipa", "Lipowy", "Lipowo", Color.SaddleBrown, 4, 0.5f);
+                Marker marker = new Marker((int)x, (int)y, (int)lastMarkerSize, t);
                 AddMarkerAction action = new AddMarkerAction(marker);
                 Actions.RunAction(action);
             }
@@ -92,87 +123,94 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// Function responsible for handling Mouse events.
         /// Should not be invoked manually.
         /// </summary>
-        private void MarkersPanel_MouseEnter(object sender, EventArgs e)
+        private void Marker_MouseEnter(object sender, EventArgs e)
         {
-//            panel.Focus();
+            ((MarkerPictureBox)sender).Focus();
         }
 
         /// <summary>
         /// Function responsible for handling Mouse events.
         /// Should not be invoked manually.
         /// </summary>
-        private void MarkersPanel_MouseMove(object sender, MouseEventArgs e)
+        private void Marker_MouseMove(object sender, MouseEventArgs e)
         {
-            mouseMoved = true;
+            mouseMovedOnMarker = true;
+            MarkerPictureBox box = sender as MarkerPictureBox;
+            if (box != null && mouseDown)
+            {
+                int x = box.Marker.X + e.X - xOffset;
+                int y = box.Marker.Y + e.Y - yOffset;
+
+                x = Math.Max(box.Marker.Size/2, x);
+                x = (int) Math.Min(image.Image.PhysicalDimension.Width - box.Marker.Size/2f, x);
+
+                y = Math.Max(box.Marker.Size / 2, y);
+                y = (int)Math.Min(image.Image.PhysicalDimension.Height - box.Marker.Size / 2f, y);
+
+                box.Marker.X = x;
+                box.Marker.Y = y;
+
+                box.Location = new Point(1, 1);
+                box.Update();
+            }
         }
 
         /// <summary>
         /// Function responsible for handling Mouse events.
         /// Should not be invoked manually.
         /// </summary>
-        private void MarkersPanel_MouseDown(object sender, MouseEventArgs e)
+        private void Marker_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
-            mouseMoved = false;
+            mouseMovedOnMarker = false;
+            xOffset = e.X;
+            yOffset = e.Y;
         }
 
         /// <summary>
         /// Function responsible for handling Mouse events.
         /// Should not be invoked manually.
         /// </summary>
-        private void MarkersPanel_MouseUp(object sender, MouseEventArgs e)
+        private void Marker_MouseUp(object sender, MouseEventArgs e)
         {
-            
+            mouseDown = false;
+            mouseMovedOnMarker = false;
         }
 
         /// <summary>
         /// Function responsible for handling Mouse events.
         /// Should not be invoked manually.
         /// </summary>
-        private void MarkersPanel_MouseWheel(object sender, MouseEventArgs e)
+        private void Marker_MouseWheel(object sender, MouseEventArgs e)
         {
-            
+            MarkerPictureBox box = sender as MarkerPictureBox;
+            if (box != null)
+            {
+                if (e.Delta > 0)
+                {
+                    box.Marker.Size = (int) (box.Marker.Size*1.05f);
+                    box.Marker.Size++;
+                }
+                else
+                {
+                    box.Marker.Size = (int) (box.Marker.Size*0.95f);
+                    box.Marker.Size--;
+                    if (box.Marker.Size < 16)
+                        box.Marker.Size = 16;
+                }
+                lastMarkerSize = box.Marker.Size;
+                box.Scale(new SizeF(1,1));
+            }
         }
 
-        private void MarkersPanel_ScaleChanged(object sender, EventArgs e)
-        {
-            float scale = (float)scaleNumericUpDown.Value / 100f;
-
-            Point loc = panel.Location;
-            float width2 = panel.Size.Width;
-            float height2 = panel.Size.Height;
-
-            int width = (int)(image.Image.PhysicalDimension.Width * scale);
-            int height = (int)(image.Image.PhysicalDimension.Height * scale);
-            panel.Size = new Size(width, height);
-
-            int x = (int)(loc.X + (width2 - panel.Size.Width) / 2);
-            int y = (int)(loc.Y + (height2 - panel.Size.Height) / 2);
-            panel.Location = new Point(x, y);
-
-            Session.Context.Scale = scale;
-        }
-
-        private void MarkersPanel_ImageChanged(Image image)
-        {
-            this.image.Image = image;
-        }
-
+        /// <summary>
+        /// Called when Context in current session is changing
+        /// </summary>
         private void MarkersPanel_ContextChanged(Context context)
         {
-            image.Image = context.Image;
+            SetContextEvents();
         }
 
-        /// <summary>
-        /// Updates the Scale Label with proper % value.
-        /// </summary>
-        private void UpdateScaleText()
-        {
-            float scale = image.Width / (float)image.Image.Width;
-            scaleNumericUpDown.Text = (int)(scale * 100) + "";
-
-            Session.Context.Scale = scale;
-        }
 
         public class MarkerPictureBox : PictureBox
         {
@@ -181,6 +219,26 @@ namespace KlasyfikacjaMiodu.ViewPanel
             public MarkerPictureBox(Marker marker)
             {
                 this.Marker = marker;
+                this.LocationChanged += MarkerPictureBox_LocationChanged;
+                this.SizeChanged += MarkerPictureBox_SizeChanged;
+                this.Layout += MarkerPictureBox_SizeChanged;
+                this.Layout += MarkerPictureBox_LocationChanged;
+            }
+
+            void MarkerPictureBox_SizeChanged(object sender, EventArgs e)
+            {
+                float scale = Session.Context.Scale;
+                Size = new Size((int)(Marker.Size * scale), (int)(Marker.Size * scale));
+            }
+
+            void MarkerPictureBox_LocationChanged(object sender, EventArgs e)
+            {
+                float scale = Session.Context.Scale;
+
+                int x = (int)(Marker.CenterX * scale);
+                int y = (int)(Marker.CenterY * scale);
+
+                Location = new Point(x, y);
             }
         }
     }
