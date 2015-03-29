@@ -124,6 +124,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SidePanel";
+            this.ShowInTaskbar = false;
             this.Text = "SidePanel";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
