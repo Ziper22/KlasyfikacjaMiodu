@@ -76,6 +76,28 @@ namespace KlasyfikacjaMiodu.BottomBar
             setHoneyTypeLabelText();
         }
 
+    //----------------------------
+        private string returnName(string txt)  //zwraca nazwe
+        {
+            StringBuilder honeyName = new StringBuilder();
+
+            honeyName.Clear();
+            honeyName.Append(txt);
+            return honeyName.ToString();
+        }
+
+        private string appendName(string lastName, string txt)  //zwraca zlozona nazwe (paro-gatunkowa)
+        {
+            StringBuilder honeyName = new StringBuilder();
+
+            honeyName.Clear();
+            honeyName.Append(lastName);
+            honeyName.Replace('y', 'o', honeyName.Length, 0);
+            honeyName.Append("-" + txt);
+            return honeyName.ToString();
+        }
+    //----------------------------
+
         private void setHoneyTypeLabelText()
         {
             //taki prosty algorytm zeby bylo wiadomo oglonie co trzeba zrobic
@@ -84,26 +106,73 @@ namespace KlasyfikacjaMiodu.BottomBar
             //i tez w razie potrzeby robil polaczenia jak lipowo-wrzosowo-gryczany.
 
             //obczaj jakie pola ma klasa honeytype tam wszystko jest co potrzeba.
+            
+            string labelName = "";   //do nazwy
+            int honeyNameCounter = 0;
+            bool foundOne = false;  //dla sprawdzenia, że już raz znalaeziono jakiś pyłek 
 
             int value = 0;
             HoneyType bestType = null;
+
             foreach (KeyValuePair<HoneyType, int> entry in honeyCounter)
             {
-                if (bestType == null)
+                if (bestType == null)   //nie ma bestType, to "Niezklasyfikowany"
                 {
-                    bestType = entry.Key;
-                    value = entry.Value;
+                    labelName = returnName("Niezklasyfikowany");
+                    honeyTypeLabel.Text = labelName;
+
+                    if (entry.Value >= 1 && honeyNameCounter >= 3 && foundOne == true) //ale jezeli nie ma best type, a byl juz jakis typ wypisany
+                    {                                                                 //oraz bylo wiecej niz 3 gatunki, to "Wielokwiatowy"
+                        labelName = returnName("Wielokwiatowy");
+                        honeyTypeLabel.Text = labelName;
+                    }
                 }
 
-                if (entry.Value > value)
+                if (entry.Key.MinimalPollensAmount <= entry.Value)
                 {
-                    bestType = entry.Key;
-                    value = entry.Value;
-                }   
+                    if (bestType != null)   //jest bestType i to co znaleziono tez spelnia zalozenia
+                    {                       //, to nazwa sklada sie z kilku
+                        labelName = appendName(labelName, entry.Key.DescriptionName);
+                        honeyTypeLabel.Text = labelName;
+
+                        honeyNameCounter++;
+
+                        if (honeyNameCounter >= 3)
+                            bestType = null;
+                    }
+
+                    if (bestType == null && honeyNameCounter < 1)   //pierwszy gatunek, ktory spelnia warunek, wypisuje nazwe
+                    {                                               //i ustala bestType
+                        bestType = entry.Key;
+                        labelName = entry.Key.DescriptionName;
+                        honeyTypeLabel.Text = labelName;
+
+                        honeyNameCounter++;
+                        foundOne = true;
+                    }
+                }
             }
 
-            if (bestType != null && bestType.MinimalPollensAmount <= value)
-                honeyTypeLabel.Text = bestType.DescriptionName;
+            //int value = 0;
+            //HoneyType bestType = null;
+
+            //foreach (KeyValuePair<HoneyType, int> entry in honeyCounter)
+            //{
+            //    if (bestType == null)
+            //    {
+            //        bestType = entry.Key;
+            //        value = entry.Value;
+            //    }
+
+            //    if (entry.Value > value)
+            //    {
+            //        bestType = entry.Key;
+            //        value = entry.Value;
+            //    }   
+            //}
+
+            //if (bestType != null && bestType.MinimalPollensAmount <= value)
+            //    honeyTypeLabel.Text = bestType.DescriptionName;
         }
     }
 }
