@@ -17,11 +17,13 @@ namespace KlasyfikacjaMiodu
     public partial class SidePanel : Form
     {
         private PollenModule chosenModule;
+//        private PollenModuleSelector pollenModuleSelector;
         public SidePanel()
         {
             InitializeComponent();
             MouseClick += PollenModule_Clicked;
             PollenModule chosenModule = null;
+//            pollenModuleSelector = new PollenModuleSelector();
                        
            //FormClosing += new FormClosingEventHandler(SidePanel_FormClosing);
         }
@@ -34,19 +36,21 @@ namespace KlasyfikacjaMiodu
         private void dodajToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
-            addEditWindow.OkButtonClicked += HoneyTypeEditWindow_Add(HoneyType honeyType);
+            addEditWindow.OkButtonClicked += HoneyTypeEditWindow_Add;
             addEditWindow.Show();
         }
 
         private void HoneyTypeEditWindow_Add(HoneyType honeyType)
         {
-            panel1.Controls.Add(new PollenModule(honeyType));
+            PollenModule pollenModule = new PollenModule(honeyType);
+//            pollenModuleSelector.AddListeners(pollenModule);
+            panel1.Controls.Add(pollenModule);
         }
 
         private void edytujToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow(chosenModule);
-            addEditWindow.OkButtonClicked += HoneyTypeEditWindow_Edit(HoneyType honeyType);
+            HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow(chosenModule.HoneyType);
+            addEditWindow.OkButtonClicked += HoneyTypeEditWindow_Edit;
             addEditWindow.Show();
         }
 

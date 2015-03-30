@@ -69,6 +69,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Marker.cs" />
+    <Compile Include="PollenModuleSelector.cs" />
     <Compile Include="ViewPanel\ImagePanel.cs" />
     <Compile Include="ViewPanel\MarkerImageCache.cs" />
     <Compile Include="ViewPanel\MarkersPanel.cs" />
