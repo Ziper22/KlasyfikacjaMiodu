@@ -30,29 +30,32 @@ namespace KlasyfikacjaMiodu
         {
             chosenModule = sender as PollenModule;
         }
-        
+
         private void dodajToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
-            //addEditWindow.Show();
-           // addEditWindow.OkButtonClicked += chosenModule.Add(HoneyType honeyType);
+            HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
+            addEditWindow.OkButtonClicked += HoneyTypeEditWindow_Add(HoneyType honeyType);
+            addEditWindow.Show();
+        }
 
-
-            //tylko do testów    
-            panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
-            panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
-            panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
-            panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
-            panel1.Controls.Add(new PollenModule("Nowy Pyłek", Color.DarkMagenta));
+        private void HoneyTypeEditWindow_Add(HoneyType honeyType)
+        {
+            panel1.Controls.Add(new PollenModule(honeyType));
         }
 
         private void edytujToolStripMenuItem_Click(object sender, EventArgs e)
-        {         
-            HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
+        {
+            HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow(chosenModule);
+            addEditWindow.OkButtonClicked += HoneyTypeEditWindow_Edit(HoneyType honeyType);
             addEditWindow.Show();
-            //addEditWindow.OkButtonClicked+=chosenModule.Edit(HoneyType);
         }
 
+        private void HoneyTypeEditWindow_Edit(HoneyType honeyType)
+        {
+            chosenModule.Edit(honeyType);
+        }
+        
+       
         private void usuńToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz usunąć wybrany znacznik?", "Znacznik zostanie usunięty", MessageBoxButtons.YesNo);

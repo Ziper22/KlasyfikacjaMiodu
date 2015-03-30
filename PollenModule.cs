@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,8 +26,6 @@ namespace KlasyfikacjaMiodu
         public Label PollenNumber;
         public Label PollenPercentage;
 
-        //public FlowLayoutPanel MainPanel;
-
         public FlowDirection FlowDirection;
         public FlowDirection FlowDirectionValues;
 
@@ -37,18 +36,13 @@ namespace KlasyfikacjaMiodu
             PollenValues = new FlowLayoutPanel();
             PollenNumber = new Label();
             PollenPercentage = new Label();
-            //MainPanel=new FlowLayoutPanel();
 
             Controls.Add(MarkerColor);
             Controls.Add(HoneyName);
             Controls.Add(PollenValues);
             PollenValues.Controls.Add(PollenNumber);
             PollenValues.Controls.Add(PollenPercentage);
-            //MainPanel.Controls.Add(MarkerColor);
-            //MainPanel.Controls.Add(HoneyName);
-            //MainPanel.Controls.Add(PollenValues);
 
-            //MainPanel.Size=new Size(130,40);
             MarkerColor.Size = new Size(40, 40);
             HoneyName.Size = new Size(60, 40);
             PollenValues.Size = new Size(30, 40);
@@ -57,22 +51,29 @@ namespace KlasyfikacjaMiodu
             AutoSize = true;
             FlowDirection = FlowDirection.LeftToRight;
             FlowDirectionValues = FlowDirection.TopDown;
-        }       
 
-        public PollenModule(double pollenNumber, double pollenPercentage, HoneyType honeyType) : this()
+            MouseEnter += PollenModule_MouseEnter;
+        }
+
+        public PollenModule(double pollenNumber, double pollenPercentage, HoneyType honeyType)
+            : this()
         {
             HoneyName.Text = honeyType.Name;
             MarkerColor.BackColor = honeyType.MarkerColor;
             Number = pollenNumber;
             Percentage = pollenPercentage;
         }
+
         public PollenModule(HoneyType honeyType)
             : this()
         {
             HoneyName.Text = honeyType.Name;
             MarkerColor.BackColor = honeyType.MarkerColor;
+            Number = 0;
+            Percentage = 0;
         }
-        public PollenModule(string honeyName, Color color) : this() //tylko do testów
+        public PollenModule(string honeyName, Color color)
+            : this() //tylko do testów
         {
             HoneyName.Text = honeyName;
             MarkerColor.BackColor = color;
@@ -82,24 +83,33 @@ namespace KlasyfikacjaMiodu
             PollenPercentage.Text = Percentage.ToString();
         }
 
-        public void Add(HoneyType honey)
+        public PollenModule Add(HoneyType honey)
         {
-            
+            PollenModule newPollen = new PollenModule(honey);
+            return newPollen;
         }
         public void Edit(HoneyType honey)
         {
-            
-        }
 
-        public void Remove()
+        }
+        
+        //protected override void OnMouseEnter(EventArgs e)
+        //{
+        //    BackColor = Color.LightPink;
+        //}
+
+        private void PollenModule_MouseEnter(object sender, EventArgs e)
         {
-            
+            Point position = PointToClient(Cursor.Position);
+            if (ClientRectangle.Contains(position))
+            {
+                BackColor = Color.HotPink;
+            }
         }
 
-        protected override void OnMouseEnter(EventArgs e)
+        protected override void OnMouseLeave(EventArgs e)
         {
-            //MainPanel.BackColor = Color.FloralWhite;
+            BackColor = Color.Empty;
         }
-
     }
 }
