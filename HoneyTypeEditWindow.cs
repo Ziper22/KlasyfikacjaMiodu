@@ -26,7 +26,7 @@ namespace KlasyfikacjaMiodu
         {
             InitializeComponent();
             Name = null;
-            honeyType = new HoneyType("", "", Color.White);
+            honeyType = new HoneyType("", "", "", Color.Empty, 0, 0);
         }
 
         public HoneyTypeEditWindow(HoneyType honeyType)
@@ -36,7 +36,10 @@ namespace KlasyfikacjaMiodu
 
             nameTextBox.Text = honeyType.Name;
             descriptionTextBox.Text = honeyType.DescriptionName;
+            linkedNameTextBox.Text = honeyType.LinkedName;
             specimenPictureBox.BackColor = honeyType.MarkerColor;
+            valueTextBox.Text = honeyType.MinimalPollensAmount.ToString();
+            percentTextBox.Text = honeyType.MinimalPollensPercentageAmount.ToString();
         }
 
         private void chooseColorButton_Click(object sender, EventArgs e)
@@ -53,7 +56,10 @@ namespace KlasyfikacjaMiodu
         {
             honeyType.Name = nameTextBox.Text;
             honeyType.DescriptionName = descriptionTextBox.Text;
+            honeyType.LinkedName = linkedNameTextBox.Text;
             honeyType.MarkerColor = color;
+            honeyType.MinimalPollensAmount = float.Parse(valueTextBox.Text);
+            honeyType.MinimalPollensPercentageAmount = float.Parse(percentTextBox.Text);
 
             OnOkButtonClicked();
 

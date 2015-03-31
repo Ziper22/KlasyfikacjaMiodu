@@ -32,8 +32,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.valueTextBox = new System.Windows.Forms.TextBox();
             this.percentTextBox = new System.Windows.Forms.TextBox();
+            this.valueTextBox = new System.Windows.Forms.TextBox();
             this.linkedNameTextBox = new System.Windows.Forms.TextBox();
             this.specimenPictureBox = new System.Windows.Forms.PictureBox();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -53,8 +53,8 @@
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.valueTextBox);
             this.panel1.Controls.Add(this.percentTextBox);
+            this.panel1.Controls.Add(this.valueTextBox);
             this.panel1.Controls.Add(this.linkedNameTextBox);
             this.panel1.Controls.Add(this.specimenPictureBox);
             this.panel1.Controls.Add(this.cancelButton);
@@ -76,18 +76,18 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(12, 113);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 13);
+            this.label6.Size = new System.Drawing.Size(47, 13);
             this.label6.TabIndex = 14;
-            this.label6.Text = "Ilość:";
+            this.label6.Text = "Procent:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(12, 87);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 13;
-            this.label5.Text = "Procent:";
+            this.label5.Text = "Ilość:";
             // 
             // label4
             // 
@@ -98,20 +98,20 @@
             this.label4.TabIndex = 12;
             this.label4.Text = "Nazwa link:";
             // 
-            // valueTextBox
-            // 
-            this.valueTextBox.Location = new System.Drawing.Point(77, 110);
-            this.valueTextBox.Name = "valueTextBox";
-            this.valueTextBox.Size = new System.Drawing.Size(29, 20);
-            this.valueTextBox.TabIndex = 11;
-            // 
             // percentTextBox
             // 
-            this.percentTextBox.Location = new System.Drawing.Point(77, 84);
-            this.percentTextBox.MaxLength = 3;
+            this.percentTextBox.Location = new System.Drawing.Point(77, 110);
             this.percentTextBox.Name = "percentTextBox";
             this.percentTextBox.Size = new System.Drawing.Size(29, 20);
-            this.percentTextBox.TabIndex = 10;
+            this.percentTextBox.TabIndex = 11;
+            // 
+            // valueTextBox
+            // 
+            this.valueTextBox.Location = new System.Drawing.Point(77, 84);
+            this.valueTextBox.MaxLength = 3;
+            this.valueTextBox.Name = "valueTextBox";
+            this.valueTextBox.Size = new System.Drawing.Size(29, 20);
+            this.valueTextBox.TabIndex = 10;
             // 
             // linkedNameTextBox
             // 
@@ -227,8 +227,8 @@
         private System.Windows.Forms.PictureBox specimenPictureBox;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.TextBox valueTextBox;
         private System.Windows.Forms.TextBox percentTextBox;
+        private System.Windows.Forms.TextBox valueTextBox;
         private System.Windows.Forms.TextBox linkedNameTextBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
