@@ -36,6 +36,9 @@ namespace KlasyfikacjaMiodu.TopMenu
             ChangeEnabledProperty();
         }
 
+        /// <summary>
+        /// Defines Hotkeys for Undo and Redo options.
+        /// </summary>
         private void Form_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.Z)

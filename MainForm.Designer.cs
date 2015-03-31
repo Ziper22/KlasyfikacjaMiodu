@@ -286,41 +286,41 @@ namespace KlasyfikacjaMiodu
             // newProjectMenuItem
             // 
             this.newProjectMenuItem.Name = "newProjectMenuItem";
-            this.newProjectMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.newProjectMenuItem.Size = new System.Drawing.Size(196, 26);
             this.newProjectMenuItem.Text = "Nowy projekt";
             // 
             // saveProjectMenuItem
             // 
             this.saveProjectMenuItem.Name = "saveProjectMenuItem";
-            this.saveProjectMenuItem.Size = new System.Drawing.Size(236, 26);
-            this.saveProjectMenuItem.Text = "Zapisz Projekt (Ctrl+S)";
+            this.saveProjectMenuItem.Size = new System.Drawing.Size(196, 26);
+            this.saveProjectMenuItem.Text = "Zapisz Projekt...";
             // 
             // loadProjectMenuItem
             // 
             this.loadProjectMenuItem.Name = "loadProjectMenuItem";
-            this.loadProjectMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.loadProjectMenuItem.Size = new System.Drawing.Size(196, 26);
             this.loadProjectMenuItem.Text = "Wczytaj projekt...";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(233, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
             // 
             // loadImageMenuItem
             // 
             this.loadImageMenuItem.Name = "loadImageMenuItem";
-            this.loadImageMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.loadImageMenuItem.Size = new System.Drawing.Size(196, 26);
             this.loadImageMenuItem.Text = "Wczytaj zdjęcie...";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(233, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(193, 6);
             // 
             // quitMenuItem
             // 
             this.quitMenuItem.Name = "quitMenuItem";
-            this.quitMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.quitMenuItem.Size = new System.Drawing.Size(196, 26);
             this.quitMenuItem.Text = "Wyjście";
             // 
             // editMenu
@@ -357,8 +357,8 @@ namespace KlasyfikacjaMiodu
             // showPanelMenuItem
             // 
             this.showPanelMenuItem.Name = "showPanelMenuItem";
-            this.showPanelMenuItem.Size = new System.Drawing.Size(222, 26);
-            this.showPanelMenuItem.Text = "Pokaż panel (Ctrl+P)";
+            this.showPanelMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.showPanelMenuItem.Text = "Ukryj listę";
             // 
             // MainForm
             // 

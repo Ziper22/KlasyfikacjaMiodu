@@ -27,6 +27,12 @@ namespace KlasyfikacjaMiodu.TopMenu
         void ShowPanel_Click(object sender, EventArgs e)
         {
             sidePanel.Visible = !sidePanel.Visible;
+
+            if (sidePanel.Visible)
+                showPanel.Text = "Ukryj listę";
+            else
+                showPanel.Text = "Pokaż listę";
         }
+
     }
 }
