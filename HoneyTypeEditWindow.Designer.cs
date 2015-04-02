@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.percentNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.percentTextBox = new System.Windows.Forms.TextBox();
             this.valueTextBox = new System.Windows.Forms.TextBox();
             this.linkedNameTextBox = new System.Windows.Forms.TextBox();
             this.specimenPictureBox = new System.Windows.Forms.PictureBox();
@@ -45,15 +48,19 @@
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.percentNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.specimenPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.percentNumericUpDown);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.percentTextBox);
             this.panel1.Controls.Add(this.valueTextBox);
             this.panel1.Controls.Add(this.linkedNameTextBox);
             this.panel1.Controls.Add(this.specimenPictureBox);
@@ -68,8 +75,48 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(284, 261);
+            this.panel1.Size = new System.Drawing.Size(275, 221);
             this.panel1.TabIndex = 0;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(206, 61);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(59, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "np. Lipowo";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(206, 35);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(58, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "np. Lipowy";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(206, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(45, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "np. Lipa";
+            // 
+            // percentNumericUpDown
+            // 
+            this.percentNumericUpDown.Location = new System.Drawing.Point(100, 111);
+            this.percentNumericUpDown.Name = "percentNumericUpDown";
+            this.percentNumericUpDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.percentNumericUpDown.Size = new System.Drawing.Size(45, 20);
+            this.percentNumericUpDown.TabIndex = 5;
+            this.percentNumericUpDown.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
             // 
             // label6
             // 
@@ -94,36 +141,33 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 61);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 13);
+            this.label4.Size = new System.Drawing.Size(85, 13);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Nazwa link:";
-            // 
-            // percentTextBox
-            // 
-            this.percentTextBox.Location = new System.Drawing.Point(77, 110);
-            this.percentTextBox.Name = "percentTextBox";
-            this.percentTextBox.Size = new System.Drawing.Size(29, 20);
-            this.percentTextBox.TabIndex = 11;
+            this.label4.Text = "Nazwa łącząca:";
             // 
             // valueTextBox
             // 
-            this.valueTextBox.Location = new System.Drawing.Point(77, 84);
-            this.valueTextBox.MaxLength = 3;
+            this.valueTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.valueTextBox.Location = new System.Drawing.Point(100, 84);
+            this.valueTextBox.MaxLength = 4;
             this.valueTextBox.Name = "valueTextBox";
-            this.valueTextBox.Size = new System.Drawing.Size(29, 20);
-            this.valueTextBox.TabIndex = 10;
+            this.valueTextBox.Size = new System.Drawing.Size(45, 20);
+            this.valueTextBox.TabIndex = 4;
+            this.valueTextBox.Text = "10";
+            this.valueTextBox.TextChanged += new System.EventHandler(this.valueTextBox_TextChanged);
             // 
             // linkedNameTextBox
             // 
-            this.linkedNameTextBox.Location = new System.Drawing.Point(77, 58);
+            this.linkedNameTextBox.Location = new System.Drawing.Point(100, 58);
             this.linkedNameTextBox.Name = "linkedNameTextBox";
             this.linkedNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.linkedNameTextBox.TabIndex = 9;
+            this.linkedNameTextBox.TabIndex = 3;
+            this.linkedNameTextBox.TextChanged += new System.EventHandler(this.linkedNameTextBox_TextChanged);
             // 
             // specimenPictureBox
             // 
             this.specimenPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.specimenPictureBox.Location = new System.Drawing.Point(183, 136);
+            this.specimenPictureBox.Location = new System.Drawing.Point(206, 136);
             this.specimenPictureBox.Name = "specimenPictureBox";
             this.specimenPictureBox.Size = new System.Drawing.Size(26, 23);
             this.specimenPictureBox.TabIndex = 8;
@@ -131,7 +175,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(15, 176);
+            this.cancelButton.Location = new System.Drawing.Point(70, 176);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 7;
@@ -141,20 +185,20 @@
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(102, 176);
+            this.okButton.Location = new System.Drawing.Point(157, 176);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 6;
+            this.okButton.TabIndex = 8;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // chooseColorButton
             // 
-            this.chooseColorButton.Location = new System.Drawing.Point(77, 136);
+            this.chooseColorButton.Location = new System.Drawing.Point(100, 136);
             this.chooseColorButton.Name = "chooseColorButton";
             this.chooseColorButton.Size = new System.Drawing.Size(100, 23);
-            this.chooseColorButton.TabIndex = 5;
+            this.chooseColorButton.TabIndex = 6;
             this.chooseColorButton.Text = "Wybierz kolor";
             this.chooseColorButton.UseVisualStyleBackColor = true;
             this.chooseColorButton.Click += new System.EventHandler(this.chooseColorButton_Click);
@@ -170,26 +214,28 @@
             // 
             // descriptionTextBox
             // 
-            this.descriptionTextBox.Location = new System.Drawing.Point(77, 32);
+            this.descriptionTextBox.Location = new System.Drawing.Point(100, 32);
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.Size = new System.Drawing.Size(100, 20);
-            this.descriptionTextBox.TabIndex = 3;
+            this.descriptionTextBox.TabIndex = 2;
+            this.descriptionTextBox.TextChanged += new System.EventHandler(this.descriptionTextBox_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 35);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.Size = new System.Drawing.Size(85, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Opis:";
+            this.label2.Text = "Nazwa opisowa:";
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(77, 6);
+            this.nameTextBox.Location = new System.Drawing.Point(100, 6);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(100, 20);
             this.nameTextBox.TabIndex = 1;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
             // 
             // label1
             // 
@@ -204,12 +250,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(275, 221);
             this.Controls.Add(this.panel1);
             this.Name = "HoneyTypeEditWindow";
             this.Text = "AddEditWindow";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.percentNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.specimenPictureBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -227,11 +274,14 @@
         private System.Windows.Forms.PictureBox specimenPictureBox;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.TextBox percentTextBox;
         private System.Windows.Forms.TextBox valueTextBox;
         private System.Windows.Forms.TextBox linkedNameTextBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown percentNumericUpDown;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
     }
 }
