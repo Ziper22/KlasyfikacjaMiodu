@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KlasyfikacjaMiodu.SidePanel
+namespace KlasyfikacjaMiodu
 {
     /// <summary>
     /// Author: Marek Borski<para/>
     /// </summary>
-    
+    /// 
     public partial class HoneyTypeEditWindow : Form
     {
         public delegate void OkButtonClickedDelegate(HoneyType honeyType);
@@ -65,7 +71,7 @@ namespace KlasyfikacjaMiodu.SidePanel
 
             OnOkButtonClicked();
 
-            Close();
+            this.Close();
         }
 
         protected virtual void OnOkButtonClicked()
@@ -76,7 +82,7 @@ namespace KlasyfikacjaMiodu.SidePanel
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void nameTextBox_TextChanged(object sender, EventArgs e)

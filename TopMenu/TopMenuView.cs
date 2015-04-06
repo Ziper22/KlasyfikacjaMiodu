@@ -14,9 +14,9 @@ namespace KlasyfikacjaMiodu.TopMenu
     public class TopMenuView
     {
         private ToolStripMenuItem showPanel;
-        private SidePanel.SidePanel sidePanel;
+        private SidePanel sidePanel;
 
-        public TopMenuView(ToolStripMenuItem showPanel, SidePanel.SidePanel sidePanel)
+        public TopMenuView(ToolStripMenuItem showPanel, SidePanel sidePanel)
         {
             this.showPanel = showPanel;
             this.sidePanel = sidePanel;

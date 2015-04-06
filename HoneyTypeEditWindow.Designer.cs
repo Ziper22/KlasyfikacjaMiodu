@@ -1,4 +1,4 @@
-﻿namespace KlasyfikacjaMiodu.SidePanel
+﻿namespace KlasyfikacjaMiodu
 {
     partial class HoneyTypeEditWindow
     {
@@ -259,6 +259,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         #endregion
