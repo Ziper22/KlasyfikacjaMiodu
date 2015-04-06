@@ -9,10 +9,10 @@ namespace KlasyfikacjaMiodu.SideMenu
     /// Author: Agata Hammermeister<para/>
     /// </summary>
 
-    public partial class SidePanel : Form
+    public partial class SidePanel : Form //dodać topmost=true
     {
-        private PollenModuleSelector pollenModuleSelector;
-        private Form mainForm;
+        private readonly PollenModuleSelector pollenModuleSelector;
+        private readonly Form mainForm;
         private bool locationChanged;
         private bool orientationVertical;
 
@@ -36,43 +36,42 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         #region AddEditDelete
 
-        private void dodajToolStripMenuItem_Click(object sender, EventArgs e)
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PollenModule pm1 = new PollenModule("Ułan", Color.Goldenrod);
+            HoneyType honey = new HoneyType("Ułan", "qwe", "asd", Color.Goldenrod, 14, 1);
+            PollenModule pm1 = new PollenModule(honey);
             panel1.Controls.Add(pm1);
             pollenModuleSelector.AddListeners(pm1);
-            PollenModule pm2 = new PollenModule("Ułan", Color.Goldenrod);
+            panel1.Controls.Add(pm1);
+            PollenModule pm2 = new PollenModule(honey);
             panel1.Controls.Add(pm2);
             pollenModuleSelector.AddListeners(pm2);
-            PollenModule pm3 = new PollenModule("Ułan", Color.Goldenrod);
+            PollenModule pm3 = new PollenModule(honey);
             panel1.Controls.Add(pm3);
             pollenModuleSelector.AddListeners(pm3);
-            PollenModule pm4 = new PollenModule("Ułan", Color.Goldenrod);
+            PollenModule pm4 = new PollenModule(honey);
             panel1.Controls.Add(pm4);
             pollenModuleSelector.AddListeners(pm4);
-            PollenModule pm5 = new PollenModule("Ułan", Color.Goldenrod);
+            PollenModule pm5 = new PollenModule(honey);
             panel1.Controls.Add(pm5);
             pollenModuleSelector.AddListeners(pm5);
-            PollenModule pm6 = new PollenModule("Ułan", Color.Goldenrod);
+            PollenModule pm6 = new PollenModule(honey);
             panel1.Controls.Add(pm6);
             pollenModuleSelector.AddListeners(pm6);
-            PollenModule pm7 = new PollenModule("Ułan", Color.Goldenrod);
-            panel1.Controls.Add(pm7);
-            pollenModuleSelector.AddListeners(pm7);
-
+    
             HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
             addEditWindow.OkButtonClicked += HoneyType_Add;
             addEditWindow.ShowDialog();
         }
 
-        private void HoneyType_Add(HoneyType honeyType)
+        private void HoneyType_Add(HoneyType newHoney)
         {
-            PollenModule pollenModule = new PollenModule(honeyType);
+            PollenModule pollenModule = new PollenModule(newHoney);
             panel1.Controls.Add(pollenModule);
             pollenModuleSelector.AddListeners(pollenModule);
         }
 
-        private void edytujToolStripMenuItem_Click(object sender, EventArgs e)
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //if (panel1.HasChildren)//
             //  {
@@ -88,7 +87,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             pollenModuleSelector.chosenModule.Edit(honeyType);
         }
 
-        private void usuńToolStripMenuItem_Click(object sender, EventArgs e) //Delete
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e) //Delete
         {
             // if (panel1.HasChildren)//
             //      {
@@ -101,7 +100,7 @@ namespace KlasyfikacjaMiodu.SideMenu
                 PollenModule activeModule = pollenModuleSelector.chosenModule;
                 if (activeModule != null)
                 {
-                    if (panel1.Container != null) panel1.Container.Remove(activeModule);
+                    if (panel1.Controls != null) panel1.Controls.Remove(activeModule);
                     Session.Context.RemoveHoneyType(activeModule.HoneyType);
                 }
             }
@@ -131,12 +130,11 @@ namespace KlasyfikacjaMiodu.SideMenu
             {
                 mainForm.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - (mainForm.Width + Width))/2,
                     (Screen.PrimaryScreen.WorkingArea.Height - mainForm.Height)/2);
-                //czeeeeeemuuu nie jest ładnie na środku jak defaultowo ;_;
             }
             Location = new Point(mainForm.Right, mainForm.Top);
 
-            pionowaToolStripMenuItem.Text = "Wyrównaj";
-            poziomaToolStripMenuItem.Text = "Pozioma";
+            verticalToolStripMenuItem.Text = "Wyrównaj";
+            horizontalToolStripMenuItem.Text = "Pozioma";
 
         }
 
@@ -151,16 +149,13 @@ namespace KlasyfikacjaMiodu.SideMenu
             {
                 mainForm.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - mainForm.Width)/2,
                     (Screen.PrimaryScreen.WorkingArea.Height - (mainForm.Height + Height))/2);
-                //Location = new Point(mainForm.Left - Width / 2, Top);
             }
             Location = new Point(mainForm.Left, mainForm.Bottom);
 
-            //Location = new Point(mainForm.Left - Width / 2, Top);
             //jak rogi się spotykają (poz defaultowa) to wyśrodkować wszystko
 
-            pionowaToolStripMenuItem.Text = "Pionowa";
-            poziomaToolStripMenuItem.Text = "Wyrównaj";
-
+            verticalToolStripMenuItem.Text = "Pionowa";
+            horizontalToolStripMenuItem.Text = "Wyrównaj";
         }
 
         #endregion
