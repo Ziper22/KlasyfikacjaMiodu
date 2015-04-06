@@ -1,4 +1,4 @@
-﻿namespace KlasyfikacjaMiodu
+﻿namespace KlasyfikacjaMiodu.SidePanel
 {
     partial class SidePanel
     {
@@ -125,7 +125,8 @@
             this.MinimizeBox = false;
             this.Name = "SidePanel";
             this.ShowInTaskbar = false;
-            this.Text = "SidePanel";
+            this.Text = "Miody";
+            this.TopMost = true;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
