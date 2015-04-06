@@ -87,7 +87,7 @@ namespace KlasyfikacjaMiodu
             this.pollensImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pollensImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pollensImage.Enabled = false;
-            this.pollensImage.Image = global::KlasyfikacjaMiodu.Properties.Resources.ulan;
+            this.pollensImage.Image = global::KlasyfikacjaMiodu.Properties.Resources.Deer_Trail_honey_2;
             this.pollensImage.Location = new System.Drawing.Point(0, 0);
             this.pollensImage.Margin = new System.Windows.Forms.Padding(0);
             this.pollensImage.Name = "pollensImage";
@@ -357,7 +357,7 @@ namespace KlasyfikacjaMiodu
             // showPanelMenuItem
             // 
             this.showPanelMenuItem.Name = "showPanelMenuItem";
-            this.showPanelMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.showPanelMenuItem.Size = new System.Drawing.Size(149, 26);
             this.showPanelMenuItem.Text = "Ukryj listę";
             // 
             // MainForm
