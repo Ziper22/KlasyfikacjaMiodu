@@ -31,6 +31,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             MarkerColor = new PictureBox();
             MarkerColor.Enabled = false;
             HoneyName = new Label();
+            HoneyName.Enabled = false;
             PollenValues = new FlowLayoutPanel();
             PollenValues.Enabled = false;
             PollenNumber = new Label();

@@ -1,4 +1,4 @@
-﻿namespace KlasyfikacjaMiodu.SidePanel
+﻿namespace KlasyfikacjaMiodu.SideMenu
 {
     partial class SidePanel
     {

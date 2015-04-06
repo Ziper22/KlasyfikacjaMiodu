@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using KlasyfikacjaMiodu.SideMenu;
 
-namespace KlasyfikacjaMiodu.SidePanel
+namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
     /// Author: Agata Hammermeister<para/>
@@ -22,7 +22,7 @@ namespace KlasyfikacjaMiodu.SidePanel
             pollenModuleSelector = new PollenModuleSelector();
             Session.Changed += Session_Changed;
             this.mainForm = mainForm;
-            LocationChanged += SidePanel_LocationChanged;
+            LocationChanged +=SidePanel_LocationChanged;
             orientationVertical = true;
         }
 
@@ -135,8 +135,8 @@ namespace KlasyfikacjaMiodu.SidePanel
             }
             Location = new Point(mainForm.Right, mainForm.Top);
 
-            //verticalToolStripMenuItem.Text = "Wyrównaj";
-            //horizontalToolStripMenuItem.Text = "Pozioma";
+            pionowaToolStripMenuItem.Text = "Wyrównaj";
+            poziomaToolStripMenuItem.Text = "Pozioma";
 
         }
 
@@ -158,8 +158,8 @@ namespace KlasyfikacjaMiodu.SidePanel
             //Location = new Point(mainForm.Left - Width / 2, Top);
             //jak rogi się spotykają (poz defaultowa) to wyśrodkować wszystko
 
-            //verticalToolStripMenuItem.Text = "Pionowa";
-            //horizontalToolStripMenuItem.Text = "Wyrównaj";
+            pionowaToolStripMenuItem.Text = "Pionowa";
+            poziomaToolStripMenuItem.Text = "Wyrównaj";
 
         }
 
