@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.dodajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.edytujToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usuńToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.orientacjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pionowaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.poziomaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.orientationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.horizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -44,10 +44,10 @@
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(1, 2, 0, 2);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dodajToolStripMenuItem,
-            this.edytujToolStripMenuItem,
-            this.usuńToolStripMenuItem,
-            this.orientacjaToolStripMenuItem});
+            this.addToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.deleteToolStripMenuItem,
+            this.orientationToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(1, 2, 0, 2);
@@ -55,51 +55,51 @@
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // dodajToolStripMenuItem
+            // addToolStripMenuItem
             // 
-            this.dodajToolStripMenuItem.Name = "dodajToolStripMenuItem";
-            this.dodajToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
-            this.dodajToolStripMenuItem.Text = "Dodaj";
-            this.dodajToolStripMenuItem.Click += new System.EventHandler(this.dodajToolStripMenuItem_Click);
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.addToolStripMenuItem.Text = "Dodaj";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
-            // edytujToolStripMenuItem
+            // editToolStripMenuItem
             // 
-            this.edytujToolStripMenuItem.Name = "edytujToolStripMenuItem";
-            this.edytujToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.edytujToolStripMenuItem.Text = "Edytuj";
-            this.edytujToolStripMenuItem.Click += new System.EventHandler(this.edytujToolStripMenuItem_Click);
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.editToolStripMenuItem.Text = "Edytuj";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
-            // usuńToolStripMenuItem
+            // deleteToolStripMenuItem
             // 
-            this.usuńToolStripMenuItem.Name = "usuńToolStripMenuItem";
-            this.usuńToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.usuńToolStripMenuItem.Text = "Usuń";
-            this.usuńToolStripMenuItem.Click += new System.EventHandler(this.usuńToolStripMenuItem_Click);
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.deleteToolStripMenuItem.Text = "Usuń";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
-            // orientacjaToolStripMenuItem
+            // orientationToolStripMenuItem
             // 
-            this.orientacjaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pionowaToolStripMenuItem,
-            this.poziomaToolStripMenuItem});
-            this.orientacjaToolStripMenuItem.Name = "orientacjaToolStripMenuItem";
-            this.orientacjaToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
-            this.orientacjaToolStripMenuItem.Text = "Orientacja";
+            this.orientationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verticalToolStripMenuItem,
+            this.horizontalToolStripMenuItem});
+            this.orientationToolStripMenuItem.Name = "orientationToolStripMenuItem";
+            this.orientationToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.orientationToolStripMenuItem.Text = "Orientacja";
             // 
-            // pionowaToolStripMenuItem
+            // verticalToolStripMenuItem
             // 
-            this.pionowaToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.pionowaToolStripMenuItem.Name = "pionowaToolStripMenuItem";
-            this.pionowaToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
-            this.pionowaToolStripMenuItem.Text = "Pionowa";
-            this.pionowaToolStripMenuItem.Click += new System.EventHandler(this.pionowaToolStripMenuItem_Click);
+            this.verticalToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.verticalToolStripMenuItem.Name = "verticalToolStripMenuItem";
+            this.verticalToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.verticalToolStripMenuItem.Text = "Pionowa";
+            this.verticalToolStripMenuItem.Click += new System.EventHandler(this.pionowaToolStripMenuItem_Click);
             // 
-            // poziomaToolStripMenuItem
+            // horizontalToolStripMenuItem
             // 
-            this.poziomaToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.poziomaToolStripMenuItem.Name = "poziomaToolStripMenuItem";
-            this.poziomaToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
-            this.poziomaToolStripMenuItem.Text = "Pozioma";
-            this.poziomaToolStripMenuItem.Click += new System.EventHandler(this.poziomaToolStripMenuItem_Click);
+            this.horizontalToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.horizontalToolStripMenuItem.Name = "horizontalToolStripMenuItem";
+            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.horizontalToolStripMenuItem.Text = "Pozioma";
+            this.horizontalToolStripMenuItem.Click += new System.EventHandler(this.poziomaToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -126,7 +126,6 @@
             this.Name = "SidePanel";
             this.ShowInTaskbar = false;
             this.Text = "Miody";
-            this.TopMost = true;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -137,12 +136,12 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem dodajToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem edytujToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem usuńToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel panel1;
-        private System.Windows.Forms.ToolStripMenuItem orientacjaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pionowaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem poziomaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem orientationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verticalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem horizontalToolStripMenuItem;
     }
 }
