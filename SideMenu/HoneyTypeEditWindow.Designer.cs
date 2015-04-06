@@ -1,4 +1,4 @@
-﻿namespace KlasyfikacjaMiodu
+﻿namespace KlasyfikacjaMiodu.SideMenu
 {
     partial class HoneyTypeEditWindow
     {

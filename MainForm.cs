@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KlasyfikacjaMiodu.BottomBar;
+using KlasyfikacjaMiodu.SideMenu;
 using KlasyfikacjaMiodu.ViewPanel;
 
 namespace KlasyfikacjaMiodu
