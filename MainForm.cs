@@ -43,7 +43,7 @@ namespace KlasyfikacjaMiodu
 
         private void PrepareSidePanel()
         {
-            sidePanel = new SidePanel();
+            sidePanel = new SidePanel(this);
             sidePanel.Size = new Size(sidePanel.Size.Width, Size.Height);
             sidePanel.StartPosition = FormStartPosition.Manual;
 
