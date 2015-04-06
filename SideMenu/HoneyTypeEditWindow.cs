@@ -38,7 +38,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             valueTextBox.Text = honeyType.MinimalPollensAmount.ToString();
             percentNumericUpDown.Value = (decimal)honeyType.MinimalPollensPercentageAmount * 100;
 
-            okButton.Enabled = false;
+            okButton.Enabled = true;
         }
 
         private void chooseColorButton_Click(object sender, EventArgs e)
