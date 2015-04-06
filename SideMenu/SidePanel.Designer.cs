@@ -111,6 +111,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(233, 300);
             this.panel1.TabIndex = 1;
+            this.panel1.WrapContents = false;
             // 
             // SidePanel
             // 
@@ -140,9 +141,9 @@
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.FlowLayoutPanel panel1;
         private System.Windows.Forms.ToolStripMenuItem orientationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verticalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem horizontalToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel panel1;
     }
 }
