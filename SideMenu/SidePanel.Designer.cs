@@ -91,7 +91,7 @@
             this.verticalToolStripMenuItem.Name = "verticalToolStripMenuItem";
             this.verticalToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.verticalToolStripMenuItem.Text = "Pionowa";
-            this.verticalToolStripMenuItem.Click += new System.EventHandler(this.pionowaToolStripMenuItem_Click);
+            this.verticalToolStripMenuItem.Click += new System.EventHandler(this.verticalToolStripMenuItem_Click);
             // 
             // horizontalToolStripMenuItem
             // 
@@ -99,7 +99,7 @@
             this.horizontalToolStripMenuItem.Name = "horizontalToolStripMenuItem";
             this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.horizontalToolStripMenuItem.Text = "Pozioma";
-            this.horizontalToolStripMenuItem.Click += new System.EventHandler(this.poziomaToolStripMenuItem_Click);
+            this.horizontalToolStripMenuItem.Click += new System.EventHandler(this.horizontalToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -126,6 +126,7 @@
             this.Name = "SidePanel";
             this.ShowInTaskbar = false;
             this.Text = "Miody";
+            this.TopMost = true;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
