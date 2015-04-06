@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.Remoting.Channels;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace KlasyfikacjaMiodu
+namespace KlasyfikacjaMiodu.SidePanel
 {
     /// <summary>
     /// Author: Agata Hammermeister<para/>
@@ -18,10 +12,11 @@ namespace KlasyfikacjaMiodu
         public HoneyType HoneyType { get; private set; }
         public double Number;
         public double Percentage;
+        private bool highlighted;
+        private bool chosen;
 
         public PictureBox MarkerColor;
         public Label HoneyName;
-
         public FlowLayoutPanel PollenValues;
         public Label PollenNumber;
         public Label PollenPercentage;
@@ -32,8 +27,11 @@ namespace KlasyfikacjaMiodu
         public PollenModule()
         {
             MarkerColor = new PictureBox();
+            MarkerColor.Enabled = false;
             HoneyName = new Label();
+            HoneyName.Enabled = false;
             PollenValues = new FlowLayoutPanel();
+            PollenValues.Enabled = false;
             PollenNumber = new Label();
             PollenPercentage = new Label();
 
@@ -52,7 +50,22 @@ namespace KlasyfikacjaMiodu
             FlowDirection = FlowDirection.LeftToRight;
             FlowDirectionValues = FlowDirection.TopDown;
 
-            MouseEnter += PollenModule_MouseEnter;
+            Session.Changed += Session_Changed;
+        }
+
+        void Session_Changed(Context context)
+        {
+            Session.Context.MarkerAdded += Context_MarkerAdded;
+
+            // Context.HoneyTypes
+        }
+
+        void Context_MarkerAdded(Marker marker)
+        {
+            if (marker.HoneyType.Equals(HoneyType))
+            {
+                Number++;
+            }
         }
 
         public PollenModule(double pollenNumber, double pollenPercentage, HoneyType honeyType)
@@ -72,6 +85,7 @@ namespace KlasyfikacjaMiodu
             Number = 0;
             Percentage = 0;
         }
+
         public PollenModule(string honeyName, Color color)
             : this() //tylko do testów
         {
@@ -90,25 +104,36 @@ namespace KlasyfikacjaMiodu
         }
         public void Edit(HoneyType honey)
         {
-
-        }
-        
-        //protected override void OnMouseEnter(EventArgs e)
-        //{
-        //    BackColor = Color.LightPink;
-        //}
-
-        private void PollenModule_MouseEnter(object sender, EventArgs e)
-        {
-            Point position = PointToClient(Cursor.Position);
-            if (ClientRectangle.Contains(position))
-            {
-                BackColor = Color.HotPink;
-            }
+            MarkerColor.BackColor = honey.MarkerColor;
+            HoneyName.Text = honey.Name;
+            Number = honey.MinimalPollensAmount;
+            Percentage = honey.MinimalPollensPercentageAmount;
         }
 
-        protected override void OnMouseLeave(EventArgs e)
+        public void Highlight()
         {
+            if(chosen) return;
+
+            BackColor = Color.PapayaWhip;
+            highlighted = true;
+        }
+
+        public void UnHighlight()
+        {
+            if (chosen) return;
+            highlighted = false;
+            BackColor = Color.Empty;
+        }
+
+        public void Choose()
+        {
+            chosen = true;
+            BackColor = Color.NavajoWhite;
+        }
+
+        public void UnChoose()
+        {
+            chosen = false;
             BackColor = Color.Empty;
         }
     }
