@@ -6,13 +6,14 @@ namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
     /// Author: Agata Hammermeister<para/>
-    /// Contains information on each <see cref="HoneyType"/>. Displayed on the side panel.
+    /// Represents information on each <see cref="HoneyType"/>. 
+    /// Displayed on the side panel.
     /// </summary>
     public class PollenModule : FlowLayoutPanel
     {
         public HoneyType HoneyType { get; private set; }
         public double Number;
-        public double Percentage; //doliczyć
+        public double Percentage;
         private bool chosen;
 
         public PictureBox MarkerColor;
@@ -26,14 +27,9 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         public PollenModule()
         {
-            MarkerColor = new PictureBox();
-            MarkerColor.Enabled = false;
-            HoneyName = new Label();
-            HoneyName.Enabled = false;
-            HoneyName.Padding = new Padding(0, 6, 0, 0);
-            PollenValues = new FlowLayoutPanel();
-            PollenValues.Enabled = false;
-            PollenValues.Padding = new Padding(0, 3, 0, 0);
+            MarkerColor = new PictureBox {Enabled = false};
+            HoneyName = new Label {Enabled = false, Padding = new Padding(0, 6, 0, 0)};
+            PollenValues = new FlowLayoutPanel {Enabled = false, Padding = new Padding(0, 3, 0, 0)};
             PollenNumber = new Label();
             PollenPercentage = new Label();
 
@@ -64,23 +60,24 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             MarkerColor.BackColor = honeyType.MarkerColor;
             HoneyName.Text = honeyType.Name;
-            PollenNumber.Text = Number + " sztuk";
+            PollenNumber.Text = Number + " pyłków";
             PollenPercentage.Text = Percentage + "%";
         }
 
         void Session_Changed(Context context)
         {
             Session.Context.MarkerAdded += Context_MarkerAdded;
-
-            // Context.HoneyTypes
         }
 
+        /// <summary>
+        ///Computes percentage share and number of honey type markers 
+        /// </summary>
         void Context_MarkerAdded(Marker marker)
         {
             if (marker.HoneyType.Equals(HoneyType))
             {
                 Number++;
-                PollenNumber.Text = Number + " sztuk";
+                PollenNumber.Text = Number + " pyłków";
                 int allMarkers = Session.Context.HoneyTypes.Count;
                 Percentage = Number*100/allMarkers;
                 PollenPercentage.Text = Percentage + "%";
