@@ -23,6 +23,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             Name = null;
             honeyType = new HoneyType("", "", "", Color.Empty, 0, 0);
 
+            this.Text = "Dodaj";
             okButton.Enabled = false;
         }
 
@@ -38,6 +39,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             valueTextBox.Text = honeyType.MinimalPollensAmount.ToString();
             percentNumericUpDown.Value = (decimal)honeyType.MinimalPollensPercentageAmount * 100;
 
+            this.Text = "Edytuj";
             okButton.Enabled = true;
         }
 
