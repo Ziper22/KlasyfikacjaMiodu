@@ -123,9 +123,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ulan.jpg" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Resources\Deer-Trail-honey-2.jpg" />
     <Content Include="Resources\marker128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

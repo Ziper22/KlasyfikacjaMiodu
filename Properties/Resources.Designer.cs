@@ -63,9 +63,9 @@ namespace KlasyfikacjaMiodu.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ulan {
+        internal static System.Drawing.Bitmap Deer_Trail_honey_2 {
             get {
-                object obj = ResourceManager.GetObject("ulan", resourceCulture);
+                object obj = ResourceManager.GetObject("Deer-Trail-honey-2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
