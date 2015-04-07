@@ -48,6 +48,11 @@ namespace KlasyfikacjaMiodu
         private HoneyType selectedHoneyType;
         private Image image;
 
+        public Context()
+        {
+            image = Properties.Resources.honeyPollens;
+        }
+
         public float Scale
         {
             get { return scale; }

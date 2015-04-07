@@ -54,8 +54,12 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         private void Marker_Click(object sender, MouseEventArgs e)
         {
-            if (!mouseMovedOnMarker)
-            panel.Controls.Remove((Control)sender);
+            MarkerPictureBox box = sender as MarkerPictureBox;
+            if (box != null)
+            {
+                if (!mouseMovedOnMarker)
+                    Session.Context.RemoveMarker(box.Marker);
+            }
         }
 
         private void Context_MarkerRemoved(Marker marker)
@@ -75,16 +79,9 @@ namespace KlasyfikacjaMiodu.ViewPanel
         {
             MarkerPictureBox p = new MarkerPictureBox(marker);
 
-            Image im = image.Image;
-            Bitmap b = new Bitmap(im);
-            for (int i = 0; i < b.Width; i++)
-            {
-                for (int j = 0; j < b.Height; j++)
-                {
-                    b.SetPixel(i, j, Color.DeepSkyBlue);
-                }
-            }
-            p.Image = (Image)b;
+
+            p.BackgroundImage = MarkerImageCache.GetImageForHoneyType(marker.HoneyType);
+            p.BackgroundImageLayout = ImageLayout.Zoom;
 
             int size = (int)(32 * Session.Context.Scale);
             p.Size = new Size(32, 32);
@@ -104,18 +101,23 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         private void MarkersPanel_Click(object sender, MouseEventArgs e)
         {
-            if (!mouseMovedOnPanel && e.Button == MouseButtons.Left)
+            HoneyType selectedHoneyType = Session.Context.SelectedHoneyType;
+            if (selectedHoneyType != null)
             {
-                float scale = Session.Context.Scale;
+                if (!mouseMovedOnPanel && e.Button == MouseButtons.Left)
+                {
+                    float scale = Session.Context.Scale;
 
-                float x = (e.X) / scale;
-                float y = (e.Y) / scale;
-//                x = Math.Max(lastMarkerSize / 2, Math.Min(image.Image.PhysicalDimension.Width - lastMarkerSize / 2, x));
-//                y = Math.Max(lastMarkerSize / 2, Math.Min(image.Image.PhysicalDimension.Height - lastMarkerSize / 2, y));
-                HoneyType t = new HoneyType("Lipa", "Lipowy", "Lipowo", Color.SaddleBrown, 4, 0.5f);
-                Marker marker = new Marker((int)x, (int)y, (int)lastMarkerSize, t);
-                AddMarkerAction action = new AddMarkerAction(marker);
-                Actions.RunAction(action);
+                    float x = (e.X) / scale;
+                    float y = (e.Y) / scale;
+                    //                x = Math.Max(lastMarkerSize / 2, Math.Min(image.Image.PhysicalDimension.Width - lastMarkerSize / 2, x));
+                    //                y = Math.Max(lastMarkerSize / 2, Math.Min(image.Image.PhysicalDimension.Height - lastMarkerSize / 2, y));
+
+
+                    Marker marker = new Marker((int)x, (int)y, (int)lastMarkerSize, selectedHoneyType);
+                    AddMarkerAction action = new AddMarkerAction(marker);
+                    Actions.RunAction(action);
+                }
             }
         }
 
@@ -141,8 +143,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 int x = box.Marker.X + e.X - xOffset;
                 int y = box.Marker.Y + e.Y - yOffset;
 
-                x = Math.Max(box.Marker.Size/2, x);
-                x = (int) Math.Min(image.Image.PhysicalDimension.Width - box.Marker.Size/2f, x);
+                x = Math.Max(box.Marker.Size / 2, x);
+                x = (int)Math.Min(image.Image.PhysicalDimension.Width - box.Marker.Size / 2f, x);
 
                 y = Math.Max(box.Marker.Size / 2, y);
                 y = (int)Math.Min(image.Image.PhysicalDimension.Height - box.Marker.Size / 2f, y);
@@ -188,18 +190,18 @@ namespace KlasyfikacjaMiodu.ViewPanel
             {
                 if (e.Delta > 0)
                 {
-                    box.Marker.Size = (int) (box.Marker.Size*1.05f);
+                    box.Marker.Size = (int)(box.Marker.Size * 1.05f);
                     box.Marker.Size++;
                 }
                 else
                 {
-                    box.Marker.Size = (int) (box.Marker.Size*0.95f);
+                    box.Marker.Size = (int)(box.Marker.Size * 0.95f);
                     box.Marker.Size--;
                     if (box.Marker.Size < 16)
                         box.Marker.Size = 16;
                 }
                 lastMarkerSize = box.Marker.Size;
-                box.Scale(new SizeF(1,1));
+                box.Scale(new SizeF(1, 1));
             }
         }
 
@@ -209,6 +211,13 @@ namespace KlasyfikacjaMiodu.ViewPanel
         private void MarkersPanel_ContextChanged(Context context)
         {
             SetContextEvents();
+            panel.Controls.Clear();
+            panel.Controls.Add(image);
+
+            foreach (Marker marker in context.Markers)
+            {
+                Context_MarkerAdded(marker);
+            }
         }
 
 

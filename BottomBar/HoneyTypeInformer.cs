@@ -111,7 +111,6 @@ namespace KlasyfikacjaMiodu.BottomBar
             int honeyNameCounter = 0;
             bool foundOne = false;  //dla sprawdzenia, że już raz znalaeziono jakiś pyłek 
 
-            int value = 0;
             HoneyType bestType = null;
 
             foreach (KeyValuePair<HoneyType, int> entry in honeyCounter)

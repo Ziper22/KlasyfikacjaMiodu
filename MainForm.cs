@@ -46,6 +46,7 @@ namespace KlasyfikacjaMiodu
             sidePanel = new SidePanel(this);
             sidePanel.Size = new Size(sidePanel.Size.Width, Size.Height);
             sidePanel.StartPosition = FormStartPosition.Manual;
+            sidePanel.Owner = this;
 
             CenterToScreen();
             Location = new Point(Left - sidePanel.Width/2, Top);
