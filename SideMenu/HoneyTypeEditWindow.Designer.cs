@@ -192,6 +192,7 @@
             0,
             0,
             0});
+            this.percentNumericUpDown.KeyUp += new System.Windows.Forms.KeyEventHandler(this.percentNumericUpDown_KeyUp);
             // 
             // label7
             // 

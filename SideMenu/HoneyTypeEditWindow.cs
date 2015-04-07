@@ -61,7 +61,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             honeyType.Name = nameTextBox.Text;
             honeyType.DescriptionName = descriptionTextBox.Text;
             honeyType.LinkedName = linkedNameTextBox.Text;
-            honeyType.MarkerColor = color;
+            honeyType.MarkerColor = specimenPictureBox.BackColor;
             honeyType.MinimalPollensAmount = float.Parse(valueTextBox.Text);
             honeyType.MinimalPollensPercentageAmount = (float)percentNumericUpDown.Value / 100f;
 
@@ -104,6 +104,18 @@ namespace KlasyfikacjaMiodu.SideMenu
             CheckIfInt();
             CheckInputControls();
             SwitchOkButton();
+        }
+
+        private void percentNumericUpDown_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete)
+            {
+                if (percentNumericUpDown.Text.Length == 0)
+                {
+                    percentNumericUpDown.Value = 0;
+                    percentNumericUpDown.Text = "0";
+                }
+            }
         }
 
         private void CheckInputControls()
@@ -156,6 +168,6 @@ namespace KlasyfikacjaMiodu.SideMenu
                     valueTextBox.Select(valueTextBox.Text.Length, 0);
                 }
             }
-        }
+        } 
     }
 }
