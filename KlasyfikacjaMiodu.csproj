@@ -55,6 +55,7 @@
     <Compile Include="BottomBar\HoneyTypeInformer.cs" />
     <Compile Include="BottomBar\ScaleHandler.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="DefaultHoneyTypesBase.cs" />
     <Compile Include="HoneyType.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
