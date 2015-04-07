@@ -63,9 +63,19 @@ namespace KlasyfikacjaMiodu.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Deer_Trail_honey_2 {
+        internal static System.Drawing.Bitmap honeyPollens {
             get {
-                object obj = ResourceManager.GetObject("Deer-Trail-honey-2", resourceCulture);
+                object obj = ResourceManager.GetObject("honeyPollens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap marker128 {
+            get {
+                object obj = ResourceManager.GetObject("marker128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

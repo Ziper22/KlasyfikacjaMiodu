@@ -156,8 +156,9 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Session_ContextChanged(Context context)
         {
-            pollensImage.Image = context.Image;
             SetContextEvents();
+            pollensImage.Image = context.Image;
+            panel.BackgroundImage = context.Image;
         }
     }
 }

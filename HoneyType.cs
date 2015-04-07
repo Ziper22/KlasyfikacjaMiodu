@@ -22,14 +22,6 @@ namespace KlasyfikacjaMiodu
         public float MinimalPollensAmount { get; set; }
         public float MinimalPollensPercentageAmount { get; set; }
 
-        [Obsolete("This Constructor is deprecated, please use the second one")]
-        public HoneyType(string name, string descriptionName, Color markerColor)
-        {
-            DescriptionName = descriptionName;
-            Name = name;
-            MarkerColor = markerColor;
-        }
-
         public HoneyType(string name, string descriptionName, string linkedName, Color markerColor, float minimalPollensAmount, float minimalPollensPercentageAmount)
         {
             Name = name;
