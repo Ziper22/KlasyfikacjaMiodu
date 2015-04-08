@@ -83,6 +83,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             PollenModule pollenModule = new PollenModule(newHoney);
             panel1.Controls.Add(pollenModule);
             pollenModuleSelector.AddListeners(pollenModule);
+            Session.Context.AddHoneyType(newHoney);
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -98,6 +99,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         private void HoneyType_Edit(HoneyType honeyType)
         {
             pollenModuleSelector.chosenModule.Edit(honeyType);
+            Session.Context.EditedHoneyType(honeyType);
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)

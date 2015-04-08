@@ -11,6 +11,8 @@ namespace KlasyfikacjaMiodu.SideMenu
     /// </summary>
     public class PollenModule : FlowLayoutPanel
     {
+        //zmiana koloru wszystkich po edycji       
+
         public HoneyType HoneyType { get; private set; }
         public double Number;
         public double Percentage;
@@ -49,6 +51,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             FlowDirectionValues = FlowDirection.TopDown;
 
             Session.Changed += Session_Changed;
+            Session_Changed(Session.Context);
         }
 
         public PollenModule(HoneyType honeyType)
@@ -67,6 +70,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         void Session_Changed(Context context)
         {
             Session.Context.MarkerAdded += Context_MarkerAdded;
+            Session.Context.MarkerRemoved += Context_MarkerRemoved;
         }
 
         /// <summary>
@@ -77,11 +81,26 @@ namespace KlasyfikacjaMiodu.SideMenu
             if (marker.HoneyType.Equals(HoneyType))
             {
                 Number++;
-                PollenNumber.Text = Number + " pyłków";
-                int allMarkers = Session.Context.HoneyTypes.Count;
-                Percentage = Number*100/allMarkers;
-                PollenPercentage.Text = Percentage + "%";
             }
+            Compute();
+        }
+
+        //zapisywanie
+        void Context_MarkerRemoved(Marker marker)
+        {
+            if (marker.HoneyType.Equals(HoneyType))
+            {
+                Number--;
+            }
+            Compute();
+        }
+
+        private void Compute() //zmienić nazwę na sensowniejszą :P
+        {
+            PollenNumber.Text = Number + " pyłków";
+            int allMarkers = Session.Context.Markers.Count;
+            Percentage = Number * 100f / allMarkers;
+            PollenPercentage.Text = Math.Round(Percentage, 3) + "%";
         }
 
         public PollenModule Add(HoneyType honey)
