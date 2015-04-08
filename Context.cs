@@ -30,6 +30,8 @@ namespace KlasyfikacjaMiodu
         public event HoneyTypeEventHandler HoneyTypeRemoved;
         [field: NonSerialized]
         public event HoneyTypeEventHandler HoneyTypeSelected;
+        [field: NonSerialized]
+        public event HoneyTypeEventHandler HoneyTypeEdited;
 
         public delegate void MarkerEventHandler(Marker marker);
         [field: NonSerialized]
@@ -51,6 +53,7 @@ namespace KlasyfikacjaMiodu
         public Context()
         {
             image = Properties.Resources.honeyPollens;
+            //honeyTypes = DefaultHoneyTypesBase.GetAllHoneyTypesFromFile();
         }
 
         public float Scale
@@ -119,6 +122,11 @@ namespace KlasyfikacjaMiodu
             OnHoneyTypeAdded(honeyType);
         }
 
+        public void EditedHoneyType(HoneyType honeyType)
+        {
+            OnHoneyTypeEdited(honeyType);
+        }
+
         public void RemoveHoneyType(HoneyType honeyType)
         {
             honeyTypes.Remove(honeyType);
@@ -183,6 +191,12 @@ namespace KlasyfikacjaMiodu
         {
             if (HoneyTypeSelected != null)
                 HoneyTypeSelected(selectedHoneyType);
+        }
+
+        protected virtual void OnHoneyTypeEdited(HoneyType honeyType)
+        {
+            if (HoneyTypeEdited != null)
+                HoneyTypeEdited(honeyType);
         }
     }
 }
