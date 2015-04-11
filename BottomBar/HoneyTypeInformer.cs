@@ -92,43 +92,25 @@ namespace KlasyfikacjaMiodu.BottomBar
 
             honeyName.Clear();
             honeyName.Append(lastName);
-            honeyName.Replace('y', 'o', honeyName.Length, 0);
+            honeyName.Replace('y', 'o', honeyName.Length-1, 1);
             honeyName.Append("-" + txt);
             return honeyName.ToString();
         }
     //----------------------------
 
         private void setHoneyTypeLabelText()
-        {
-            //taki prosty algorytm zeby bylo wiadomo oglonie co trzeba zrobic
-
-            //trzeba napisac od nowa i moze jakeis inne funkcje dodac zeby uwzglednial sklad procentowy danego pylku w miodzie
-            //i tez w razie potrzeby robil polaczenia jak lipowo-wrzosowo-gryczany.
-
-            //obczaj jakie pola ma klasa honeytype tam wszystko jest co potrzeba.
-            
+        {          
             string labelName = "";   //do nazwy
             int honeyNameCounter = 0;
-            bool foundOne = false;  //dla sprawdzenia, że już raz znalaeziono jakiś pyłek 
+            bool foundOne = false;   //dla sprawdzenia, że już raz znalaeziono jakiś pyłek 
 
             HoneyType bestType = null;
 
             foreach (KeyValuePair<HoneyType, int> entry in honeyCounter)
             {
-                if (bestType == null)   //nie ma bestType, to "Niezklasyfikowany"
+                if (allHoneyTypeAmount != 0 && ((float)entry.Value/allHoneyTypeAmount >= (float)entry.Key.MinimalPollensPercentageAmount))
                 {
-                    labelName = returnName("Niezklasyfikowany");
-                    honeyTypeLabel.Text = labelName;
-
-                    if (entry.Value >= 1 && honeyNameCounter >= 3 && foundOne == true) //ale jezeli nie ma best type, a byl juz jakis typ wypisany
-                    {                                                                 //oraz bylo wiecej niz 3 gatunki, to "Wielokwiatowy"
-                        labelName = returnName("Wielokwiatowy");
-                        honeyTypeLabel.Text = labelName;
-                    }
-                }
-
-                if (entry.Key.MinimalPollensAmount <= entry.Value)
-                {
+                    
                     if (bestType != null)   //jest bestType i to co znaleziono tez spelnia zalozenia
                     {                       //, to nazwa sklada sie z kilku
                         labelName = appendName(labelName, entry.Key.DescriptionName);
@@ -136,7 +118,7 @@ namespace KlasyfikacjaMiodu.BottomBar
 
                         honeyNameCounter++;
 
-                        if (honeyNameCounter >= 3)
+                        if (honeyNameCounter > 3)
                             bestType = null;
                     }
 
@@ -150,28 +132,21 @@ namespace KlasyfikacjaMiodu.BottomBar
                         foundOne = true;
                     }
                 }
+
+                if (bestType == null)   //nie ma bestType, to "Niesklasyfikowany"
+                {
+                    labelName = returnName("Niesklasyfikowany");
+                    honeyTypeLabel.Text = labelName;
+
+                    if (entry.Value >= 1 && honeyNameCounter > 3 && foundOne == true)  //ale jezeli nie ma best type, a byl juz jakis typ wypisany
+                    {                                                                  //oraz bylo wiecej niz 3 gatunki, to "Wielokwiatowy"
+                        labelName = returnName("Wielokwiatowy");
+                        honeyTypeLabel.Text = labelName;
+                    }
+                }
+                
             }
-
-            //int value = 0;
-            //HoneyType bestType = null;
-
-            //foreach (KeyValuePair<HoneyType, int> entry in honeyCounter)
-            //{
-            //    if (bestType == null)
-            //    {
-            //        bestType = entry.Key;
-            //        value = entry.Value;
-            //    }
-
-            //    if (entry.Value > value)
-            //    {
-            //        bestType = entry.Key;
-            //        value = entry.Value;
-            //    }   
-            //}
-
-            //if (bestType != null && bestType.MinimalPollensAmount <= value)
-            //    honeyTypeLabel.Text = bestType.DescriptionName;
         }
+
     }
 }
