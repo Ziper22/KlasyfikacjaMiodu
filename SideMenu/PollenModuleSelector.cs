@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki<para/>
+    ///     Author: Mariusz Gorzycki
+    ///     <para />
     /// </summary>
-    
-    class PollenModuleSelector
+    internal class PollenModuleSelector
     {
         public PollenModule chosenModule { get; private set; }
         public PollenModule highlightedModule { get; private set; }
@@ -18,7 +19,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             pollenModule.MouseClick += pollenModule_MouseClick;
         }
 
-        void pollenModule_MouseEnter(object sender, EventArgs e)
+        private void pollenModule_MouseEnter(object sender, EventArgs e)
         {
             PollenModule newHighlightedModule = sender as PollenModule;
 
@@ -32,7 +33,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
-        void pollenModule_MouseLeave(object sender, EventArgs e)
+        private void pollenModule_MouseLeave(object sender, EventArgs e)
         {
             PollenModule newHighlightedModule = sender as PollenModule;
 
@@ -46,7 +47,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
-        void pollenModule_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void pollenModule_MouseClick(object sender, MouseEventArgs e)
         {
             PollenModule newSelectedModule = sender as PollenModule;
 

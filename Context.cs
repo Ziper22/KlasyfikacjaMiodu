@@ -4,13 +4,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KlasyfikacjaMiodu.Properties;
 
 namespace KlasyfikacjaMiodu
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki<para/>
-    /// All project data and current state is kept as a program Context.
-    /// Every Context realted action as new project, loading new data etc. can by listened with events.
+    ///     Author: Mariusz Gorzycki
+    ///     <para />
+    ///     All project data and current state is kept as a program Context.
+    ///     Every Context realted action as new project, loading new data etc. can by listened with events.
     /// </summary>
     [Serializable]
     public class Context
@@ -52,7 +54,7 @@ namespace KlasyfikacjaMiodu
 
         public Context()
         {
-            image = Properties.Resources.honeyPollens;
+            image = Resources.honeyPollens;
             //honeyTypes = DefaultHoneyTypesBase.GetAllHoneyTypesFromFile();
         }
 
