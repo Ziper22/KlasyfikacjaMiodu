@@ -5,27 +5,24 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
-    /// Author: Agata Hammermeister<para/>
-    /// Represents information on each <see cref="HoneyType"/>. 
-    /// Displayed on the side panel.
+    ///     Author: Agata Hammermeister
+    ///     <para />
+    ///     Represents information on each <see cref="HoneyType" />.
+    ///     Displayed on the side panel.
     /// </summary>
     public class PollenModule : FlowLayoutPanel
     {
-        //zmiana koloru wszystkich po edycji       
-
         public HoneyType HoneyType { get; private set; }
-        public double Number;
-        public double Percentage;
         private bool chosen;
-
-        public PictureBox MarkerColor;
-        public Label HoneyName;
-        public FlowLayoutPanel PollenValues;
-        public Label PollenNumber;
-        public Label PollenPercentage;
-
         public new FlowDirection FlowDirection;
         public FlowDirection FlowDirectionValues;
+        public Label HoneyName;
+        public PictureBox MarkerColor;
+        public double Number;
+        public double Percentage;
+        public Label PollenNumber;
+        public Label PollenPercentage;
+        public FlowLayoutPanel PollenValues;
 
         public PollenModule()
         {
@@ -67,16 +64,16 @@ namespace KlasyfikacjaMiodu.SideMenu
             PollenPercentage.Text = Percentage + "%";
         }
 
-        void Session_Changed(Context context)
+        private void Session_Changed(Context context)
         {
             Session.Context.MarkerAdded += Context_MarkerAdded;
             Session.Context.MarkerRemoved += Context_MarkerRemoved;
         }
 
         /// <summary>
-        ///Computes percentage share and number of honey type markers 
+        ///     Computes percentage share and number of honey type markers
         /// </summary>
-        void Context_MarkerAdded(Marker marker)
+        private void Context_MarkerAdded(Marker marker)
         {
             if (marker.HoneyType.Equals(HoneyType))
             {
@@ -85,8 +82,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             ComputeMarkerNumber();
         }
 
-        //zapisywanie
-        void Context_MarkerRemoved(Marker marker)
+        private void Context_MarkerRemoved(Marker marker)
         {
             if (marker.HoneyType.Equals(HoneyType))
             {
@@ -99,7 +95,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
             PollenNumber.Text = Number + " pyłków";
             int allMarkers = Session.Context.Markers.Count;
-            Percentage = Number * 100f / allMarkers;
+            Percentage = Number*100f/allMarkers;
             PollenPercentage.Text = Math.Round(Percentage, 3) + "%";
         }
 
@@ -108,6 +104,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             PollenModule newPollen = new PollenModule(honey);
             return newPollen;
         }
+
         public void Edit(HoneyType honey)
         {
             HoneyType = honey;

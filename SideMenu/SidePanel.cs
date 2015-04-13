@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using KlasyfikacjaMiodu.SideMenu;
 
 namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
-    /// Author: Agata Hammermeister<para/>
+    ///     Author: Agata Hammermeister
+    ///     <para />
     /// </summary>
-
     public partial class SidePanel : Form
     {
-        private readonly PollenModuleSelector pollenModuleSelector;
         private readonly Form mainForm;
+        private readonly PollenModuleSelector pollenModuleSelector;
         private bool locationChanged;
 
         public SidePanel(Form mainForm)
@@ -23,8 +22,9 @@ namespace KlasyfikacjaMiodu.SideMenu
             this.mainForm = mainForm;
             LocationChanged += SidePanel_LocationChanged;
         }
+
         /// <summary>
-        /// Loads modules in side panel for all honey types
+        ///     Loads modules in side panel for all honey types
         /// </summary>
         private void Session_Changed(Context context)
         {
@@ -32,6 +32,17 @@ namespace KlasyfikacjaMiodu.SideMenu
             {
                 HoneyType_Add(honey);
             }
+        }
+
+        /// <summary>
+        ///     On ControlBox click hides side panel instead of closing it
+        /// </summary>
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            if (e.CloseReason != CloseReason.UserClosing) return;
+            e.Cancel = true;
+            Hide();
         }
 
         #region AddEditDelete
@@ -88,7 +99,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (pollenModuleSelector.chosenModule!=null)
+            if (pollenModuleSelector.chosenModule != null)
             {
                 HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow(Session.Context.SelectedHoneyType);
                 addEditWindow.OkButtonClicked += HoneyType_Edit;
@@ -98,7 +109,6 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void HoneyType_Edit(HoneyType honeyType)
         {
-            //edithoney
             pollenModuleSelector.chosenModule.Edit(honeyType);
             Session.Context.EditedHoneyType(honeyType);
         }
@@ -125,12 +135,13 @@ namespace KlasyfikacjaMiodu.SideMenu
                 }
             }
         }
+
         #endregion
 
         #region Location&Orientation
 
         /// <summary>
-        ///Detects if location of the side panel has been changed 
+        ///     Detects if location of the side panel has been changed
         /// </summary>
         private void SidePanel_LocationChanged(object sender, EventArgs e)
         {
@@ -138,7 +149,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Changes orientation of the side panel to vertical
+        ///     Changes orientation of the side panel to vertical
         /// </summary>
         private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -149,17 +160,16 @@ namespace KlasyfikacjaMiodu.SideMenu
             if (locationChanged)
             {
                 mainForm.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - (mainForm.Width + Width))/2,
-                    (Screen.PrimaryScreen.WorkingArea.Height - mainForm.Height)/2);               
+                    (Screen.PrimaryScreen.WorkingArea.Height - mainForm.Height)/2);
             }
             Location = new Point(mainForm.Right, mainForm.Top);
 
             verticalToolStripMenuItem.Text = "Wyrównaj";
             horizontalToolStripMenuItem.Text = "Pozioma";
-
         }
 
         /// <summary>
-        /// Changes orientation of the side panel to horizontal
+        ///     Changes orientation of the side panel to horizontal
         /// </summary>
         private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -179,16 +189,5 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         #endregion
-
-        /// <summary>
-        /// On ControlBox click hides side panel instead of closing it
-        /// </summary>
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-            if (e.CloseReason != CloseReason.UserClosing) return;
-            e.Cancel = true;
-            Hide();
-        }
     }
 }
