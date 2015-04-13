@@ -82,7 +82,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             {
                 Number++;
             }
-            Compute();
+            ComputeMarkerNumber();
         }
 
         //zapisywanie
@@ -92,10 +92,10 @@ namespace KlasyfikacjaMiodu.SideMenu
             {
                 Number--;
             }
-            Compute();
+            ComputeMarkerNumber();
         }
 
-        private void Compute() //zmienić nazwę na sensowniejszą :P
+        private void ComputeMarkerNumber()
         {
             PollenNumber.Text = Number + " pyłków";
             int allMarkers = Session.Context.Markers.Count;
