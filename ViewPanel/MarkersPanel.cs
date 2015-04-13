@@ -232,6 +232,15 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 this.SizeChanged += MarkerPictureBox_SizeChanged;
                 this.Layout += MarkerPictureBox_SizeChanged;
                 this.Layout += MarkerPictureBox_LocationChanged;
+                Session.Context.HoneyTypeEdited += Context_HoneyTypeEdited;
+            }
+
+            void Context_HoneyTypeEdited(HoneyType honeyType)
+            {
+                if (Marker.HoneyType==honeyType)
+                {
+                    BackgroundImage = MarkerImageCache.GetImageForHoneyType(honeyType);
+                }
             }
 
             void MarkerPictureBox_SizeChanged(object sender, EventArgs e)
