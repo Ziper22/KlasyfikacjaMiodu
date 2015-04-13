@@ -98,6 +98,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void HoneyType_Edit(HoneyType honeyType)
         {
+            //edithoney
             pollenModuleSelector.chosenModule.Edit(honeyType);
             Session.Context.EditedHoneyType(honeyType);
         }
