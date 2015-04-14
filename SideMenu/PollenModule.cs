@@ -14,15 +14,15 @@ namespace KlasyfikacjaMiodu.SideMenu
     {
         public HoneyType HoneyType { get; private set; }
         private bool chosen;
-        public new FlowDirection FlowDirection;
-        public FlowDirection FlowDirectionValues;
-        public Label HoneyName;
-        public PictureBox MarkerColor;
-        public double Number;
-        public double Percentage;
-        public Label PollenNumber;
-        public Label PollenPercentage;
-        public FlowLayoutPanel PollenValues;
+        private new FlowDirection FlowDirection;
+        private FlowDirection FlowDirectionValues;
+        private Label HoneyName;
+        private PictureBox MarkerColor;
+        private double Number;
+        private double Percentage;
+        private Label PollenNumber;
+        private Label PollenPercentage;
+        private FlowLayoutPanel PollenValues;
 
         public PollenModule()
         {
