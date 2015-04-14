@@ -59,6 +59,7 @@ namespace KlasyfikacjaMiodu
             this.redoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.showPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mousePostion = new System.Windows.Forms.Label();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pollensImage)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -362,12 +363,22 @@ namespace KlasyfikacjaMiodu
             this.showPanelMenuItem.Size = new System.Drawing.Size(149, 26);
             this.showPanelMenuItem.Text = "Ukryj listę";
             // 
+            // mousePostion
+            // 
+            this.mousePostion.AutoSize = true;
+            this.mousePostion.Location = new System.Drawing.Point(695, 381);
+            this.mousePostion.Name = "mousePostion";
+            this.mousePostion.Size = new System.Drawing.Size(77, 13);
+            this.mousePostion.TabIndex = 3;
+            this.mousePostion.Text = "mouse position";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 442);
+            this.Controls.Add(this.mousePostion);
             this.Controls.Add(this.topMenu);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.viewPanel);
@@ -426,6 +437,7 @@ namespace KlasyfikacjaMiodu
         private FlowLayoutPanel flowLayoutPanel2;
         private Label percentDesc;
         private NumericUpDown scale;
+        private Label mousePostion;
     }
 }
 
