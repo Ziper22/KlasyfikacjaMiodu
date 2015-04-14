@@ -20,8 +20,10 @@ namespace KlasyfikacjaMiodu.SideMenu
         public HoneyTypeEditWindow()
         {
             InitializeComponent();
+            CenterToScreen();
+            
             Name = null;
-            honeyType = new HoneyType("", "", "", Color.Empty, 0, 0);
+            honeyType = new HoneyType("", Color.Empty, 0, 0);
 
             this.Text = "Dodaj";
             okButton.Enabled = false;
@@ -30,11 +32,11 @@ namespace KlasyfikacjaMiodu.SideMenu
         public HoneyTypeEditWindow(HoneyType honeyType)
         {
             InitializeComponent();
+            CenterToScreen();
+
             this.honeyType = honeyType;
 
             nameTextBox.Text = honeyType.Name;
-            descriptionTextBox.Text = honeyType.DescriptionName;
-            linkedNameTextBox.Text = honeyType.LinkedName;
             specimenPictureBox.BackColor = honeyType.MarkerColor;
             valueTextBox.Text = honeyType.MinimalPollensAmount.ToString();
             percentNumericUpDown.Value = (decimal)honeyType.MinimalPollensPercentageAmount * 100;
@@ -59,8 +61,6 @@ namespace KlasyfikacjaMiodu.SideMenu
         private void okButton_Click(object sender, EventArgs e)
         {
             honeyType.Name = nameTextBox.Text;
-            honeyType.DescriptionName = descriptionTextBox.Text;
-            honeyType.LinkedName = linkedNameTextBox.Text;
             honeyType.MarkerColor = specimenPictureBox.BackColor;
             honeyType.MinimalPollensAmount = float.Parse(valueTextBox.Text);
             honeyType.MinimalPollensPercentageAmount = (float)percentNumericUpDown.Value / 100f;
@@ -118,6 +118,9 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
+        /// <summary>
+        /// Counts all controls in which information must be set
+        /// </summary>
         private void CheckInputControls()
         {
             foreach (Control cont in panel1.Controls) 
@@ -137,9 +140,12 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
+        /// <summary>
+        /// Checks if the condition to switch on the ok button is satisfied
+        /// </summary>
         private void SwitchOkButton()
         {
-            if (count == 5) 
+            if (count == 3) 
             {
                 okButton.Enabled = true;
             }
@@ -150,6 +156,9 @@ namespace KlasyfikacjaMiodu.SideMenu
             count = 0;
         }
 
+        /// <summary>
+        /// Doesn't allow to type in "Ilość" field anything else besides digits
+        /// </summary>
         private void CheckIfInt()
         {
             try
@@ -168,6 +177,6 @@ namespace KlasyfikacjaMiodu.SideMenu
                     valueTextBox.Select(valueTextBox.Text.Length, 0);
                 }
             }
-        } 
+        }
     }
 }
