@@ -21,34 +21,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             Session.Changed += Session_Changed;
             this.mainForm = mainForm;
             LocationChanged += SidePanel_LocationChanged;
-        }
 
-        /// <summary>
-        ///     Loads modules in side panel for all honey types
-        /// </summary>
-        private void Session_Changed(Context context)
-        {
-            foreach (HoneyType honey in Session.Context.HoneyTypes)
-            {
-                HoneyType_Add(honey);
-            }
-        }
-
-        /// <summary>
-        ///     On ControlBox click hides side panel instead of closing it
-        /// </summary>
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-            if (e.CloseReason != CloseReason.UserClosing) return;
-            e.Cancel = true;
-            Hide();
-        }
-
-        #region AddEditDelete
-
-        private void addToolStripMenuItem_Click(object sender, EventArgs e)
-        {
             HoneyType facelia = new HoneyType("Facelia", "faceliowy", "facelio", Color.MediumSlateBlue, 14, 1);
             PollenModule pm1 = new PollenModule(facelia);
             panel1.Controls.Add(pm1);
@@ -83,7 +56,34 @@ namespace KlasyfikacjaMiodu.SideMenu
             PollenModule pm7 = new PollenModule(lipa);
             panel1.Controls.Add(pm7);
             pollenModuleSelector.AddListeners(pm7);
+        }
 
+        /// <summary>
+        ///     Loads modules in side panel for all honey types
+        /// </summary>
+        private void Session_Changed(Context context)
+        {
+            foreach (HoneyType honey in Session.Context.HoneyTypes)
+            {
+                HoneyType_Add(honey);
+            }
+        }
+
+        /// <summary>
+        ///     On ControlBox click hides side panel instead of closing it
+        /// </summary>
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            if (e.CloseReason != CloseReason.UserClosing) return;
+            e.Cancel = true;
+            Hide();
+        }
+
+        #region AddEditDelete
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {           
             HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
             addEditWindow.OkButtonClicked += HoneyType_Add;
             addEditWindow.ShowDialog();
