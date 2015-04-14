@@ -57,7 +57,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
             //    }
             //}
 
-            var b = new Bitmap(128, 128);
+            Bitmap b = new Bitmap(128, 128);
             for (int i = 0; i < b.Width; i++)
             {
                 for (int j = 0; j < b.Height; j++)
