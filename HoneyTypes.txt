@@ -58,4 +58,45 @@ Malinowo
 LightPink
 10
 50
-
+Koniczyna
+Koniczynowy
+Koniczynowo
+DarkGreen
+10
+50
+B³awat
+B³awatowy
+B³awatowo
+MediumPurple
+10
+50
+Manuka
+Manukowy
+Manukowo
+WhiteSmoke
+10
+50
+Naw³oæ
+Naw³ocinowy
+Naw³ocinowo
+Lime
+10
+50
+Cz¹ber
+Cz¹browy
+Cz¹browo
+SpringGreen
+10
+50
+SpadŸLiœæ
+Spadziowy Liœciasty
+Spadziowy Liœciasto
+DarkOliveGreen
+10
+50
+SpadŸIg³a
+Spadziowy Iglasty
+Spadziowy Iglasto
+DarkKhaki
+10
+50
