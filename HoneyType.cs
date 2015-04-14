@@ -16,17 +16,28 @@ namespace KlasyfikacjaMiodu
     public class HoneyType
     {
         public string Name { get; set; }
+        [Obsolete("Tylko 1 nazwa będzie używana")]
         public string DescriptionName { get; set; }
+        [Obsolete("Tylko 1 nazwa będzie używana")]
         public string LinkedName { get; set; }
         public Color MarkerColor { get; set; }
         public float MinimalPollensAmount { get; set; }
         public float MinimalPollensPercentageAmount { get; set; }
 
+        [Obsolete("Tylko 1 nazwa będzie używana")]
         public HoneyType(string name, string descriptionName, string linkedName, Color markerColor, float minimalPollensAmount, float minimalPollensPercentageAmount)
         {
             Name = name;
             DescriptionName = descriptionName;
             LinkedName = linkedName;
+            MarkerColor = markerColor;
+            MinimalPollensAmount = minimalPollensAmount;
+            MinimalPollensPercentageAmount = minimalPollensPercentageAmount;
+        }
+
+        public HoneyType(string name, Color markerColor, float minimalPollensAmount, float minimalPollensPercentageAmount)
+        {
+            Name = name;
             MarkerColor = markerColor;
             MinimalPollensAmount = minimalPollensAmount;
             MinimalPollensPercentageAmount = minimalPollensPercentageAmount;
@@ -47,7 +58,7 @@ namespace KlasyfikacjaMiodu
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((HoneyType) obj);
+            return Equals((HoneyType)obj);
         }
 
         public override int GetHashCode()
@@ -55,11 +66,11 @@ namespace KlasyfikacjaMiodu
             unchecked
             {
                 var hashCode = (Name != null ? Name.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (DescriptionName != null ? DescriptionName.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (LinkedName != null ? LinkedName.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ MarkerColor.GetHashCode();
-                hashCode = (hashCode*397) ^ MinimalPollensAmount.GetHashCode();
-                hashCode = (hashCode*397) ^ MinimalPollensPercentageAmount.GetHashCode();
+                hashCode = (hashCode * 397) ^ (DescriptionName != null ? DescriptionName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (LinkedName != null ? LinkedName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ MarkerColor.GetHashCode();
+                hashCode = (hashCode * 397) ^ MinimalPollensAmount.GetHashCode();
+                hashCode = (hashCode * 397) ^ MinimalPollensPercentageAmount.GetHashCode();
                 return hashCode;
             }
         }
