@@ -66,7 +66,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
                 foreach (HoneyType honey in context.HoneyTypes)
                 {
-                    Inner_HoneyType_Add(honey);
+                    HoneyType_Add(honey);
                 }
         }
 
@@ -86,20 +86,20 @@ namespace KlasyfikacjaMiodu.SideMenu
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
-            addEditWindow.OkButtonClicked += HoneyType_Add;
+            addEditWindow.OkButtonClicked += HoneyType_AddToContext;
             addEditWindow.ShowDialog();
         }
 
-        private void Inner_HoneyType_Add(HoneyType newHoney)
+        private void HoneyType_Add(HoneyType newHoney)
         {
             PollenModule pollenModule = new PollenModule(newHoney);
             panel1.Controls.Add(pollenModule);
             pollenModuleSelector.AddListeners(pollenModule);
         }
 
-        private void HoneyType_Add(HoneyType newHoney)
+        private void HoneyType_AddToContext(HoneyType newHoney)
         {
-            Inner_HoneyType_Add(newHoney);
+            HoneyType_Add(newHoney);
             Session.Context.AddHoneyType(newHoney);
         }
 
