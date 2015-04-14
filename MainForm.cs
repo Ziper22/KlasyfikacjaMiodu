@@ -39,6 +39,8 @@ namespace KlasyfikacjaMiodu
             topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, loadProjectMenuItem, loadImageMenuItem, quitMenuItem);
             topMenuEdit = new TopMenuEdit(this, editMenu, undoMenuItem, redoMenuItem);
             topMenuView = new TopMenuView(showPanelMenuItem, sidePanel);
+
+            AddMousePositionEvent();
         }
 
         private void PrepareSidePanel()
@@ -63,6 +65,46 @@ namespace KlasyfikacjaMiodu
                 cp.ExStyle = cp.ExStyle | 0x2000000;
                 return cp;
             }
+        }
+
+        private void AddMousePositionEvent()
+        {
+            GlobalMouseHandler gmh = new GlobalMouseHandler();
+            gmh.TheMouseMoved += new MouseMovedEvent(gmh_TheMouseMoved);
+            Application.AddMessageFilter(gmh);
+        }
+
+        void gmh_TheMouseMoved()
+        {
+            Point p = System.Windows.Forms.Cursor.Position;
+            Point pf = new Point(p.X - Left, p.Y - Top);
+            mousePostion.Text = pf.ToString();
+        }
+
+        public delegate void MouseMovedEvent();
+
+        public class GlobalMouseHandler : IMessageFilter
+        {
+            private const int WM_MOUSEMOVE = 0x0200;
+
+            public event MouseMovedEvent TheMouseMoved;
+
+            #region IMessageFilter Members
+
+            public bool PreFilterMessage(ref Message m)
+            {
+                if (m.Msg == WM_MOUSEMOVE)
+                {
+                    if (TheMouseMoved != null)
+                    {
+                        TheMouseMoved();
+                    }
+                }
+                // Always allow message to continue to the next filter control
+                return false;
+            }
+
+            #endregion
         }
     }
 }

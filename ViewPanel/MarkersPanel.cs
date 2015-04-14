@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using KlasyfikacjaMiodu.ActionsModule;
@@ -50,12 +51,31 @@ namespace KlasyfikacjaMiodu.ViewPanel
         {
             Session.Context.MarkerAdded += Context_MarkerAdded;
             Session.Context.MarkerRemoved += Context_MarkerRemoved;
+            Session.Context.HoneyTypeRemoved += Context_HoneyTypeRemoved;
+        }
+
+        void Context_HoneyTypeRemoved(HoneyType honeyType)
+        {
+            List<Control> toDelete = new List<Control>();
+            foreach (Control control in panel.Controls)
+            {
+                MarkerPictureBox box = control as MarkerPictureBox;
+                if (box != null && box.Marker.HoneyType.Equals(honeyType))
+                {
+                    toDelete.Add(box);
+                }
+            }
+
+            foreach (Control box in toDelete)
+            {
+                panel.Controls.Remove(box);
+            }
         }
 
         private void Marker_Click(object sender, MouseEventArgs e)
         {
             MarkerPictureBox box = sender as MarkerPictureBox;
-            if (box != null)
+            if (box != null && e.Button == MouseButtons.Right)
             {
                 if (!mouseMovedOnMarker)
                     Session.Context.RemoveMarker(box.Marker);
