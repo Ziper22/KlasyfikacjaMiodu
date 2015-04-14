@@ -101,7 +101,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void valueTextBox_TextChanged(object sender, EventArgs e)
         {
-            CheckIfInt();
+            CheckIfInt(valueTextBox);
             CheckInputControls();
             SwitchOkButton();
         }
@@ -116,6 +116,8 @@ namespace KlasyfikacjaMiodu.SideMenu
                     percentNumericUpDown.Text = "0";
                 }
             }
+
+            CheckIfInt(percentNumericUpDown);
         }
 
         /// <summary>
@@ -157,24 +159,34 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Doesn't allow to type in "Ilość" field anything else besides digits
+        /// Doesn't allow to type in digit-type field anything else besides digits
         /// </summary>
-        private void CheckIfInt()
+        private void CheckIfInt(Control control)
         {
             try
             {
-                int.Parse(valueTextBox.Text);
+                int.Parse(control.Text);
             }
             catch (Exception)
             {
-                if (valueTextBox.Text.Length <= 1)
+                if (control.Text.Length <= 1)
                 {
-                    valueTextBox.Text = "";
+                    control.Text = "";
                 }
                 else
                 {
-                    valueTextBox.Text = valueTextBox.Text.Remove(valueTextBox.Text.Length - 1);
-                    valueTextBox.Select(valueTextBox.Text.Length, 0);
+                    control.Text = control.Text.Remove(control.Text.Length - 1);
+
+                    if (control is TextBox)
+                    {
+                        TextBox temp = (TextBox)control;
+                        temp.Select(temp.Text.Length, 0);
+                    }
+                    else if (control is NumericUpDown)
+                    {
+                        NumericUpDown temp = (NumericUpDown)control;
+                        temp.Select(temp.Text.Length, 0);
+                    }                    
                 }
             }
         }
