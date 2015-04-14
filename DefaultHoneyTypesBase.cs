@@ -26,7 +26,7 @@ namespace KlasyfikacjaMiodu
             float HoneyMinimalPollensAmount = 0;
             float HoneyMinimalPollensPercentageAmount = 0;
 
-            using (StreamReader reader = new StreamReader("HoneyTypes.txt"))
+            using (StreamReader reader = new StreamReader("HoneyTypes.txt", Encoding.Default))
             {
                 while (true)
                 {
