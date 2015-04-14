@@ -55,7 +55,7 @@ namespace KlasyfikacjaMiodu
         public Context()
         {
             image = Resources.honeyPollens;
-            //honeyTypes = DefaultHoneyTypesBase.GetAllHoneyTypesFromFile();
+            honeyTypes = DefaultHoneyTypesBase.GetAllHoneyTypesFromFile();
         }
 
         public float Scale
