@@ -21,42 +21,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             this.mainForm = mainForm;
             LocationChanged += SidePanel_LocationChanged;
             Session.Changed += Session_Changed;
-            Session_Changed(Session.Context);
-
-            //HoneyType facelia = new HoneyType("Facelia", "faceliowy", "facelio", Color.MediumSlateBlue, 14, 1);
-            //PollenModule pm1 = new PollenModule(facelia);
-            //panel1.Controls.Add(pm1);
-            //pollenModuleSelector.AddListeners(pm1);
-
-            //HoneyType wrzos = new HoneyType("Wrzos", "wrzosowy", "wrzosowo", Color.Purple, 14, 1);
-            //PollenModule pm2 = new PollenModule(wrzos);
-            //panel1.Controls.Add(pm2);
-            //pollenModuleSelector.AddListeners(pm2);
-
-            //HoneyType malina = new HoneyType("Malina", "malinowy", "malinowo", Color.MediumVioletRed, 14, 1);
-            //PollenModule pm3 = new PollenModule(malina);
-            //panel1.Controls.Add(pm3);
-            //pollenModuleSelector.AddListeners(pm3);
-
-            //HoneyType nawłoć = new HoneyType("Nawłoć", "nawłociowy", "nawłociowo", Color.Goldenrod, 14, 1);
-            //PollenModule pm4 = new PollenModule(nawłoć);
-            //panel1.Controls.Add(pm4);
-            //pollenModuleSelector.AddListeners(pm4);
-
-            //HoneyType rzepak = new HoneyType("Rzepak", "rzepakowy", "rzepakowo", Color.Gold, 14, 1);
-            //PollenModule pm5 = new PollenModule(rzepak);
-            //panel1.Controls.Add(pm5);
-            //pollenModuleSelector.AddListeners(pm5);
-
-            //HoneyType akacja = new HoneyType("Akacja", "akacjowy", "akacjowo", Color.Ivory, 14, 1);
-            //PollenModule pm6 = new PollenModule(akacja);
-            //panel1.Controls.Add(pm6);
-            //pollenModuleSelector.AddListeners(pm6);
-
-            //HoneyType lipa = new HoneyType("Lipa", "lipowy", "lipowo", Color.GreenYellow, 14, 1);
-            //PollenModule pm7 = new PollenModule(lipa);
-            //panel1.Controls.Add(pm7);
-            //pollenModuleSelector.AddListeners(pm7);
+            Session_Changed(Session.Context);           
         }
 
         /// <summary>
