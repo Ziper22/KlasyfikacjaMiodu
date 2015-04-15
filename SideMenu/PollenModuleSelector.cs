@@ -9,7 +9,7 @@ namespace KlasyfikacjaMiodu.SideMenu
     /// </summary>
     internal class PollenModuleSelector
     {
-        public PollenModule chosenModule { get; private set; }
+        public PollenModule chosenModule { get; set; }
         public PollenModule highlightedModule { get; private set; }
 
         public void AddListeners(PollenModule pollenModule)
