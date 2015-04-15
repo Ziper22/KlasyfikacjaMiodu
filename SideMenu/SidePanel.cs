@@ -21,7 +21,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             this.mainForm = mainForm;
             LocationChanged += SidePanel_LocationChanged;
             Session.Changed += Session_Changed;
-            Session_Changed(Session.Context);           
+            Session_Changed(Session.Context);
         }
 
         /// <summary>
@@ -29,10 +29,11 @@ namespace KlasyfikacjaMiodu.SideMenu
         /// </summary>
         private void Session_Changed(Context context)
         {
-                foreach (HoneyType honey in context.HoneyTypes)
-                {
-                    HoneyType_Add(honey);
-                }
+            panel1.Controls.Clear();
+            foreach (HoneyType honey in context.HoneyTypes)
+            {
+                HoneyType_Add(honey);
+            }
         }
 
         /// <summary>
@@ -99,6 +100,8 @@ namespace KlasyfikacjaMiodu.SideMenu
                     {
                         panel1.Controls.Remove(activeModule);
                         Session.Context.RemoveHoneyType(activeModule.HoneyType);
+                        pollenModuleSelector.chosenModule = null;
+                        Session.Context.SelectedHoneyType = null;
                     }
                 }
                 else if (dialogResult == DialogResult.No)
