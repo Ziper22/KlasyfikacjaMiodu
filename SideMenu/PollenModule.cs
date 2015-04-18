@@ -40,9 +40,9 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             MarkerColor.Size = new Size(40, 40);
             HoneyName.Size = new Size(73, 40);
-            PollenValues.Size = new Size(55, 40);
-            PollenNumber.Size = new Size(55, 20);
-            PollenPercentage.Size = new Size(55, 20);
+            PollenValues.Size = new Size(70, 40);
+            PollenNumber.Size = new Size(70, 20);
+            PollenPercentage.Size = new Size(70, 20);
             AutoSize = true;
             FlowDirection = FlowDirection.LeftToRight;
             FlowDirectionValues = FlowDirection.TopDown;

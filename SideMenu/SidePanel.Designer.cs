@@ -51,7 +51,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(1, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(209, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(224, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -89,7 +89,7 @@
             // 
             this.verticalToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.verticalToolStripMenuItem.Name = "verticalToolStripMenuItem";
-            this.verticalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.verticalToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.verticalToolStripMenuItem.Text = "Wyrównaj";
             this.verticalToolStripMenuItem.Click += new System.EventHandler(this.verticalToolStripMenuItem_Click);
             // 
@@ -97,7 +97,7 @@
             // 
             this.horizontalToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.horizontalToolStripMenuItem.Name = "horizontalToolStripMenuItem";
-            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.horizontalToolStripMenuItem.Text = "Lista pozioma";
             this.horizontalToolStripMenuItem.Click += new System.EventHandler(this.horizontalToolStripMenuItem_Click);
             // 
@@ -109,7 +109,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Margin = new System.Windows.Forms.Padding(1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(209, 300);
+            this.panel1.Size = new System.Drawing.Size(224, 300);
             this.panel1.TabIndex = 1;
             this.panel1.WrapContents = false;
             // 
@@ -118,7 +118,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(209, 324);
+            this.ClientSize = new System.Drawing.Size(224, 324);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

@@ -129,7 +129,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
             panel1.FlowDirection = FlowDirection.TopDown;
 
-            Size = new Size(225, mainForm.Height);
+            Size = new Size(240, mainForm.Height);
 
             if (locationChanged)
             {
