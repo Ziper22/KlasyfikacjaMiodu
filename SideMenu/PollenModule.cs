@@ -60,7 +60,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             MarkerColor.BackColor = honeyType.MarkerColor;
             HoneyName.Text = honeyType.Name;
-            PollenNumber.Text = Number + " pyłków";
+            PollenNumber.Text = "pyłków: " + Number;
             PollenPercentage.Text = Percentage + "%";
         }
 
@@ -93,7 +93,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void ComputeMarkerNumber()
         {
-            PollenNumber.Text = Number + " pyłków";
+            PollenNumber.Text = "pyłków: " + Number;
             int allMarkers = Session.Context.Markers.Count;
             Percentage = Number*100f/allMarkers;
             PollenPercentage.Text = Math.Round(Percentage, 3) + "%";
