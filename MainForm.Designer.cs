@@ -75,7 +75,6 @@ namespace KlasyfikacjaMiodu
             // 
             this.viewPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.viewPanel.BackColor = System.Drawing.Color.Transparent;
-            this.viewPanel.BackgroundImage = global::KlasyfikacjaMiodu.Properties.Resources.honeyPollens;
             this.viewPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.viewPanel.Controls.Add(this.pollensImage);
             this.viewPanel.Location = new System.Drawing.Point(51, 73);

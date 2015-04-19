@@ -26,13 +26,16 @@ namespace KlasyfikacjaMiodu.ViewPanel
             panel.MouseUp += PanelOnMouseUp;
             panel.MouseMove += panel_MouseMove;
             Session.Changed += MarkersPanel_ContextChanged;
-            panel.Paint += panel_Paint;
+            image.Paint += image_Paint;
             SetContextEvents();
         }
 
-        void panel_Paint(object sender, PaintEventArgs e)
+        void image_Paint(object sender, PaintEventArgs e)
         {
-//            throw new NotImplementedException();
+            foreach (Marker marker in Session.Context.Markers)
+            {
+                marker.draw(e, Session.Context.Scale);
+            }
         }
 
         void panel_MouseMove(object sender, MouseEventArgs e)
@@ -76,6 +79,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
             {
                 panel.Controls.Remove(box);
             }
+
+            image.Refresh();
         }
 
         private void Marker_Click(object sender, MouseEventArgs e)
@@ -102,11 +107,13 @@ namespace KlasyfikacjaMiodu.ViewPanel
                     break;
                 }
             }
+            image.Refresh();
         }
 
         private void Context_MarkerAdded(Marker marker)
         {
             MarkerPictureBox p = new MarkerPictureBox(marker);
+            p.Paint += image_Paint;
 
 
             p.BackgroundImage = MarkerImageCache.GetImageForHoneyType(marker.HoneyType);
@@ -126,6 +133,9 @@ namespace KlasyfikacjaMiodu.ViewPanel
             p.MouseUp += Marker_MouseUp;
             p.MouseEnter += Marker_MouseEnter;
             p.MouseMove += Marker_MouseMove;
+
+            p.SendToBack();
+            image.Refresh();
         }
 
         private void MarkersPanel_Click(object sender, MouseEventArgs e)
@@ -146,6 +156,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
                     Marker marker = new Marker((int)x, (int)y, (int)lastMarkerSize, selectedHoneyType);
                     AddMarkerAction action = new AddMarkerAction(marker);
                     Actions.RunAction(action);
+                    image.Refresh();
                 }
             }
         }
@@ -183,6 +194,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
                 box.Location = new Point(1, 1);
                 box.Update();
+
+                image.Refresh();
             }
         }
 
@@ -231,6 +244,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 }
                 lastMarkerSize = box.Marker.Size;
                 box.Scale(new SizeF(1, 1));
+
+                image.Refresh();
             }
         }
 
@@ -247,6 +262,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
             {
                 Context_MarkerAdded(marker);
             }
+            image.Refresh();
         }
 
 
@@ -261,15 +277,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 this.SizeChanged += MarkerPictureBox_SizeChanged;
                 this.Layout += MarkerPictureBox_SizeChanged;
                 this.Layout += MarkerPictureBox_LocationChanged;
-                Session.Context.HoneyTypeEdited += Context_HoneyTypeEdited;
-            }
-
-            void Context_HoneyTypeEdited(HoneyType honeyType)
-            {
-                if (Marker.HoneyType==honeyType)
-                {
-                    BackgroundImage = MarkerImageCache.GetImageForHoneyType(honeyType);
-                }
             }
 
             void MarkerPictureBox_SizeChanged(object sender, EventArgs e)
