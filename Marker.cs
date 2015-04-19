@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using KlasyfikacjaMiodu.ViewPanel;
 
 namespace KlasyfikacjaMiodu
 {
@@ -54,6 +56,15 @@ namespace KlasyfikacjaMiodu
                 hashCode = (hashCode*397) ^ (HoneyType != null ? HoneyType.GetHashCode() : 0);
                 return hashCode;
             }
+        }
+
+        public void draw(PaintEventArgs e, float scale)
+        {
+            Rectangle dest = new Rectangle((int)((X - Size / 2f) * scale), (int)((Y - Size / 2f) * scale), (int)(Size * scale), (int)(Size * scale));
+            Image image = MarkerImageCache.GetImageForHoneyType(HoneyType);
+
+            Rectangle src = new Rectangle(0,0, (int) image.PhysicalDimension.Width, (int) image.PhysicalDimension.Height);
+            e.Graphics.DrawImage(image, dest, src, GraphicsUnit.Pixel);
         }
 
         public int CenterX
