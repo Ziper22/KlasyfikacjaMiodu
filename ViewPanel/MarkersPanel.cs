@@ -26,7 +26,13 @@ namespace KlasyfikacjaMiodu.ViewPanel
             panel.MouseUp += PanelOnMouseUp;
             panel.MouseMove += panel_MouseMove;
             Session.Changed += MarkersPanel_ContextChanged;
+            panel.Paint += panel_Paint;
             SetContextEvents();
+        }
+
+        void panel_Paint(object sender, PaintEventArgs e)
+        {
+//            throw new NotImplementedException();
         }
 
         void panel_MouseMove(object sender, MouseEventArgs e)
@@ -78,7 +84,10 @@ namespace KlasyfikacjaMiodu.ViewPanel
             if (box != null && e.Button == MouseButtons.Right)
             {
                 if (!mouseMovedOnMarker)
-                    Session.Context.RemoveMarker(box.Marker);
+                {
+                    RemoveMarkerAction action = new RemoveMarkerAction(box.Marker);
+                    Actions.RunAction(action);
+                }
             }
         }
 

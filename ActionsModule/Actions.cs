@@ -61,5 +61,11 @@ namespace KlasyfikacjaMiodu.ActionsModule
         {
             get { return unDoneActions.Count; }
         }
+
+        public static void Clear()
+        {
+            doneActions.Clear();
+            unDoneActions.Clear();
+        }
     }
 }
