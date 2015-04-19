@@ -95,7 +95,11 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
             PollenNumber.Text = "pyłków: " + Number;
             int allMarkers = Session.Context.Markers.Count;
-            Percentage = Number*100f/allMarkers;
+            if (allMarkers > 0)
+            {
+                Percentage = Number*100f/allMarkers;
+            }
+            else Percentage = 0;
             PollenPercentage.Text = Math.Round(Percentage, 3) + "%";
         }
 
