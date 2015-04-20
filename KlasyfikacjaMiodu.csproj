@@ -130,6 +130,7 @@
     <None Include="Resources\marker128.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\HoneyTypes.txt" />
     <Content Include="Resources\Marker.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

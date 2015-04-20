@@ -106,5 +106,10 @@ namespace KlasyfikacjaMiodu
 
             #endregion
         }
+
+        private void topMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }
