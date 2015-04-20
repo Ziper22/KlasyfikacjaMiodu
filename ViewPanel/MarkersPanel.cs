@@ -61,6 +61,12 @@ namespace KlasyfikacjaMiodu.ViewPanel
             Session.Context.MarkerAdded += Context_MarkerAdded;
             Session.Context.MarkerRemoved += Context_MarkerRemoved;
             Session.Context.HoneyTypeRemoved += Context_HoneyTypeRemoved;
+            Session.Context.HoneyTypeEdited += Context_HoneyTypeEdited;
+        }
+
+        void Context_HoneyTypeEdited(HoneyType honeyType)
+        {
+            image.Refresh();
         }
 
         void Context_HoneyTypeRemoved(HoneyType honeyType)
