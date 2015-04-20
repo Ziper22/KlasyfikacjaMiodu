@@ -71,6 +71,68 @@ namespace KlasyfikacjaMiodu.Properties {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Akacja
+        ///Akacjowy
+        ///Akacjowo
+        ///MistyRose
+        ///10
+        ///30
+        ///Facelia
+        ///Faceliowy
+        ///Faceliowo
+        ///MediumPurple
+        ///10
+        ///45
+        ///Gryka
+        ///Gryczany
+        ///Grykowo
+        ///Ivory
+        ///10
+        ///45
+        ///Lipa
+        ///Lipowy
+        ///Lipowo
+        ///GreenYellow
+        ///10
+        ///20
+        ///Malina
+        ///Malinowy
+        ///Malinowo
+        ///HotPink
+        ///10
+        ///45
+        ///Mniszek
+        ///Mniszkowy
+        ///Mniszkowo
+        ///Orange
+        ///10
+        ///45
+        ///Nawłoć
+        ///Nawłocinowy
+        ///Nawłocinowo
+        ///Yellow
+        ///10
+        ///45
+        ///Rzepak
+        ///Rzepakowy
+        ///Rzepakowo
+        ///Gold
+        ///10
+        ///45
+        ///Wrzos
+        ///Wrzosowy
+        ///Wrzosowo
+        ///MediumOrchid
+        ///10
+        ///45.
+        /// </summary>
+        internal static string HoneyTypes {
+            get {
+                return ResourceManager.GetString("HoneyTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap marker128 {

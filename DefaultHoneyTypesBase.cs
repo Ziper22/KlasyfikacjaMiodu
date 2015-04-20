@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Reflection;
+using System.Resources;
 
 namespace KlasyfikacjaMiodu
 {
-    class DefaultHoneyTypesBase
+    internal class DefaultHoneyTypesBase
     {
         /// <summary>
         /// Author: Arek Mackiewicz,Krzysztof Kalisz<para/>
@@ -26,7 +29,7 @@ namespace KlasyfikacjaMiodu
             float HoneyMinimalPollensAmount = 0;
             float HoneyMinimalPollensPercentageAmount = 0;
 
-            using (StreamReader reader = new StreamReader("HoneyTypes.txt", Encoding.Default))
+            using (StringReader reader = new StringReader(Properties.Resources.HoneyTypes))
             {
                 while (true)
                 {
@@ -37,7 +40,8 @@ namespace KlasyfikacjaMiodu
                     HoneyMarkerColor = Color.FromName(reader.ReadLine());
                     HoneyMinimalPollensAmount = Convert.ToSingle(reader.ReadLine());
                     HoneyMinimalPollensPercentageAmount = Convert.ToSingle(reader.ReadLine());
-                    HoneyList.Add(new HoneyType(HoneyName, HoneyDescriptionName,HoneyLinkedName, HoneyMarkerColor,HoneyMinimalPollensAmount,HoneyMinimalPollensPercentageAmount));
+                    HoneyList.Add(new HoneyType(HoneyName, HoneyDescriptionName, HoneyLinkedName, HoneyMarkerColor,
+                        HoneyMinimalPollensAmount, HoneyMinimalPollensPercentageAmount));
                 }
             }
             return HoneyList;

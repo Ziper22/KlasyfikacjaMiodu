@@ -15,7 +15,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         private Panel panel;
         private PictureBox image;
         private bool mouseDown = false, mouseMovedOnMarker = false, mouseMovedOnPanel = false;
-        private int xOffset, yOffset, lastMarkerSize = 32;
+        private int imagePositionX, imagePositionY, lastMarkerSize = 32, mouseX, mouseY;
 
         public MarkersPanel(Panel panel, PictureBox image)
         {
@@ -186,14 +186,16 @@ namespace KlasyfikacjaMiodu.ViewPanel
             MarkerPictureBox box = sender as MarkerPictureBox;
             if (box != null && mouseDown)
             {
-                int x = box.Marker.X + e.X - xOffset;
-                int y = box.Marker.Y + e.Y - yOffset;
+                float scale = Session.Context.Scale;
 
-                x = Math.Max(box.Marker.Size / 2, x);
-                x = (int)Math.Min(image.Image.PhysicalDimension.Width - box.Marker.Size / 2f, x);
+                int x = (int)(imagePositionX - (mouseX - Cursor.Position.X) / scale);
+                int y = (int)(imagePositionY - (mouseY - Cursor.Position.Y) / scale);
 
-                y = Math.Max(box.Marker.Size / 2, y);
-                y = (int)Math.Min(image.Image.PhysicalDimension.Height - box.Marker.Size / 2f, y);
+                x = Math.Max(-box.Marker.Size / 6, x);
+                x = (int) Math.Min(image.Image.PhysicalDimension.Width + box.Marker.Size / 6f, x);
+
+                y = Math.Max(-box.Marker.Size / 6, y);
+                y = (int) Math.Min(image.Image.PhysicalDimension.Height + box.Marker.Size / 6f, y);
 
                 box.Marker.X = x;
                 box.Marker.Y = y;
@@ -213,8 +215,14 @@ namespace KlasyfikacjaMiodu.ViewPanel
         {
             mouseDown = true;
             mouseMovedOnMarker = false;
-            xOffset = e.X;
-            yOffset = e.Y;
+            MarkerPictureBox box = sender as MarkerPictureBox;
+            if (box != null && mouseDown)
+            {
+                imagePositionX = box.Marker.X;
+                imagePositionY = box.Marker.Y;
+            }
+            mouseX = Cursor.Position.X;
+            mouseY = Cursor.Position.Y;
         }
 
         /// <summary>
@@ -250,6 +258,20 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 }
                 lastMarkerSize = box.Marker.Size;
                 box.Scale(new SizeF(1, 1));
+
+                //poprawianie pozycji
+                int x = box.Marker.X;
+                int y = box.Marker.Y;
+
+                x = Math.Max(-box.Marker.Size / 6, x);
+                x = (int)Math.Min(image.Image.PhysicalDimension.Width + box.Marker.Size / 6f, x);
+
+                y = Math.Max(-box.Marker.Size / 6, y);
+                y = (int)Math.Min(image.Image.PhysicalDimension.Height + box.Marker.Size / 6f, y);
+
+                box.Marker.X = x;
+                box.Marker.Y = y;
+                box.Location = new Point(1, 1);
 
                 image.Refresh();
             }
