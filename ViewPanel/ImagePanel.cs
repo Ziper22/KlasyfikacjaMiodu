@@ -149,6 +149,11 @@ namespace KlasyfikacjaMiodu.ViewPanel
         {
             this.pollensImage.Image = image;
             AdjustScaleToRealImageSize();
+
+            foreach (Marker marker in Session.Context.Markers.ToArray())
+            {
+                Session.Context.RemoveMarker(marker);
+            }
         }
 
         /// <summary>
