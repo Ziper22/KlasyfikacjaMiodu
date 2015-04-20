@@ -22,8 +22,17 @@ namespace KlasyfikacjaMiodu.BottomBar
             this.scaleNumericUpDown = scaleNumericUpDown;
 
             scaleNumericUpDown.ValueChanged += new EventHandler(ScaleNumeric_ScaleChanged);
+            Session.Changed += Session_Changed;
             SetContextEvents();
             SetScaleText();
+        }
+
+        /// <summary>
+        /// Called when Context in current session is changing
+        /// </summary>
+        void Session_Changed(Context Context)
+        {
+            SetContextEvents();
         }
 
         /// <summary>
