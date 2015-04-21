@@ -103,16 +103,20 @@ namespace KlasyfikacjaMiodu.BottomBar
             string labelName = "";   //do nazwy
             int honeyNameCounter = 0;
             bool foundOne = false;   //dla sprawdzenia, że już raz znalaeziono jakiś pyłek 
-
+            //
+            //ToolTip HoneyTip = new ToolTip();
+            //HoneyTip.ShowAlways = true;
+            //string tipLabel = "";
+            //
             HoneyType bestType = null;
 
             foreach (KeyValuePair<HoneyType, int> entry in honeyCounter)
             {
-                if (allHoneyTypeAmount != 0 && ((float)entry.Value/allHoneyTypeAmount >= (float)entry.Key.MinimalPollensPercentageAmount))
+                if (allHoneyTypeAmount != 0 && ((float)entry.Value/allHoneyTypeAmount*100 >= (float)entry.Key.MinimalPollensPercentageAmount))
                 {
                     
-                    if (bestType != null)   //jest bestType i to co znaleziono tez spelnia zalozenia
-                    {                       //, to nazwa sklada sie z kilku
+                    if (bestType != null)                                               //jest bestType i to co znaleziono tez spelnia zalozenia
+                    {                                                                   //, to nazwa sklada sie z kilku
                         labelName = appendName(labelName, entry.Key.DescriptionName);
                         honeyTypeLabel.Text = labelName;
 
@@ -120,20 +124,24 @@ namespace KlasyfikacjaMiodu.BottomBar
 
                         if (honeyNameCounter > 3)
                             bestType = null;
+
+                        //tipLabel = appendName(tipLabel, entry.Key.DescriptionName);
                     }
 
-                    if (bestType == null && honeyNameCounter < 1)   //pierwszy gatunek, ktory spelnia warunek, wypisuje nazwe
-                    {                                               //i ustala bestType
+                    if (bestType == null && honeyNameCounter < 1)                       //pierwszy gatunek, ktory spelnia warunek, wypisuje nazwe
+                    {                                                                   //i ustala bestType
                         bestType = entry.Key;
                         labelName = entry.Key.DescriptionName;
                         honeyTypeLabel.Text = labelName;
 
                         honeyNameCounter++;
                         foundOne = true;
+
+                        //tipLabel = entry.Key.DescriptionName;
                     }
                 }
 
-                if (bestType == null)   //nie ma bestType, to "Niesklasyfikowany"
+                if (bestType == null)                                                  //nie ma bestType, to "Niesklasyfikowany"
                 {
                     labelName = returnName("Niesklasyfikowany");
                     honeyTypeLabel.Text = labelName;
@@ -143,9 +151,14 @@ namespace KlasyfikacjaMiodu.BottomBar
                         labelName = returnName("Wielokwiatowy");
                         honeyTypeLabel.Text = labelName;
                     }
+
+                    //if (labelName == "Niesklasyfikowany")
+                    //    tipLabel = "Niesklasyfikowany";
                 }
                 
             }
+
+            //HoneyTip.SetToolTip(honeyTypeLabel, tipLabel);
         }
 
     }
