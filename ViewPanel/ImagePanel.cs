@@ -78,7 +78,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void PollensImage_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mouseDown)
+            if (mouseDown && e.Button != MouseButtons.Left)
                 panel.Location = new Point(panel.Location.X + e.X - xOffset, panel.Location.Y + e.Y - yOffset);
         }
 

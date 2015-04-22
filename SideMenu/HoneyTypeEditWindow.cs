@@ -22,7 +22,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             CenterToScreen();
             
             Name = null;
-            honeyType = new HoneyType("", Color.Empty, 0, 0);
+            honeyType = new HoneyType();
 
             this.Text = "Dodaj";
             okButton.Enabled = false;
@@ -40,7 +40,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             nameTextBox.Text = honeyType.Name;
             honeyNameTextBox.Text = honeyType.DescriptionName;
             specimenPictureBox.BackColor = honeyType.MarkerColor;
-            valueTextBox.Text = honeyType.MinimalPollensAmount.ToString();
+//            valueTextBox.Text = honeyType.MinimalPollensAmount.ToString();
             percentNumericUpDown.Value = (decimal)honeyType.MinimalPollensPercentageAmount;
 
             this.Text = "Edytuj";
@@ -110,7 +110,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             honeyType.Name = nameTextBox.Text;
             honeyType.DescriptionName = honeyNameTextBox.Text;
             honeyType.MarkerColor = specimenPictureBox.BackColor;
-            honeyType.MinimalPollensAmount = float.Parse(valueTextBox.Text);
+//            honeyType.MinimalPollensAmount = float.Parse(valueTextBox.Text);
             honeyType.MinimalPollensPercentageAmount = (float)percentNumericUpDown.Value;
 
             OnOkButtonClicked();

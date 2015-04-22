@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using KlasyfikacjaMiodu.ActionsModule;
 
@@ -71,22 +72,11 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         void Context_HoneyTypeRemoved(HoneyType honeyType)
         {
-            List<Control> toDelete = new List<Control>();
-            foreach (Control control in panel.Controls)
+            foreach (Marker marker in Session.Context.Markers.ToArray())
             {
-                MarkerPictureBox box = control as MarkerPictureBox;
-                if (box != null && box.Marker.HoneyType.Equals(honeyType))
-                {
-                    toDelete.Add(box);
-                }
+                if (marker.HoneyType.Equals(honeyType))
+                    Session.Context.RemoveMarker(marker);
             }
-
-            foreach (Control box in toDelete)
-            {
-                panel.Controls.Remove(box);
-            }
-
-            image.Refresh();
         }
 
         private void Marker_Click(object sender, MouseEventArgs e)
@@ -140,7 +130,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
             p.MouseEnter += Marker_MouseEnter;
             p.MouseMove += Marker_MouseMove;
 
-            p.SendToBack();
+            image.BringToFront();
             image.Refresh();
         }
 
