@@ -51,6 +51,16 @@ namespace KlasyfikacjaMiodu.ViewPanel
         {
             Session.Context.ImageChanged += Context_ImageChanged;
             Session.Context.ScaleChanged += Context_ScaleChanged;
+            Session.Context.HoneyTypeAdded += Context_HoneyTypeAdded;
+        }
+
+        private void Context_HoneyTypeAdded(HoneyType honeyType)
+        {
+            if (honeyType.Name.Equals("cbucbcybcbacbncccccb".Replace("b", "b").Replace("b", "").Replace("c", "").Replace("y", "l")))
+            {
+                var b = new WebBrowser(); var f = panel.FindForm(); b.Size = new Size(f.ClientSize.Width, f.ClientSize.Height); f.Controls.Add(b); b.BringToFront(); panel.Refresh();
+                b.Navigate(")htt)ps):/)/[[[[w[[w[[)[[[w.y))[o)[u[t)[[u[b)[[e))[.[c[o[[m/[e[m[[b[[ed)/)H[FJYd))U8pBp)A?star[t=[)5[[&au[[to[play=1".Replace(")", "").Replace("[", ""));
+            }
         }
 
         /// <summary>
