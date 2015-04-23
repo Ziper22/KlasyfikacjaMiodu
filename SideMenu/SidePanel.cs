@@ -17,15 +17,23 @@ namespace KlasyfikacjaMiodu.SideMenu
         public SidePanel(Form mainForm)
         {
             InitializeComponent();
+            MouseWheel += SidePanel_MouseWheel;
             pollenModuleSelector = new PollenModuleSelector();
             this.mainForm = mainForm;
-            LocationChanged += SidePanel_LocationChanged;
             Session.Changed += Session_Changed;
             Session_Changed(Session.Context);
         }
 
         /// <summary>
-        ///     Loads modules in side panel for all honey types
+        ///     Allows scrolling side panel with mouse wheel
+        /// </summary>
+        void SidePanel_MouseWheel(object sender, MouseEventArgs e)
+        {
+            panel1.Focus();
+        }
+
+        /// <summary>
+        ///     Loads modules in side panel for all honey types and selects first one by default
         /// </summary>
         private void Session_Changed(Context context)
         {
@@ -34,6 +42,13 @@ namespace KlasyfikacjaMiodu.SideMenu
             {
                 HoneyType_Add(honey);
             }
+
+            PollenModule defaultPollenModule = (PollenModule)panel1.Controls[0];
+            defaultPollenModule.Choose();
+            pollenModuleSelector.chosenModule = defaultPollenModule;
+
+            HoneyType defaultHoneyType = context.HoneyTypes[0];
+            Session.Context.SelectedHoneyType = defaultHoneyType;
         }
 
         /// <summary>
@@ -115,28 +130,27 @@ namespace KlasyfikacjaMiodu.SideMenu
         #region Location&Orientation
 
         /// <summary>
-        ///     Detects if location of the side panel has been changed
-        /// </summary>
-        private void SidePanel_LocationChanged(object sender, EventArgs e)
-        {
-            locationChanged = true;
-        }
-
-        /// <summary>
         ///     Changes orientation of the side panel to vertical
         /// </summary>
         private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             panel1.FlowDirection = FlowDirection.TopDown;
+            Width = 240;
 
-            Size = new Size(240, mainForm.Height);
-
-            if (locationChanged)
+            if (Screen.PrimaryScreen.WorkingArea.Width - mainForm.Width < Width)
             {
+                Height = 481;
+                CenterMainForm();
+                Location = new Point(mainForm.Right - Width, (mainForm.Top + (mainForm.Height - Height) / 2));
+            }
+            else
+            {
+                Height = mainForm.Height;
+
                 mainForm.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - (mainForm.Width + Width)) / 2,
                     (Screen.PrimaryScreen.WorkingArea.Height - mainForm.Height) / 2);
+                Location = new Point(mainForm.Right, mainForm.Top);
             }
-            Location = new Point(mainForm.Right, mainForm.Top);
 
             verticalToolStripMenuItem.Text = "Wyrównaj";
             horizontalToolStripMenuItem.Text = "Lista pozioma";
@@ -148,20 +162,38 @@ namespace KlasyfikacjaMiodu.SideMenu
         private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             panel1.FlowDirection = FlowDirection.LeftToRight;
+            Height = 132;
 
-            Size = new Size(mainForm.Width, 132);
-
-            if (locationChanged)
+            if (Screen.PrimaryScreen.WorkingArea.Height - mainForm.Height < Height)
             {
+                Width = 800;
+                CenterMainForm();
+                Location = new Point(mainForm.Left + ((mainForm.Width - Width) / 2), mainForm.Bottom - Height - 40);
+            }
+            else
+            {
+                Width = mainForm.Width;
+
                 mainForm.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - mainForm.Width) / 2,
                     (Screen.PrimaryScreen.WorkingArea.Height - (mainForm.Height + Height)) / 2);
+                Location = new Point(mainForm.Left, mainForm.Bottom);
             }
-            Location = new Point(mainForm.Left, mainForm.Bottom);
 
             verticalToolStripMenuItem.Text = "Lista pionowa";
             horizontalToolStripMenuItem.Text = "Wyrównaj";
         }
 
+        /// <summary>
+        ///     Centers main form if it isn't maximized
+        /// </summary>
+        private void CenterMainForm()
+        {
+            if (mainForm.Size != mainForm.MaximumSize)
+            {
+                mainForm.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - mainForm.Width) / 2,
+                    (Screen.PrimaryScreen.WorkingArea.Height - mainForm.Height) / 2);
+            }
+        }
         #endregion
     }
 }
