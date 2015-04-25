@@ -13,11 +13,14 @@ namespace KlasyfikacjaMiodu.BottomBar
         private int allHoneyTypeAmount = 0;
         private Label honeyTypeLabel;
         private Dictionary<HoneyType, int> honeyCounter;
+        private ToolTip HoneyTip;
 
         public HoneyTypeInformer(Label honeyTypeLabel)
         {
             this.honeyTypeLabel = honeyTypeLabel;
             honeyCounter = new Dictionary<HoneyType, int>();
+            HoneyTip = new ToolTip();
+            HoneyTip.ShowAlways = true;
 
             SetContextEvents();
             Session.Changed += Session_ContextChanged;
@@ -99,15 +102,12 @@ namespace KlasyfikacjaMiodu.BottomBar
     //----------------------------
 
         private void setHoneyTypeLabelText()
-        {          
-            string labelName = "";   //do nazwy
+        {
+            string labelName = "";      //do nazwy
             int honeyNameCounter = 0;
-            bool foundOne = false;   //dla sprawdzenia, że już raz znalaeziono jakiś pyłek 
-            //
-            //ToolTip HoneyTip = new ToolTip();
-            //HoneyTip.ShowAlways = true;
-            //string tipLabel = "";
-            //
+            bool foundOne = false;      //dla sprawdzenia, że już raz znalaeziono jakiś pyłek 
+            string tipLabel = "";       //honeyTip
+            
             HoneyType bestType = null;
 
             foreach (KeyValuePair<HoneyType, int> entry in honeyCounter)
@@ -121,11 +121,10 @@ namespace KlasyfikacjaMiodu.BottomBar
                         honeyTypeLabel.Text = labelName;
 
                         honeyNameCounter++;
+                        tipLabel = appendName(tipLabel, entry.Key.DescriptionName);
 
                         if (honeyNameCounter > 3)
-                            bestType = null;
-
-                        //tipLabel = appendName(tipLabel, entry.Key.DescriptionName);
+                            bestType = null;                           
                     }
 
                     if (bestType == null && honeyNameCounter < 1)                       //pierwszy gatunek, ktory spelnia warunek, wypisuje nazwe
@@ -137,28 +136,38 @@ namespace KlasyfikacjaMiodu.BottomBar
                         honeyNameCounter++;
                         foundOne = true;
 
-                        //tipLabel = entry.Key.DescriptionName;
+                        tipLabel = entry.Key.DescriptionName;
                     }
                 }
 
-                if (bestType == null)                                                  //nie ma bestType, to "Niesklasyfikowany"
+                if (bestType == null)                                                   //nie ma bestType, to "Niesklasyfikowany"
                 {
-                    labelName = returnName("Niesklasyfikowany");
-                    honeyTypeLabel.Text = labelName;
+                    //labelName = returnName("Niesklasyfikowany");
+                    //honeyTypeLabel.Text = labelName;
 
-                    if (entry.Value >= 1 && honeyNameCounter > 3 && foundOne == true)  //ale jezeli nie ma best type, a byl juz jakis typ wypisany
-                    {                                                                  //oraz bylo wiecej niz 3 gatunki, to "Wielokwiatowy"
+                    if (entry.Value >= 1 && honeyNameCounter > 3 && foundOne == true)   //ale jezeli nie ma best type, a byl juz jakis typ wypisany
+                    {                                                                   //oraz bylo wiecej niz 3 gatunki, to "Wielokwiatowy"
                         labelName = returnName("Wielokwiatowy");
                         honeyTypeLabel.Text = labelName;
-                    }
 
-                    //if (labelName == "Niesklasyfikowany")
-                    //    tipLabel = "Niesklasyfikowany";
+                        if(honeyNameCounter > 4)                                        //Magiczna 4 - poprawia wpisywanie i samopoczucie (honeyTip)
+                            tipLabel = appendName(tipLabel, entry.Key.DescriptionName);
+
+                        honeyNameCounter++;
+                    }
+                    
+                    if(honeyNameCounter < 3)
+                    {
+                        labelName = returnName("Niesklasyfikowany");
+                        honeyTypeLabel.Text = labelName;
+
+                        tipLabel = "Niesklasyfikowany";
+                    }
                 }
                 
             }
-
-            //HoneyTip.SetToolTip(honeyTypeLabel, tipLabel);
+                                                                                        //HoneyTip
+            HoneyTip.SetToolTip(honeyTypeLabel, tipLabel);                              //Podpowiedz pokazująca gatunki gdy "Wielokwiatowy"
         }
 
     }
