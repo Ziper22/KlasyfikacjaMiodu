@@ -35,11 +35,10 @@
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.specimenPictureBox = new System.Windows.Forms.PictureBox();
-            this.valueTextBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.percentNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.warningLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.honeyNameTextBox = new System.Windows.Forms.TextBox();
@@ -69,7 +68,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 116);
+            this.label3.Location = new System.Drawing.Point(12, 89);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 4;
@@ -77,21 +76,20 @@
             // 
             // chooseColorButton
             // 
-            this.chooseColorButton.Location = new System.Drawing.Point(91, 111);
+            this.chooseColorButton.Location = new System.Drawing.Point(91, 84);
             this.chooseColorButton.Name = "chooseColorButton";
             this.chooseColorButton.Size = new System.Drawing.Size(100, 23);
-            this.chooseColorButton.TabIndex = 5;
+            this.chooseColorButton.TabIndex = 4;
             this.chooseColorButton.Text = "Wybierz kolor";
             this.chooseColorButton.UseVisualStyleBackColor = true;
             this.chooseColorButton.Click += new System.EventHandler(this.ChooseColorButton_Click);
             // 
             // okButton
             // 
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(148, 150);
+            this.okButton.Location = new System.Drawing.Point(149, 123);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 7;
+            this.okButton.TabIndex = 6;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.OkButton_Click);
@@ -99,10 +97,10 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(61, 150);
+            this.cancelButton.Location = new System.Drawing.Point(58, 123);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 6;
+            this.cancelButton.TabIndex = 5;
             this.cancelButton.Text = "Anuluj";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
@@ -110,37 +108,17 @@
             // specimenPictureBox
             // 
             this.specimenPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.specimenPictureBox.Location = new System.Drawing.Point(58, 111);
+            this.specimenPictureBox.Location = new System.Drawing.Point(58, 84);
             this.specimenPictureBox.Name = "specimenPictureBox";
             this.specimenPictureBox.Size = new System.Drawing.Size(23, 23);
             this.specimenPictureBox.TabIndex = 8;
             this.specimenPictureBox.TabStop = false;
             this.specimenPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SpecimenPictureBox_MouseClick);
             // 
-            // valueTextBox
-            // 
-            this.valueTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.valueTextBox.Location = new System.Drawing.Point(91, 59);
-            this.valueTextBox.MaxLength = 4;
-            this.valueTextBox.Name = "valueTextBox";
-            this.valueTextBox.Size = new System.Drawing.Size(45, 20);
-            this.valueTextBox.TabIndex = 3;
-            this.valueTextBox.Text = "10";
-            this.valueTextBox.TextChanged += new System.EventHandler(this.ValueTextBox_TextChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 62);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Min. ilość:";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 88);
+            this.label6.Location = new System.Drawing.Point(12, 61);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 13);
             this.label6.TabIndex = 14;
@@ -148,11 +126,16 @@
             // 
             // percentNumericUpDown
             // 
-            this.percentNumericUpDown.Location = new System.Drawing.Point(91, 86);
+            this.percentNumericUpDown.Location = new System.Drawing.Point(91, 59);
+            this.percentNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.percentNumericUpDown.Name = "percentNumericUpDown";
             this.percentNumericUpDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.percentNumericUpDown.Size = new System.Drawing.Size(45, 20);
-            this.percentNumericUpDown.TabIndex = 4;
+            this.percentNumericUpDown.TabIndex = 3;
             this.percentNumericUpDown.Value = new decimal(new int[] {
             50,
             0,
@@ -162,14 +145,13 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.warningLabel);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.honeyNameTextBox);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.percentNumericUpDown);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.valueTextBox);
             this.panel1.Controls.Add(this.specimenPictureBox);
             this.panel1.Controls.Add(this.cancelButton);
             this.panel1.Controls.Add(this.okButton);
@@ -180,8 +162,20 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(264, 193);
+            this.panel1.Size = new System.Drawing.Size(272, 176);
             this.panel1.TabIndex = 0;
+            // 
+            // warningLabel
+            // 
+            this.warningLabel.AutoSize = true;
+            this.warningLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.warningLabel.ForeColor = System.Drawing.Color.Red;
+            this.warningLabel.Location = new System.Drawing.Point(9, 154);
+            this.warningLabel.Name = "warningLabel";
+            this.warningLabel.Size = new System.Drawing.Size(259, 13);
+            this.warningLabel.TabIndex = 18;
+            this.warningLabel.Text = "Co najmniej jedna z nowych nazw istnieje już w bazie!";
+            this.warningLabel.Visible = false;
             // 
             // label7
             // 
@@ -224,7 +218,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(264, 193);
+            this.ClientSize = new System.Drawing.Size(272, 176);
             this.Controls.Add(this.panel1);
             this.Name = "HoneyTypeEditWindow";
             this.Text = "AddEditWindow";
@@ -245,8 +239,6 @@
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.PictureBox specimenPictureBox;
-        private System.Windows.Forms.TextBox valueTextBox;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown percentNumericUpDown;
         private System.Windows.Forms.Panel panel1;
@@ -254,6 +246,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label warningLabel;
 
     }
 }
