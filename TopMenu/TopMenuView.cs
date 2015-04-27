@@ -23,6 +23,7 @@ namespace KlasyfikacjaMiodu.TopMenu
             this.sidePanel = sidePanel;
 
             showPanel.Click += ShowPanel_Click;
+            sidePanel.FormClosing += ShowPanel_Click;
         }
 
         void ShowPanel_Click(object sender, EventArgs e)

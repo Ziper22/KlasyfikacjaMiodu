@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Drawing;
+using KlasyfikacjaMiodu.Serialization;
 
 namespace KlasyfikacjaMiodu.TopMenu
 {
@@ -17,8 +18,8 @@ namespace KlasyfikacjaMiodu.TopMenu
     public class TopMenuFile
     {
         BinaryFormatter formatter = new BinaryFormatter(); // potrzebne do serializacji
-        OpenFileDialog ofd = new OpenFileDialog();  // okno z odczytem danych
-        SaveFileDialog sfd = new SaveFileDialog();  // okno z zapisem danych
+        OpenFileDialog ofd = new OpenFileDialog();
+        FolderBrowserDialog fbd = new FolderBrowserDialog();
 
         private ToolStripMenuItem newProject;
         private ToolStripMenuItem saveProject;
@@ -49,33 +50,35 @@ namespace KlasyfikacjaMiodu.TopMenu
 
         private void SaveProject_Click(object sender, EventArgs e)
         {
-            sfd.Filter = "Klasyfikacja Miodu project file (.km)|*.km";
-            if (sfd.ShowDialog() == DialogResult.OK)
+            fbd.Description = "Select a folder to save project...";
+
+            if (fbd.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    using (Stream output = File.Create(sfd.FileName))
-                    { formatter.Serialize(output, Session.Context); }
+                    Serializer.SerializeImage(fbd);
+                    Serializer.Serialize(fbd.SelectedPath);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
             }
         }
 
         private void LoadProject_Click(object sender, EventArgs e)
         {
-            Context newContext = new Context();
+            Context newContext;
+            fbd.Description = "Select a folder to load project...";
 
-            ofd.Filter = "Klasyfikacja Miodu project file (.km)|*.km";
-            if (ofd.ShowDialog() == DialogResult.OK)
+            if (fbd.ShowDialog() == DialogResult.OK)
             {
+                newContext = new Context();
                 try
                 {
-                    using (Stream input = File.OpenRead(ofd.FileName)) 
-                    { newContext = (Context)formatter.Deserialize(input); }
+                    Serializer.DeserializeImage(fbd);
+                    newContext = Serializer.Deserialize(fbd);
+                    //Serializer.Serialize(fbd.SelectedPath);
                 }
                 catch (Exception ex)
                 {
@@ -84,6 +87,7 @@ namespace KlasyfikacjaMiodu.TopMenu
 
                 Session.Load(newContext);
             }
+            
         }
 
         private void LoadImage_Click(object sender, EventArgs e)
