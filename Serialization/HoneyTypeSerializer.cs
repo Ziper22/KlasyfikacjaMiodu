@@ -30,7 +30,6 @@ namespace KlasyfikacjaMiodu.Serialization
         }
         public static HoneyType Deserialize(string line)
         {
-            HoneyType honeyType = null;
             int startIndex, lastIndex, length;
 
             string name;

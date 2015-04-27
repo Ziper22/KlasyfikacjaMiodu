@@ -39,24 +39,15 @@ namespace KlasyfikacjaMiodu.Serialization
         {
             string destPath = fbd.SelectedPath + @"\";
 
-            using (Bitmap myBitmap = new Bitmap(Session.Context.Image))
+            using (MemoryStream memory = new MemoryStream())
             {
-                ImageCodecInfo codecInfo = Serializer.GetEncoderInfo(ImageFormat.Jpeg);
-                EncoderParameters parameters = new EncoderParameters(1);
-
-                if (codecInfo != null)
+                using (FileStream fs = new FileStream(destPath + "projectImage.jpg", FileMode.Create, FileAccess.ReadWrite))
                 {
-                    // Quality: 100
-                    parameters.Param[0] = new EncoderParameter(
-                        System.Drawing.Imaging.Encoder.Quality, 100L);
-                    myBitmap.Save(destPath + "projectImage.jpg", codecInfo, parameters);
+                    Session.Context.Image.Save(memory, ImageFormat.Jpeg);
+                    byte[] bytes = memory.ToArray();
+                    fs.Write(bytes, 0, bytes.Length);
                 }
             }
-
-
-
-            // Session.Context.Image.Save(fbd.SelectedPath, ImageFormat.Bmp);
-            // Serialization.Serializer.Serialize(Session.Context, fbd.SelectedPath);
         }
 
         public static Context Deserialize(FolderBrowserDialog fbd)
@@ -92,14 +83,6 @@ namespace KlasyfikacjaMiodu.Serialization
             string imagePath = fbd.SelectedPath + @"\projectImage.jpg";
             if (File.Exists(imagePath))
                 Session.Context.Image = Image.FromFile(imagePath);
-        }
-
-        public static ImageCodecInfo GetEncoderInfo(ImageFormat format)
-        {
-            return ImageCodecInfo.GetImageEncoders().ToList().Find(delegate(ImageCodecInfo codec)
-            {
-                return codec.FormatID == format.Guid;
-            });
         }
     }
 }
