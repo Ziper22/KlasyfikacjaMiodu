@@ -22,9 +22,10 @@ namespace KlasyfikacjaMiodu.SideMenu
             InitializeComponent();
             CenterToScreen();
 
-            //Name = null;
             honeyType = new HoneyType();
             specimenPictureBox.BackColor = DrawColor();
+            nameTextBox.BackColor = Color.FromArgb(245, 174, 174);
+            honeyNameTextBox.BackColor = Color.FromArgb(245, 174, 174);
 
             this.Text = "Dodaj";
             okButton.Enabled = false;
@@ -123,6 +124,10 @@ namespace KlasyfikacjaMiodu.SideMenu
                 specimenPictureBox.BackColor = Color.Empty;
 
                 SwitchOkButton(CheckIfInputControlsAreFilled());
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                ChooseColorButton_Click(sender, e);
             }
         }
 
@@ -282,8 +287,8 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             toolTip.SetToolTip(nameTextBox, "Nazwa pyłku - w postaci rzeczownika");
             toolTip.SetToolTip(honeyNameTextBox, "Nazwa miodu - w postaci przymiotnika");
-            toolTip.SetToolTip(percentNumericUpDown, "Minimalna procentowa liczba pyłków, wymagana, by dać miód danego rodzaju");
-            toolTip.SetToolTip(specimenPictureBox, "Kliknij prawym przyciskiem myszy, by usunąć kolor");
+            toolTip.SetToolTip(percentNumericUpDown, "Minimalna zawartość procentowa pyłków w miodzie potrzebna do stwierdzenia, że miód jest danego typu");
+            toolTip.SetToolTip(specimenPictureBox, "Kliknij prawym przyciskiem myszy, aby usunąć kolor");
         }
 
         /// <summary>
