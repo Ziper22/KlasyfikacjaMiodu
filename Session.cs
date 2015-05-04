@@ -16,7 +16,7 @@ namespace KlasyfikacjaMiodu
     {
         public delegate void SessionEventHandler(Context Context);
         public static event SessionEventHandler Changed;
-        private static Context context = new Context();
+        private static Context context = new Context(true);
 
         /// <summary>
         /// Returns current application <see cref="Context"/>
@@ -30,19 +30,19 @@ namespace KlasyfikacjaMiodu
         /// Create new application <see cref="Context"/>.
         /// Previus Context will be overriden.
         /// </summary>
-        public static void New()
+        public static void NewClear()
         {
-            Session.context = new Context();
+            Session.context = new Context(false);
             onChanged();
         }
 
         /// <summary>
-        /// Load new application <see cref="Context"/>.
+        /// Create new application <see cref="Context"/>.
         /// Previus Context will be overriden.
         /// </summary>
-        public static void Load(Context context)
+        public static void NewDefault()
         {
-            Session.context = context;
+            Session.context = new Context(true);
             onChanged();
         }
 

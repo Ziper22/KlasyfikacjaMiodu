@@ -43,12 +43,17 @@ namespace KlasyfikacjaMiodu.SideMenu
                 HoneyType_Add(honey);
             }
 
-            PollenModule defaultPollenModule = (PollenModule)panel1.Controls[0];
-            defaultPollenModule.Choose();
-            pollenModuleSelector.chosenModule = defaultPollenModule;
+            if (panel1.Controls.Count > 0)
+            {
+                PollenModule defaultPollenModule = (PollenModule) panel1.Controls[0];
+                defaultPollenModule.Choose();
+                pollenModuleSelector.chosenModule = defaultPollenModule;
 
-            HoneyType defaultHoneyType = context.HoneyTypes[0];
-            Session.Context.SelectedHoneyType = defaultHoneyType;
+                HoneyType defaultHoneyType = context.HoneyTypes[0];
+                Session.Context.SelectedHoneyType = defaultHoneyType;
+            }
+
+            Session.Context.HoneyTypeAdded += HoneyType_Add;
         }
 
         /// <summary>
@@ -80,7 +85,6 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void HoneyType_AddToContext(HoneyType newHoney)
         {
-            HoneyType_Add(newHoney);
             Session.Context.AddHoneyType(newHoney);
         }
 

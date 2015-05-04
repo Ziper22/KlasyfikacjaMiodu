@@ -53,7 +53,8 @@ namespace KlasyfikacjaMiodu.Serialization
         public static Context Deserialize(FolderBrowserDialog fbd)
         {
             Marker marker;
-            Context context = new Context();
+            Session.NewClear();
+            Context context = Session.Context;
             using (StreamReader sr = File.OpenText(fbd.SelectedPath + @"\info.txt"))
             {
                 string line = String.Empty;
