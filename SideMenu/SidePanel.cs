@@ -81,6 +81,16 @@ namespace KlasyfikacjaMiodu.SideMenu
             PollenModule pollenModule = new PollenModule(newHoney);
             panel1.Controls.Add(pollenModule);
             pollenModuleSelector.AddListeners(pollenModule);
+            //panel1.HorizontalScroll.Maximum += pollenModule.Width;
+            //panel1.HorizontalScroll.Value = panel1.HorizontalScroll.Maximum;
+            //panel1.AutoScrollOffset = new Point(panel1.HorizontalScroll.Maximum);
+            if (panel1.FlowDirection == FlowDirection.LeftToRight)
+            {
+                panel1.FlowDirection = FlowDirection.TopDown;
+                panel1.FlowDirection = FlowDirection.LeftToRight;
+            }
+            panel1.ScrollControlIntoView(pollenModule);
+            //panel1.Update();
         }
 
         private void HoneyType_AddToContext(HoneyType newHoney)
