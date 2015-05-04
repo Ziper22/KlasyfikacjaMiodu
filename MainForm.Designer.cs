@@ -359,7 +359,7 @@ namespace KlasyfikacjaMiodu
             // showPanelMenuItem
             // 
             this.showPanelMenuItem.Name = "showPanelMenuItem";
-            this.showPanelMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.showPanelMenuItem.Size = new System.Drawing.Size(149, 26);
             this.showPanelMenuItem.Text = "Ukryj listę";
             // 
             // mousePostion
@@ -382,7 +382,7 @@ namespace KlasyfikacjaMiodu
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.viewPanel);
             this.MainMenuStrip = this.topMenu;
-            this.MinimumSize = new System.Drawing.Size(400, 240);
+            this.MinimumSize = new System.Drawing.Size(480, 240);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Klasyfikacja Miodu";

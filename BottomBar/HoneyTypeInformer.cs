@@ -144,7 +144,9 @@ namespace KlasyfikacjaMiodu.BottomBar
         private void SetLabelText(String text)
         {
             String shortName = text;
-            int maxTextSize = (form.ClientSize.Width - 700) / 9;
+            int pixelsPerLetter = 9;
+            int otherLabelsWidth = 450;
+            int maxTextSize = Math.Max(0, (form.ClientSize.Width - otherLabelsWidth) / pixelsPerLetter);
 
             if (shortName.Length > maxTextSize)
             {
