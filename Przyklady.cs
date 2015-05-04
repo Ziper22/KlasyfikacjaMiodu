@@ -20,12 +20,12 @@ namespace KlasyfikacjaMiodu
             //w tym przypadku jest odczytanie aktualnej skali obrazka
 
             //Tworzenie nowej sesji:
-            Session.New();
+            Session.NewDefault();
 
             //Wczytywanie z pliku i odtwarznie sesji:
-            Context newContext = new Context();
+            Context newContext = new Context(true);
             //trzeba wczytać i odtworzyć obiekt Context
-            Session.Load(newContext);
+//            Session.Load(newContext);
             //po przekazaniu nowego contextu do sesji program sam wczyta jej zawartosc
 
             //Dodawanie nasluchiwaczy zmian:

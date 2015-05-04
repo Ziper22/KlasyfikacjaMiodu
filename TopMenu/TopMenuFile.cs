@@ -45,7 +45,7 @@ namespace KlasyfikacjaMiodu.TopMenu
 
         private void NewProject_Click(object sender, EventArgs e)
         {
-            Session.New();
+            Session.NewDefault();
         }
 
         private void SaveProject_Click(object sender, EventArgs e)
@@ -73,7 +73,6 @@ namespace KlasyfikacjaMiodu.TopMenu
 
             if (fbd.ShowDialog() == DialogResult.OK)
             {
-                newContext = new Context();
                 try
                 {
                     Serializer.DeserializeImage(fbd);
@@ -84,8 +83,6 @@ namespace KlasyfikacjaMiodu.TopMenu
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                Session.Load(newContext);
             }
             
         }

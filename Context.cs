@@ -53,10 +53,17 @@ namespace KlasyfikacjaMiodu
         private HoneyType selectedHoneyType;
         private Image image;
 
-        public Context()
+        public Context(bool useDefaultHoneyTypes)
         {
             Actions.Clear();
             image = Resources.honeyPollens;
+
+            if (useDefaultHoneyTypes)
+                LoadDefaultHoneyTypes();
+        }
+
+        private void LoadDefaultHoneyTypes()
+        {
             honeyTypes = DefaultHoneyTypesBase.GetAllHoneyTypesFromFile();
         }
 
