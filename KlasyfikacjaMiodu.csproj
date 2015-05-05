@@ -68,6 +68,9 @@
     <Compile Include="Serialization\MarkerSerializer.cs" />
     <Compile Include="Serialization\Serializer.cs" />
     <Compile Include="Serialization\TimeSerializer.cs" />
+    <Compile Include="SideMenu\BlackLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SideMenu\HoneyTypeEditWindow.cs">
       <SubType>Form</SubType>
     </Compile>

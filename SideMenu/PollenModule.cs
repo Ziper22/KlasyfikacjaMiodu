@@ -27,10 +27,10 @@ namespace KlasyfikacjaMiodu.SideMenu
         public PollenModule()
         {
             MarkerColor = new PictureBox {Enabled = false};
-            HoneyName = new Label {Enabled = false, Padding = new Padding(0, 6, 0, 0)};
+            HoneyName = new BlackLabel {Enabled = false, Padding = new Padding(0, 6, 0, 0)};
             PollenValues = new FlowLayoutPanel {Enabled = false, Padding = new Padding(0, 3, 0, 0)};
-            PollenNumber = new Label();
-            PollenPercentage = new Label();
+            PollenNumber = new BlackLabel();
+            PollenPercentage = new BlackLabel();
 
             Controls.Add(MarkerColor);
             Controls.Add(HoneyName);
