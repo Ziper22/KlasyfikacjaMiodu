@@ -10,17 +10,29 @@ using System.Drawing;
 
 namespace KlasyfikacjaMiodu.Serialization
 {
-    public static class Serializer
+    public class Serializer
     {
-        private static List<string> honeyTypeStringList;
-        private static List<string> markerStringList;
+        private HoneyTypeSerializer honeyTypeSerializer;
+        private MarkerSerializer markerSerializer;
 
-        public static void Serialize(string folderPath)
+        private List<string> honeyTypeStringList;
+        private List<string> markerStringList;
+
+        public Serializer()
         {
-            honeyTypeStringList = HoneyTypeSerializer.Serialize(Session.Context);
-            markerStringList = MarkerSerializer.Serialize(Session.Context);
+            honeyTypeSerializer = new HoneyTypeSerializer();
+            markerSerializer = new MarkerSerializer();
 
-                using (StreamWriter sw = new StreamWriter(folderPath + "/info.txt"))
+            honeyTypeStringList = new List<string>();
+            markerStringList = new List<string>();
+        }
+
+        public void Serialize(SaveFileDialog sfd)
+        {
+            honeyTypeStringList = honeyTypeSerializer.Serialize(Session.Context);
+            markerStringList = markerSerializer.Serialize(Session.Context);
+
+                using (StreamWriter sw = new StreamWriter(sfd.FileName))
                 {
                     sw.WriteLine("===--- HONEY TYPES ---===");
                     for (int i = 0; i < honeyTypeStringList.Count; i++)
@@ -35,13 +47,12 @@ namespace KlasyfikacjaMiodu.Serialization
                 
                 }
         }
-        public static void SerializeImage(FolderBrowserDialog fbd)
+        public void SerializeImage(SaveFileDialog sfd)
         {
-            string destPath = fbd.SelectedPath + @"\";
-
+            string path = Path.Combine(Path.GetDirectoryName(sfd.FileName), Path.GetFileNameWithoutExtension(sfd.FileName)) + ".jpg";
             using (MemoryStream memory = new MemoryStream())
             {
-                using (FileStream fs = new FileStream(destPath + "projectImage.jpg", FileMode.Create, FileAccess.ReadWrite))
+                using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite))
                 {
                     Session.Context.Image.Save(memory, ImageFormat.Jpeg);
                     byte[] bytes = memory.ToArray();
@@ -50,11 +61,11 @@ namespace KlasyfikacjaMiodu.Serialization
             }
         }
 
-        public static Context Deserialize(FolderBrowserDialog fbd)
+        public Context Deserialize(OpenFileDialog ofd)
         {
             Marker marker;
             Context context = Session.Context;
-            using (StreamReader sr = File.OpenText(fbd.SelectedPath + @"\info.txt"))
+            using (StreamReader sr = File.OpenText(ofd.FileName))
             {
                 string line = String.Empty;
                 while ((line = sr.ReadLine()) != null)
@@ -62,12 +73,12 @@ namespace KlasyfikacjaMiodu.Serialization
                     if (line != "")
                     {
                         if (line.Contains("HoneyType")) // linijka z HoneyTypem
-                            context.AddHoneyType(HoneyTypeSerializer.Deserialize(line));
+                            context.AddHoneyType(honeyTypeSerializer.Deserialize(line));
                         else if (line.Contains("Marker")) // linijka z Markerem
                         {
-                            marker = MarkerSerializer.Deserialize(line);
+                            marker = markerSerializer.Deserialize(line);
                             if (marker != null)
-                                context.AddMArker(MarkerSerializer.Deserialize(line));
+                                context.AddMArker(markerSerializer.Deserialize(line));
                         }
                         else if (line.Contains("Timer")) //linijka z czasem
                             context.TimeSpan = TimeSerializer.Deserialize(line);
@@ -78,9 +89,9 @@ namespace KlasyfikacjaMiodu.Serialization
             return context;
         }
 
-        public static void DeserializeImage(FolderBrowserDialog fbd)
+        public void DeserializeImage(OpenFileDialog ofd)
         {
-            string imagePath = fbd.SelectedPath + @"\projectImage.jpg";
+            string imagePath = Path.Combine(Path.GetDirectoryName(ofd.FileName), Path.GetFileNameWithoutExtension(ofd.FileName), ".jpg");
             if (File.Exists(imagePath))
                 Session.Context.Image = Image.FromFile(imagePath);
         }

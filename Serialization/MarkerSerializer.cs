@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace KlasyfikacjaMiodu.Serialization
 {
-    public static class MarkerSerializer
+    public class MarkerSerializer
     {
-        private static List<string> markerStringList;
+        private List<string> markerStringList;
 
-        public static List<string> Serialize(Context context)
+        public MarkerSerializer()
+        {
+            markerStringList = new List<string>();    
+        }
+
+        public List<string> Serialize(Context context)
         {
             markerStringList = new List<string>();
             string markerString;
@@ -26,12 +31,10 @@ namespace KlasyfikacjaMiodu.Serialization
             }
             return markerStringList;
         }
-        public static Marker Deserialize(string line)
+        public Marker Deserialize(string line)
         {
-            Marker marker = null;
             int startIndex, lastIndex, length;
             int x, y, size;
-            HoneyType honeyType;
             string honeyTypeName;
             
             // Get x

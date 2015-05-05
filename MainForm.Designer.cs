@@ -157,7 +157,7 @@ namespace KlasyfikacjaMiodu
             this.scale.Location = new System.Drawing.Point(3, 3);
             this.scale.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.scale.Maximum = new decimal(new int[] {
-            9999,
+            999,
             0,
             0,
             0});
@@ -361,7 +361,7 @@ namespace KlasyfikacjaMiodu
             // showPanelMenuItem
             // 
             this.showPanelMenuItem.Name = "showPanelMenuItem";
-            this.showPanelMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.showPanelMenuItem.Size = new System.Drawing.Size(206, 26);
             this.showPanelMenuItem.Text = "Ukryj listę";
             // 
             // centerImageMenuItem

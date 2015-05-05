@@ -18,14 +18,13 @@ namespace KlasyfikacjaMiodu.TopMenu
     public class TopMenuFile
     {
         BinaryFormatter formatter = new BinaryFormatter(); // potrzebne do serializacji
-        OpenFileDialog ofd = new OpenFileDialog();
-        FolderBrowserDialog fbd = new FolderBrowserDialog();
 
         private ToolStripMenuItem newProject;
         private ToolStripMenuItem saveProject;
         private ToolStripMenuItem loadProject;
         private ToolStripMenuItem loadImage;
         private ToolStripMenuItem quit;
+        private Serializer serializer;
 
         public TopMenuFile(ToolStripMenuItem newProject, ToolStripMenuItem saveProject,
            ToolStripMenuItem loadProject, ToolStripMenuItem loadImage, ToolStripMenuItem quit)
@@ -35,6 +34,7 @@ namespace KlasyfikacjaMiodu.TopMenu
             this.loadProject = loadProject;
             this.loadImage = loadImage;
             this.quit = quit;
+            serializer = new Serializer();
 
             newProject.Click += NewProject_Click;
             saveProject.Click += SaveProject_Click;
@@ -50,18 +50,20 @@ namespace KlasyfikacjaMiodu.TopMenu
 
         private void SaveProject_Click(object sender, EventArgs e)
         {
-            fbd.Description = "Select a folder to save project...";
-
-            if (fbd.ShowDialog() == DialogResult.OK)
+            using (SaveFileDialog sfd = new SaveFileDialog())
             {
-                try
+                sfd.Filter = "Project txt (*.txt)|*.txt";
+                if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    Serializer.SerializeImage(fbd);
-                    Serializer.Serialize(fbd.SelectedPath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    try
+                    {
+                        serializer.SerializeImage(sfd);
+                        serializer.Serialize(sfd);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -69,20 +71,22 @@ namespace KlasyfikacjaMiodu.TopMenu
         private void LoadProject_Click(object sender, EventArgs e)
         {
             Context newContext;
-            fbd.Description = "Select a folder to load project...";
 
-            if (fbd.ShowDialog() == DialogResult.OK)
+            using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                try
+                ofd.Filter = "Project txt (*.txt)|*.txt";
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    Session.NewClear();
-                    Serializer.DeserializeImage(fbd);
-                    newContext = Serializer.Deserialize(fbd);
-                    //Serializer.Serialize(fbd.SelectedPath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    try
+                    {
+                        Session.NewClear();
+                        serializer.DeserializeImage(ofd);
+                        newContext = serializer.Deserialize(ofd);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             
@@ -91,11 +95,14 @@ namespace KlasyfikacjaMiodu.TopMenu
         private void LoadImage_Click(object sender, EventArgs e)
         {
             Bitmap bmp;
-            ofd.Filter = "Image Files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png" ;
-            if (ofd.ShowDialog() == DialogResult.OK)
+            using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                bmp = new Bitmap(ofd.FileName);
-                Session.Context.Image = (Image)bmp;
+                ofd.Filter = "Image Files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    bmp = new Bitmap(ofd.FileName);
+                    Session.Context.Image = (Image)bmp;
+                }
             }
         }
 

@@ -8,13 +8,17 @@ using System.Windows.Forms;
 
 namespace KlasyfikacjaMiodu.Serialization
 {
-    public static class HoneyTypeSerializer
+    public class HoneyTypeSerializer
     {
-        private static List<string> honeyTypeStringList;
+        private List<string> honeyTypeStringList;
 
-        public static List<string> Serialize(Context context)
+        public HoneyTypeSerializer()
         {
             honeyTypeStringList = new List<string>();
+        }
+
+        public List<string> Serialize(Context context)
+        {
             string honeyTypeString;
 
             foreach (var honeyType in context.HoneyTypes)
@@ -28,7 +32,7 @@ namespace KlasyfikacjaMiodu.Serialization
             }
             return honeyTypeStringList;
         }
-        public static HoneyType Deserialize(string line)
+        public HoneyType Deserialize(string line)
         {
             int startIndex, lastIndex, length;
 
@@ -65,11 +69,11 @@ namespace KlasyfikacjaMiodu.Serialization
             return new HoneyType(name,descriptionName, markerColor, minimalPollensPercentageAmount);
         }
 
-        private static String ToHexConverter(System.Drawing.Color c)
+        private String ToHexConverter(System.Drawing.Color c)
         {
             return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }
-        private static Color ToColorConverter(string hex)
+        private Color ToColorConverter(string hex)
         {
             return System.Drawing.ColorTranslator.FromHtml(hex);
         }
