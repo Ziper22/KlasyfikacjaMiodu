@@ -22,6 +22,12 @@ namespace KlasyfikacjaMiodu.SideMenu
             this.mainForm = mainForm;
             Session.Changed += Session_Changed;
             Session_Changed(Session.Context);
+            this.SizeChanged += SidePanel_SizeChanged;
+        }
+
+        void SidePanel_SizeChanged(object sender, EventArgs e)
+        {
+            AlignVerticalPanel();
         }
 
         /// <summary>
@@ -81,16 +87,8 @@ namespace KlasyfikacjaMiodu.SideMenu
             PollenModule pollenModule = new PollenModule(newHoney);
             panel1.Controls.Add(pollenModule);
             pollenModuleSelector.AddListeners(pollenModule);
-            //panel1.HorizontalScroll.Maximum += pollenModule.Width;
-            //panel1.HorizontalScroll.Value = panel1.HorizontalScroll.Maximum;
-            //panel1.AutoScrollOffset = new Point(panel1.HorizontalScroll.Maximum);
-            if (panel1.FlowDirection == FlowDirection.LeftToRight)
-            {
-                panel1.FlowDirection = FlowDirection.TopDown;
-                panel1.FlowDirection = FlowDirection.LeftToRight;
-            }
+            AlignVerticalPanel();
             panel1.ScrollControlIntoView(pollenModule);
-            //panel1.Update();
         }
 
         private void HoneyType_AddToContext(HoneyType newHoney)
@@ -192,6 +190,7 @@ namespace KlasyfikacjaMiodu.SideMenu
                     (Screen.PrimaryScreen.WorkingArea.Height - (mainForm.Height + Height)) / 2);
                 Location = new Point(mainForm.Left, mainForm.Bottom);
             }
+            AlignVerticalPanel();
 
             verticalToolStripMenuItem.Text = "Lista pionowa";
             horizontalToolStripMenuItem.Text = "Wyrównaj";
@@ -206,6 +205,20 @@ namespace KlasyfikacjaMiodu.SideMenu
             {
                 mainForm.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - mainForm.Width) / 2,
                     (Screen.PrimaryScreen.WorkingArea.Height - mainForm.Height) / 2);
+            }
+        }
+
+        /// <summary>
+        ///     Scrolls panel to the last pollen module
+        /// </summary>
+        private void AlignVerticalPanel()
+        {
+            if (panel1.FlowDirection == FlowDirection.LeftToRight)
+            {
+                panel1.FlowDirection = FlowDirection.TopDown;
+                panel1.FlowDirection = FlowDirection.LeftToRight;
+                //int pollenModulesNumber = panel1.Controls.Count;
+                //panel1.ScrollControlIntoView(panel1.Controls[pollenModulesNumber - 1]);
             }
         }
         #endregion
