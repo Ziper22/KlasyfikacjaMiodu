@@ -24,7 +24,6 @@ namespace KlasyfikacjaMiodu.TopMenu
         private ToolStripMenuItem loadProject;
         private ToolStripMenuItem loadImage;
         private ToolStripMenuItem quit;
-        private Serializer serializer;
 
         public TopMenuFile(ToolStripMenuItem newProject, ToolStripMenuItem saveProject,
            ToolStripMenuItem loadProject, ToolStripMenuItem loadImage, ToolStripMenuItem quit)
@@ -34,7 +33,6 @@ namespace KlasyfikacjaMiodu.TopMenu
             this.loadProject = loadProject;
             this.loadImage = loadImage;
             this.quit = quit;
-            serializer = new Serializer();
 
             newProject.Click += NewProject_Click;
             saveProject.Click += SaveProject_Click;
@@ -50,6 +48,7 @@ namespace KlasyfikacjaMiodu.TopMenu
 
         private void SaveProject_Click(object sender, EventArgs e)
         {
+            Serializer serializer = new Serializer();
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
                 sfd.Filter = "Project txt (*.txt)|*.txt";
@@ -70,7 +69,7 @@ namespace KlasyfikacjaMiodu.TopMenu
 
         private void LoadProject_Click(object sender, EventArgs e)
         {
-            Context newContext;
+            Serializer serializer = new Serializer();
 
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
@@ -81,7 +80,7 @@ namespace KlasyfikacjaMiodu.TopMenu
                     {
                         Session.NewClear();
                         serializer.DeserializeImage(ofd);
-                        newContext = serializer.Deserialize(ofd);
+                        serializer.Deserialize(ofd);
                     }
                     catch (Exception ex)
                     {
