@@ -11,6 +11,8 @@ using System.Windows.Forms;
 
 namespace KlasyfikacjaMiodu.BottomBar
 {
+    /// Author: Michał Fornalski, Mariusz Gorzycki<para/>
+    /// Class responsible for calculating the honey kind.
     class HoneyTypeInformer
     {
         private Label honeyTypeLabel;
@@ -145,7 +147,7 @@ namespace KlasyfikacjaMiodu.BottomBar
         {
             String shortName = text;
             int pixelsPerLetter = 9;
-            int otherLabelsWidth = 620;
+            int otherLabelsWidth = 450;
             int maxTextSize = Math.Max(0, (form.ClientSize.Width - otherLabelsWidth) / pixelsPerLetter);
 
             if (shortName.Length > maxTextSize)

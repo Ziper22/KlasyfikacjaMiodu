@@ -9,14 +9,10 @@ namespace KlasyfikacjaMiodu
 {
     static class Program
     {
-        /// <summary>
-        /// Główny punkt wejścia dla aplikacji.
-        /// Nic nie zmieniać w tej klasie!
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles(); //Nic nie zmieniać w tej klasie!
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }

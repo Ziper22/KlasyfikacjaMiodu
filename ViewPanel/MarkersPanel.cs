@@ -283,7 +283,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
             image.Refresh();
         }
 
-
+        /// Author: Mariusz Gorzycki<para/>
+        /// Graphic marker representation.
         public class MarkerPictureBox : PictureBox
         {
             public Marker Marker { get; private set; }

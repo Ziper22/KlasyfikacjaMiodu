@@ -8,16 +8,18 @@ using System.Windows.Forms;
 
 namespace KlasyfikacjaMiodu.SideMenu
 {
+    /// Author: Mariusz Gorzycki<para/>
+    /// Label with black text when disabled.
     class BlackLabel : Label
     {
         protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
         {
             if (Enabled)
             {
-                //use normal realization
                 base.OnPaint(e);
                 return;
             }
+
             //custom drawing
             using (Brush aBrush = new SolidBrush(Color.Black))
             {

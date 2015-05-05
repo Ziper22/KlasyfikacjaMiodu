@@ -92,7 +92,6 @@
     <Compile Include="ViewPanel\MarkersPanel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Przyklady.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="BottomBar\TimeCounter.cs" />
     <Compile Include="TopMenu\TopMenuEdit.cs" />
