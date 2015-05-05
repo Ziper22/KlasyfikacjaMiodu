@@ -75,8 +75,9 @@ namespace KlasyfikacjaMiodu.TopMenu
             {
                 try
                 {
-                    newContext = Serializer.Deserialize(fbd);
+                    Session.NewClear();
                     Serializer.DeserializeImage(fbd);
+                    newContext = Serializer.Deserialize(fbd);
                     //Serializer.Serialize(fbd.SelectedPath);
                 }
                 catch (Exception ex)
