@@ -28,7 +28,9 @@ namespace KlasyfikacjaMiodu.Serialization
                     "DESCRIPTION_NAME:" + honeyType.DescriptionName + " " +
                     "MARKER_COLOR:" + ToHexConverter(honeyType.MarkerColor) + " " +
                     "MINIMAL_POLLENS_PERCENTAGE_AMOUNT:" + honeyType.MinimalPollensPercentageAmount;
-                honeyTypeStringList.Add(honeyTypeString);
+
+                if (!honeyTypeStringList.Contains(honeyTypeString))
+                    honeyTypeStringList.Add(honeyTypeString);              
             }
             return honeyTypeStringList;
         }

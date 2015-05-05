@@ -64,6 +64,8 @@ namespace KlasyfikacjaMiodu.Serialization
         public Context Deserialize(OpenFileDialog ofd)
         {
             Marker marker;
+            HoneyType honeyType;
+
             Context context = Session.Context;
             using (StreamReader sr = File.OpenText(ofd.FileName))
             {
@@ -73,7 +75,12 @@ namespace KlasyfikacjaMiodu.Serialization
                     if (line != "")
                     {
                         if (line.Contains("HoneyType")) // linijka z HoneyTypem
-                            context.AddHoneyType(honeyTypeSerializer.Deserialize(line));
+                        {
+                            honeyType = honeyTypeSerializer.Deserialize(line);
+                            if (!context.HoneyTypes.Contains(honeyType))
+                                context.AddHoneyType(honeyType);
+                            
+                        }
                         else if (line.Contains("Marker")) // linijka z Markerem
                         {
                             marker = markerSerializer.Deserialize(line);
