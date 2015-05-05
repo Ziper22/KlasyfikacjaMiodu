@@ -91,9 +91,17 @@ namespace KlasyfikacjaMiodu.Serialization
 
         public void DeserializeImage(OpenFileDialog ofd)
         {
+            Image img;
             string imagePath = Path.Combine(Path.GetDirectoryName(ofd.FileName), Path.GetFileNameWithoutExtension(ofd.FileName)) + ".jpg";
             if (File.Exists(imagePath))
-                Session.Context.Image = Image.FromFile(imagePath);
+            {
+                using (var bmpTemp = new Bitmap(imagePath))
+                {
+                    img = new Bitmap(bmpTemp);
+                }
+                Session.Context.Image = img;
+             }
+
         }
     }
 }
