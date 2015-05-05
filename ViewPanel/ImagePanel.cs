@@ -32,6 +32,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
             SetContextEvents();
             Session.Changed += Session_ContextChanged;
             AdjustScaleToRealImageSize();
+            CenterImage();
         }
 
         private void pollensImage_Layout(object sender, LayoutEventArgs e)
@@ -148,6 +149,12 @@ namespace KlasyfikacjaMiodu.ViewPanel
             Session.Context.Scale = pollensImage.Width / (float)pollensImage.Image.PhysicalDimension.Width;
         }
 
+        private void CenterImage()
+        {
+            Form form = panel.FindForm();
+            panel.Location = new Point(form.ClientSize.Width / 2 - panel.Width / 2, form.ClientSize.Height / 2 - panel.Height / 2);
+        }
+
         /// <summary>
         /// Called when Image in current Context is changing
         /// </summary>
@@ -160,6 +167,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
             {
                 Session.Context.RemoveMarker(marker);
             }
+
+            CenterImage();
         }
 
         /// <summary>
@@ -170,6 +179,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
             SetContextEvents();
             pollensImage.Image = context.Image;
             AdjustScaleToRealImageSize();
+
+            CenterImage();
         }
     }
 }

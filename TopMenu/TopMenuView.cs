@@ -35,7 +35,6 @@ namespace KlasyfikacjaMiodu.TopMenu
         private void CenterImageOnClick(object sender, EventArgs eventArgs)
         {
             Form form = viewPanel.FindForm();
-
             viewPanel.Location = new Point(form.ClientSize.Width / 2 - viewPanel.Width / 2, form.ClientSize.Height / 2 - viewPanel.Height / 2);
         }
 
