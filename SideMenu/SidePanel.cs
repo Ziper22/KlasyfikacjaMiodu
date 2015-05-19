@@ -166,6 +166,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             verticalToolStripMenuItem.Text = "Wyrównaj";
             horizontalToolStripMenuItem.Text = "Lista pozioma";
+            ChangeMenuItemsOrder();    
         }
 
         /// <summary>
@@ -192,8 +193,24 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
             AlignVerticalPanel();
 
+            //do poprawy
             verticalToolStripMenuItem.Text = "Lista pionowa";
             horizontalToolStripMenuItem.Text = "Wyrównaj";
+            ChangeMenuItemsOrder();
+        }
+
+        ///<summary>
+        /// Changes order of "Orientation" menu toolstrip items
+        /// </summary>
+        private void ChangeMenuItemsOrder()
+        {
+            ToolStripItem tmpItem = orientationToolStripMenuItem.DropDownItems[0]; 
+
+            if (tmpItem.Text!="Wyrównaj")
+            {
+                orientationToolStripMenuItem.DropDownItems.RemoveAt(0);
+                orientationToolStripMenuItem.DropDownItems.Add(tmpItem);  
+            }         
         }
 
         /// <summary>
