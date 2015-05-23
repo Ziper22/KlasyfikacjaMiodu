@@ -43,6 +43,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.honeyNameTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.checkBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.specimenPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.percentNumericUpDown)).BeginInit();
             this.panel1.SuspendLayout();
@@ -145,6 +146,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkBox);
             this.panel1.Controls.Add(this.warningLabel);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label4);
@@ -162,7 +164,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(272, 176);
+            this.panel1.Size = new System.Drawing.Size(272, 193);
             this.panel1.TabIndex = 0;
             // 
             // warningLabel
@@ -170,7 +172,7 @@
             this.warningLabel.AutoSize = true;
             this.warningLabel.BackColor = System.Drawing.SystemColors.Control;
             this.warningLabel.ForeColor = System.Drawing.Color.Red;
-            this.warningLabel.Location = new System.Drawing.Point(9, 154);
+            this.warningLabel.Location = new System.Drawing.Point(10, 171);
             this.warningLabel.Name = "warningLabel";
             this.warningLabel.Size = new System.Drawing.Size(259, 13);
             this.warningLabel.TabIndex = 18;
@@ -212,13 +214,24 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "Nazwa miodu:";
             // 
+            // checkBox
+            // 
+            this.checkBox.AutoSize = true;
+            this.checkBox.Location = new System.Drawing.Point(58, 151);
+            this.checkBox.Name = "checkBox";
+            this.checkBox.Size = new System.Drawing.Size(166, 17);
+            this.checkBox.TabIndex = 19;
+            this.checkBox.Text = "Dodaj pyłek do bazy na stałe";
+            this.checkBox.UseVisualStyleBackColor = true;
+            this.checkBox.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
+            // 
             // HoneyTypeEditWindow
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(272, 176);
+            this.ClientSize = new System.Drawing.Size(272, 193);
             this.Controls.Add(this.panel1);
             this.Name = "HoneyTypeEditWindow";
             this.Text = "AddEditWindow";
@@ -247,6 +260,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label warningLabel;
+        private System.Windows.Forms.CheckBox checkBox;
 
     }
 }

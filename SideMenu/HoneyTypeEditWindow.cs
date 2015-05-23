@@ -12,6 +12,8 @@ namespace KlasyfikacjaMiodu.SideMenu
     {
         public delegate void OkButtonClickedDelegate(HoneyType honeyType);
         public event OkButtonClickedDelegate OkButtonClicked;
+        public delegate void CheckBoxCheckedDelegate();
+        public event CheckBoxCheckedDelegate CheckBoxChecked;
         private HoneyType honeyType;
 
         bool isNameFieldRed = false;
@@ -100,8 +102,6 @@ namespace KlasyfikacjaMiodu.SideMenu
         /// <summary>
         /// Checks if name (names) which we are going to choose is (are) already assigned to other pollen
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
         private bool CheckIfNameWasAssigned(string newName)
         {
             foreach (HoneyType honey in Session.Context.HoneyTypes)
@@ -141,6 +141,7 @@ namespace KlasyfikacjaMiodu.SideMenu
                 honeyType.MinimalPollensPercentageAmount = (float)percentNumericUpDown.Value;
 
                 OnOkButtonClicked();
+                checkBox_CheckedChanged(sender, e);
 
                 this.Close();
             }
@@ -154,6 +155,20 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
             if (OkButtonClicked != null)
                 OkButtonClicked(honeyType);
+        }
+
+        private void checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox.Checked == true) 
+            {
+                OnCheckBoxChecked();
+            }            
+        }
+
+        protected virtual void OnCheckBoxChecked()
+        {
+            if (CheckBoxChecked != null)
+                CheckBoxChecked();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -174,6 +189,7 @@ namespace KlasyfikacjaMiodu.SideMenu
                 isNameFieldRed = false;
             }
 
+            CheckIfSpaceWasClicked(nameTextBox);
             SwitchOkButton(CheckIfInputControlsAreFilled());
         }
 
@@ -190,6 +206,7 @@ namespace KlasyfikacjaMiodu.SideMenu
                 isHoneyNameFieldRed = false;
             }
 
+            CheckIfSpaceWasClicked(honeyNameTextBox);
             SwitchOkButton(CheckIfInputControlsAreFilled());
         }
 
@@ -232,7 +249,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Checks if the condition to switch on the ok button is satisfied
+        /// Checks if the condition to switch the ok button on is satisfied
         /// </summary>
         private void SwitchOkButton(bool areControlsFilled)
         {
@@ -243,6 +260,17 @@ namespace KlasyfikacjaMiodu.SideMenu
             else
             {
                 okButton.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Doesn't allow to type a space at the beggining of textboxes
+        /// </summary>
+        private void CheckIfSpaceWasClicked(Control control)
+        {
+            if (control.Text.StartsWith(" ") == true)  
+            {
+                control.Text = control.Text.Remove(0, 1);
             }
         }
 
@@ -312,6 +340,6 @@ namespace KlasyfikacjaMiodu.SideMenu
             } while (CheckIfColorWasAssigned(color) == true);
 
             return color;
-        }
+        }        
     }
 }
