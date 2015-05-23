@@ -29,6 +29,9 @@ namespace KlasyfikacjaMiodu.BottomBar
 
         private void TimeChanged(Object sender, EventArgs args)
         {
+            if (Session.Context.BlockedView)
+                return;
+
             Session.Context.TimeSpan = Session.Context.TimeSpan.Add(new TimeSpan(0, 0, 1));
             time.Text = Session.Context.TimeSpan.ToString();
         }

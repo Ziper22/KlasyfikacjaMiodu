@@ -25,6 +25,9 @@ namespace KlasyfikacjaMiodu.ActionsModule
         /// </summary>
         public static void UndoLastAction()
         {
+            if (Session.Context.BlockedView)
+                return;
+
             if (doneActions.Count > 0)
             {
                 Action last = doneActions.Pop();
@@ -38,6 +41,9 @@ namespace KlasyfikacjaMiodu.ActionsModule
         /// </summary>
         public static void RedoLastUndoneAction()
         {
+            if (Session.Context.BlockedView)
+                return;
+
             if (unDoneActions.Count > 0)
             {
                 Action last = unDoneActions.Pop();

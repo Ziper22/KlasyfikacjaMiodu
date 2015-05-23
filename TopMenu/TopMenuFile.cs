@@ -39,15 +39,21 @@ namespace KlasyfikacjaMiodu.TopMenu
             loadProject.Click += LoadProject_Click;
             loadImage.Click += LoadImage_Click;
             quit.Click += Quit_Click;
+            
+           
         }
 
         private void NewProject_Click(object sender, EventArgs e)
         {
-            Session.NewDefault();
+            if(!Session.Context.BlockedView)
+                Session.NewDefault();
         }
 
         private void SaveProject_Click(object sender, EventArgs e)
         {
+            if (Session.Context.BlockedView)
+                return;
+
             Serializer serializer = new Serializer();
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
@@ -65,12 +71,15 @@ namespace KlasyfikacjaMiodu.TopMenu
                     }
                 }
             }
+            
         }
 
         private void LoadProject_Click(object sender, EventArgs e)
         {
-            Serializer serializer = new Serializer();
+            if (Session.Context.BlockedView)
+                return;
 
+            Serializer serializer = new Serializer();
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Filter = "Project txt (*.txt)|*.txt";
@@ -93,6 +102,9 @@ namespace KlasyfikacjaMiodu.TopMenu
 
         private void LoadImage_Click(object sender, EventArgs e)
         {
+            if(Session.Context.BlockedView)
+                return;
+
             Bitmap bmp;
             using (OpenFileDialog ofd = new OpenFileDialog())
             {

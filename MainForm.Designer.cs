@@ -61,6 +61,7 @@ namespace KlasyfikacjaMiodu
             this.showPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.centerImageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mousePostion = new System.Windows.Forms.Label();
+            this.blockView = new System.Windows.Forms.CheckBox();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pollensImage)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -379,12 +380,25 @@ namespace KlasyfikacjaMiodu
             this.mousePostion.TabIndex = 3;
             this.mousePostion.Text = "mouse position";
             // 
+            // blockView
+            // 
+            this.blockView.AutoSize = true;
+            this.blockView.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.blockView.Location = new System.Drawing.Point(619, 11);
+            this.blockView.Name = "blockView";
+            this.blockView.Size = new System.Drawing.Size(98, 17);
+            this.blockView.TabIndex = 4;
+            this.blockView.Text = "Zablokuj widok";
+            this.blockView.UseVisualStyleBackColor = false;
+            this.blockView.CheckedChanged += new System.EventHandler(this.blockView_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 442);
+            this.Controls.Add(this.blockView);
             this.Controls.Add(this.mousePostion);
             this.Controls.Add(this.topMenu);
             this.Controls.Add(this.bottomPanel);
@@ -446,6 +460,7 @@ namespace KlasyfikacjaMiodu
         private NumericUpDown scale;
         private Label mousePostion;
         private ToolStripMenuItem centerImageMenuItem;
+        private CheckBox blockView;
     }
 }
 

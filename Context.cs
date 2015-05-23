@@ -52,6 +52,7 @@ namespace KlasyfikacjaMiodu
         private List<Marker> markers = new List<Marker>();
         private HoneyType selectedHoneyType;
         private Image image;
+        private bool blockedView;
 
         public Context(bool useDefaultHoneyTypes)
         {
@@ -106,7 +107,11 @@ namespace KlasyfikacjaMiodu
                 OnHoneyTypeSelected();
             }
         }
-
+        public bool BlockedView
+        {
+            get { return this.blockedView; }
+            set { this.blockedView = value; }
+        }
         public IList<Marker> Markers
         {
             get { return markers.AsReadOnly(); }

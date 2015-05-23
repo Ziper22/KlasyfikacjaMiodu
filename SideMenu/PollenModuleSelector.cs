@@ -21,6 +21,9 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void pollenModule_MouseEnter(object sender, EventArgs e)
         {
+            if (Session.Context.BlockedView)
+                return;
+
             PollenModule newHighlightedModule = sender as PollenModule;
 
             if (newHighlightedModule != null)
@@ -35,6 +38,9 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void pollenModule_MouseLeave(object sender, EventArgs e)
         {
+            if (Session.Context.BlockedView)
+                return;
+
             PollenModule newHighlightedModule = sender as PollenModule;
 
             if (newHighlightedModule != null)
@@ -49,6 +55,9 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void pollenModule_MouseClick(object sender, MouseEventArgs e)
         {
+            if (Session.Context.BlockedView)
+                return;
+
             PollenModule newSelectedModule = sender as PollenModule;
 
             if (newSelectedModule != null)

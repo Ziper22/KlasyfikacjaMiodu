@@ -26,6 +26,7 @@ namespace KlasyfikacjaMiodu
         private TopMenuEdit topMenuEdit;
         private TopMenuView topMenuView;
         private SidePanel sidePanel;
+       
 
         public MainForm()
         {
@@ -110,6 +111,18 @@ namespace KlasyfikacjaMiodu
         private void topMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void blockView_CheckedChanged(object sender, EventArgs e)
+        {
+            if (blockView.Checked == true){
+                Session.Context.BlockedView = true;
+                blockView.Text = "Odblokuj widok";
+            }
+            else{
+                Session.Context.BlockedView = false;
+                blockView.Text = "Zablokuj widok";
+            }
         }
     }
 }

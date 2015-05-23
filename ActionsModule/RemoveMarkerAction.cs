@@ -15,11 +15,17 @@
 
         public override void Do()
         {
+            if (Session.Context.BlockedView)
+                return;
+
             Session.Context.RemoveMarker(marker);
         }
 
         public override void Undo()
         {
+            if (Session.Context.BlockedView)
+                return;
+
             Session.Context.AddMArker(marker);
         }
     }
