@@ -26,22 +26,21 @@ namespace KlasyfikacjaMiodu
         private TopMenuEdit topMenuEdit;
         private TopMenuView topMenuView;
         private SidePanel sidePanel;
-       
+
 
         public MainForm()
         {
             InitializeComponent();
             PrepareSidePanel();
             markersPanel = new MarkersPanel(viewPanel, pollensImage);
-            imagePanel = new ImagePanel(viewPanel, pollensImage);
+            imagePanel = new ImagePanel(viewPanel, pollensImage, this);
             scaleHandler = new ScaleHandler(scale);
             honeyTypeInformer = new HoneyTypeInformer(honeyType);
-            timeCounter = new TimeCounter(workTime);
+            timeCounter = new TimeCounter(workTime, stoperButton);
             topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, loadProjectMenuItem, loadImageMenuItem, quitMenuItem);
             topMenuEdit = new TopMenuEdit(this, editMenu, undoMenuItem, redoMenuItem);
             topMenuView = new TopMenuView(showPanelMenuItem, centerImageMenuItem, sidePanel, viewPanel);
-
-            AddMousePositionEvent();
+            viewPanel.MouseMove += viewPanel_MouseMove;
         }
 
         private void PrepareSidePanel()
@@ -52,9 +51,9 @@ namespace KlasyfikacjaMiodu
             sidePanel.Owner = this;
 
             CenterToScreen();
-            Location = new Point(Left - sidePanel.Width/2, Top);
+            Location = new Point(Left - sidePanel.Width / 2, Top);
 
-            sidePanel.Location = new Point(Right,Top);
+            sidePanel.Location = new Point(Right, Top);
             sidePanel.Show();
         }
 
@@ -66,6 +65,14 @@ namespace KlasyfikacjaMiodu
                 cp.ExStyle = cp.ExStyle | 0x2000000;
                 return cp;
             }
+        }
+
+        void viewPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point p = e.Location;
+            p.X = (int)(p.X / (viewPanel.Width / 100.5f));
+            p.Y = (int)(p.Y / (viewPanel.Height / 100.5f));
+            mousePostion.Text = p.ToString();
         }
 
         private void AddMousePositionEvent()
@@ -115,11 +122,13 @@ namespace KlasyfikacjaMiodu
 
         private void blockView_CheckedChanged(object sender, EventArgs e)
         {
-            if (blockView.Checked == true){
+            if (blockView.Checked == true)
+            {
                 Session.Context.BlockedView = true;
                 blockView.Text = "Odblokuj widok";
             }
-            else{
+            else
+            {
                 Session.Context.BlockedView = false;
                 blockView.Text = "Zablokuj widok";
             }

@@ -11,12 +11,24 @@ namespace KlasyfikacjaMiodu.BottomBar
     {
         private Timer timer;
         private Label time;
+        private Button stoperButton;
 
-        public TimeCounter(Label time)
+        public TimeCounter(Label time, Button stoperButton)
         {
             this.time = time;
+            this.stoperButton = stoperButton;
             SetOneSecondTimer();
             Session.Changed += Session_Changed;
+
+            stoperButton.Click += stoperButton_Click;
+        }
+
+        void stoperButton_Click(object sender, EventArgs e)
+        {
+            if (timer.Enabled)
+                PauseTimer();
+            else
+                StartTimer();
         }
 
         private void SetOneSecondTimer()
@@ -24,7 +36,19 @@ namespace KlasyfikacjaMiodu.BottomBar
             timer = new Timer();
             timer.Tick += TimeChanged;
             timer.Interval = 1000;
+            StartTimer();
+        }
+
+        private void StartTimer()
+        {
             timer.Start();
+            stoperButton.Text = "| |";
+        }
+
+        private void PauseTimer()
+        {
+            timer.Stop();
+            stoperButton.Text = "|>";
         }
 
         private void TimeChanged(Object sender, EventArgs args)

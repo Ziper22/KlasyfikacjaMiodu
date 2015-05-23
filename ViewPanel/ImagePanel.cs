@@ -16,13 +16,15 @@ namespace KlasyfikacjaMiodu.ViewPanel
     {
         private Panel panel;
         private PictureBox pollensImage;
+        private Form form;
         private bool mouseDown = false;
         private int xOffset, yOffset;
 
-        public ImagePanel(Panel panel, PictureBox pollensImage)
+        public ImagePanel(Panel panel, PictureBox pollensImage, Form form)
         {
             this.panel = panel;
             this.pollensImage = pollensImage;
+            this.form = form;
             panel.MouseDown += new MouseEventHandler(PollensImage_MouseDown);
             panel.MouseUp += new MouseEventHandler(PollensImage_MouseUp);
             panel.MouseMove += new MouseEventHandler(PollensImage_MouseMove);
@@ -33,12 +35,19 @@ namespace KlasyfikacjaMiodu.ViewPanel
             Session.Changed += Session_ContextChanged;
             AdjustScaleToRealImageSize();
             CenterImage();
+
+            form.SizeChanged += form_SizeChanged;
+        }
+
+        void form_SizeChanged(object sender, EventArgs e)
+        {
+            CenterImage();
         }
 
         private void pollensImage_Layout(object sender, LayoutEventArgs e)
         {
             float scale = Session.Context.Scale;
-            int width = (int) (pollensImage.Image.PhysicalDimension.Width*scale);
+            int width = (int)(pollensImage.Image.PhysicalDimension.Width * scale);
             int height = (int)(pollensImage.Image.PhysicalDimension.Height * scale);
             pollensImage.Size = new Size(width, height);
 
@@ -57,7 +66,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         private void Context_HoneyTypeAdded(HoneyType honeyType)
         {
-            
+
         }
 
         /// <summary>
@@ -107,7 +116,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         {
             if (panel.Focused)
             {
-                float scale = pollensImage.Width/(float) pollensImage.Image.PhysicalDimension.Width;
+                float scale = pollensImage.Width / (float)pollensImage.Image.PhysicalDimension.Width;
                 if (e.Delta > 0)
                 {
                     if (scale < 0.1f)
@@ -116,6 +125,9 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 }
                 else
                     scale *= 0.9f;
+
+                if (scale > 9.999)
+                    scale = 9.999f;
 
                 Session.Context.Scale = scale;
             }
@@ -151,7 +163,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         private void CenterImage()
         {
-            Form form = panel.FindForm();
             panel.Location = new Point(form.ClientSize.Width / 2 - panel.Width / 2, form.ClientSize.Height / 2 - panel.Height / 2);
         }
 
