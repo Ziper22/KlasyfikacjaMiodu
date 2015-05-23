@@ -130,10 +130,16 @@ namespace KlasyfikacjaMiodu.BottomBar
 
             foreach (KeyValuePair<HoneyType, int> item in sortedHoneyTypes)
             {
+
                 if (name.Length > 0)
                 {
-                    name.Remove(name.Length - 1, 1);
-                    name.Append("o-");
+                    if (name[name.Length-1] == 'y')
+                    {
+                        name.Remove(name.Length - 1, 1);
+                        name.Append("o-");
+                    }
+                    else
+                        name.Append("-");
                 }
 
                 name.Append(item.Key.DescriptionName);
