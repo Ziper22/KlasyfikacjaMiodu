@@ -71,8 +71,8 @@ namespace KlasyfikacjaMiodu
         void viewPanel_MouseMove(object sender, MouseEventArgs e)
         {
             Point p = e.Location;
-            p.X = (int)(p.X / (viewPanel.Width / 100.5f));
-            p.Y = (int)(p.Y / (viewPanel.Height / 100.5f));
+            p.X = (int)(p.X / (viewPanel.Width / pollensImage.Image.PhysicalDimension.Width));
+            p.Y = (int)(p.Y / (viewPanel.Height / pollensImage.Image.PhysicalDimension.Width));
             mousePostion.Text = p.ToString();
         }
 
