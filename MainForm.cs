@@ -41,6 +41,7 @@ namespace KlasyfikacjaMiodu
             topMenuEdit = new TopMenuEdit(this, editMenu, undoMenuItem, redoMenuItem);
             topMenuView = new TopMenuView(showPanelMenuItem, centerImageMenuItem, sidePanel, viewPanel);
             viewPanel.MouseMove += viewPanel_MouseMove;
+            viewPanel.MouseLeave += viewPanel_MouseLeave;
         }
 
         private void PrepareSidePanel()
@@ -87,6 +88,11 @@ namespace KlasyfikacjaMiodu
             Point p = System.Windows.Forms.Cursor.Position;
             Point pf = new Point(p.X - Left, p.Y - Top);
             mousePostion.Text = pf.ToString();
+        }
+
+        void viewPanel_MouseLeave(object sender, EventArgs e)
+        {
+            mousePostion.Text = "";
         }
 
         public delegate void MouseMovedEvent();

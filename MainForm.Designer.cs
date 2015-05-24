@@ -389,9 +389,8 @@ namespace KlasyfikacjaMiodu
             this.mousePostion.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.mousePostion.Location = new System.Drawing.Point(704, 9);
             this.mousePostion.Name = "mousePostion";
-            this.mousePostion.Size = new System.Drawing.Size(77, 13);
+            this.mousePostion.Size = new System.Drawing.Size(0, 13);
             this.mousePostion.TabIndex = 3;
-            this.mousePostion.Text = "mouse position";
             // 
             // blockView
             // 
