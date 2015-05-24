@@ -81,6 +81,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         private void Marker_Click(object sender, MouseEventArgs e)
         {
+           
             MarkerPictureBox box = sender as MarkerPictureBox;
             if (box != null && e.Button == MouseButtons.Right)
             {
@@ -136,6 +137,9 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         private void MarkersPanel_Click(object sender, MouseEventArgs e)
         {
+            if (!Session.Context.EditMode)
+                return;
+
             HoneyType selectedHoneyType = Session.Context.SelectedHoneyType;
             if (selectedHoneyType != null)
             {
@@ -163,9 +167,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseEnter(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             ((MarkerPictureBox)sender).Focus();
         }
 
@@ -175,31 +176,36 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseMove(object sender, MouseEventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
 
-            mouseMovedOnMarker = true;
+            if (e.Button != MouseButtons.Left)
+                mouseMovedOnMarker = true;
+
             MarkerPictureBox box = sender as MarkerPictureBox;
             if (box != null && mouseDown)
             {
-                float scale = Session.Context.Scale;
+                mouseMovedOnMarker = true;
+              
+                if (box != null && mouseDown)
+                {
+                    float scale = Session.Context.Scale;
 
-                int x = (int)(imagePositionX - (mouseX - Cursor.Position.X) / scale);
-                int y = (int)(imagePositionY - (mouseY - Cursor.Position.Y) / scale);
+                    int x = (int) (imagePositionX - (mouseX - Cursor.Position.X)/scale);
+                    int y = (int) (imagePositionY - (mouseY - Cursor.Position.Y)/scale);
 
-                x = Math.Max(-box.Marker.Size / 6, x);
-                x = (int) Math.Min(image.Image.PhysicalDimension.Width + box.Marker.Size / 6f, x);
+                    x = Math.Max(-box.Marker.Size/6, x);
+                    x = (int) Math.Min(image.Image.PhysicalDimension.Width + box.Marker.Size/6f, x);
 
-                y = Math.Max(-box.Marker.Size / 6, y);
-                y = (int) Math.Min(image.Image.PhysicalDimension.Height + box.Marker.Size / 6f, y);
+                    y = Math.Max(-box.Marker.Size/6, y);
+                    y = (int) Math.Min(image.Image.PhysicalDimension.Height + box.Marker.Size/6f, y);
 
-                box.Marker.X = x;
-                box.Marker.Y = y;
+                    box.Marker.X = x;
+                    box.Marker.Y = y;
 
-                box.Location = new Point(1, 1);
-                box.Update();
+                    box.Location = new Point(1, 1);
+                    box.Update();
 
-                image.Refresh();
+                    image.Refresh();
+                }
             }
         }
 
@@ -209,7 +215,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Session.Context.BlockedView)
+            if (!Session.Context.EditMode)
                 return;
 
             mouseDown = true;
@@ -230,9 +236,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseUp(object sender, MouseEventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             mouseDown = false;
             mouseMovedOnMarker = false;
         }
@@ -243,7 +246,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (Session.Context.BlockedView)
+            if (!Session.Context.EditMode)
                 return;
 
             MarkerPictureBox box = sender as MarkerPictureBox;
@@ -253,6 +256,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 {
                     box.Marker.Size = (int)(box.Marker.Size * 1.05f);
                     box.Marker.Size++;
+                    if (box.Marker.Size > Math.Min(image.Image.PhysicalDimension.Width, image.Image.PhysicalDimension.Height) / 3)
+                        box.Marker.Size = (int) (Math.Min(image.Image.PhysicalDimension.Width, image.Image.PhysicalDimension.Height) / 3);
                 }
                 else
                 {

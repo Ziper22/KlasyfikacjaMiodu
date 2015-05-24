@@ -34,18 +34,12 @@ namespace KlasyfikacjaMiodu.TopMenu
 
         private void CenterImageOnClick(object sender, EventArgs eventArgs)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             Form form = viewPanel.FindForm();
             viewPanel.Location = new Point(form.ClientSize.Width / 2 - viewPanel.Width / 2, form.ClientSize.Height / 2 - viewPanel.Height / 2);
         }
 
         void ShowPanel_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             sidePanel.Visible = !sidePanel.Visible;
 
             if (sidePanel.Visible)

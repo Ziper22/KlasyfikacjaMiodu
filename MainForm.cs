@@ -26,22 +26,22 @@ namespace KlasyfikacjaMiodu
         private TopMenuEdit topMenuEdit;
         private TopMenuView topMenuView;
         private SidePanel sidePanel;
-       
+
 
         public MainForm()
         {
             InitializeComponent();
             PrepareSidePanel();
             markersPanel = new MarkersPanel(viewPanel, pollensImage);
-            imagePanel = new ImagePanel(viewPanel, pollensImage);
+            imagePanel = new ImagePanel(viewPanel, pollensImage, this);
             scaleHandler = new ScaleHandler(scale);
             honeyTypeInformer = new HoneyTypeInformer(honeyType);
-            timeCounter = new TimeCounter(workTime);
+            timeCounter = new TimeCounter(workTime, stoperButton);
             topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, loadProjectMenuItem, loadImageMenuItem, quitMenuItem);
             topMenuEdit = new TopMenuEdit(this, editMenu, undoMenuItem, redoMenuItem);
             topMenuView = new TopMenuView(showPanelMenuItem, centerImageMenuItem, sidePanel, viewPanel);
-
-            AddMousePositionEvent();
+            viewPanel.MouseMove += viewPanel_MouseMove;
+            viewPanel.MouseLeave += viewPanel_MouseLeave;
         }
 
         private void PrepareSidePanel()
@@ -52,9 +52,9 @@ namespace KlasyfikacjaMiodu
             sidePanel.Owner = this;
 
             CenterToScreen();
-            Location = new Point(Left - sidePanel.Width/2, Top);
+            Location = new Point(Left - sidePanel.Width / 2, Top);
 
-            sidePanel.Location = new Point(Right,Top);
+            sidePanel.Location = new Point(Right, Top);
             sidePanel.Show();
         }
 
@@ -66,6 +66,14 @@ namespace KlasyfikacjaMiodu
                 cp.ExStyle = cp.ExStyle | 0x2000000;
                 return cp;
             }
+        }
+
+        void viewPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point p = e.Location;
+            p.X = (int)(p.X / (viewPanel.Width / 100.5f));
+            p.Y = (int)(p.Y / (viewPanel.Height / 100.5f));
+            mousePostion.Text = p.ToString();
         }
 
         private void AddMousePositionEvent()
@@ -80,6 +88,11 @@ namespace KlasyfikacjaMiodu
             Point p = System.Windows.Forms.Cursor.Position;
             Point pf = new Point(p.X - Left, p.Y - Top);
             mousePostion.Text = pf.ToString();
+        }
+
+        void viewPanel_MouseLeave(object sender, EventArgs e)
+        {
+            mousePostion.Text = "";
         }
 
         public delegate void MouseMovedEvent();
@@ -112,17 +125,34 @@ namespace KlasyfikacjaMiodu
         {
 
         }
-
-        private void blockView_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Sets application into edit mode.
+        /// </summary>
+        private void editMode_CheckedChanged(object sender, EventArgs e)
         {
-            if (blockView.Checked == true){
-                Session.Context.BlockedView = true;
-                blockView.Text = "Odblokuj widok";
+            if (editMode.Checked)
+            {
+                Session.Context.EditMode = true;
+                timeCounter.StartTimer();
+                this.ChangeMenuStatus(true);
+                sidePanel.Enabled = true;
             }
-            else{
-                Session.Context.BlockedView = false;
-                blockView.Text = "Zablokuj widok";
+            else
+            {
+                Session.Context.EditMode = false;
+                timeCounter.PauseTimer();
+                this.ChangeMenuStatus(false);
+                sidePanel.Enabled = false;
             }
+        }
+        /// <summary>
+        /// Changes "Enabled" property in main menu.
+        /// </summary>
+        private void ChangeMenuStatus(bool status)
+        {
+            fileMenu.Enabled = status;
+            editMenu.Enabled = status;
+            viewMenu.Enabled = status;
         }
     }
 }

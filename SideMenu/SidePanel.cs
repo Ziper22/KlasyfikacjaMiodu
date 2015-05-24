@@ -23,8 +23,22 @@ namespace KlasyfikacjaMiodu.SideMenu
             this.mainForm = mainForm;
             Session.Changed += Session_Changed;
             Session_Changed(Session.Context);
+
             //SizeChanged += SidePanel_SizeChanged;
             mainForm.SizeChanged += mainForm_SizeChanged;
+
+            this.SizeChanged += SidePanel_SizeChanged;
+        }
+
+        public void changeMenuStatus(bool status)
+        {
+            this.editToolStripMenuItem.Enabled = status;
+            this.deleteToolStripMenuItem.Enabled = status;
+            this.addToolStripMenuItem.Enabled = status;
+            this.menuStrip1.Enabled = status;
+        }
+        void SidePanel_SizeChanged(object sender, EventArgs e)
+        {
         }
 
         /// <summary>
@@ -34,12 +48,13 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
             panel1.Focus();
         }
-
+        
         /// <summary>
         ///     Loads modules in side panel for all honey types and selects first one by default
         /// </summary>
         private void Session_Changed(Context context)
         {
+
             panel1.Controls.Clear();
             foreach (HoneyType honey in context.HoneyTypes)
             {
@@ -74,9 +89,6 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
             addEditWindow.OkButtonClicked += HoneyType_AddToContext;
             addEditWindow.ShowDialog();
@@ -98,9 +110,6 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             if (pollenModuleSelector.chosenModule != null)
             {
                 if (pollenModuleSelector.chosenModule.HoneyType.Name == "Zanieczyszczenie")
@@ -121,9 +130,6 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             if (pollenModuleSelector.chosenModule != null)
             {
                 if (pollenModuleSelector.chosenModule.HoneyType.Name == "Zanieczyszczenie")
@@ -162,8 +168,6 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void AlignSidePanel()
         {
-            if (Session.Context.BlockedView)
-                return;
 
             if (panel1.FlowDirection == FlowDirection.LeftToRight) //for horizontal
             {               
@@ -196,9 +200,6 @@ namespace KlasyfikacjaMiodu.SideMenu
         /// </summary>
         private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             panel1.FlowDirection = FlowDirection.TopDown;
             Width = 240;
             Height = 481;
@@ -215,9 +216,6 @@ namespace KlasyfikacjaMiodu.SideMenu
         /// </summary>
         private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             panel1.FlowDirection = FlowDirection.LeftToRight;
             Height = 132;
 

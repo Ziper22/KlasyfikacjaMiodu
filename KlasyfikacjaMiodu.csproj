@@ -136,6 +136,9 @@
     <None Include="Resources\marker128.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\stop.jpg" />
+    <None Include="Resources\start.jpg" />
+    <None Include="Resources\start.bmp" />
     <None Include="Resources\HoneyTypes.txt" />
     <Content Include="Resources\Marker.bmp" />
   </ItemGroup>

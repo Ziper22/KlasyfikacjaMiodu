@@ -45,6 +45,7 @@ namespace KlasyfikacjaMiodu
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.workTimeDesc = new System.Windows.Forms.Label();
             this.workTime = new System.Windows.Forms.Label();
+            this.stoperButton = new System.Windows.Forms.Button();
             this.topMenu = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,7 @@ namespace KlasyfikacjaMiodu
             this.showPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.centerImageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mousePostion = new System.Windows.Forms.Label();
-            this.blockView = new System.Windows.Forms.CheckBox();
+            this.editMode = new System.Windows.Forms.CheckBox();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pollensImage)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -229,11 +230,11 @@ namespace KlasyfikacjaMiodu
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel1.Controls.Add(this.workTimeDesc);
             this.flowLayoutPanel1.Controls.Add(this.workTime);
+            this.flowLayoutPanel1.Controls.Add(this.stoperButton);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(619, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(588, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(165, 32);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(196, 32);
             this.flowLayoutPanel1.TabIndex = 3;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -242,7 +243,7 @@ namespace KlasyfikacjaMiodu
             this.workTimeDesc.AutoSize = true;
             this.workTimeDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.workTimeDesc.Location = new System.Drawing.Point(0, 6);
-            this.workTimeDesc.Margin = new System.Windows.Forms.Padding(0);
+            this.workTimeDesc.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.workTimeDesc.Name = "workTimeDesc";
             this.workTimeDesc.Size = new System.Drawing.Size(91, 20);
             this.workTimeDesc.TabIndex = 0;
@@ -253,11 +254,22 @@ namespace KlasyfikacjaMiodu
             this.workTime.AutoSize = true;
             this.workTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.workTime.Location = new System.Drawing.Point(91, 6);
-            this.workTime.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.workTime.Margin = new System.Windows.Forms.Padding(0, 6, 3, 0);
             this.workTime.Name = "workTime";
             this.workTime.Size = new System.Drawing.Size(71, 20);
             this.workTime.TabIndex = 1;
             this.workTime.Text = "00:00:00";
+            // 
+            // stoperButton
+            // 
+            this.stoperButton.BackgroundImage = global::KlasyfikacjaMiodu.Properties.Resources.stop;
+            this.stoperButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.stoperButton.Location = new System.Drawing.Point(165, 3);
+            this.stoperButton.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.stoperButton.Name = "stoperButton";
+            this.stoperButton.Size = new System.Drawing.Size(28, 28);
+            this.stoperButton.TabIndex = 3;
+            this.stoperButton.UseVisualStyleBackColor = true;
             // 
             // topMenu
             // 
@@ -373,24 +385,28 @@ namespace KlasyfikacjaMiodu
             // 
             // mousePostion
             // 
+            this.mousePostion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.mousePostion.AutoSize = true;
-            this.mousePostion.Location = new System.Drawing.Point(695, 381);
+            this.mousePostion.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.mousePostion.Location = new System.Drawing.Point(704, 9);
             this.mousePostion.Name = "mousePostion";
-            this.mousePostion.Size = new System.Drawing.Size(77, 13);
+            this.mousePostion.Size = new System.Drawing.Size(0, 13);
             this.mousePostion.TabIndex = 3;
-            this.mousePostion.Text = "mouse position";
             // 
             // blockView
             // 
-            this.blockView.AutoSize = true;
-            this.blockView.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.blockView.Location = new System.Drawing.Point(619, 11);
-            this.blockView.Name = "blockView";
-            this.blockView.Size = new System.Drawing.Size(98, 17);
-            this.blockView.TabIndex = 4;
-            this.blockView.Text = "Zablokuj widok";
-            this.blockView.UseVisualStyleBackColor = false;
-            this.blockView.CheckedChanged += new System.EventHandler(this.blockView_CheckedChanged);
+            this.editMode.AutoSize = true;
+            this.editMode.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.editMode.Checked = true;
+            this.editMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.editMode.Location = new System.Drawing.Point(615, 11);
+            this.editMode.Name = "editMode";
+            this.editMode.Size = new System.Drawing.Size(77, 17);
+            this.editMode.TabIndex = 4;
+            this.editMode.Text = "Tryb edycji";
+            this.editMode.UseVisualStyleBackColor = false;
+            this.editMode.CheckedChanged += new System.EventHandler(this.editMode_CheckedChanged);
+            Session.Context.EditMode = true;
             // 
             // MainForm
             // 
@@ -398,7 +414,7 @@ namespace KlasyfikacjaMiodu
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 442);
-            this.Controls.Add(this.blockView);
+            this.Controls.Add(this.editMode);
             this.Controls.Add(this.mousePostion);
             this.Controls.Add(this.topMenu);
             this.Controls.Add(this.bottomPanel);
@@ -460,7 +476,8 @@ namespace KlasyfikacjaMiodu
         private NumericUpDown scale;
         private Label mousePostion;
         private ToolStripMenuItem centerImageMenuItem;
-        private CheckBox blockView;
+        private Button stoperButton;
+        private CheckBox editMode;
     }
 }
 

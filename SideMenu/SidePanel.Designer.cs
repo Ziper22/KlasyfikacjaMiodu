@@ -96,6 +96,7 @@
             this.verticalToolStripMenuItem.Name = "verticalToolStripMenuItem";
             this.verticalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.verticalToolStripMenuItem.Text = "Wyrównaj listę";
+
             this.verticalToolStripMenuItem.Click += new System.EventHandler(this.verticalToolStripMenuItem_Click);
             // 
             // doLewejToolStripMenuItem
@@ -116,7 +117,7 @@
             // 
             this.horizontalToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.horizontalToolStripMenuItem.Name = "horizontalToolStripMenuItem";
-            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.horizontalToolStripMenuItem.Text = "Lista pozioma";
             this.horizontalToolStripMenuItem.Click += new System.EventHandler(this.horizontalToolStripMenuItem_Click);
             // 
