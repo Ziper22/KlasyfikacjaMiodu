@@ -85,9 +85,6 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
             addEditWindow.OkButtonClicked += HoneyType_AddToContext;
             addEditWindow.ShowDialog();
@@ -109,9 +106,6 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             if (pollenModuleSelector.chosenModule != null)
             {
                 HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow(Session.Context.SelectedHoneyType);
@@ -128,9 +122,6 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             if (pollenModuleSelector.chosenModule != null)
             {
                 const string message = "Czy na pewno chcesz usunąć wybrany znacznik?";
@@ -163,9 +154,6 @@ namespace KlasyfikacjaMiodu.SideMenu
         /// </summary>
         private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             panel1.FlowDirection = FlowDirection.TopDown;
             Width = 240;
 
@@ -194,9 +182,6 @@ namespace KlasyfikacjaMiodu.SideMenu
         /// </summary>
         private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             panel1.FlowDirection = FlowDirection.LeftToRight;
             Height = 132;
 

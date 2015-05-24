@@ -126,29 +126,5 @@ namespace KlasyfikacjaMiodu
 
         }
 
-        private void blockView_CheckedChanged(object sender, EventArgs e)
-        {
-            if (blockView.Checked == true)
-            {
-                Session.Context.BlockedView = true;
-                this.changeMenuStatus(false);
-                blockView.Text = "Włącz tryb edycji";
-            }
-            else
-            {
-                Session.Context.BlockedView = false;
-                this.changeMenuStatus(true);
-                blockView.Text = "Wyłącz tryb edycji";
-            }
-        }
-        private void changeMenuStatus(bool status)
-        {
-           fileMenu.Enabled = status;
-           editMenu.Enabled = status;
-           viewMenu.Enabled = status;
-
-           SidePanel.changeMenuStatus(sidePanel, status);
-        }
-
     }
 }

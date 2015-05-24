@@ -163,9 +163,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseEnter(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             ((MarkerPictureBox)sender).Focus();
         }
 
@@ -175,10 +172,11 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseMove(object sender, MouseEventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
 
             if (e.Button != MouseButtons.Left)
+                mouseMovedOnMarker = true;
+            MarkerPictureBox box = sender as MarkerPictureBox;
+            if (box != null && mouseDown)
             {
                 mouseMovedOnMarker = true;
                 MarkerPictureBox box = sender as MarkerPictureBox;
@@ -212,9 +210,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             mouseDown = true;
             mouseMovedOnMarker = false;
             MarkerPictureBox box = sender as MarkerPictureBox;
@@ -233,9 +228,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseUp(object sender, MouseEventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             mouseDown = false;
             mouseMovedOnMarker = false;
         }
@@ -246,9 +238,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             MarkerPictureBox box = sender as MarkerPictureBox;
             if (box != null)
             {

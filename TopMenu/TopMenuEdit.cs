@@ -59,17 +59,11 @@ namespace KlasyfikacjaMiodu.TopMenu
 
         private void Undo_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             Actions.UndoLastAction();
         }
 
         private void Redo_Click(object sender, EventArgs e)
         {
-            if (Session.Context.BlockedView)
-                return;
-
             Actions.RedoLastUndoneAction();
         }
 

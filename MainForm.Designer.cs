@@ -62,7 +62,6 @@ namespace KlasyfikacjaMiodu
             this.showPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.centerImageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mousePostion = new System.Windows.Forms.Label();
-            this.blockView = new System.Windows.Forms.CheckBox();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pollensImage)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -393,18 +392,6 @@ namespace KlasyfikacjaMiodu
             this.mousePostion.Size = new System.Drawing.Size(0, 13);
             this.mousePostion.TabIndex = 3;
             // 
-            // blockView
-            // 
-            this.blockView.AutoSize = true;
-            this.blockView.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.blockView.Location = new System.Drawing.Point(574, 8);
-            this.blockView.Name = "blockView";
-            this.blockView.Size = new System.Drawing.Size(113, 17);
-            this.blockView.TabIndex = 4;
-            this.blockView.Text = "Wyłącz tryb edycji";
-            this.blockView.UseVisualStyleBackColor = false;
-            this.blockView.CheckedChanged += new System.EventHandler(this.blockView_CheckedChanged);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -473,8 +460,11 @@ namespace KlasyfikacjaMiodu
         private NumericUpDown scale;
         private Label mousePostion;
         private ToolStripMenuItem centerImageMenuItem;
+<<<<<<< HEAD
         private CheckBox blockView;
         private Button stoperButton;
+=======
+>>>>>>> parent of 1544f84... Blokada v1
     }
 }
 
