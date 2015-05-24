@@ -223,7 +223,6 @@
             this.checkBox.TabIndex = 19;
             this.checkBox.Text = "Dodaj pyłek do bazy na stałe";
             this.checkBox.UseVisualStyleBackColor = true;
-            this.checkBox.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // HoneyTypeEditWindow
             // 

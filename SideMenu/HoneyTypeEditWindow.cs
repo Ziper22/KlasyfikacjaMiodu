@@ -19,6 +19,9 @@ namespace KlasyfikacjaMiodu.SideMenu
         bool isNameFieldRed = false;
         bool isHoneyNameFieldRed = false;
 
+        /// <summary>
+        /// Constructor for adding new pollen
+        /// </summary>
         public HoneyTypeEditWindow()
         {
             InitializeComponent();
@@ -35,6 +38,9 @@ namespace KlasyfikacjaMiodu.SideMenu
             ShowToolTip();
         }
 
+        /// <summary>
+        /// Constructor for editing existing pollen
+        /// </summary>
         public HoneyTypeEditWindow(HoneyType honeyType)
         {
             InitializeComponent();
@@ -53,128 +59,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             ShowToolTip();
         }
 
-        private void ChooseColorButton_Click(object sender, EventArgs e)
-        {
-            ColorDialog dlg = new ColorDialog();
-
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                bool wasColorAssigned = CheckIfColorWasAssigned(dlg.Color);
-
-                if (wasColorAssigned == true)
-                {
-                    DialogResult result = MessageBox.Show("Ten kolor został już przypisany innemu pyłkowi. Czy chcesz go użyć ponownie?", "Zdublowany kolor", MessageBoxButtons.YesNo);
-
-                    if (result == DialogResult.Yes)
-                    {
-                        specimenPictureBox.BackColor = dlg.Color;
-                    }
-                    else
-                    {
-                        specimenPictureBox.BackColor = Color.Empty;
-                    }
-                }
-                else
-                {
-                    specimenPictureBox.BackColor = dlg.Color;
-                }
-            }
-
-            SwitchOkButton(CheckIfInputControlsAreFilled());
-        }
-
-        /// <summary>
-        /// Checks if color which we are going to choose is already assigned to other pollen
-        /// </summary>
-        /// <returns></returns>
-        private bool CheckIfColorWasAssigned(Color color)
-        {
-            foreach (HoneyType honey in Session.Context.HoneyTypes)
-            {
-                if (color == honey.MarkerColor)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Checks if name (names) which we are going to choose is (are) already assigned to other pollen
-        /// </summary>
-        private bool CheckIfNameWasAssigned(string newName)
-        {
-            foreach (HoneyType honey in Session.Context.HoneyTypes)
-            {
-                if (string.Equals(newName, honey.Name, StringComparison.OrdinalIgnoreCase) || string.Equals(newName, honey.DescriptionName, StringComparison.OrdinalIgnoreCase)) 
-                {
-                    if (string.Equals(newName, honeyType.Name, StringComparison.OrdinalIgnoreCase) == false && string.Equals(newName, honeyType.DescriptionName, StringComparison.OrdinalIgnoreCase) == false) 
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private void SpecimenPictureBox_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                specimenPictureBox.BackColor = Color.Empty;
-
-                SwitchOkButton(CheckIfInputControlsAreFilled());
-            }
-            else if (e.Button == MouseButtons.Left)
-            {
-                ChooseColorButton_Click(sender, e);
-            }
-        }
-
-        private void OkButton_Click(object sender, EventArgs e)
-        {
-            if (isNameFieldRed == false && isHoneyNameFieldRed == false)
-            {
-                honeyType.Name = nameTextBox.Text;
-                honeyType.DescriptionName = honeyNameTextBox.Text;
-                honeyType.MarkerColor = specimenPictureBox.BackColor;
-                honeyType.MinimalPollensPercentageAmount = (float)percentNumericUpDown.Value;
-
-                OnOkButtonClicked();
-                checkBox_CheckedChanged(sender, e);
-
-                this.Close();
-            }
-            else
-            {
-                warningLabel.Visible = true;
-            }
-        }
-
-        protected virtual void OnOkButtonClicked()
-        {
-            if (OkButtonClicked != null)
-                OkButtonClicked(honeyType);
-        }
-
-        private void checkBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox.Checked == true) 
-            {
-                OnCheckBoxChecked();
-            }            
-        }
-
-        protected virtual void OnCheckBoxChecked()
-        {
-            if (CheckBoxChecked != null)
-                CheckBoxChecked();
-        }
-
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        #region Events
 
         private void NameTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -224,6 +109,124 @@ namespace KlasyfikacjaMiodu.SideMenu
             CheckIfInt(percentNumericUpDown);
         }
 
+        private void ChooseColorButton_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                bool wasColorAssigned = CheckIfColorWasAssigned(dlg.Color);
+
+                if (wasColorAssigned == true)
+                {
+                    DialogResult result = MessageBox.Show("Ten kolor został już przypisany innemu pyłkowi. Czy chcesz go użyć ponownie?", "Zdublowany kolor", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        specimenPictureBox.BackColor = dlg.Color;
+                    }
+                    else
+                    {
+                        specimenPictureBox.BackColor = Color.Empty;
+                    }
+                }
+                else
+                {
+                    specimenPictureBox.BackColor = dlg.Color;
+                }
+            }
+
+            SwitchOkButton(CheckIfInputControlsAreFilled());
+        }       
+
+        private void SpecimenPictureBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                specimenPictureBox.BackColor = Color.Empty;
+
+                SwitchOkButton(CheckIfInputControlsAreFilled());
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                ChooseColorButton_Click(sender, e);
+            }
+        }
+
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            if (isNameFieldRed == false && isHoneyNameFieldRed == false)
+            {
+                honeyType.Name = nameTextBox.Text;
+                honeyType.DescriptionName = honeyNameTextBox.Text;
+                honeyType.MarkerColor = specimenPictureBox.BackColor;
+                honeyType.MinimalPollensPercentageAmount = (float)percentNumericUpDown.Value;
+
+                OnOkButtonClicked();
+
+                if (checkBox.Checked == true)
+                    OnCheckBoxChecked();
+
+                this.Close();
+            }
+            else
+            {
+                warningLabel.Visible = true;
+            }
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        #endregion
+
+        protected virtual void OnOkButtonClicked()
+        {
+            if (OkButtonClicked != null)
+                OkButtonClicked(honeyType);
+        }
+        
+        protected virtual void OnCheckBoxChecked()
+        {
+            if (CheckBoxChecked != null)
+                CheckBoxChecked();
+        }
+
+        /// <summary>
+        /// Checks if color which we are going to choose is already assigned to other pollen
+        /// </summary>
+        private bool CheckIfColorWasAssigned(Color color)
+        {
+            foreach (HoneyType honey in Session.Context.HoneyTypes)
+            {
+                if (color == honey.MarkerColor)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if name (names) which we are going to choose is (are) already assigned to other pollen
+        /// </summary>
+        private bool CheckIfNameWasAssigned(string newName)
+        {
+            foreach (HoneyType honey in Session.Context.HoneyTypes)
+            {
+                if (string.Equals(newName, honey.Name, StringComparison.OrdinalIgnoreCase) || string.Equals(newName, honey.DescriptionName, StringComparison.OrdinalIgnoreCase))
+                {
+                    if (string.Equals(newName, honeyType.Name, StringComparison.OrdinalIgnoreCase) == false && string.Equals(newName, honeyType.DescriptionName, StringComparison.OrdinalIgnoreCase) == false)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// Checks if all controls in which information must be set are filled
         /// </summary>
@@ -264,13 +267,19 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Doesn't allow to type a space at the beggining of textboxes
+        /// Doesn't allow to type a space at the beggining and two or more spaces at the end of textboxes
         /// </summary>
-        private void CheckIfSpaceWasClicked(Control control)
+        private void CheckIfSpaceWasClicked(TextBox control)
         {
             if (control.Text.StartsWith(" ") == true)  
             {
                 control.Text = control.Text.Remove(0, 1);
+            }
+
+            if (control.Text.EndsWith("  ") == true) 
+            {
+                control.Text = control.Text.Remove(control.Text.Length - 1);
+                control.Select(control.Text.Length, 0);
             }
         }
 
@@ -293,20 +302,15 @@ namespace KlasyfikacjaMiodu.SideMenu
                 {
                     control.Text = control.Text.Remove(control.Text.Length - 1);
 
-                    if (control is TextBox)
-                    {
-                        TextBox temp = (TextBox)control;
-                        temp.Select(temp.Text.Length, 0);
-                    }
-                    else if (control is NumericUpDown)
-                    {
-                        NumericUpDown temp = (NumericUpDown)control;
-                        temp.Select(temp.Text.Length, 0);
-                    }
+                    NumericUpDown temp = (NumericUpDown)control;
+                    temp.Select(temp.Text.Length, 0);
                 }
             }
         }
 
+        /// <summary>
+        /// Assigns tooltips to four controls
+        /// </summary>
         private void ShowToolTip()
         {
             ToolTip toolTip = new ToolTip();
@@ -322,7 +326,6 @@ namespace KlasyfikacjaMiodu.SideMenu
         /// <summary>
         /// Gets a random color
         /// </summary>
-        /// <returns></returns>
         private Color DrawColor()
         {
             Random rnd = new Random();
