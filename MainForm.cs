@@ -72,7 +72,7 @@ namespace KlasyfikacjaMiodu
         {
             Point p = e.Location;
             p.X = (int)(p.X / (viewPanel.Width / pollensImage.Image.PhysicalDimension.Width));
-            p.Y = (int)(p.Y / (viewPanel.Height / pollensImage.Image.PhysicalDimension.Width));
+            p.Y = (int)(p.Y / (viewPanel.Height / pollensImage.Image.PhysicalDimension.Height));
             mousePostion.Text = p.ToString();
         }
 
