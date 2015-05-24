@@ -262,12 +262,13 @@ namespace KlasyfikacjaMiodu
             // 
             // stoperButton
             // 
+            this.stoperButton.BackgroundImage = global::KlasyfikacjaMiodu.Properties.Resources.stop;
+            this.stoperButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.stoperButton.Location = new System.Drawing.Point(165, 3);
             this.stoperButton.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.stoperButton.Name = "stoperButton";
             this.stoperButton.Size = new System.Drawing.Size(28, 28);
             this.stoperButton.TabIndex = 3;
-            this.stoperButton.Text = "|>";
             this.stoperButton.UseVisualStyleBackColor = true;
             // 
             // topMenu

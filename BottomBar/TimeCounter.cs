@@ -42,13 +42,13 @@ namespace KlasyfikacjaMiodu.BottomBar
         private void StartTimer()
         {
             timer.Start();
-            stoperButton.Text = "| |";
+            stoperButton.BackgroundImage = Properties.Resources.start;
         }
 
         private void PauseTimer()
         {
             timer.Stop();
-            stoperButton.Text = "|>";
+            stoperButton.BackgroundImage = Properties.Resources.stop;
         }
 
         private void TimeChanged(Object sender, EventArgs args)
