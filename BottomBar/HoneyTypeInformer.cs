@@ -31,6 +31,16 @@ namespace KlasyfikacjaMiodu.BottomBar
 
             form = honeyTypeLabel.FindForm();
             form.SizeChanged += form_SizeChanged;
+
+            Session.Context.HoneyTypeEdited += Context_HoneyTypeEdited;
+        }
+
+        private void Context_HoneyTypeEdited(HoneyType honeyType)
+        {
+            Dictionary<HoneyType, int> honeyCounter = CountAllMarkers();
+            List<KeyValuePair<HoneyType, int>> sortedHoneyTypes = FindSortedHoneyTypes(honeyCounter);
+
+            SetHoneyTypeLabelText(sortedHoneyTypes);
         }
 
         void form_SizeChanged(object sender, EventArgs e)
