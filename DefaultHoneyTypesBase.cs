@@ -15,8 +15,7 @@ namespace KlasyfikacjaMiodu
     {
         /// <summary>
         /// Author: Arek Mackiewicz,Krzysztof Kalisz<para/>
-        /// All project data and current state is kept as a program Context.
-        /// Every Context realted action as new project, loading new data etc. can by listened with events.
+        /// 
         /// </summary>
         public static List<HoneyType> GetAllHoneyTypesFromFile()
         {
@@ -45,6 +44,22 @@ namespace KlasyfikacjaMiodu
                 }
             }
             return HoneyList;
+        }
+        /// <summary>
+        /// Adds new honey type to DefaultHoneyTypeBase
+        /// </summary>
+        /// <param name="honeyType">HoneyType</param>
+        public static void AddNewHoneyTypeToFile(HoneyType honeyType)
+        {
+            using (StreamWriter writer = new StreamWriter("HoneyTypes.txt",true))
+            {
+                writer.WriteLine(honeyType.Name);
+                writer.WriteLine(honeyType.DescriptionName);
+                writer.WriteLine(honeyType.Name);
+                writer.WriteLine(honeyType.MarkerColor);
+                writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
+                writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
+            }
         }
     }
 }
