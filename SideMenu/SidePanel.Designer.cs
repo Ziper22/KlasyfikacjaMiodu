@@ -34,6 +34,8 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orientationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.doLewejToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.doPrawejToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.horizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
@@ -87,11 +89,28 @@
             // 
             // verticalToolStripMenuItem
             // 
+            this.verticalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.doLewejToolStripMenuItem,
+            this.doPrawejToolStripMenuItem});
             this.verticalToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.verticalToolStripMenuItem.Name = "verticalToolStripMenuItem";
             this.verticalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.verticalToolStripMenuItem.Text = "Wyrównaj";
+            this.verticalToolStripMenuItem.Text = "Wyrównaj listę";
             this.verticalToolStripMenuItem.Click += new System.EventHandler(this.verticalToolStripMenuItem_Click);
+            // 
+            // doLewejToolStripMenuItem
+            // 
+            this.doLewejToolStripMenuItem.Name = "doLewejToolStripMenuItem";
+            this.doLewejToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.doLewejToolStripMenuItem.Text = "Do lewej";
+            this.doLewejToolStripMenuItem.Click += new System.EventHandler(this.toLeftToolStripMenuItem_Click);
+            // 
+            // doPrawejToolStripMenuItem
+            // 
+            this.doPrawejToolStripMenuItem.Name = "doPrawejToolStripMenuItem";
+            this.doPrawejToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.doPrawejToolStripMenuItem.Text = "Do prawej";
+            this.doPrawejToolStripMenuItem.Click += new System.EventHandler(this.toRightToolStripMenuItem_Click);
             // 
             // horizontalToolStripMenuItem
             // 
@@ -145,5 +164,7 @@
         private System.Windows.Forms.ToolStripMenuItem verticalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem horizontalToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel panel1;
+        private System.Windows.Forms.ToolStripMenuItem doLewejToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem doPrawejToolStripMenuItem;
     }
 }

@@ -13,6 +13,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         private readonly Form mainForm;
         private readonly PollenModuleSelector pollenModuleSelector;
         private bool locationChanged;
+        bool alignToRight = true;
 
         public SidePanel(Form mainForm)
         {
@@ -22,12 +23,8 @@ namespace KlasyfikacjaMiodu.SideMenu
             this.mainForm = mainForm;
             Session.Changed += Session_Changed;
             Session_Changed(Session.Context);
-            this.SizeChanged += SidePanel_SizeChanged;
-        }
-
-        void SidePanel_SizeChanged(object sender, EventArgs e)
-        {
-            AlignVerticalPanel();
+            //SizeChanged += SidePanel_SizeChanged;
+            mainForm.SizeChanged += mainForm_SizeChanged;
         }
 
         /// <summary>
@@ -51,7 +48,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             if (panel1.Controls.Count > 0)
             {
-                PollenModule defaultPollenModule = (PollenModule) panel1.Controls[0];
+                PollenModule defaultPollenModule = (PollenModule)panel1.Controls[0];
                 defaultPollenModule.Choose();
                 pollenModuleSelector.chosenModule = defaultPollenModule;
 
@@ -90,7 +87,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             PollenModule pollenModule = new PollenModule(newHoney);
             panel1.Controls.Add(pollenModule);
             pollenModuleSelector.AddListeners(pollenModule);
-            AlignVerticalPanel();
+            RefreshPanel();
             panel1.ScrollControlIntoView(pollenModule);
         }
 
@@ -106,6 +103,10 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             if (pollenModuleSelector.chosenModule != null)
             {
+                if (pollenModuleSelector.chosenModule.HoneyType.Name == "Zanieczyszczenie")
+                {
+                    return;
+                }
                 HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow(Session.Context.SelectedHoneyType);
                 addEditWindow.OkButtonClicked += HoneyType_Edit;
                 addEditWindow.ShowDialog();
@@ -125,6 +126,10 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             if (pollenModuleSelector.chosenModule != null)
             {
+                if (pollenModuleSelector.chosenModule.HoneyType.Name == "Zanieczyszczenie")
+                {
+                    return;
+                }
                 const string message = "Czy na pewno chcesz usunąć wybrany znacznik?";
                 const string title = "Znacznik zostanie usunięty";
 
@@ -150,6 +155,42 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         #region Location&Orientation
 
+        void mainForm_SizeChanged(object sender, EventArgs e)
+        {
+            AlignSidePanel();
+        }
+
+        private void AlignSidePanel()
+        {
+            if (Session.Context.BlockedView)
+                return;
+
+            if (panel1.FlowDirection == FlowDirection.LeftToRight) //for horizontal
+            {               
+                if (Screen.PrimaryScreen.WorkingArea.Bottom - mainForm.Bottom < Height)
+                {
+                    Width = 800;
+                    Location = new Point(mainForm.Left + ((mainForm.Width - Width)/2), mainForm.Bottom - Height);
+                }
+                else
+                {
+                    Width = mainForm.Width;
+                    Location = new Point(mainForm.Left, mainForm.Bottom);
+                }            
+            }
+            else //for vertical
+            {
+                if (alignToRight)
+                {
+                    AlignSidePanelToRight();
+                }
+                else
+                {
+                    AlignSidePanelToLeft();
+                }
+            }
+        }
+
         /// <summary>
         ///     Changes orientation of the side panel to vertical
         /// </summary>
@@ -160,25 +201,13 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             panel1.FlowDirection = FlowDirection.TopDown;
             Width = 240;
+            Height = 481;
 
-            if (Screen.PrimaryScreen.WorkingArea.Width - mainForm.Width < Width)
-            {
-                Height = 481;
-                CenterMainForm();
-                Location = new Point(mainForm.Right - Width, (mainForm.Top + (mainForm.Height - Height) / 2));
-            }
-            else
-            {
-                Height = mainForm.Height;
-
-                mainForm.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - (mainForm.Width + Width)) / 2,
-                    (Screen.PrimaryScreen.WorkingArea.Height - mainForm.Height) / 2);
-                Location = new Point(mainForm.Right, mainForm.Top);
-            }
-
-            verticalToolStripMenuItem.Text = "Wyrównaj";
+            verticalToolStripMenuItem.Text = "Wyrównaj listę";
             horizontalToolStripMenuItem.Text = "Lista pozioma";
-            ChangeMenuItemsOrder();    
+            SwapMenuItems();
+
+            AlignSidePanel();
         }
 
         /// <summary>
@@ -192,66 +221,88 @@ namespace KlasyfikacjaMiodu.SideMenu
             panel1.FlowDirection = FlowDirection.LeftToRight;
             Height = 132;
 
-            if (Screen.PrimaryScreen.WorkingArea.Height - mainForm.Height < Height)
+            if (Screen.PrimaryScreen.WorkingArea.Bottom - mainForm.Bottom < Height)
             {
                 Width = 800;
-                CenterMainForm();
-                Location = new Point(mainForm.Left + ((mainForm.Width - Width) / 2), mainForm.Bottom - Height - 40);
+                Location = new Point(mainForm.Left + ((mainForm.Width - Width) / 2), mainForm.Bottom - Height);
             }
             else
             {
                 Width = mainForm.Width;
 
-                mainForm.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - mainForm.Width) / 2,
-                    (Screen.PrimaryScreen.WorkingArea.Height - (mainForm.Height + Height)) / 2);
                 Location = new Point(mainForm.Left, mainForm.Bottom);
             }
-            AlignVerticalPanel();
 
-            //do poprawy
+            RefreshPanel();
+
             verticalToolStripMenuItem.Text = "Lista pionowa";
-            horizontalToolStripMenuItem.Text = "Wyrównaj";
-            ChangeMenuItemsOrder();
+            horizontalToolStripMenuItem.Text = "Wyrównaj listę";
+            SwapMenuItems();
+
+            AlignSidePanel();
+        }
+
+        private void AlignSidePanelToLeft()
+        {
+            alignToRight = false;
+           
+                if (Screen.PrimaryScreen.WorkingArea.Left + mainForm.Left < Width)
+                {
+                    Location = new Point(mainForm.Left, mainForm.Top + (mainForm.Height - Height) / 2);
+                }
+                else
+                {
+                    Location = new Point(mainForm.Left - Width, mainForm.Top);
+                }
+        }
+
+        private void AlignSidePanelToRight()
+        {
+            alignToRight = true;
+            
+                if (Screen.PrimaryScreen.WorkingArea.Right - mainForm.Right < Width)
+                {
+                    Location = new Point(mainForm.Right - Width, (mainForm.Top + (mainForm.Height - Height) / 2));
+                }
+                else
+                {
+                    Location = new Point(mainForm.Right, mainForm.Top);
+                }
         }
 
         ///<summary>
-        /// Changes order of "Orientation" menu toolstrip items
+        /// Changes order of "Orientation" menu toolstrip items so the "Align" item is always first
         /// </summary>
-        private void ChangeMenuItemsOrder()
+        private void SwapMenuItems()
         {
-            ToolStripItem tmpItem = orientationToolStripMenuItem.DropDownItems[0]; 
+            ToolStripItem tmpItem = orientationToolStripMenuItem.DropDownItems[0];
 
-            if (tmpItem.Text!="Wyrównaj")
+            if (tmpItem.Text != "Wyrównaj listę")
             {
                 orientationToolStripMenuItem.DropDownItems.RemoveAt(0);
-                orientationToolStripMenuItem.DropDownItems.Add(tmpItem);  
-            }         
-        }
-
-        /// <summary>
-        ///     Centers main form if it isn't maximized
-        /// </summary>
-        private void CenterMainForm()
-        {
-            if (mainForm.Size != mainForm.MaximumSize)
-            {
-                mainForm.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - mainForm.Width) / 2,
-                    (Screen.PrimaryScreen.WorkingArea.Height - mainForm.Height) / 2);
+                orientationToolStripMenuItem.DropDownItems.Add(tmpItem);
             }
         }
 
-        /// <summary>
-        ///     Scrolls panel to the last pollen module
-        /// </summary>
-        private void AlignVerticalPanel()
+        private void RefreshPanel()
         {
             if (panel1.FlowDirection == FlowDirection.LeftToRight)
             {
                 panel1.FlowDirection = FlowDirection.TopDown;
                 panel1.FlowDirection = FlowDirection.LeftToRight;
-                //int pollenModulesNumber = panel1.Controls.Count;
-                //panel1.ScrollControlIntoView(panel1.Controls[pollenModulesNumber - 1]);
             }
+        }
+
+        private void toLeftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alignToRight = false;
+            AlignSidePanel();
+        }
+
+        private void toRightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alignToRight = true;
+            AlignSidePanel();
         }
         #endregion
     }
