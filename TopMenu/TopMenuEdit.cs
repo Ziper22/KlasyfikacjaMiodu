@@ -41,6 +41,9 @@ namespace KlasyfikacjaMiodu.TopMenu
         /// </summary>
         private void Form_KeyDown(object sender, KeyEventArgs e)
         {
+            if (Session.Context.BlockedView)
+                return;
+
             if (e.Control && e.KeyCode == Keys.Z)
             {
                 Actions.UndoLastAction();

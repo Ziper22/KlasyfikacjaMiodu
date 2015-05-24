@@ -399,9 +399,9 @@ namespace KlasyfikacjaMiodu
             this.blockView.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.blockView.Location = new System.Drawing.Point(574, 8);
             this.blockView.Name = "blockView";
-            this.blockView.Size = new System.Drawing.Size(98, 17);
+            this.blockView.Size = new System.Drawing.Size(113, 17);
             this.blockView.TabIndex = 4;
-            this.blockView.Text = "Zablokuj widok";
+            this.blockView.Text = "Wyłącz tryb edycji";
             this.blockView.UseVisualStyleBackColor = false;
             this.blockView.CheckedChanged += new System.EventHandler(this.blockView_CheckedChanged);
             // 

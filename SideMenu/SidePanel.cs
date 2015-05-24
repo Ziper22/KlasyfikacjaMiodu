@@ -25,6 +25,13 @@ namespace KlasyfikacjaMiodu.SideMenu
             this.SizeChanged += SidePanel_SizeChanged;
         }
 
+        public static void changeMenuStatus(SidePanel sidePanel, bool status)
+        {
+            sidePanel.editToolStripMenuItem.Enabled = status;
+            sidePanel.deleteToolStripMenuItem.Enabled = status;
+            sidePanel.addToolStripMenuItem.Enabled = status;
+            sidePanel.menuStrip1.Enabled = status;
+        }
         void SidePanel_SizeChanged(object sender, EventArgs e)
         {
             AlignVerticalPanel();
@@ -37,12 +44,13 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
             panel1.Focus();
         }
-
+        
         /// <summary>
         ///     Loads modules in side panel for all honey types and selects first one by default
         /// </summary>
         private void Session_Changed(Context context)
         {
+
             panel1.Controls.Clear();
             foreach (HoneyType honey in context.HoneyTypes)
             {

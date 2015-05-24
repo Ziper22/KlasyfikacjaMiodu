@@ -125,13 +125,24 @@ namespace KlasyfikacjaMiodu
             if (blockView.Checked == true)
             {
                 Session.Context.BlockedView = true;
-                blockView.Text = "Odblokuj widok";
+                this.changeMenuStatus(false);
+                blockView.Text = "Włącz tryb edycji";
             }
             else
             {
                 Session.Context.BlockedView = false;
-                blockView.Text = "Zablokuj widok";
+                this.changeMenuStatus(true);
+                blockView.Text = "Wyłącz tryb edycji";
             }
         }
+        private void changeMenuStatus(bool status)
+        {
+           fileMenu.Enabled = status;
+           editMenu.Enabled = status;
+           viewMenu.Enabled = status;
+
+           SidePanel.changeMenuStatus(sidePanel, status);
+        }
+
     }
 }
