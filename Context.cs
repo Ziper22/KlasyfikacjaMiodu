@@ -52,6 +52,7 @@ namespace KlasyfikacjaMiodu
         private List<Marker> markers = new List<Marker>();
         private HoneyType selectedHoneyType;
         private Image image;
+        private bool editMode;
 
         public Context(bool useDefaultHoneyTypes)
         {
@@ -105,6 +106,11 @@ namespace KlasyfikacjaMiodu
                 selectedHoneyType = value;
                 OnHoneyTypeSelected();
             }
+        }
+        public bool EditMode
+        {
+            get { return editMode; }
+            set { editMode = value; }
         }
 
         public IList<Marker> Markers

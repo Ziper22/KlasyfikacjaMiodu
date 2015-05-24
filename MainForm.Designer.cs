@@ -62,6 +62,7 @@ namespace KlasyfikacjaMiodu
             this.showPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.centerImageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mousePostion = new System.Windows.Forms.Label();
+            this.editMode = new System.Windows.Forms.CheckBox();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pollensImage)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -392,14 +393,29 @@ namespace KlasyfikacjaMiodu
             this.mousePostion.Size = new System.Drawing.Size(0, 13);
             this.mousePostion.TabIndex = 3;
             // 
+            // blockView
+            // 
+            this.editMode.AutoSize = true;
+            this.editMode.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.editMode.Checked = true;
+            this.editMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.editMode.Location = new System.Drawing.Point(615, 11);
+            this.editMode.Name = "editMode";
+            this.editMode.Size = new System.Drawing.Size(77, 17);
+            this.editMode.TabIndex = 4;
+            this.editMode.Text = "Tryb edycji";
+            this.editMode.UseVisualStyleBackColor = false;
+            this.editMode.CheckedChanged += new System.EventHandler(this.editMode_CheckedChanged);
+            Session.Context.EditMode = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 442);
+            this.Controls.Add(this.editMode);
             this.Controls.Add(this.mousePostion);
-            this.Controls.Add(this.blockView);
             this.Controls.Add(this.topMenu);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.viewPanel);
@@ -460,11 +476,8 @@ namespace KlasyfikacjaMiodu
         private NumericUpDown scale;
         private Label mousePostion;
         private ToolStripMenuItem centerImageMenuItem;
-<<<<<<< HEAD
-        private CheckBox blockView;
         private Button stoperButton;
-=======
->>>>>>> parent of 1544f84... Blokada v1
+        private CheckBox editMode;
     }
 }
 

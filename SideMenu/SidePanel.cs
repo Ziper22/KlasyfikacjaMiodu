@@ -25,12 +25,12 @@ namespace KlasyfikacjaMiodu.SideMenu
             this.SizeChanged += SidePanel_SizeChanged;
         }
 
-        public static void changeMenuStatus(SidePanel sidePanel, bool status)
+        public void changeMenuStatus(bool status)
         {
-            sidePanel.editToolStripMenuItem.Enabled = status;
-            sidePanel.deleteToolStripMenuItem.Enabled = status;
-            sidePanel.addToolStripMenuItem.Enabled = status;
-            sidePanel.menuStrip1.Enabled = status;
+            this.editToolStripMenuItem.Enabled = status;
+            this.deleteToolStripMenuItem.Enabled = status;
+            this.addToolStripMenuItem.Enabled = status;
+            this.menuStrip1.Enabled = status;
         }
         void SidePanel_SizeChanged(object sender, EventArgs e)
         {

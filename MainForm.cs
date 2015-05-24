@@ -126,5 +126,28 @@ namespace KlasyfikacjaMiodu
 
         }
 
+        private void editMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (editMode.Checked)
+            {
+                Session.Context.EditMode = true;
+                timeCounter.StartTimer();
+                this.changeMenuStatus(true);
+                sidePanel.Enabled = true;
+            }
+            else
+            {
+                Session.Context.EditMode = false;
+                timeCounter.PauseTimer();
+                this.changeMenuStatus(false);
+                sidePanel.Enabled = false;
+            }
+        }
+        private void changeMenuStatus(bool status)
+        {
+            fileMenu.Enabled = status;
+            editMenu.Enabled = status;
+            viewMenu.Enabled = status;
+        }
     }
 }

@@ -81,6 +81,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         private void Marker_Click(object sender, MouseEventArgs e)
         {
+           
             MarkerPictureBox box = sender as MarkerPictureBox;
             if (box != null && e.Button == MouseButtons.Right)
             {
@@ -136,6 +137,9 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         private void MarkersPanel_Click(object sender, MouseEventArgs e)
         {
+            if (!Session.Context.EditMode)
+                return;
+
             HoneyType selectedHoneyType = Session.Context.SelectedHoneyType;
             if (selectedHoneyType != null)
             {
@@ -175,11 +179,12 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
             if (e.Button != MouseButtons.Left)
                 mouseMovedOnMarker = true;
+
             MarkerPictureBox box = sender as MarkerPictureBox;
             if (box != null && mouseDown)
             {
                 mouseMovedOnMarker = true;
-                MarkerPictureBox box = sender as MarkerPictureBox;
+              
                 if (box != null && mouseDown)
                 {
                     float scale = Session.Context.Scale;
@@ -210,6 +215,9 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseDown(object sender, MouseEventArgs e)
         {
+            if (!Session.Context.EditMode)
+                return;
+
             mouseDown = true;
             mouseMovedOnMarker = false;
             MarkerPictureBox box = sender as MarkerPictureBox;
@@ -238,6 +246,9 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseWheel(object sender, MouseEventArgs e)
         {
+            if (!Session.Context.EditMode)
+                return;
+
             MarkerPictureBox box = sender as MarkerPictureBox;
             if (box != null)
             {
