@@ -393,12 +393,10 @@ namespace KlasyfikacjaMiodu
             this.mousePostion.Size = new System.Drawing.Size(0, 13);
             this.mousePostion.TabIndex = 3;
             // 
-            // blockView
+            // editMode
             // 
             this.editMode.AutoSize = true;
             this.editMode.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.editMode.Checked = true;
-            this.editMode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.editMode.Location = new System.Drawing.Point(615, 11);
             this.editMode.Name = "editMode";
             this.editMode.Size = new System.Drawing.Size(77, 17);
@@ -406,7 +404,6 @@ namespace KlasyfikacjaMiodu
             this.editMode.Text = "Tryb edycji";
             this.editMode.UseVisualStyleBackColor = false;
             this.editMode.CheckedChanged += new System.EventHandler(this.editMode_CheckedChanged);
-            Session.Context.EditMode = true;
             // 
             // MainForm
             // 

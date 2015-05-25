@@ -37,7 +37,7 @@ namespace KlasyfikacjaMiodu
             scaleHandler = new ScaleHandler(scale);
             honeyTypeInformer = new HoneyTypeInformer(honeyType);
             timeCounter = new TimeCounter(workTime, stoperButton);
-            topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, loadProjectMenuItem, loadImageMenuItem, quitMenuItem);
+            topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, loadProjectMenuItem, loadImageMenuItem, quitMenuItem, this);
             topMenuEdit = new TopMenuEdit(this, editMenu, undoMenuItem, redoMenuItem);
             topMenuView = new TopMenuView(showPanelMenuItem, centerImageMenuItem, sidePanel, viewPanel);
             viewPanel.MouseMove += viewPanel_MouseMove;

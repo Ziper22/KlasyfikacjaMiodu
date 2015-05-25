@@ -17,22 +17,22 @@ namespace KlasyfikacjaMiodu.TopMenu
     /// </summary>
     public class TopMenuFile
     {
-        BinaryFormatter formatter = new BinaryFormatter(); // potrzebne do serializacji
-
         private ToolStripMenuItem newProject;
         private ToolStripMenuItem saveProject;
         private ToolStripMenuItem loadProject;
         private ToolStripMenuItem loadImage;
         private ToolStripMenuItem quit;
+        private MainForm mainForm;
 
         public TopMenuFile(ToolStripMenuItem newProject, ToolStripMenuItem saveProject,
-           ToolStripMenuItem loadProject, ToolStripMenuItem loadImage, ToolStripMenuItem quit)
+           ToolStripMenuItem loadProject, ToolStripMenuItem loadImage, ToolStripMenuItem quit, MainForm mainForm)
         {
             this.newProject = newProject;
             this.saveProject = saveProject;
             this.loadProject = loadProject;
             this.loadImage = loadImage;
             this.quit = quit;
+            this.mainForm = mainForm;
 
             newProject.Click += NewProject_Click;
             saveProject.Click += SaveProject_Click;
@@ -44,6 +44,8 @@ namespace KlasyfikacjaMiodu.TopMenu
         private void NewProject_Click(object sender, EventArgs e)
         {
             Session.NewDefault();
+            Session.Context.Scale = 0.57F;
+            RefreshHeaderOfForm("Unknown");
         }
 
         private void SaveProject_Click(object sender, EventArgs e)
@@ -56,8 +58,8 @@ namespace KlasyfikacjaMiodu.TopMenu
                 {
                     try
                     {
-                        serializer.SerializeImage(sfd);
                         serializer.Serialize(sfd);
+                        RefreshHeaderOfForm(sfd.FileName);
                     }
                     catch (Exception ex)
                     {
@@ -79,8 +81,8 @@ namespace KlasyfikacjaMiodu.TopMenu
                     try
                     {
                         Session.NewClear();
-                        serializer.DeserializeImage(ofd);
                         serializer.Deserialize(ofd);
+                        RefreshHeaderOfForm(ofd.FileName);
                     }
                     catch (Exception ex)
                     {
@@ -88,7 +90,7 @@ namespace KlasyfikacjaMiodu.TopMenu
                     }
                 }
             }
-            
+            Session.Context.Scale = 0.57F;
         }
 
         private void LoadImage_Click(object sender, EventArgs e)
@@ -99,8 +101,16 @@ namespace KlasyfikacjaMiodu.TopMenu
                 ofd.Filter = "Image Files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    bmp = new Bitmap(ofd.FileName);
-                    Session.Context.Image = (Image)bmp;
+                    try
+                    {
+                        bmp = new Bitmap(ofd.FileName);
+                        Session.Context.Image = (Image)bmp;
+                        Session.Context.Scale = 0.57F;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -108,6 +118,12 @@ namespace KlasyfikacjaMiodu.TopMenu
         private void Quit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void RefreshHeaderOfForm(string projectPath)
+        {
+            string projectName = Path.GetFileNameWithoutExtension(projectPath);
+            mainForm.Text = "Klasyfikacja Miodu - [" + projectName + "]";
         }
     }
 }

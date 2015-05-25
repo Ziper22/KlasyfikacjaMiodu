@@ -29,25 +29,10 @@ namespace KlasyfikacjaMiodu.Serialization
 
         public void Serialize(SaveFileDialog sfd)
         {
-            honeyTypeStringList = honeyTypeSerializer.Serialize(Session.Context);
-            markerStringList = markerSerializer.Serialize(Session.Context);
-
-                using (StreamWriter sw = new StreamWriter(sfd.FileName))
-                {
-                    sw.WriteLine("===--- HONEY TYPES ---===");
-                    for (int i = 0; i < honeyTypeStringList.Count; i++)
-                        sw.WriteLine("HoneyType {0} ---> {1}\r\n", i + 1, honeyTypeStringList[i]);
-
-                    sw.WriteLine("===--- MARKERS ---===");
-                    for (int i = 0; i < markerStringList.Count; i++)
-                        sw.WriteLine("Marker {0} ---> {1}\r\n", i + 1, markerStringList[i]);
-
-                    sw.WriteLine("===--- TIME ---===");
-                    sw.WriteLine("Timer:" + TimeSerializer.Serialize());
-                
-                }
+            SerializeImage(sfd);
+            SerializeTxt(sfd);
         }
-        public void SerializeImage(SaveFileDialog sfd)
+        private void SerializeImage(SaveFileDialog sfd)
         {
             string path = Path.Combine(Path.GetDirectoryName(sfd.FileName), Path.GetFileNameWithoutExtension(sfd.FileName)) + ".jpg";
             using (MemoryStream memory = new MemoryStream())
@@ -60,11 +45,52 @@ namespace KlasyfikacjaMiodu.Serialization
                 }
             }
         }
+        private void SerializeTxt(SaveFileDialog sfd)
+        {
+            honeyTypeStringList = honeyTypeSerializer.Serialize(Session.Context);
+            markerStringList = markerSerializer.Serialize(Session.Context);
+
+            using (StreamWriter sw = new StreamWriter(sfd.FileName))
+            {
+                sw.WriteLine("===--- HONEY TYPES ---===");
+                for (int i = 0; i < honeyTypeStringList.Count; i++)
+                    sw.WriteLine("HoneyType {0} ---> {1}\r\n", i + 1, honeyTypeStringList[i]);
+
+                sw.WriteLine("===--- MARKERS ---===");
+                for (int i = 0; i < markerStringList.Count; i++)
+                    sw.WriteLine("Marker {0} ---> {1}\r\n", i + 1, markerStringList[i]);
+
+                sw.WriteLine("===--- TIME ---===");
+                sw.WriteLine("Timer:" + TimeSerializer.Serialize());
+            }
+        }
 
         public Context Deserialize(OpenFileDialog ofd)
         {
+            DeserializeImage(ofd);
+            Context context = DeserializeTxt(ofd);
+
+            return context;
+        }
+        private void DeserializeImage(OpenFileDialog ofd)
+        {
+            Image img;
+            string imagePath = Path.Combine(Path.GetDirectoryName(ofd.FileName), Path.GetFileNameWithoutExtension(ofd.FileName)) + ".jpg";
+            if (File.Exists(imagePath))
+            {
+                using (var bmpTemp = new Bitmap(imagePath))
+                {
+                    img = new Bitmap(bmpTemp);
+                }
+                Session.Context.Image = img;
+             }
+
+        }
+        private Context DeserializeTxt(OpenFileDialog ofd)
+        {
             Marker marker;
             Context context = Session.Context;
+
             using (StreamReader sr = File.OpenText(ofd.FileName))
             {
                 string line = String.Empty;
@@ -87,21 +113,6 @@ namespace KlasyfikacjaMiodu.Serialization
             }
 
             return context;
-        }
-
-        public void DeserializeImage(OpenFileDialog ofd)
-        {
-            Image img;
-            string imagePath = Path.Combine(Path.GetDirectoryName(ofd.FileName), Path.GetFileNameWithoutExtension(ofd.FileName)) + ".jpg";
-            if (File.Exists(imagePath))
-            {
-                using (var bmpTemp = new Bitmap(imagePath))
-                {
-                    img = new Bitmap(bmpTemp);
-                }
-                Session.Context.Image = img;
-             }
-
         }
     }
 }
