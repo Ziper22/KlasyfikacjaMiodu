@@ -60,7 +60,8 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             MarkerColor.BackColor = honeyType.MarkerColor;
             HoneyName.Text = honeyType.Name;
-            PollenNumber.Text = "pyłków: " + Number;
+            if (honeyType.Dirt) PollenNumber.Text = "ilość: " + Number;
+            else PollenNumber.Text = "pyłków: " + Number;
             PollenPercentage.Text = Percentage + "%";
         }
 
