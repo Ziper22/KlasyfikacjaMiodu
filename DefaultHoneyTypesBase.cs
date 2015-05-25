@@ -66,7 +66,6 @@ namespace KlasyfikacjaMiodu
                 writer.WriteLine(honeyType.Name);
                 writer.WriteLine(honeyType.DescriptionName);
                 writer.WriteLine(honeyType.Name);
-                writer.WriteLine(honeyType.MarkerColor);
                 writer.WriteLine(honeyType.MarkerColor.Name);
                 writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
                 writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
