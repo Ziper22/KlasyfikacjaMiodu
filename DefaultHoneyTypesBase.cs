@@ -57,7 +57,6 @@ namespace KlasyfikacjaMiodu
         /// <param name="honeyType">HoneyType</param>
         public static void AddNewHoneyTypeToFile(HoneyType honeyType)
         {
-            using (StreamWriter writer = new StreamWriter("HoneyTypes.txt",true))
             if (!File.Exists("HoneyTypes.txt"))
                 File.WriteAllText("HoneyTypes.txt", Properties.Resources.HoneyTypes);
 
