@@ -2,8 +2,8 @@ Zanieczyszczenie
 z
 z
 Gray
-200
-200
+200000
+200000
 Akacja
 Akacjowy
 Akacjowo
