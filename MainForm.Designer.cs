@@ -403,6 +403,7 @@ namespace KlasyfikacjaMiodu
             this.editMode.TabIndex = 4;
             this.editMode.Text = "Tryb edycji";
             this.editMode.UseVisualStyleBackColor = false;
+            this.editMode.Checked = true;
             this.editMode.CheckedChanged += new System.EventHandler(this.editMode_CheckedChanged);
             // 
             // MainForm
