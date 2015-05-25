@@ -30,6 +30,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             this.SizeChanged += SidePanel_SizeChanged;
         }
 
+        #region MainMethods
         public void changeMenuStatus(bool status)
         {
             this.editToolStripMenuItem.Enabled = status;
@@ -60,15 +61,21 @@ namespace KlasyfikacjaMiodu.SideMenu
             {
                 HoneyType_Add(honey);
             }
-
-            if (panel1.Controls.Count > 0)
+            
+            if (panel1.Controls.Count > 1)
             {
-                PollenModule defaultPollenModule = (PollenModule)panel1.Controls[0];
+                PollenModule dirtPollenModule = (PollenModule)panel1.Controls[0];
+                dirtPollenModule.HoneyType.Dirt = true;
+                dirtPollenModule.HidePercentage();
+
+                PollenModule defaultPollenModule = (PollenModule)panel1.Controls[1];
                 defaultPollenModule.Choose();
                 pollenModuleSelector.chosenModule = defaultPollenModule;
 
-                HoneyType defaultHoneyType = context.HoneyTypes[0];
+                HoneyType defaultHoneyType = context.HoneyTypes[1];
                 Session.Context.SelectedHoneyType = defaultHoneyType;
+
+                panel1.VerticalScroll.Value = 1;
             }
 
             Session.Context.HoneyTypeAdded += HoneyType_Add;
@@ -84,6 +91,8 @@ namespace KlasyfikacjaMiodu.SideMenu
             e.Cancel = true;
             Hide();
         }
+
+        #endregion
 
         #region AddEditDelete
 
@@ -103,9 +112,13 @@ namespace KlasyfikacjaMiodu.SideMenu
             panel1.ScrollControlIntoView(pollenModule);
         }
 
-        private void HoneyType_AddToContext(HoneyType newHoney)
+        private void HoneyType_AddToContext(HoneyType newHoney, bool persistent)
         {
             Session.Context.AddHoneyType(newHoney);
+            if (persistent)
+            {
+                DefaultHoneyTypesBase.AddNewHoneyTypeToFile(newHoney);   
+            }
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -122,7 +135,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
-        private void HoneyType_Edit(HoneyType honeyType)
+        private void HoneyType_Edit(HoneyType honeyType,bool persistent)
         {
             pollenModuleSelector.chosenModule.Edit(honeyType);
             Session.Context.EditedHoneyType(honeyType);

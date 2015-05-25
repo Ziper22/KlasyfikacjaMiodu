@@ -94,7 +94,14 @@ namespace KlasyfikacjaMiodu.SideMenu
         private void ComputeMarkerNumber()
         {
             PollenNumber.Text = "pyłków: " + Number;
-            int allMarkers = Session.Context.Markers.Count;
+            int allMarkers = 0;
+            foreach (Marker marker in Session.Context.Markers)
+            {
+                if (!marker.HoneyType.Dirt)
+                {
+                    allMarkers++;
+                }
+            }
             if (allMarkers > 0)
             {
                 Percentage = Number*100f/allMarkers;
@@ -139,6 +146,11 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
             chosen = false;
             BackColor = Color.Empty;
+        }
+
+        public void HidePercentage()
+        {
+            PollenPercentage.Visible = false;
         }
     }
 }

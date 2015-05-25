@@ -19,6 +19,7 @@ namespace KlasyfikacjaMiodu
         public string DescriptionName { get; set; }
         public Color MarkerColor { get; set; }
         public float MinimalPollensPercentageAmount { get; set; }
+        public bool Dirt { get; set; }
 
         public HoneyType()
         {
@@ -32,6 +33,7 @@ namespace KlasyfikacjaMiodu
             DescriptionName = descriptionName;
             MarkerColor = markerColor;
             MinimalPollensPercentageAmount = minimalPollensPercentageAmount;
+            Dirt = false;
         }
 
         public HoneyType(string name, string descriptionName, Color markerColor, float minimalPollensPercentageAmount)
@@ -40,6 +42,7 @@ namespace KlasyfikacjaMiodu
             DescriptionName = descriptionName;
             MarkerColor = markerColor;
             MinimalPollensPercentageAmount = minimalPollensPercentageAmount;
+            Dirt = false;
         }
 
         public override string ToString()

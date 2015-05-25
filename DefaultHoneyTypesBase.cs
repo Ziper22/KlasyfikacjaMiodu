@@ -51,15 +51,15 @@ namespace KlasyfikacjaMiodu
         /// <param name="honeyType">HoneyType</param>
         public static void AddNewHoneyTypeToFile(HoneyType honeyType)
         {
-            using (StreamWriter writer = new StreamWriter("HoneyTypes.txt",true))
-            {
-                writer.WriteLine(honeyType.Name);
-                writer.WriteLine(honeyType.DescriptionName);
-                writer.WriteLine(honeyType.Name);
-                writer.WriteLine(honeyType.MarkerColor);
-                writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
-                writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
-            }
+            //using (StreamWriter writer = new StreamWriter())
+            //{
+            //    writer.WriteLine(honeyType.Name);
+            //    writer.WriteLine(honeyType.DescriptionName);
+            //    writer.WriteLine(honeyType.Name);
+            //    writer.WriteLine(honeyType.MarkerColor);
+            //    writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
+            //    writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
+            //}
         }
     }
 }

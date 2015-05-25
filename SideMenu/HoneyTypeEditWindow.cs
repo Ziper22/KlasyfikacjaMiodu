@@ -10,7 +10,7 @@ namespace KlasyfikacjaMiodu.SideMenu
     /// 
     public partial class HoneyTypeEditWindow : Form
     {
-        public delegate void OkButtonClickedDelegate(HoneyType honeyType);
+        public delegate void OkButtonClickedDelegate(HoneyType honeyType, bool persistent);
         public event OkButtonClickedDelegate OkButtonClicked;
         public delegate void CheckBoxCheckedDelegate();
         public event CheckBoxCheckedDelegate CheckBoxChecked;
@@ -55,7 +55,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             this.Text = "Edytuj";
             okButton.Enabled = true;
-
+            checkBox.Visible = false;
             ShowToolTip();
         }
 
@@ -185,7 +185,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         protected virtual void OnOkButtonClicked()
         {
             if (OkButtonClicked != null)
-                OkButtonClicked(honeyType);
+                OkButtonClicked(honeyType, checkBox.Checked);
         }
         
         protected virtual void OnCheckBoxChecked()
