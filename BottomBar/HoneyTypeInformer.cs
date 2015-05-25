@@ -109,7 +109,13 @@ namespace KlasyfikacjaMiodu.BottomBar
 
         private List<KeyValuePair<HoneyType, int>> FindSortedHoneyTypes(Dictionary<HoneyType, int> honeyCounter)
         {
-            int markerAmount = Session.Context.Markers.Count;
+            int markerAmount = 0;
+            foreach (Marker marker in Session.Context.Markers)
+            {
+                if (!marker.HoneyType.Dirt)
+                    markerAmount++;
+            }
+
             List<KeyValuePair<HoneyType, int>> matchingHoneyTypes = new List<KeyValuePair<HoneyType, int>>();
 
             foreach (KeyValuePair<HoneyType, int> entry in honeyCounter)

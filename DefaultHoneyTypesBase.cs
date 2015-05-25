@@ -28,7 +28,13 @@ namespace KlasyfikacjaMiodu
             float HoneyMinimalPollensAmount = 0;
             float HoneyMinimalPollensPercentageAmount = 0;
 
-            using (StringReader reader = new StringReader(Properties.Resources.HoneyTypes))
+            string text;
+            if (File.Exists("HoneyTypes.txt"))
+                text = File.ReadAllText("HoneyTypes.txt");
+            else
+                text = Properties.Resources.HoneyTypes;
+
+            using (StringReader reader = new StringReader(text))
             {
                 while (true)
                 {
@@ -51,15 +57,18 @@ namespace KlasyfikacjaMiodu
         /// <param name="honeyType">HoneyType</param>
         public static void AddNewHoneyTypeToFile(HoneyType honeyType)
         {
-            //using (StreamWriter writer = new StreamWriter())
-            //{
-            //    writer.WriteLine(honeyType.Name);
-            //    writer.WriteLine(honeyType.DescriptionName);
-            //    writer.WriteLine(honeyType.Name);
-            //    writer.WriteLine(honeyType.MarkerColor);
-            //    writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
-            //    writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
-            //}
+            if (!File.Exists("HoneyTypes.txt"))
+                File.WriteAllText("HoneyTypes.txt", Properties.Resources.HoneyTypes);
+
+            using (StreamWriter writer = new StreamWriter("HoneyTypes.txt", true))
+            {
+                writer.WriteLine(honeyType.Name);
+                writer.WriteLine(honeyType.DescriptionName);
+                writer.WriteLine(honeyType.Name);
+                writer.WriteLine(honeyType.MarkerColor.Name);
+                writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
+                writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
+            }
         }
     }
 }
