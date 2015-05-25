@@ -38,12 +38,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.percentNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBox = new System.Windows.Forms.CheckBox();
             this.warningLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.honeyNameTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.specimenPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.percentNumericUpDown)).BeginInit();
             this.panel1.SuspendLayout();
@@ -167,8 +167,19 @@
             this.panel1.Size = new System.Drawing.Size(272, 193);
             this.panel1.TabIndex = 0;
             // 
+            // checkBox
+            // 
+            this.checkBox.AutoSize = true;
+            this.checkBox.Location = new System.Drawing.Point(58, 151);
+            this.checkBox.Name = "checkBox";
+            this.checkBox.Size = new System.Drawing.Size(166, 17);
+            this.checkBox.TabIndex = 19;
+            this.checkBox.Text = "Dodaj pyłek do bazy na stałe";
+            this.checkBox.UseVisualStyleBackColor = true;
+            // 
             // warningLabel
             // 
+            this.warningLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.warningLabel.AutoSize = true;
             this.warningLabel.BackColor = System.Drawing.SystemColors.Control;
             this.warningLabel.ForeColor = System.Drawing.Color.Red;
@@ -213,16 +224,6 @@
             this.label2.Size = new System.Drawing.Size(74, 13);
             this.label2.TabIndex = 15;
             this.label2.Text = "Nazwa miodu:";
-            // 
-            // checkBox
-            // 
-            this.checkBox.AutoSize = true;
-            this.checkBox.Location = new System.Drawing.Point(58, 151);
-            this.checkBox.Name = "checkBox";
-            this.checkBox.Size = new System.Drawing.Size(166, 17);
-            this.checkBox.TabIndex = 19;
-            this.checkBox.Text = "Dodaj pyłek do bazy na stałe";
-            this.checkBox.UseVisualStyleBackColor = true;
             // 
             // HoneyTypeEditWindow
             // 

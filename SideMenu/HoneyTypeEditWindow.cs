@@ -12,8 +12,6 @@ namespace KlasyfikacjaMiodu.SideMenu
     {
         public delegate void OkButtonClickedDelegate(HoneyType honeyType, bool persistent);
         public event OkButtonClickedDelegate OkButtonClicked;
-        public delegate void CheckBoxCheckedDelegate();
-        public event CheckBoxCheckedDelegate CheckBoxChecked;
         private HoneyType honeyType;
 
         bool isNameFieldRed = false;
@@ -34,8 +32,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             this.Text = "Dodaj";
             okButton.Enabled = false;
-
-            ShowToolTip();
+            ShowToolTips();
         }
 
         /// <summary>
@@ -53,10 +50,11 @@ namespace KlasyfikacjaMiodu.SideMenu
             specimenPictureBox.BackColor = honeyType.MarkerColor;
             percentNumericUpDown.Value = (decimal)honeyType.MinimalPollensPercentageAmount;
 
+            Size = new System.Drawing.Size(288, 210);
             this.Text = "Edytuj";
             okButton.Enabled = true;
             checkBox.Visible = false;
-            ShowToolTip();
+            ShowToolTips();
         }
 
         #region Events
@@ -164,9 +162,6 @@ namespace KlasyfikacjaMiodu.SideMenu
 
                 OnOkButtonClicked();
 
-                if (checkBox.Checked == true)
-                    OnCheckBoxChecked();
-
                 this.Close();
             }
             else
@@ -186,12 +181,6 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
             if (OkButtonClicked != null)
                 OkButtonClicked(honeyType, checkBox.Checked);
-        }
-        
-        protected virtual void OnCheckBoxChecked()
-        {
-            if (CheckBoxChecked != null)
-                CheckBoxChecked();
         }
 
         /// <summary>
@@ -311,7 +300,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         /// <summary>
         /// Assigns tooltips to four controls
         /// </summary>
-        private void ShowToolTip()
+        private void ShowToolTips()
         {
             ToolTip toolTip = new ToolTip();
             toolTip.ShowAlways = true;
