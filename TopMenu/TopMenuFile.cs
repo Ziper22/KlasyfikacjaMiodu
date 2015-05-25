@@ -78,16 +78,21 @@ namespace KlasyfikacjaMiodu.TopMenu
                 ofd.Filter = "Project txt (*.txt)|*.txt";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    try
+                    if (CheckIfProjectImageExists(ofd.FileName))
                     {
-                        Session.NewClear();
-                        serializer.Deserialize(ofd);
-                        RefreshHeaderOfForm(ofd.FileName);
+                        try
+                        {
+                            Session.NewClear();
+                            serializer.Deserialize(ofd);
+                            RefreshHeaderOfForm(ofd.FileName);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    else
+                        MessageBox.Show("Nie znaleziono pliku ze zdjęciem.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             Session.Context.Scale = 0.57F;
@@ -120,10 +125,29 @@ namespace KlasyfikacjaMiodu.TopMenu
             Application.Exit();
         }
 
+        /// <summary>
+        /// Refreshes header of form with name of project.
+        /// </summary>
+        /// <param name="projectPath">Path with project files.</param>
         private void RefreshHeaderOfForm(string projectPath)
         {
             string projectName = Path.GetFileNameWithoutExtension(projectPath);
             mainForm.Text = "Klasyfikacja Miodu - [" + projectName + "]";
+        }
+
+        /// <summary>
+        /// Determines if image within project directory exists.
+        /// </summary>
+        /// <param name="txtFilePath">Path with .txt file.</param>
+        /// <returns></returns>
+        private bool CheckIfProjectImageExists(string txtFilePath)
+        {
+            string imagePath = Path.GetFileNameWithoutExtension(txtFilePath) + ".jpg";
+            string directoryPath = Path.GetDirectoryName(txtFilePath);
+
+            if (File.Exists(directoryPath + "//" + imagePath)) return true;
+            else return false;
+
         }
     }
 }
