@@ -30,8 +30,8 @@ namespace KlasyfikacjaMiodu
             float HoneyMinimalPollensPercentageAmount = 0;
 
             string text;
-            if (File.Exists("HoneyTypes.txt"))
-                text = File.ReadAllText("HoneyTypes.txt");
+            if (File.Exists("../../Resources/HoneyTypes.txt"))
+                text = File.ReadAllText("../../Resources/HoneyTypes.txt");
             else
                 text = Properties.Resources.HoneyTypes;
 
@@ -61,10 +61,9 @@ namespace KlasyfikacjaMiodu
         /// <param name="honeyType">HoneyType</param>
         public static void AddNewHoneyTypeToFile(HoneyType honeyType)
         {
-            if (!File.Exists("HoneyTypes.txt"))
-                File.WriteAllText("HoneyTypes.txt", Properties.Resources.HoneyTypes);
-
-            using (StreamWriter writer = new StreamWriter("HoneyTypes.txt", true))
+            string path = "../../Resources/HoneyTypes.txt";
+          
+            using (StreamWriter writer = new StreamWriter(path, true))
             {
                 writer.WriteLine(honeyType.Name);
                 writer.WriteLine(honeyType.DescriptionName);
