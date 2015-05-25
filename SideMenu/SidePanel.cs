@@ -49,7 +49,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
             panel1.Focus();
         }
-        
+
         /// <summary>
         ///     Loads modules in side panel for all honey types and selects first one by default
         /// </summary>
@@ -59,9 +59,13 @@ namespace KlasyfikacjaMiodu.SideMenu
             panel1.Controls.Clear();
             foreach (HoneyType honey in context.HoneyTypes)
             {
+                if (honey.Name=="Zanieczyszczenie")
+                {
+                    honey.Dirt = true;
+                }
                 HoneyType_Add(honey);
             }
-            
+
             if (panel1.Controls.Count > 1)
             {
                 PollenModule dirtPollenModule = (PollenModule)panel1.Controls[0];
@@ -117,7 +121,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             Session.Context.AddHoneyType(newHoney);
             if (persistent)
             {
-                DefaultHoneyTypesBase.AddNewHoneyTypeToFile(newHoney);   
+                DefaultHoneyTypesBase.AddNewHoneyTypeToFile(newHoney);
             }
         }
 
@@ -135,7 +139,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
-        private void HoneyType_Edit(HoneyType honeyType,bool persistent)
+        private void HoneyType_Edit(HoneyType honeyType, bool persistent)
         {
             pollenModuleSelector.chosenModule.Edit(honeyType);
             Session.Context.EditedHoneyType(honeyType);
@@ -183,17 +187,17 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
 
             if (panel1.FlowDirection == FlowDirection.LeftToRight) //for horizontal
-            {               
+            {
                 if (Screen.PrimaryScreen.WorkingArea.Bottom - mainForm.Bottom < Height)
                 {
                     Width = 800;
-                    Location = new Point(mainForm.Left + ((mainForm.Width - Width)/2), mainForm.Bottom - Height);
+                    Location = new Point(mainForm.Left + ((mainForm.Width - Width) / 2), mainForm.Bottom - Height);
                 }
                 else
                 {
                     Width = mainForm.Width;
                     Location = new Point(mainForm.Left, mainForm.Bottom);
-                }            
+                }
             }
             else //for vertical
             {
@@ -244,41 +248,44 @@ namespace KlasyfikacjaMiodu.SideMenu
                 Location = new Point(mainForm.Left, mainForm.Bottom);
             }
 
-            RefreshPanel();
-
             verticalToolStripMenuItem.Text = "Lista pionowa";
             horizontalToolStripMenuItem.Text = "Wyrównaj listę";
             SwapMenuItems();
 
-            AlignSidePanel();
+            AlignSidePanel(); RefreshPanel();           
         }
 
         private void AlignSidePanelToLeft()
         {
             alignToRight = false;
-           
-                if (Screen.PrimaryScreen.WorkingArea.Left + mainForm.Left < Width)
-                {
-                    Location = new Point(mainForm.Left, mainForm.Top + (mainForm.Height - Height) / 2);
-                }
-                else
-                {
-                    Location = new Point(mainForm.Left - Width, mainForm.Top);
-                }
+
+            //if (panel1.FlowDirection==FlowDirection.LeftToRight)
+            //{
+            //    MessageBox.Show("dupa");
+            //    verticalView();
+            //}
+            if (Screen.PrimaryScreen.WorkingArea.Left + mainForm.Left < Width)
+            {
+                Location = new Point(mainForm.Left, mainForm.Top + (mainForm.Height - Height) / 2);
+            }
+            else
+            {
+                Location = new Point(mainForm.Left - Width, mainForm.Top);
+            }
         }
 
         private void AlignSidePanelToRight()
         {
             alignToRight = true;
-            
-                if (Screen.PrimaryScreen.WorkingArea.Right - mainForm.Right < Width)
-                {
-                    Location = new Point(mainForm.Right - Width, (mainForm.Top + (mainForm.Height - Height) / 2));
-                }
-                else
-                {
-                    Location = new Point(mainForm.Right, mainForm.Top);
-                }
+
+            if (Screen.PrimaryScreen.WorkingArea.Right - mainForm.Right < Width)
+            {
+                Location = new Point(mainForm.Right - Width, (mainForm.Top + (mainForm.Height - Height) / 2));
+            }
+            else
+            {
+                Location = new Point(mainForm.Right, mainForm.Top);
+            }
         }
 
         ///<summary>
@@ -293,6 +300,17 @@ namespace KlasyfikacjaMiodu.SideMenu
                 orientationToolStripMenuItem.DropDownItems.RemoveAt(0);
                 orientationToolStripMenuItem.DropDownItems.Add(tmpItem);
             }
+            if (panel1.FlowDirection==FlowDirection.LeftToRight)
+            {  
+                doLewejToolStripMenuItem.Visible = false;
+                doPrawejToolStripMenuItem.Visible = false;
+            }
+            else
+            {
+                doLewejToolStripMenuItem.Visible = true;
+                doPrawejToolStripMenuItem.Visible = true; 
+            }
+
         }
 
         private void RefreshPanel()
