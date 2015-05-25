@@ -395,15 +395,17 @@ namespace KlasyfikacjaMiodu
             // 
             // editMode
             // 
+            this.editMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.editMode.AutoSize = true;
             this.editMode.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.editMode.Location = new System.Drawing.Point(615, 11);
+            this.editMode.Checked = true;
+            this.editMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.editMode.Location = new System.Drawing.Point(704, 5);
             this.editMode.Name = "editMode";
             this.editMode.Size = new System.Drawing.Size(77, 17);
             this.editMode.TabIndex = 4;
             this.editMode.Text = "Tryb edycji";
             this.editMode.UseVisualStyleBackColor = false;
-            this.editMode.Checked = true;
             this.editMode.CheckedChanged += new System.EventHandler(this.editMode_CheckedChanged);
             // 
             // MainForm
