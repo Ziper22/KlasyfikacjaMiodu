@@ -146,6 +146,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SidePanel";
+            this.Enabled = false;
             this.ShowInTaskbar = false;
             this.Text = "Lista pyłków";
             this.menuStrip1.ResumeLayout(false);

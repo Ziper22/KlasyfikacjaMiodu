@@ -25,6 +25,7 @@ namespace KlasyfikacjaMiodu
             string HoneyDescriptionName = "";
             string HoneyLinkedName = "";
             Color HoneyMarkerColor = Color.Empty;
+            int r, g, b;
             float HoneyMinimalPollensAmount = 0;
             float HoneyMinimalPollensPercentageAmount = 0;
 
@@ -42,7 +43,10 @@ namespace KlasyfikacjaMiodu
                     if (HoneyName == null) break;
                     HoneyDescriptionName = reader.ReadLine();
                     HoneyLinkedName = reader.ReadLine();
-                    HoneyMarkerColor = Color.FromName(reader.ReadLine());
+                    r = Convert.ToInt32(reader.ReadLine());
+                    g = Convert.ToInt32(reader.ReadLine());
+                    b = Convert.ToInt32(reader.ReadLine());
+                    HoneyMarkerColor = Color.FromArgb(r, g, b);
                     HoneyMinimalPollensAmount = Convert.ToSingle(reader.ReadLine());
                     HoneyMinimalPollensPercentageAmount = Convert.ToSingle(reader.ReadLine());
                     HoneyList.Add(new HoneyType(HoneyName, HoneyDescriptionName, HoneyLinkedName, HoneyMarkerColor,
@@ -65,7 +69,9 @@ namespace KlasyfikacjaMiodu
                 writer.WriteLine(honeyType.Name);
                 writer.WriteLine(honeyType.DescriptionName);
                 writer.WriteLine(honeyType.Name);
-                writer.WriteLine(honeyType.MarkerColor.Name);
+                writer.WriteLine(honeyType.MarkerColor.R);
+                writer.WriteLine(honeyType.MarkerColor.G);
+                writer.WriteLine(honeyType.MarkerColor.B);
                 writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
                 writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
             }

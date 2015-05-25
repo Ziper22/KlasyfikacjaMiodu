@@ -62,7 +62,7 @@ namespace KlasyfikacjaMiodu
             this.showPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.centerImageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mousePostion = new System.Windows.Forms.Label();
-            this.editMode = new System.Windows.Forms.CheckBox();
+            this.editMode = new System.Windows.Forms.Button();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pollensImage)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -298,6 +298,7 @@ namespace KlasyfikacjaMiodu
             this.fileMenu.Name = "fileMenu";
             this.fileMenu.Size = new System.Drawing.Size(47, 25);
             this.fileMenu.Text = "Plik";
+            this.fileMenu.Visible = false;
             // 
             // newProjectMenuItem
             // 
@@ -348,6 +349,7 @@ namespace KlasyfikacjaMiodu
             this.editMenu.Name = "editMenu";
             this.editMenu.Size = new System.Drawing.Size(66, 25);
             this.editMenu.Text = "Edycja";
+            this.editMenu.Visible = false;
             // 
             // undoMenuItem
             // 
@@ -370,6 +372,7 @@ namespace KlasyfikacjaMiodu
             this.viewMenu.Name = "viewMenu";
             this.viewMenu.Size = new System.Drawing.Size(67, 25);
             this.viewMenu.Text = "Widok";
+            this.viewMenu.Visible = false;
             // 
             // showPanelMenuItem
             // 
@@ -395,19 +398,15 @@ namespace KlasyfikacjaMiodu
             // 
             // editMode
             // 
-            this.editMode.AutoSize = true;
-            this.editMode.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.editMode.Checked = true;
-            this.editMode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.editMode.Dock = System.Windows.Forms.DockStyle.Top;
-            this.editMode.Location = new System.Drawing.Point(0, 29);
+            this.editMode.Location = new System.Drawing.Point(7, 0);
             this.editMode.Name = "editMode";
-            this.editMode.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.editMode.Size = new System.Drawing.Size(784, 17);
-            this.editMode.TabIndex = 4;
-            this.editMode.Text = "Tryb edycji";
-            this.editMode.UseVisualStyleBackColor = false;
-            this.editMode.CheckedChanged += new System.EventHandler(this.editMode_CheckedChanged);
+            this.editMode.Size = new System.Drawing.Size(107, 23);
+            this.editMode.TabIndex = 5;
+            this.editMode.Text = "Włącz edytowanie";
+            this.editMode.UseVisualStyleBackColor = true;
+            Session.Context.EditMode = false;
+            this.editMode.Click += new System.EventHandler(this.editMode_Click);
+            
             // 
             // MainForm
             // 
@@ -417,9 +416,9 @@ namespace KlasyfikacjaMiodu
             this.ClientSize = new System.Drawing.Size(784, 442);
             this.Controls.Add(this.editMode);
             this.Controls.Add(this.mousePostion);
-            this.Controls.Add(this.topMenu);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.viewPanel);
+            this.Controls.Add(this.topMenu);
             this.MainMenuStrip = this.topMenu;
             this.MinimumSize = new System.Drawing.Size(480, 239);
             this.Name = "MainForm";
@@ -478,7 +477,7 @@ namespace KlasyfikacjaMiodu
         private Label mousePostion;
         private ToolStripMenuItem centerImageMenuItem;
         private Button stoperButton;
-        private CheckBox editMode;
+        private Button editMode;
     }
 }
 

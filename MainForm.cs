@@ -128,22 +128,16 @@ namespace KlasyfikacjaMiodu
         /// <summary>
         /// Sets application into edit mode.
         /// </summary>
-        private void editMode_CheckedChanged(object sender, EventArgs e)
+        private void editMode_Click(object sender, EventArgs e)
         {
-            if (editMode.Checked)
-            {
-                Session.Context.EditMode = true;
-                timeCounter.StartTimer();
-                this.ChangeMenuStatus(true);
-                sidePanel.Enabled = true;
-            }
-            else
-            {
-                Session.Context.EditMode = false;
-                timeCounter.PauseTimer();
-                this.ChangeMenuStatus(false);
-                sidePanel.Enabled = false;
-            }
+            Session.Context.EditMode = true;
+            timeCounter.StartTimer();
+            this.ChangeMenuStatus(true);
+            sidePanel.Enabled = true;
+            fileMenu.Visible = true;
+            editMenu.Visible = true;
+            viewMenu.Visible = true;
+            editMode.Visible = false;
         }
         /// <summary>
         /// Changes "Enabled" property in main menu.
@@ -154,5 +148,7 @@ namespace KlasyfikacjaMiodu
             editMenu.Enabled = status;
             viewMenu.Enabled = status;
         }
+
+       
     }
 }
