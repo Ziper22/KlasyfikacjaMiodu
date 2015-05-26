@@ -20,9 +20,6 @@ namespace KlasyfikacjaMiodu.BottomBar
             SetOneSecondTimer();
             Session.Changed += Session_Changed;
             stoperButton.Click += stoperButton_Click;
-
-            this.timer.Stop();
-            this.stoperButton.BackgroundImage = Properties.Resources.start;
         }
 
         void stoperButton_Click(object sender, EventArgs e)

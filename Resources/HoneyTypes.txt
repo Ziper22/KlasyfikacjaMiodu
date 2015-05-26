@@ -1,11 +1,11 @@
-﻿zanieczyszczenie
-zanieczyszczenie
-zanieczyszczenie
+﻿Zanieczyszczenie
+z
+z
 0
 0
 0
-0
-0
+200
+200
 Akacja
 Akacjowy
 Akacjowo

@@ -31,13 +31,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         #region MainMethods
-        public void changeMenuStatus(bool status)
-        {
-            this.editToolStripMenuItem.Enabled = status;
-            this.deleteToolStripMenuItem.Enabled = status;
-            this.addToolStripMenuItem.Enabled = status;
-            this.menuStrip1.Enabled = status;
-        }
+     
         void SidePanel_SizeChanged(object sender, EventArgs e)
         {
         }
@@ -59,7 +53,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             panel1.Controls.Clear();
             foreach (HoneyType honey in context.HoneyTypes)
             {
-                if (honey.Name=="Zanieczyszczenie")
+                if (honey.Name == "Zanieczyszczenie")
                 {
                     honey.Dirt = true;
                 }

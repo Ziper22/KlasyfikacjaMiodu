@@ -298,7 +298,6 @@ namespace KlasyfikacjaMiodu
             this.fileMenu.Name = "fileMenu";
             this.fileMenu.Size = new System.Drawing.Size(47, 25);
             this.fileMenu.Text = "Plik";
-            this.fileMenu.Visible = false;
             // 
             // newProjectMenuItem
             // 
@@ -349,7 +348,6 @@ namespace KlasyfikacjaMiodu
             this.editMenu.Name = "editMenu";
             this.editMenu.Size = new System.Drawing.Size(66, 25);
             this.editMenu.Text = "Edycja";
-            this.editMenu.Visible = false;
             // 
             // undoMenuItem
             // 
@@ -372,7 +370,6 @@ namespace KlasyfikacjaMiodu
             this.viewMenu.Name = "viewMenu";
             this.viewMenu.Size = new System.Drawing.Size(67, 25);
             this.viewMenu.Text = "Widok";
-            this.viewMenu.Visible = false;
             // 
             // showPanelMenuItem
             // 
@@ -398,15 +395,15 @@ namespace KlasyfikacjaMiodu
             // 
             // editMode
             // 
-            this.editMode.Location = new System.Drawing.Point(7, 0);
+            this.editMode.Location = new System.Drawing.Point(314, 0);
             this.editMode.Name = "editMode";
-            this.editMode.Size = new System.Drawing.Size(107, 23);
+            this.editMode.Size = new System.Drawing.Size(117, 24);
             this.editMode.TabIndex = 5;
             this.editMode.Text = "Włącz edytowanie";
             this.editMode.UseVisualStyleBackColor = true;
-            Session.Context.EditMode = false;
+            this.editMode.Visible = false;
+            //Session.Context.EditMode = true;
             this.editMode.Click += new System.EventHandler(this.editMode_Click);
-            
             // 
             // MainForm
             // 

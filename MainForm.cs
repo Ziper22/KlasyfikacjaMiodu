@@ -132,7 +132,6 @@ namespace KlasyfikacjaMiodu
         {
             Session.Context.EditMode = true;
             timeCounter.StartTimer();
-            this.ChangeMenuStatus(true);
             sidePanel.Enabled = true;
             fileMenu.Visible = true;
             editMenu.Visible = true;
@@ -140,15 +139,18 @@ namespace KlasyfikacjaMiodu
             editMode.Visible = false;
         }
         /// <summary>
-        /// Changes "Enabled" property in main menu.
+        /// Changes "Enabled" property in sidePanel, changes "Visible" property in mainMenu, pauses timer.
         /// </summary>
-        private void ChangeMenuStatus(bool status)
+        public void TurnOffEditMode()
         {
-            fileMenu.Enabled = status;
-            editMenu.Enabled = status;
-            viewMenu.Enabled = status;
+            Session.Context.EditMode = false;
+            sidePanel.Enabled = false;
+            fileMenu.Visible = false;
+            editMenu.Visible = false;
+            viewMenu.Visible = false;
+            editMode.Visible = true;
+            timeCounter.PauseTimer();
         }
-
        
     }
 }

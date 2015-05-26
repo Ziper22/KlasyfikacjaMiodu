@@ -52,7 +52,7 @@ namespace KlasyfikacjaMiodu
         private List<Marker> markers = new List<Marker>();
         private HoneyType selectedHoneyType;
         private Image image;
-        private bool editMode;
+        private bool editMode = true;
 
         public Context(bool useDefaultHoneyTypes)
         {
