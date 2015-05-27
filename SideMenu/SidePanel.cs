@@ -170,11 +170,17 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         #region Location&Orientation
 
+        ///<summary>
+        /// Aligns side panel every time main form's size changes
+        /// </summary>
         void mainForm_SizeChanged(object sender, EventArgs e)
         {
             AlignSidePanel();
         }
 
+        ///<summary>
+        /// Aligns panel depending on its orientation
+        /// </summary>
         private void AlignSidePanel()
         {
 
@@ -221,6 +227,9 @@ namespace KlasyfikacjaMiodu.SideMenu
             HideDropDownMenuItems();
         }
 
+        ///<summary>
+        /// Hides drop down items of the "Orientation" menu tool strip
+        /// </summary>
         private void HideDropDownMenuItems()
         {
             foreach (ToolStripMenuItem item in orientationToolStripMenuItem.DropDownItems)
@@ -229,6 +238,9 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
+        ///<summary>
+        /// Shows drop down items of the "Orientation" menu tool strip
+        /// </summary>
         private void ShowDropDownMenuItems()
         {
             foreach (ToolStripMenuItem item in orientationToolStripMenuItem.DropDownItems)
@@ -264,15 +276,14 @@ namespace KlasyfikacjaMiodu.SideMenu
             AlignSidePanel(); RefreshPanel();           
         }
 
+
+        ///<summary>
+        /// Aligns side panel to left depending on its orientation
+        /// </summary>
         private void AlignSidePanelToLeft()
         {
             alignToRight = false;
 
-            //if (panel1.FlowDirection==FlowDirection.LeftToRight)
-            //{
-            //    MessageBox.Show("dupa");
-            //    verticalView();
-            //}
             if (Screen.PrimaryScreen.WorkingArea.Left + mainForm.Left < Width)
             {
                 Location = new Point(mainForm.Left, mainForm.Top + (mainForm.Height - Height) / 2);
@@ -283,6 +294,9 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
+        ///<summary>
+        /// Aligns side panel to right depending on its orientation
+        /// </summary>
         private void AlignSidePanelToRight()
         {
             alignToRight = true;
@@ -322,6 +336,9 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         }
 
+        ///<summary>
+        /// Refreshes panel orientation
+        /// </summary>
         private void RefreshPanel()
         {
             if (panel1.FlowDirection == FlowDirection.LeftToRight)
@@ -331,22 +348,31 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
+        ///<summary>
+        /// Aligns panel to left
+        /// </summary>
         private void toLeftToolStripMenuItem_Click(object sender, EventArgs e)
         {
             alignToRight = false;
             AlignSidePanel();
         }
 
+        ///<summary>
+        /// Aligns panel to right
+        /// </summary>
         private void toRightToolStripMenuItem_Click(object sender, EventArgs e)
         {
             alignToRight = true;
             AlignSidePanel();
         }
-        #endregion
 
+        ///<summary>
+        /// Shows drop down items of the "Orientation" menu tool strip
+        /// </summary>
         private void orientationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowDropDownMenuItems();
         }
+        #endregion
     }
 }

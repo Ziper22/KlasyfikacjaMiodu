@@ -120,7 +120,7 @@ namespace KlasyfikacjaMiodu.BottomBar
 
             foreach (KeyValuePair<HoneyType, int> entry in honeyCounter)
             {
-                if (100f * entry.Value / markerAmount >= entry.Key.MinimalPollensPercentageAmount)
+                if (100f * entry.Value / markerAmount >= entry.Key.MinimalPollensPercentageAmount && !entry.Key.Dirt)
                     matchingHoneyTypes.Add(entry);
             }
 
