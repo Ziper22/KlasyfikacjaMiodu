@@ -66,7 +66,12 @@ namespace KlasyfikacjaMiodu.Serialization
             string s = line.Substring(startIndex, length);
             minimalPollensPercentageAmount = float.Parse(line.Substring(startIndex, length));
 
-            return new HoneyType(name,descriptionName, markerColor, minimalPollensPercentageAmount);
+            HoneyType h = new HoneyType(name,descriptionName, markerColor, minimalPollensPercentageAmount);
+
+            if (h.Name.Equals("Zanieczyszczenie"))
+                h.Dirt = true;
+
+            return h;
         }
 
         private String ToHexConverter(System.Drawing.Color c)

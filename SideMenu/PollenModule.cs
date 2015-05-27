@@ -62,7 +62,8 @@ namespace KlasyfikacjaMiodu.SideMenu
             HoneyName.Text = honeyType.Name;
             if (honeyType.Dirt) PollenNumber.Text = "ilość: " + Number;
             else PollenNumber.Text = "pyłków: " + Number;
-            PollenPercentage.Text = Percentage + "%";
+            if (honeyType.Dirt) PollenPercentage.Visible = false;
+            else PollenPercentage.Text = Percentage + "%";
         }
 
         private void Session_Changed(Context context)

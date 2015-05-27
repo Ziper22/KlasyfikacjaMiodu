@@ -64,7 +64,6 @@ namespace KlasyfikacjaMiodu.SideMenu
             {
                 PollenModule dirtPollenModule = (PollenModule)panel1.Controls[0];
                 dirtPollenModule.HoneyType.Dirt = true;
-                dirtPollenModule.HidePercentage();
 
                 PollenModule defaultPollenModule = (PollenModule)panel1.Controls[1];
                 defaultPollenModule.Choose();
@@ -72,10 +71,8 @@ namespace KlasyfikacjaMiodu.SideMenu
 
                 HoneyType defaultHoneyType = context.HoneyTypes[1];
                 Session.Context.SelectedHoneyType = defaultHoneyType;
-
-                panel1.VerticalScroll.Value = 1;
             }
-
+            panel1.VerticalScroll.Value = 1;
             Session.Context.HoneyTypeAdded += HoneyType_Add;
         }
 
@@ -117,6 +114,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             {
                 DefaultHoneyTypesBase.AddNewHoneyTypeToFile(newHoney);
             }
+            panel1.ScrollControlIntoView(panel1.Controls[panel1.Controls.Count - 1]);
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
