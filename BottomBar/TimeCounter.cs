@@ -42,12 +42,14 @@ namespace KlasyfikacjaMiodu.BottomBar
         {
             timer.Start();
             stoperButton.BackgroundImage = Properties.Resources.stop;
+            Session.Context.EditMode = true;
         }
 
         public void PauseTimer()
         {
             timer.Stop();
             stoperButton.BackgroundImage = Properties.Resources.start;
+            Session.Context.EditMode = false;
         }
 
         private void TimeChanged(Object sender, EventArgs args)
@@ -59,6 +61,11 @@ namespace KlasyfikacjaMiodu.BottomBar
         private void Session_Changed(Context context)
         {
             time.Text = context.TimeSpan.ToString();
+        }
+
+        public bool Running
+        {
+            get { return timer.Enabled; }
         }
     }
 }

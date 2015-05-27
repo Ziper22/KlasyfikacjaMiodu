@@ -126,31 +126,39 @@ namespace KlasyfikacjaMiodu
 
         }
         /// <summary>
-        /// Sets application into edit mode.
-        /// </summary>
-        private void editMode_Click(object sender, EventArgs e)
-        {
-            Session.Context.EditMode = true;
-            timeCounter.StartTimer();
-            sidePanel.Enabled = true;
-            fileMenu.Visible = true;
-            editMenu.Visible = true;
-            viewMenu.Visible = true;
-            editMode.Visible = false;
-        }
-        /// <summary>
         /// Changes "Enabled" property in sidePanel, changes "Visible" property in mainMenu, pauses timer.
         /// </summary>
         public void TurnOffEditMode()
         {
             Session.Context.EditMode = false;
-            sidePanel.Enabled = false;
-            fileMenu.Visible = false;
-            editMenu.Visible = false;
+
+            //sidePanel.Enabled = false;
+            sidePanel.SetPanel(false);
+
             viewMenu.Visible = false;
-            editMode.Visible = true;
-            timeCounter.PauseTimer();
+            wlaczEdytowanieToolStripMenuItem.Visible = true;
+
+            if (timeCounter.Running)
+                timeCounter.PauseTimer();
         }
-       
+
+
+        public void AddEditModeToMenu()
+        {
+            wlaczEdytowanieToolStripMenuItem.Visible = true;
+        }
+
+        public void wlaczEdytowanieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Session.Context.EditMode = true;
+
+            sidePanel.SetPanel(true);
+
+            viewMenu.Visible = true;
+            wlaczEdytowanieToolStripMenuItem.Visible = false;
+
+            if (!timeCounter.Running)
+                timeCounter.StartTimer();
+        }
     }
 }

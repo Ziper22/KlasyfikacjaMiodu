@@ -85,7 +85,10 @@ namespace KlasyfikacjaMiodu.TopMenu
                             Session.NewClear();
                             serializer.Deserialize(ofd);
                             RefreshHeaderOfForm(ofd.FileName);
-                             mainForm.TurnOffEditMode(); // wyłączenie Trybu edycji
+
+                        
+                            mainForm.TurnOffEditMode();
+                            mainForm.AddEditModeToMenu();
                         }
                         catch (Exception ex)
                         {

@@ -58,11 +58,11 @@ namespace KlasyfikacjaMiodu
             this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.undoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wlaczEdytowanieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.showPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.centerImageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mousePostion = new System.Windows.Forms.Label();
-            this.editMode = new System.Windows.Forms.Button();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pollensImage)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -343,7 +343,8 @@ namespace KlasyfikacjaMiodu
             // 
             this.editMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.undoMenuItem,
-            this.redoMenuItem});
+            this.redoMenuItem,
+            this.wlaczEdytowanieToolStripMenuItem});
             this.editMenu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.editMenu.Name = "editMenu";
             this.editMenu.Size = new System.Drawing.Size(66, 25);
@@ -352,14 +353,22 @@ namespace KlasyfikacjaMiodu
             // undoMenuItem
             // 
             this.undoMenuItem.Name = "undoMenuItem";
-            this.undoMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.undoMenuItem.Size = new System.Drawing.Size(205, 26);
             this.undoMenuItem.Text = "Cofnij (Ctrl+Z)";
             // 
             // redoMenuItem
             // 
             this.redoMenuItem.Name = "redoMenuItem";
-            this.redoMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.redoMenuItem.Size = new System.Drawing.Size(205, 26);
             this.redoMenuItem.Text = "Przywróć (Ctrl+Y)";
+            // 
+            // wlaczEdytowanieToolStripMenuItem
+            // 
+            this.wlaczEdytowanieToolStripMenuItem.Name = "wlaczEdytowanieToolStripMenuItem";
+            this.wlaczEdytowanieToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.wlaczEdytowanieToolStripMenuItem.Text = "Włącz edytowanie";
+            this.wlaczEdytowanieToolStripMenuItem.Visible = false;
+            this.wlaczEdytowanieToolStripMenuItem.Click += new System.EventHandler(this.wlaczEdytowanieToolStripMenuItem_Click);
             // 
             // viewMenu
             // 
@@ -390,20 +399,8 @@ namespace KlasyfikacjaMiodu
             this.mousePostion.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.mousePostion.Location = new System.Drawing.Point(704, 9);
             this.mousePostion.Name = "mousePostion";
-            this.mousePostion.Size = new System.Drawing.Size(0, 13);
+            this.mousePostion.Size = new System.Drawing.Size(31, 13);
             this.mousePostion.TabIndex = 3;
-            // 
-            // editMode
-            // 
-            this.editMode.Location = new System.Drawing.Point(314, 0);
-            this.editMode.Name = "editMode";
-            this.editMode.Size = new System.Drawing.Size(117, 24);
-            this.editMode.TabIndex = 5;
-            this.editMode.Text = "Włącz edytowanie";
-            this.editMode.UseVisualStyleBackColor = true;
-            this.editMode.Visible = false;
-            //Session.Context.EditMode = true;
-            this.editMode.Click += new System.EventHandler(this.editMode_Click);
             // 
             // MainForm
             // 
@@ -411,11 +408,10 @@ namespace KlasyfikacjaMiodu
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 442);
-            this.Controls.Add(this.editMode);
             this.Controls.Add(this.mousePostion);
+            this.Controls.Add(this.topMenu);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.viewPanel);
-            this.Controls.Add(this.topMenu);
             this.MainMenuStrip = this.topMenu;
             this.MinimumSize = new System.Drawing.Size(480, 239);
             this.Name = "MainForm";
@@ -474,7 +470,7 @@ namespace KlasyfikacjaMiodu
         private Label mousePostion;
         private ToolStripMenuItem centerImageMenuItem;
         private Button stoperButton;
-        private Button editMode;
+        private ToolStripMenuItem wlaczEdytowanieToolStripMenuItem;
     }
 }
 

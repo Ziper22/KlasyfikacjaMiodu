@@ -374,5 +374,13 @@ namespace KlasyfikacjaMiodu.SideMenu
             ShowDropDownMenuItems();
         }
         #endregion
+
+        public void SetPanel(bool block)
+        {
+            addToolStripMenuItem.Enabled = block;
+            editToolStripMenuItem.Enabled = block;
+            deleteToolStripMenuItem.Enabled = block;
+            orientationToolStripMenuItem.Enabled = block;
+        }
     }
 }
