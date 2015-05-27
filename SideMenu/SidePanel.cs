@@ -218,6 +218,23 @@ namespace KlasyfikacjaMiodu.SideMenu
             SwapMenuItems();
 
             AlignSidePanel();
+            HideDropDownMenuItems();
+        }
+
+        private void HideDropDownMenuItems()
+        {
+            foreach (ToolStripMenuItem item in orientationToolStripMenuItem.DropDownItems)
+            {
+                item.Visible = false;
+            }
+        }
+
+        private void ShowDropDownMenuItems()
+        {
+            foreach (ToolStripMenuItem item in orientationToolStripMenuItem.DropDownItems)
+            {
+                item.Visible = true;
+            }
         }
 
         /// <summary>
@@ -326,5 +343,10 @@ namespace KlasyfikacjaMiodu.SideMenu
             AlignSidePanel();
         }
         #endregion
+
+        private void orientationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowDropDownMenuItems();
+        }
     }
 }

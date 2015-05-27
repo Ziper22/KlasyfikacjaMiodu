@@ -86,6 +86,7 @@
             this.orientationToolStripMenuItem.Name = "orientationToolStripMenuItem";
             this.orientationToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.orientationToolStripMenuItem.Text = "Widok";
+            this.orientationToolStripMenuItem.Click += new System.EventHandler(this.orientationToolStripMenuItem_Click);
             // 
             // verticalToolStripMenuItem
             // 
@@ -96,20 +97,19 @@
             this.verticalToolStripMenuItem.Name = "verticalToolStripMenuItem";
             this.verticalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.verticalToolStripMenuItem.Text = "Wyrównaj listę";
-
             this.verticalToolStripMenuItem.Click += new System.EventHandler(this.verticalToolStripMenuItem_Click);
             // 
             // doLewejToolStripMenuItem
             // 
             this.doLewejToolStripMenuItem.Name = "doLewejToolStripMenuItem";
-            this.doLewejToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.doLewejToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.doLewejToolStripMenuItem.Text = "Do lewej";
             this.doLewejToolStripMenuItem.Click += new System.EventHandler(this.toLeftToolStripMenuItem_Click);
             // 
             // doPrawejToolStripMenuItem
             // 
             this.doPrawejToolStripMenuItem.Name = "doPrawejToolStripMenuItem";
-            this.doPrawejToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.doPrawejToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.doPrawejToolStripMenuItem.Text = "Do prawej";
             this.doPrawejToolStripMenuItem.Click += new System.EventHandler(this.toRightToolStripMenuItem_Click);
             // 
@@ -117,7 +117,7 @@
             // 
             this.horizontalToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.horizontalToolStripMenuItem.Name = "horizontalToolStripMenuItem";
-            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.horizontalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.horizontalToolStripMenuItem.Text = "Lista pozioma";
             this.horizontalToolStripMenuItem.Click += new System.EventHandler(this.horizontalToolStripMenuItem_Click);
             // 
