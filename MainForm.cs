@@ -132,10 +132,10 @@ namespace KlasyfikacjaMiodu
         {
             Session.Context.EditMode = false;
 
-            //sidePanel.Enabled = false;
             sidePanel.SetPanel(false);
 
-            viewMenu.Visible = false;
+            showPanelMenuItem.Enabled = false;
+            centerImageMenuItem.Enabled = false;
             wlaczEdytowanieToolStripMenuItem.Visible = true;
 
             if (timeCounter.Running)
@@ -154,7 +154,9 @@ namespace KlasyfikacjaMiodu
 
             sidePanel.SetPanel(true);
 
-            viewMenu.Visible = true;
+            showPanelMenuItem.Enabled = true;
+            centerImageMenuItem.Enabled = true;
+
             wlaczEdytowanieToolStripMenuItem.Visible = false;
 
             if (!timeCounter.Running)
