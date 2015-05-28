@@ -50,20 +50,21 @@ namespace KlasyfikacjaMiodu.TopMenu
 
         private void SaveProject_Click(object sender, EventArgs e)
         {
-            Serializer serializer = new Serializer();
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
+                sfd.FileOk += CheckIfFileHasCorrectExtension;
                 sfd.Filter = "Project txt (*.txt)|*.txt";
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
+                        Serializer serializer = new Serializer();
                         serializer.Serialize(sfd);
                         RefreshHeaderOfForm(sfd.FileName);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Wystąpił błąd podczas zapisu projektu.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -71,10 +72,9 @@ namespace KlasyfikacjaMiodu.TopMenu
 
         private void LoadProject_Click(object sender, EventArgs e)
         {
-            Serializer serializer = new Serializer();
-
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
+                ofd.FileOk += CheckIfFileHasCorrectExtension;
                 ofd.Filter = "Project txt (*.txt)|*.txt";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
@@ -82,21 +82,20 @@ namespace KlasyfikacjaMiodu.TopMenu
                     {
                         try
                         {
-                            Session.NewClear();
+                            Serializer serializer = new Serializer();
                             serializer.Deserialize(ofd);
                             RefreshHeaderOfForm(ofd.FileName);
-
-                        
+                       
                             mainForm.TurnOffEditMode();
                             mainForm.AddEditModeToMenu();
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
-                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Wystąpił błąd podczas wczytywania projektu.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
-                        MessageBox.Show("Nie znaleziono pliku ze zdjęciem.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Nie znaleziono pliku ze zdjęciem projektu.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             Session.Context.Scale = 0.57F;
@@ -116,9 +115,9 @@ namespace KlasyfikacjaMiodu.TopMenu
                         Session.Context.Image = (Image)bmp;
                         Session.Context.Scale = 0.57F;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Nie udało się poprawnie wczytać zdjęcia. Upewnij się, że wybrałeś odpowiednie rozszerzenie.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -153,5 +152,32 @@ namespace KlasyfikacjaMiodu.TopMenu
             else return false;
 
         }
+
+        private void CheckIfFileHasCorrectExtension(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (sender is SaveFileDialog)
+            {
+                SaveFileDialog sv = (sender as SaveFileDialog);
+                if (Path.GetExtension(sv.FileName).ToLower() != ".txt")
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("Rozszerzenie musi mieć końcówkę 'TXT'", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            if (sender is OpenFileDialog)
+            {
+                OpenFileDialog ov = (sender as OpenFileDialog);
+                if (Path.GetExtension(ov.FileName).ToLower() != ".txt")
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("Rozszerzenie musi mieć końcówkę 'TXT'", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            
+        }
+
     }
 }

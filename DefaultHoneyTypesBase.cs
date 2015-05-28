@@ -49,8 +49,17 @@ namespace KlasyfikacjaMiodu
                     HoneyMarkerColor = Color.FromArgb(r, g, b);
                     HoneyMinimalPollensAmount = Convert.ToSingle(reader.ReadLine());
                     HoneyMinimalPollensPercentageAmount = Convert.ToSingle(reader.ReadLine());
-                    HoneyList.Add(new HoneyType(HoneyName, HoneyDescriptionName, HoneyLinkedName, HoneyMarkerColor,
-                        HoneyMinimalPollensAmount, HoneyMinimalPollensPercentageAmount));
+
+                    if (HoneyName == "Zanieczyszczenie")
+                    {
+                        HoneyType h = new HoneyType(HoneyName, HoneyDescriptionName, HoneyLinkedName, HoneyMarkerColor,
+                        HoneyMinimalPollensAmount, HoneyMinimalPollensPercentageAmount);
+                        h.Dirt = true;
+                        HoneyList.Add(h);
+                    }
+                    else
+                        HoneyList.Add(new HoneyType(HoneyName, HoneyDescriptionName, HoneyLinkedName, HoneyMarkerColor,
+                            HoneyMinimalPollensAmount, HoneyMinimalPollensPercentageAmount));
                 }
             }
             return HoneyList;

@@ -76,6 +76,7 @@ namespace KlasyfikacjaMiodu.Serialization
 
             DeserializeImage(ofd);
             Context context = DeserializeTxt(ofd);
+            if (context == null) return;
 
             Session.NewClear();
             foreach (var honeyType in context.HoneyTypes)
