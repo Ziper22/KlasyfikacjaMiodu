@@ -155,8 +155,8 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
             if (isNameFieldRed == false && isHoneyNameFieldRed == false)
             {
-                honeyType.Name = nameTextBox.Text;
-                honeyType.DescriptionName = honeyNameTextBox.Text;
+                honeyType.Name = nameTextBox.Text.Trim();
+                honeyType.DescriptionName = honeyNameTextBox.Text.Trim();
                 honeyType.MarkerColor = specimenPictureBox.BackColor;
                 honeyType.MinimalPollensPercentageAmount = (float)percentNumericUpDown.Value;
 
