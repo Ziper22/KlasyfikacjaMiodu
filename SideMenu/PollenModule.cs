@@ -95,7 +95,8 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void ComputeMarkerNumber()
         {
-            PollenNumber.Text = "pyłków: " + Number;
+            if (HoneyType.Dirt) PollenNumber.Text = "ilość: " + Number;
+            else PollenNumber.Text = "pyłków: " + Number;
             int allMarkers = 0;
             foreach (Marker marker in Session.Context.Markers)
             {
