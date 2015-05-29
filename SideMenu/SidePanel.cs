@@ -119,7 +119,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (pollenModuleSelector.chosenModule != null)
+            if (pollenModuleSelector.chosenModule.HoneyType != null)
             {
                 if (pollenModuleSelector.chosenModule.HoneyType.Name == "Zanieczyszczenie")
                 {
@@ -139,7 +139,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (pollenModuleSelector.chosenModule != null)
+            if (pollenModuleSelector.chosenModule.HoneyType != null)
             {
                 if (pollenModuleSelector.chosenModule.HoneyType.Name == "Zanieczyszczenie")
                 {
