@@ -18,8 +18,10 @@ namespace KlasyfikacjaMiodu.BottomBar
             this.time = time;
             this.stoperButton = stoperButton;
             SetOneSecondTimer();
-            Session.Changed += Session_Changed;
             stoperButton.Click += stoperButton_Click;
+
+            SetContextEvents();
+            Session.Changed += Session_ContextChanged;
         }
 
         void stoperButton_Click(object sender, EventArgs e)
@@ -55,12 +57,27 @@ namespace KlasyfikacjaMiodu.BottomBar
         private void TimeChanged(Object sender, EventArgs args)
         {
             Session.Context.TimeSpan = Session.Context.TimeSpan.Add(new TimeSpan(0, 0, 1));
-            time.Text = Session.Context.TimeSpan.ToString();
         }
 
-        private void Session_Changed(Context context)
+        private void ContextOnTimeChanged(TimeSpan timeSpan)
         {
-            time.Text = context.TimeSpan.ToString();
+            time.Text = timeSpan.ToString();
+        }
+
+        /// <summary>
+        /// Sets Context events. Listeners should be set again after every Context change in current Session
+        /// </summary>
+        private void SetContextEvents()
+        {
+            Session.Context.TimeChanged += ContextOnTimeChanged;
+        }
+
+        /// <summary>
+        /// Called when Context in current session is changing
+        /// </summary>
+        private void Session_ContextChanged(Context context)
+        {
+            SetContextEvents();
         }
 
         public bool Running

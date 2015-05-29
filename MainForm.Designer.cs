@@ -62,7 +62,6 @@ namespace KlasyfikacjaMiodu
             this.viewMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.showPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.centerImageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mousePostion = new System.Windows.Forms.Label();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pollensImage)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -92,7 +91,6 @@ namespace KlasyfikacjaMiodu
             this.pollensImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pollensImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pollensImage.Enabled = false;
-            this.pollensImage.Image = global::KlasyfikacjaMiodu.Properties.Resources.honeyPollens;
             this.pollensImage.Location = new System.Drawing.Point(0, 0);
             this.pollensImage.Margin = new System.Windows.Forms.Padding(0);
             this.pollensImage.Name = "pollensImage";
@@ -392,23 +390,12 @@ namespace KlasyfikacjaMiodu
             this.centerImageMenuItem.Size = new System.Drawing.Size(206, 26);
             this.centerImageMenuItem.Text = "Wyśrodkuj zdjęcie";
             // 
-            // mousePostion
-            // 
-            this.mousePostion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.mousePostion.AutoSize = true;
-            this.mousePostion.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.mousePostion.Location = new System.Drawing.Point(704, 9);
-            this.mousePostion.Name = "mousePostion";
-            this.mousePostion.Size = new System.Drawing.Size(31, 13);
-            this.mousePostion.TabIndex = 3;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 442);
-            this.Controls.Add(this.mousePostion);
             this.Controls.Add(this.topMenu);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.viewPanel);
@@ -467,7 +454,6 @@ namespace KlasyfikacjaMiodu
         private FlowLayoutPanel flowLayoutPanel2;
         private Label percentDesc;
         private NumericUpDown scale;
-        private Label mousePostion;
         private ToolStripMenuItem centerImageMenuItem;
         private Button stoperButton;
         private ToolStripMenuItem wlaczEdytowanieToolStripMenuItem;

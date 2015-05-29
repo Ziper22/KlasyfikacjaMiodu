@@ -137,7 +137,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         private void MarkersPanel_Click(object sender, MouseEventArgs e)
         {
-            if (!Session.Context.EditMode)
+            if (!Session.Context.EditMode || image.Image == null)
                 return;
 
             HoneyType selectedHoneyType = Session.Context.SelectedHoneyType;

@@ -158,7 +158,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void AdjustScaleToRealImageSize()
         {
-            Session.Context.Scale = pollensImage.Width / (float)pollensImage.Image.PhysicalDimension.Width;
+            if (pollensImage.Image != null)
+                Session.Context.Scale = pollensImage.Width / (float)pollensImage.Image.PhysicalDimension.Width;
         }
 
         private void CenterImage()

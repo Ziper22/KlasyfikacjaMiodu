@@ -27,7 +27,6 @@ namespace KlasyfikacjaMiodu
         private TopMenuView topMenuView;
         private SidePanel sidePanel;
 
-
         public MainForm()
         {
             InitializeComponent();
@@ -40,8 +39,6 @@ namespace KlasyfikacjaMiodu
             topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, loadProjectMenuItem, loadImageMenuItem, quitMenuItem, this);
             topMenuEdit = new TopMenuEdit(this, editMenu, undoMenuItem, redoMenuItem);
             topMenuView = new TopMenuView(showPanelMenuItem, centerImageMenuItem, sidePanel, viewPanel);
-            viewPanel.MouseMove += viewPanel_MouseMove;
-            viewPanel.MouseLeave += viewPanel_MouseLeave;
         }
 
         private void PrepareSidePanel()
@@ -68,63 +65,6 @@ namespace KlasyfikacjaMiodu
             }
         }
 
-        void viewPanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            Point p = e.Location;
-            p.X = (int)(p.X / (viewPanel.Width / pollensImage.Image.PhysicalDimension.Width));
-            p.Y = (int)(p.Y / (viewPanel.Height / pollensImage.Image.PhysicalDimension.Height));
-            mousePostion.Text = p.ToString();
-        }
-
-        private void AddMousePositionEvent()
-        {
-            GlobalMouseHandler gmh = new GlobalMouseHandler();
-            gmh.TheMouseMoved += new MouseMovedEvent(gmh_TheMouseMoved);
-            Application.AddMessageFilter(gmh);
-        }
-
-        void gmh_TheMouseMoved()
-        {
-            Point p = System.Windows.Forms.Cursor.Position;
-            Point pf = new Point(p.X - Left, p.Y - Top);
-            mousePostion.Text = pf.ToString();
-        }
-
-        void viewPanel_MouseLeave(object sender, EventArgs e)
-        {
-            mousePostion.Text = "";
-        }
-
-        public delegate void MouseMovedEvent();
-
-        public class GlobalMouseHandler : IMessageFilter
-        {
-            private const int WM_MOUSEMOVE = 0x0200;
-
-            public event MouseMovedEvent TheMouseMoved;
-
-            #region IMessageFilter Members
-
-            public bool PreFilterMessage(ref Message m)
-            {
-                if (m.Msg == WM_MOUSEMOVE)
-                {
-                    if (TheMouseMoved != null)
-                    {
-                        TheMouseMoved();
-                    }
-                }
-                // Always allow message to continue to the next filter control
-                return false;
-            }
-
-            #endregion
-        }
-
-        private void topMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
         /// <summary>
         /// Changes "Enabled" property in sidePanel, changes "Visible" property in mainMenu, pauses timer.
         /// </summary>
@@ -141,7 +81,6 @@ namespace KlasyfikacjaMiodu
             if (timeCounter.Running)
                 timeCounter.PauseTimer();
         }
-
 
         public void AddEditModeToMenu()
         {
