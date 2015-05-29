@@ -176,7 +176,6 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Marker_MouseMove(object sender, MouseEventArgs e)
         {
-
             if (e.Button != MouseButtons.Left)
                 mouseMovedOnMarker = true;
 

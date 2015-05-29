@@ -79,6 +79,7 @@ namespace KlasyfikacjaMiodu.Serialization
             if (context == null) return;
 
             Session.NewClear();
+            DeserializeImage(ofd);
             foreach (var honeyType in context.HoneyTypes)
                 Session.Context.AddHoneyType(honeyType);
             foreach (var marker in context.Markers)
