@@ -64,7 +64,7 @@ namespace KlasyfikacjaMiodu.TopMenu
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Wystąpił błąd podczas zapisu projektu.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Wystąpił błąd podczas zapisu projektu.", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -78,27 +78,28 @@ namespace KlasyfikacjaMiodu.TopMenu
                 ofd.Filter = "Project txt (*.txt)|*.txt";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    if (CheckIfProjectImageExists(ofd.FileName))
+                    Serializer serializer = new Serializer();
+                    string loadState = "";
+                    try
                     {
-                        try
-                        {
-                            Serializer serializer = new Serializer();
-                            serializer.Deserialize(ofd);
-                            RefreshHeaderOfForm(ofd.FileName);
-                       
-                            mainForm.TurnOffEditMode();
-                            mainForm.AddEditModeToMenu();
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("Wystąpił błąd podczas wczytywania projektu.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        loadState = serializer.Deserialize(ofd);
                     }
-                    else
-                        MessageBox.Show("Nie znaleziono pliku ze zdjęciem projektu.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Wystąpił błąd podczas wczytywania projektu.", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    if (loadState == "correct")
+                    {
+                        RefreshHeaderOfForm(ofd.FileName);
+                        mainForm.TurnOffEditMode();
+                        mainForm.AddEditModeToMenu();
+                        Session.Context.Scale = 0.57F;
+                    }
+                    else if (loadState != "")
+                        MessageBox.Show(loadState, "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            Session.Context.Scale = 0.57F;
         }
 
         private void LoadImage_Click(object sender, EventArgs e)
@@ -117,7 +118,7 @@ namespace KlasyfikacjaMiodu.TopMenu
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Nie udało się poprawnie wczytać zdjęcia. Upewnij się, że wybrałeś odpowiednie rozszerzenie.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Nie udało się poprawnie wczytać zdjęcia. Upewnij się, że wybrałeś odpowiednie rozszerzenie.", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -161,7 +162,7 @@ namespace KlasyfikacjaMiodu.TopMenu
                 if (Path.GetExtension(sv.FileName).ToLower() != ".txt")
                 {
                     e.Cancel = true;
-                    MessageBox.Show("Rozszerzenie musi mieć końcówkę 'TXT'", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Plik musi mieć rozszerzenie .txt", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
@@ -172,11 +173,11 @@ namespace KlasyfikacjaMiodu.TopMenu
                 if (Path.GetExtension(ov.FileName).ToLower() != ".txt")
                 {
                     e.Cancel = true;
-                    MessageBox.Show("Rozszerzenie musi mieć końcówkę 'TXT'", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Plik musi mieć rozszerzenie .txt", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
-            
+
         }
 
     }
