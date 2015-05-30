@@ -68,38 +68,31 @@ namespace KlasyfikacjaMiodu
         /// <summary>
         /// Changes "Enabled" property in sidePanel, changes "Visible" property in mainMenu, pauses timer.
         /// </summary>
-        public void TurnOffEditMode()
+        public static void SetEditMode(MainForm mainForm, bool status)
         {
-            Session.Context.EditMode = false;
+            Session.Context.EditMode = status;
 
-            sidePanel.SetPanel(false);
+            mainForm.sidePanel.SetPanel(status);
 
-            showPanelMenuItem.Enabled = false;
-            centerImageMenuItem.Enabled = false;
-            wlaczEdytowanieToolStripMenuItem.Visible = true;
+            mainForm.showPanelMenuItem.Enabled = status;
+            mainForm.centerImageMenuItem.Enabled = status;
 
-            if (timeCounter.Running)
-                timeCounter.PauseTimer();
+            mainForm.undoMenuItem.Visible = status;
+            mainForm.redoMenuItem.Visible = status;
+
+            mainForm.wlaczEdytowanieToolStripMenuItem.Visible = !status;
+
+            if (mainForm.timeCounter.Running && status == false)
+                mainForm.timeCounter.PauseTimer();
+
+            else if(!mainForm.timeCounter.Running && status == true)
+                mainForm.timeCounter.StartTimer();
         }
-
-        public void AddEditModeToMenu()
-        {
-            wlaczEdytowanieToolStripMenuItem.Visible = true;
-        }
-
+       
+       
         public void wlaczEdytowanieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Session.Context.EditMode = true;
-
-            sidePanel.SetPanel(true);
-
-            showPanelMenuItem.Enabled = true;
-            centerImageMenuItem.Enabled = true;
-
-            wlaczEdytowanieToolStripMenuItem.Visible = false;
-
-            if (!timeCounter.Running)
-                timeCounter.StartTimer();
+            MainForm.SetEditMode((MainForm)this,true);
         }
     }
 }

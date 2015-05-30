@@ -85,9 +85,8 @@ namespace KlasyfikacjaMiodu.TopMenu
                             Serializer serializer = new Serializer();
                             serializer.Deserialize(ofd);
                             RefreshHeaderOfForm(ofd.FileName);
-                       
-                            mainForm.TurnOffEditMode();
-                            mainForm.AddEditModeToMenu();
+
+                            MainForm.SetEditMode((MainForm)mainForm, false);
                         }
                         catch (Exception)
                         {

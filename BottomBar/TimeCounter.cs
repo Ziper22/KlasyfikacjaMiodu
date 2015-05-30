@@ -27,9 +27,16 @@ namespace KlasyfikacjaMiodu.BottomBar
         void stoperButton_Click(object sender, EventArgs e)
         {
             if (timer.Enabled)
+            {
+
                 PauseTimer();
+                MainForm.SetEditMode((MainForm)MainForm.ActiveForm,false);
+            }
             else
+            {
                 StartTimer();
+                MainForm.SetEditMode((MainForm)MainForm.ActiveForm,true);
+            }
         }
 
         private void SetOneSecondTimer()
