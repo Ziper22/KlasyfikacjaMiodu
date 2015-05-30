@@ -31,8 +31,6 @@ namespace KlasyfikacjaMiodu.BottomBar
 
             form = honeyTypeLabel.FindForm();
             form.SizeChanged += form_SizeChanged;
-
-            Session.Context.HoneyTypeEdited += Context_HoneyTypeEdited;
         }
 
         private void Context_HoneyTypeEdited(HoneyType honeyType)
@@ -54,6 +52,7 @@ namespace KlasyfikacjaMiodu.BottomBar
         /// </summary>
         private void SetContextEvents()
         {
+            Session.Context.HoneyTypeEdited += Context_HoneyTypeEdited;
             Session.Context.MarkerAdded += Context_MarkerAddedOrRemoved;
             Session.Context.MarkerRemoved += Context_MarkerAddedOrRemoved;
         }

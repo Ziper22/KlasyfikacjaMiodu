@@ -85,6 +85,8 @@ namespace KlasyfikacjaMiodu.BottomBar
         private void Session_ContextChanged(Context context)
         {
             SetContextEvents();
+            time.Text = context.TimeSpan.ToString();
+            PauseTimer();
         }
 
         public bool Running

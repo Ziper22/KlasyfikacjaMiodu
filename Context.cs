@@ -48,7 +48,6 @@ namespace KlasyfikacjaMiodu
         public Context(bool useDefaultHoneyTypes)
         {
             Actions.Clear();
-            image = Resources.honeyPollens;
 
             if (useDefaultHoneyTypes)
                 LoadDefaultHoneyTypes();

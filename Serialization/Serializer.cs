@@ -70,23 +70,26 @@ namespace KlasyfikacjaMiodu.Serialization
             }
         }
 
-        public void Deserialize(OpenFileDialog ofd)
+        public string Deserialize(OpenFileDialog ofd)
         {
-            if (!CheckIfProjectImageExists(ofd.FileName)) return;
+            if (!CheckIfProjectImageExists(ofd.FileName)) return "Nie znaleziono pliku ze zdjęciem projektu. Sprawdź, czy w folderze istnieje plik .jpg o takiej samej nazwie co plik .txt.";
 
-            DeserializeImage(ofd);
+            Image img = DeserializeImage(ofd);
             Context context = DeserializeTxt(ofd);
-            if (context == null) return;
+            if (context == null) return "Błąd podczas wczytywania - plik .txt jest uszkodzony.";
+            if (img == null) return "Błąd podczas wczytywania - plik .jpg jest uszkodzony.";
 
             Session.NewClear();
+            Session.Context.Image = img;
             foreach (var honeyType in context.HoneyTypes)
                 Session.Context.AddHoneyType(honeyType);
             foreach (var marker in context.Markers)
                 Session.Context.AddMArker(marker);
             Session.Context.TimeSpan = context.TimeSpan;
+            return "correct";
 
         }
-        private void DeserializeImage(OpenFileDialog ofd)
+        private Image DeserializeImage(OpenFileDialog ofd)
         {
             Image img;
             string imagePath = Path.Combine(Path.GetDirectoryName(ofd.FileName), Path.GetFileNameWithoutExtension(ofd.FileName)) + ".jpg";
@@ -96,8 +99,9 @@ namespace KlasyfikacjaMiodu.Serialization
                 {
                     img = new Bitmap(bmpTemp);
                 }
-                Session.Context.Image = img;
+                return img;
             }
+            return null;
 
         }
         private Context DeserializeTxt(OpenFileDialog ofd)

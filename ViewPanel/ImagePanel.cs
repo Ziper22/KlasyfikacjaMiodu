@@ -46,12 +46,15 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
         private void pollensImage_Layout(object sender, LayoutEventArgs e)
         {
-            float scale = Session.Context.Scale;
-            int width = (int)(pollensImage.Image.PhysicalDimension.Width * scale);
-            int height = (int)(pollensImage.Image.PhysicalDimension.Height * scale);
-            pollensImage.Size = new Size(width, height);
+            if (pollensImage.Image != null)
+            {
+                float scale = Session.Context.Scale;
+                int width = (int) (pollensImage.Image.PhysicalDimension.Width*scale);
+                int height = (int) (pollensImage.Image.PhysicalDimension.Height*scale);
+                pollensImage.Size = new Size(width, height);
 
-            panel.Size = pollensImage.Size;
+                panel.Size = pollensImage.Size;
+            }
         }
 
         /// <summary>
@@ -114,7 +117,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void PollensImage_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (panel.Focused)
+            if (panel.Focused && pollensImage.Image != null)
             {
                 float scale = pollensImage.Width / (float)pollensImage.Image.PhysicalDimension.Width;
                 if (e.Delta > 0)
@@ -138,19 +141,23 @@ namespace KlasyfikacjaMiodu.ViewPanel
         /// </summary>
         private void Context_ScaleChanged(float scale)
         {
-            Point loc = new Point(panel.Location.X, panel.Location.Y);
+            if (pollensImage.Image != null)
+            {
+                Point loc = new Point(panel.Location.X, panel.Location.Y);
 
-            float CenterX = panel.Location.X + panel.Width / 2;
-            float CenterY = panel.Location.Y + panel.Height / 2;
+                float CenterX = panel.Location.X + panel.Width/2;
+                float CenterY = panel.Location.Y + panel.Height/2;
 
-            float neededWidth = pollensImage.Image.PhysicalDimension.Width * scale;
-            float newScale = neededWidth / panel.Width;
 
-            panel.Scale(new SizeF(newScale, newScale));
+                float neededWidth = pollensImage.Image.PhysicalDimension.Width*scale;
+                float newScale = neededWidth/panel.Width;
 
-            int x = (int)(CenterX - panel.Width / 2);
-            int y = (int)(CenterY - panel.Height / 2);
-            panel.Location = new Point(x, y);
+                panel.Scale(new SizeF(newScale, newScale));
+
+                int x = (int) (CenterX - panel.Width/2);
+                int y = (int) (CenterY - panel.Height/2);
+                panel.Location = new Point(x, y);
+            }
         }
 
         /// <summary>
