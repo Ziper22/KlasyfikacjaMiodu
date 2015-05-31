@@ -22,6 +22,7 @@ namespace KlasyfikacjaMiodu.BottomBar
 
             SetContextEvents();
             Session.Changed += Session_ContextChanged;
+            PauseTimer();
         }
 
         void stoperButton_Click(object sender, EventArgs e)
@@ -44,7 +45,6 @@ namespace KlasyfikacjaMiodu.BottomBar
             timer = new Timer();
             timer.Tick += TimeChanged;
             timer.Interval = 1000;
-            StartTimer();
         }
 
         public void StartTimer()
