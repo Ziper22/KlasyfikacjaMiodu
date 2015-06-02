@@ -45,7 +45,7 @@ namespace KlasyfikacjaMiodu.TopMenu
         {
             Session.NewDefault();
             Session.Context.Scale = 0.57F;
-            RefreshHeaderOfForm("Unknown");
+            RefreshHeaderOfForm("Niezapisany projekt");
         }
 
         private void SaveProject_Click(object sender, EventArgs e)
@@ -56,16 +56,28 @@ namespace KlasyfikacjaMiodu.TopMenu
                 sfd.Filter = "Project txt (*.txt)|*.txt";
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
+                    Serializer serializer = new Serializer();
+                    string saveState = "";
+
                     try
                     {
-                        Serializer serializer = new Serializer();
-                        serializer.Serialize(sfd);
-                        RefreshHeaderOfForm(sfd.FileName);
+                        saveState = serializer.Serialize(sfd.FileName);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Wystąpił błąd podczas zapisu projektu.", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (ex is IOException)
+                        {
+                             MessageBox.Show("Wystąpił błąd podczas zapisu projektu. Plik jest używany przez inny proces.", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                             MessageBox.Show("Wystąpił błąd podczas zapisu projektu.", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+
+                    if (saveState == "correct")
+                        RefreshHeaderOfForm(sfd.FileName);
+                    else if (saveState != "")
+                        MessageBox.Show(saveState, "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
             }
         }
@@ -82,11 +94,11 @@ namespace KlasyfikacjaMiodu.TopMenu
                     string loadState = "";
                     try
                     {
-                        loadState = serializer.Deserialize(ofd);
+                        loadState = serializer.Deserialize(ofd.FileName);
                     }
-                    catch (Exception)
+                    catch (ArgumentException)
                     {
-                        MessageBox.Show("Wystąpił błąd podczas wczytywania projektu.", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Wystąpił błąd podczas wczytywania projektu. Plik ze zdjęciem jest uszkodzony.", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                     if (loadState == "correct")
@@ -128,7 +140,7 @@ namespace KlasyfikacjaMiodu.TopMenu
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Nie udało się poprawnie wczytać zdjęcia. Upewnij się, że wybrałeś odpowiednie rozszerzenie.", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Nie udało się poprawnie wczytać zdjęcia. Upewnij się, że wybrałeś odpowiednie rozszerzenie lub czy plik nie jest uszkodzony.", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -146,7 +158,7 @@ namespace KlasyfikacjaMiodu.TopMenu
         private void RefreshHeaderOfForm(string projectPath)
         {
             string projectName = Path.GetFileNameWithoutExtension(projectPath);
-            mainForm.Text = "Klasyfikacja Miodu - [" + projectName + "]";
+            mainForm.Text = projectName + " - Klasyfikacja Miodu";
         }
 
         /// <summary>

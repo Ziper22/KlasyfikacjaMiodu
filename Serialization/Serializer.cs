@@ -18,15 +18,32 @@ namespace KlasyfikacjaMiodu.Serialization
         {
 
         }
-
-        public void Serialize(SaveFileDialog sfd)
+        
+        /// <summary>
+        /// Saves a project.
+        /// </summary>
+        /// <param name="filePath">Path, which will be used to save the project.</param>
+        /// <returns>String with save state.</returns>
+        public string Serialize(string filePath)
         {
-            SerializeImage(sfd.FileName);
-            SerializeTxt(sfd.FileName);
+            bool imageCorrectlySaved;
+            imageCorrectlySaved = SerializeImage(filePath);
+            SerializeTxt(filePath);
+
+            if (!imageCorrectlySaved) return "Błąd przy zapisywaniu zdjęcia. Sprawdź, czy wczytałeś zdjęcie do projektu i spróbuj ponownie.";
+            else return "correct";
         }
-        private void SerializeImage(string imagePath)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="imagePath">Path, which will be used to save the image.</param>
+        /// <returns>True - if the image has been properly serialized, False - otherwise.</returns>
+        private bool SerializeImage(string imagePath)
         {
             string path = Path.Combine(Path.GetDirectoryName(imagePath), Path.GetFileNameWithoutExtension(imagePath)) + ".jpg";
+
+            if (Session.Context.Image == null) return false;
             using (MemoryStream memory = new MemoryStream())
             {
                 using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite))
@@ -36,6 +53,7 @@ namespace KlasyfikacjaMiodu.Serialization
                     fs.Write(bytes, 0, bytes.Length);
                 }
             }
+            return true;
         }
         private void SerializeTxt(string txtPath)
         {
@@ -70,12 +88,12 @@ namespace KlasyfikacjaMiodu.Serialization
             }
         }
 
-        public string Deserialize(OpenFileDialog ofd)
+        public string Deserialize(string filePath)
         {
-            if (!CheckIfProjectImageExists(ofd.FileName)) return "Nie znaleziono pliku ze zdjęciem projektu. Sprawdź, czy w folderze istnieje plik .jpg o takiej samej nazwie co plik .txt.";
+            if (!CheckIfProjectImageExists(filePath)) return "Nie znaleziono pliku ze zdjęciem projektu. Sprawdź, czy w folderze istnieje plik .jpg o takiej samej nazwie co plik .txt.";
 
-            Image img = DeserializeImage(ofd);
-            Context context = DeserializeTxt(ofd);
+            Image img = DeserializeImage(filePath);
+            Context context = DeserializeTxt(filePath);
             if (context == null) return "Błąd podczas wczytywania - plik .txt jest uszkodzony.";
             if (img == null) return "Błąd podczas wczytywania - plik .jpg jest uszkodzony.";
 
@@ -89,10 +107,10 @@ namespace KlasyfikacjaMiodu.Serialization
             return "correct";
 
         }
-        private Image DeserializeImage(OpenFileDialog ofd)
+        private Image DeserializeImage(string imagePath)
         {
             Image img;
-            string imagePath = Path.Combine(Path.GetDirectoryName(ofd.FileName), Path.GetFileNameWithoutExtension(ofd.FileName)) + ".jpg";
+            imagePath = Path.Combine(Path.GetDirectoryName(imagePath), Path.GetFileNameWithoutExtension(imagePath)) + ".jpg";
             if (File.Exists(imagePath))
             {
                 using (var bmpTemp = new Bitmap(imagePath))
@@ -104,7 +122,7 @@ namespace KlasyfikacjaMiodu.Serialization
             return null;
 
         }
-        private Context DeserializeTxt(OpenFileDialog ofd)
+        private Context DeserializeTxt(string txtFilePath)
         {
             Context context = new Context(true);
 
@@ -113,7 +131,7 @@ namespace KlasyfikacjaMiodu.Serialization
             Regex markerRegex = new Regex(@"(?:marker\s*x:\s*)(\d+)(?:\s*y:\s*)(\d+)(?:\s*size:\s*)(\d+)(?:\s*type_name:\s*)([a-ząćśóźżłńę ]+)", options);
             Regex timerRegex = new Regex(@"(?:timer:\s*)(\d\d:\d\d:\d\d)", options);
 
-            using (StreamReader sr = File.OpenText(ofd.FileName))
+            using (StreamReader sr = File.OpenText(txtFilePath))
             {
                 Match honeyTypeMatchResult;
                 Match markerMatchResult;
