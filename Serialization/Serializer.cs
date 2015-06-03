@@ -105,7 +105,6 @@ namespace KlasyfikacjaMiodu.Serialization
                 Session.Context.AddMArker(marker);
             Session.Context.TimeSpan = context.TimeSpan;
             return "correct";
-
         }
         private Image DeserializeImage(string imagePath)
         {

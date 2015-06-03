@@ -105,7 +105,7 @@ namespace KlasyfikacjaMiodu.TopMenu
                     {
                         try
                         {
-                            serializer.Deserialize(ofd);
+                            serializer.Deserialize(ofd.FileName);
                             RefreshHeaderOfForm(ofd.FileName);
 
                            
@@ -134,8 +134,11 @@ namespace KlasyfikacjaMiodu.TopMenu
                 {
                     try
                     {
-                        bmp = new Bitmap(ofd.FileName);
-                        Session.Context.Image = (Image)bmp;
+                        using (var fs = new FileStream(ofd.FileName, FileMode.Open))
+                        {
+                            bmp = new Bitmap(fs);
+                            Session.Context.Image = (Image)bmp.Clone();
+                        }
                         Session.Context.Scale = 0.57F;
                     }
                     catch (Exception)
