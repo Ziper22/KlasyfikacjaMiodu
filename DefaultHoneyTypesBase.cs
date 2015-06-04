@@ -11,12 +11,16 @@ using System.Resources;
 
 namespace KlasyfikacjaMiodu
 {
+    /// <summary>
+    /// Author: Arek Mackiewicz, Krzysztof Kalisz. 
+    ///     Klasa opowiedzialna za pobieranie listy pyłków z bazy.
+    /// </summary>
     internal class DefaultHoneyTypesBase
     {
         /// <summary>
-        /// Author: Arek Mackiewicz,Krzysztof Kalisz<para/>
-        /// 
+        /// Statyczna funkcja odpowiedzialna za powieranie listy pyłków z bazy.
         /// </summary>
+        /// <returns>Listaa pyłkow</returns>
         public static List<HoneyType> GetAllHoneyTypesFromFile()
         {
             List<HoneyType> HoneyList = new List<HoneyType>();
@@ -62,7 +66,7 @@ namespace KlasyfikacjaMiodu
             return HoneyList;
         }
         /// <summary>
-        /// Adds new honey type to DefaultHoneyTypeBase
+        /// Dodaje nowy typ miodu do podstawowej bazy.
         /// </summary>
         /// <param name="honeyType">HoneyType</param>
         public static void AddNewHoneyTypeToFile(HoneyType honeyType)

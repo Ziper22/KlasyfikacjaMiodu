@@ -9,14 +9,17 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.BottomBar
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki<para/>
-    /// Class responsible for handling Markers placement and image movement/scale
+    /// Author: Mariusz Gorzycki. <para/>
+    /// Klasa odpowiedzialna za przechowywanie położenia znaczników oraz przemieszczania i skalowania obrazów.
     /// </summary>
     class ScaleHandler
     {
         private NumericUpDown scaleNumericUpDown;
         private bool myChanges = false;
-
+        /// <summary>
+        /// Konstruktor klasy.
+        /// </summary>
+        /// <param name="scaleNumericUpDown"></param>
         public ScaleHandler(NumericUpDown scaleNumericUpDown)
         {
             this.scaleNumericUpDown = scaleNumericUpDown;
@@ -28,7 +31,7 @@ namespace KlasyfikacjaMiodu.BottomBar
         }
 
         /// <summary>
-        /// Called when Context in current session is changing
+        /// Funkcja wywoływana podczas zmian w bierzącej sesji.
         /// </summary>
         void Session_Changed(Context Context)
         {
@@ -36,15 +39,15 @@ namespace KlasyfikacjaMiodu.BottomBar
         }
 
         /// <summary>
-        /// Sets Context events. Listeners should be set again after every Context change in current Session
-        /// </summary>
+        /// Funkcja ustawiająca zdarzenia Contextu.
+        /// </summary>>
         private void SetContextEvents()
         {
             Session.Context.ScaleChanged += Context_ScaleChanged;
         }
 
         /// <summary>
-        /// Called when Context in current session is changing
+        /// Funkcja wywoływana podczas zmian Contextu w bierzącej sesji.
         /// </summary>
         private void Session_ContextChanged(Context context)
         {
@@ -52,7 +55,7 @@ namespace KlasyfikacjaMiodu.BottomBar
         }
 
         /// <summary>
-        /// Called when scale value was changed directly from BottomBar
+        /// Funkcja wywoływana podczas zmian wartości skali.
         /// </summary>
         private void ScaleNumeric_ScaleChanged(object sender, EventArgs e)
         {
@@ -66,7 +69,7 @@ namespace KlasyfikacjaMiodu.BottomBar
         }
 
         /// <summary>
-        /// Called when scale in current Context is changing
+        /// Funkcja wywoływana podczas zmian sklai w Contexcie.
         /// </summary>
         private void Context_ScaleChanged(float scale)
         {
@@ -75,7 +78,7 @@ namespace KlasyfikacjaMiodu.BottomBar
         }
 
         /// <summary>
-        /// Updates the Scale Label with given scale value.
+        /// Funkcja odpowiedzialna za aktualizowanie wartości skali w komórce.
         /// </summary>
         private void SetScaleText(float scale)
         {
@@ -85,7 +88,7 @@ namespace KlasyfikacjaMiodu.BottomBar
         }
 
         /// <summary>
-        /// Updates the Scale Label with proper scale value from current Context.
+        /// Funkcja odpowiedzialna za aktualizowanie wartości skali w komórce.
         /// </summary>
         private void SetScaleText()
         {

@@ -13,7 +13,7 @@ namespace KlasyfikacjaMiodu.TopMenu
 {
     /// <summary>
     /// Author: Dawid Ferszter. <para/>
-    /// Class responsible for handling "File" menu.
+    /// Klasa odpowiedzialna za przechowywnie zakładki "Plik" w menu.
     /// </summary>
     public class TopMenuFile
     {
@@ -23,7 +23,14 @@ namespace KlasyfikacjaMiodu.TopMenu
         private ToolStripMenuItem loadImage;
         private ToolStripMenuItem quit;
         private MainForm mainForm;
-
+        /// <summary>
+        /// Konstruktor klasy. Dodaje pola do rozwijanej listy.
+        /// </summary>
+        /// <param name="newProject">Nowy projekt</param>
+        /// <param name="saveProject">Zapisz projekt</param>
+        /// <param name="loadProject">Wczytaj projekt</param>
+        /// <param name="loadImage">Wczytaj obraz</param>
+        /// <param name="quit">Zakończ</param>
         public TopMenuFile(ToolStripMenuItem newProject, ToolStripMenuItem saveProject,
            ToolStripMenuItem loadProject, ToolStripMenuItem loadImage, ToolStripMenuItem quit, MainForm mainForm)
         {
@@ -40,14 +47,18 @@ namespace KlasyfikacjaMiodu.TopMenu
             loadImage.Click += LoadImage_Click;
             quit.Click += Quit_Click;
         }
-
+        /// <summary>
+        /// Funkcja wywołana po wciśnięciu "Nowy projekt".
+        /// </summary>
         private void NewProject_Click(object sender, EventArgs e)
         {
             Session.NewDefault();
             Session.Context.Scale = 0.57F;
             RefreshHeaderOfForm("Niezapisany projekt");
         }
-
+        /// <summary>
+        /// Funkcja wywołana po wciśnięciu "Zapisz projekt".
+        /// </summary>
         private void SaveProject_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog sfd = new SaveFileDialog())
@@ -81,7 +92,9 @@ namespace KlasyfikacjaMiodu.TopMenu
                 }
             }
         }
-
+        /// <summary>
+        /// Funkcja wywołana po wciśnięciu "Wczytaj projekt".
+        /// </summary>
         private void LoadProject_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
@@ -123,7 +136,9 @@ namespace KlasyfikacjaMiodu.TopMenu
                 }
             }
         }
-
+        /// <summary>
+        /// Funkcja wywołana po wciśnięciu "Wczytaj obraz".
+        /// </summary>
         private void LoadImage_Click(object sender, EventArgs e)
         {
             Bitmap bmp;
@@ -148,16 +163,18 @@ namespace KlasyfikacjaMiodu.TopMenu
                 }
             }
         }
-
+        /// <summary>
+        /// Funkcja wywołana po wciśnięciu "Zakończ". Kończy działanie programu.
+        /// </summary>
         private void Quit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
         /// <summary>
-        /// Refreshes header of form with name of project.
+        /// Odświeża nagłówek z nazwą projektu.
         /// </summary>
-        /// <param name="projectPath">Path with project files.</param>
+        /// <param name="projectPath">Ścieżka do plików.</param>
         private void RefreshHeaderOfForm(string projectPath)
         {
             string projectName = Path.GetFileNameWithoutExtension(projectPath);
@@ -165,9 +182,9 @@ namespace KlasyfikacjaMiodu.TopMenu
         }
 
         /// <summary>
-        /// Determines if image within project directory exists.
+        /// Określa, czy obraz w ramach katalogu projektu istnieje.
         /// </summary>
-        /// <param name="txtFilePath">Path with .txt file.</param>
+        /// <param name="txtFilePath">Ścieżka z plikiem .txt</param>
         /// <returns></returns>
         private bool CheckIfProjectImageExists(string txtFilePath)
         {
@@ -178,7 +195,11 @@ namespace KlasyfikacjaMiodu.TopMenu
             else return false;
 
         }
-
+        /// <summary>
+        /// Funkcja sprawdzająca czy rozdzerzenie pliku jest poprawne.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckIfFileHasCorrectExtension(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (sender is SaveFileDialog)

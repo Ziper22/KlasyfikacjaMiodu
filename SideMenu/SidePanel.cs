@@ -5,8 +5,8 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
-    ///     Author: Agata Hammermeister
-    ///     <para />
+    ///     Author: Agata Hammermeister.
+    ///     Klasa odpowiedzialna za boczny panel.
     /// </summary>
     public partial class SidePanel : Form
     {
@@ -14,7 +14,10 @@ namespace KlasyfikacjaMiodu.SideMenu
         private readonly PollenModuleSelector pollenModuleSelector;
         private bool locationChanged;
         bool alignToRight = true;
-
+        /// <summary>
+        /// Konstruktor klasy.
+        /// </summary>
+        /// <param name="mainForm"></param>
         public SidePanel(Form mainForm)
         {
             InitializeComponent();
@@ -31,13 +34,17 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         #region MainMethods
-     
+        /// <summary>
+        /// Funkcja wywoływana przy zmianie rozmiaru bocznego panelu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void SidePanel_SizeChanged(object sender, EventArgs e)
         {
         }
 
         /// <summary>
-        ///     Allows scrolling side panel with mouse wheel
+        ///      Pozwala a scrollowanie bocznego panelu za pomocą kółka myszy.
         /// </summary>
         void SidePanel_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -45,7 +52,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        ///     Loads modules in side panel for all honey types and selects first one by default
+        ///     Ładuje moduły z typami miodów do bocznego panelu i zaznacza pierwszy.   
         /// </summary>
         private void Session_Changed(Context context)
         {
@@ -77,7 +84,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        ///     On ControlBox click hides side panel instead of closing it
+        ///     Chowa panel zamiast go zamykać.
         /// </summary>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
@@ -90,14 +97,21 @@ namespace KlasyfikacjaMiodu.SideMenu
         #endregion
 
         #region AddEditDelete
-
+        /// <summary>
+        /// Obsługuje zdarzenie przy kliknięciu "Dodaj".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow();
             addEditWindow.OkButtonClicked += HoneyType_AddToContext;
             addEditWindow.ShowDialog();
         }
-
+        /// <summary>
+        /// Dodawanie nowego typu miodu.
+        /// </summary>
+        /// <param name="newHoney"></param>
         private void HoneyType_Add(HoneyType newHoney)
         {
             PollenModule pollenModule = new PollenModule(newHoney);
@@ -106,7 +120,11 @@ namespace KlasyfikacjaMiodu.SideMenu
             RefreshPanel();
             panel1.ScrollControlIntoView(pollenModule);
         }
-
+        /// <summary>
+        /// Dodawanie nowego typu miodu do Contextu.
+        /// </summary>
+        /// <param name="newHoney"></param>
+        /// <param name="persistent"></param>
         private void HoneyType_AddToContext(HoneyType newHoney, bool persistent)
         {
             Session.Context.AddHoneyType(newHoney);
@@ -116,7 +134,11 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
             panel1.ScrollControlIntoView(panel1.Controls[panel1.Controls.Count - 1]);
         }
-
+        /// <summary>
+        /// Obsługuje zdarzenie przy kliknięciu "Edytuj".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (pollenModuleSelector.chosenModule.HoneyType != null)
@@ -130,13 +152,21 @@ namespace KlasyfikacjaMiodu.SideMenu
                 addEditWindow.ShowDialog();
             }
         }
-
+        /// <summary>
+        /// Edytowanie istniejącego już typu miodu.
+        /// </summary>
+        /// <param name="honeyType"></param>
+        /// <param name="persistent"></param>
         private void HoneyType_Edit(HoneyType honeyType, bool persistent)
         {
             pollenModuleSelector.chosenModule.Edit(honeyType);
             Session.Context.EditedHoneyType(honeyType);
         }
-
+        /// <summary>
+        /// Obsługuje zdarzenie przy kliknięciu "Usuń".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (pollenModuleSelector.chosenModule.HoneyType != null)
@@ -171,7 +201,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         #region Location&Orientation
 
         ///<summary>
-        /// Aligns side panel every time main form's size changes
+        /// Wyrównuje panel przy każdej zmianie głównego okna.
         /// </summary>
         void mainForm_SizeChanged(object sender, EventArgs e)
         {
@@ -179,7 +209,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         ///<summary>
-        /// Aligns panel depending on its orientation
+        /// Wyrównuje panel zależnie od jego orientacji.
         /// </summary>
         private void AlignSidePanel()
         {
@@ -211,7 +241,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        ///     Changes orientation of the side panel to vertical
+        ///     Zmienia orientację panelu na pionową.
         /// </summary>
         private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -228,7 +258,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         ///<summary>
-        /// Hides drop down items of the "Orientation" menu tool strip
+        /// Ukrywa elementy paska menu.
         /// </summary>
         private void HideDropDownMenuItems()
         {
@@ -239,7 +269,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         ///<summary>
-        /// Shows drop down items of the "Orientation" menu tool strip
+        /// Pokazuje elementy paska menu.
         /// </summary>
         private void ShowDropDownMenuItems()
         {
@@ -250,7 +280,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        ///     Changes orientation of the side panel to horizontal
+        ///     Zmienia orientację panelu na poziomą.
         /// </summary>
         private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -278,7 +308,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
 
         ///<summary>
-        /// Aligns side panel to left depending on its orientation
+        /// Wyrównuje boczny panel do lewej strony zależnie od jego orientacji.
         /// </summary>
         private void AlignSidePanelToLeft()
         {
@@ -295,7 +325,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         ///<summary>
-        /// Aligns side panel to right depending on its orientation
+        /// Wyrównuje boczny panel do prawej strony zależnie od jego orientacji.
         /// </summary>
         private void AlignSidePanelToRight()
         {
@@ -312,7 +342,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         ///<summary>
-        /// Changes order of "Orientation" menu toolstrip items so the "Align" item is always first
+        /// Zmienia kolejność elementów w menu.
         /// </summary>
         private void SwapMenuItems()
         {
@@ -337,7 +367,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         ///<summary>
-        /// Refreshes panel orientation
+        /// Odświeża orientację panelu.
         /// </summary>
         private void RefreshPanel()
         {
@@ -349,7 +379,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         ///<summary>
-        /// Aligns panel to left
+        /// Wyrównuje panel do lewej.
         /// </summary>
         private void toLeftToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -358,7 +388,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         ///<summary>
-        /// Aligns panel to right
+        /// Wyrównuje panel do prawej.
         /// </summary>
         private void toRightToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -367,14 +397,17 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         ///<summary>
-        /// Shows drop down items of the "Orientation" menu tool strip
+        /// Funkcja wywoływana po wciśnięciu orientationToolStripMenuItem.
         /// </summary>
         private void orientationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowDropDownMenuItems();
         }
         #endregion
-
+        /// <summary>
+        /// Blokuje panel.
+        /// </summary>
+        /// <param name="block"></param>
         public void SetPanel(bool block)
         {
             addToolStripMenuItem.Enabled = block;

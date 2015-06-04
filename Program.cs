@@ -7,6 +7,10 @@ using System.Drawing;
 
 namespace KlasyfikacjaMiodu
 {
+    /// <summary>
+    /// Główny punkt wejścia dla aplikacji.
+    /// Klasa wygenerowana automatycznie.
+    /// </summary>
     static class Program
     {
         [STAThread]

@@ -5,9 +5,9 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
-    /// Author: Marek Borski<para/>
+    /// Author: Marek Borski. <para/>
+    /// Klasa odpowiedzialna za okno edycji typów miodu.
     /// </summary>
-    /// 
     public partial class HoneyTypeEditWindow : Form
     {
         public delegate void OkButtonClickedDelegate(HoneyType honeyType, bool persistent);
@@ -18,7 +18,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         bool isHoneyNameFieldRed = false;
 
         /// <summary>
-        /// Constructor for adding new pollen
+        /// Konstruktor klasy.
         /// </summary>
         public HoneyTypeEditWindow()
         {
@@ -36,7 +36,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Constructor for editing existing pollen
+        /// Konstruktor edytujący istniejący pyłek.
         /// </summary>
         public HoneyTypeEditWindow(HoneyType honeyType)
         {
@@ -58,7 +58,11 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         #region Events
-
+        /// <summary>
+        /// Funkcja wywoływana podczas zmiany tekstu w polu NameTextBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NameTextBox_TextChanged(object sender, EventArgs e)
         {
             if (CheckIfNameWasAssigned(nameTextBox.Text) == true || nameTextBox.TextLength == 0)
@@ -75,7 +79,11 @@ namespace KlasyfikacjaMiodu.SideMenu
             CheckIfSpaceWasClicked(nameTextBox);
             SwitchOkButton(CheckIfInputControlsAreFilled());
         }
-
+        /// <summary>
+        /// Funkcja wywoływana podczas zmiany tekstu w polu HoneyNameTextBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HoneyNameTextBox_TextChanged(object sender, EventArgs e)
         {
             if (CheckIfNameWasAssigned(honeyNameTextBox.Text) == true || honeyNameTextBox.TextLength == 0)
@@ -92,7 +100,11 @@ namespace KlasyfikacjaMiodu.SideMenu
             CheckIfSpaceWasClicked(honeyNameTextBox);
             SwitchOkButton(CheckIfInputControlsAreFilled());
         }
-
+        /// <summary>
+        /// Funkcja wywoływana przy wciśnięciu klawisza dodającego wartość w polu Percent.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PercentNumericUpDown_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete)
@@ -106,7 +118,11 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             CheckIfInt(percentNumericUpDown);
         }
-
+        /// <summary>
+        /// Funkcja wywoływana przy kliknięciu przycisku zmiany koloru.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChooseColorButton_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
@@ -136,7 +152,11 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             SwitchOkButton(CheckIfInputControlsAreFilled());
         }       
-
+        /// <summary>
+        /// Funkcja wywoływana po kliknięciu na obrazek z kolorem.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SpecimenPictureBox_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -150,7 +170,11 @@ namespace KlasyfikacjaMiodu.SideMenu
                 ChooseColorButton_Click(sender, e);
             }
         }
-
+        /// <summary>
+        /// Funkcja wywoływana po wciścięciu przycisku OK.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OkButton_Click(object sender, EventArgs e)
         {
             if (isNameFieldRed == false && isHoneyNameFieldRed == false)
@@ -169,14 +193,20 @@ namespace KlasyfikacjaMiodu.SideMenu
                 warningLabel.Visible = true;
             }
         }
-
+        /// <summary>
+        /// Funkcja wywoływana przy wciśnięciu przycisku Anuluj.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
         #endregion
-
+        /// <summary>
+        /// Funkcja sprawdzająca czy został wciśnięty przycisk OK.
+        /// </summary>
         protected virtual void OnOkButtonClicked()
         {
             if (OkButtonClicked != null)
@@ -184,7 +214,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Checks if color which we are going to choose is already assigned to other pollen
+        /// Funkcja sprawdza czy wybrany kolor nie jest juz przypisany do innego pyłka.
         /// </summary>
         private bool CheckIfColorWasAssigned(Color color)
         {
@@ -199,7 +229,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Checks if name (names) which we are going to choose is (are) already assigned to other pollen
+        /// Funkcja sprawdza czy wybrana nazwa nie jest juz przypisana do innego pyłka.
         /// </summary>
         private bool CheckIfNameWasAssigned(string newName)
         {
@@ -217,7 +247,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Checks if all controls in which information must be set are filled
+        /// Funkcja sprawdzająca czy wszystkie pola zostały wypełnione.
         /// </summary>
         private bool CheckIfInputControlsAreFilled()
         {
@@ -241,7 +271,8 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Checks if the condition to switch the ok button on is satisfied
+        /// Funkcja sprawdzająca czy wszystkie warunki w formularzu zostały spełnione.
+        /// Aktywuje przycisk lub go dezaktywuje.
         /// </summary>
         private void SwitchOkButton(bool areControlsFilled)
         {
@@ -256,7 +287,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Doesn't allow to type a space at the beggining and two or more spaces at the end of textboxes
+        /// Funkcja zabezpieczająca przed wciśnięciem spacji na początku lub dwóch spacji pod rząd.
         /// </summary>
         private void CheckIfSpaceWasClicked(TextBox control)
         {
@@ -273,7 +304,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Doesn't allow to type in digit-type field anything else besides digits
+        /// Nie pozwala na wpisanie do numerycznego pola niczego innego poza cyframi.
         /// </summary>
         private void CheckIfInt(Control control)
         {
@@ -298,7 +329,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Assigns tooltips to four controls
+        /// Funkcja odpowiedzialna za pokazywanie dymków z podpowiedziami.
         /// </summary>
         private void ShowToolTips()
         {
@@ -313,8 +344,9 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Gets a random color
+        /// Funkcja generująca losowy kolor.
         /// </summary>
+        /// <returns></returns>
         private Color DrawColor()
         {
             Random rnd = new Random();

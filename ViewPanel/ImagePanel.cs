@@ -19,7 +19,9 @@ namespace KlasyfikacjaMiodu.ViewPanel
         private Form form;
         private bool mouseDown = false;
         private int xOffset, yOffset;
-
+        /// <summary>
+        /// Konstuktor klasy
+        /// </summary>
         public ImagePanel(Panel panel, PictureBox pollensImage, Form form)
         {
             this.panel = panel;
@@ -38,12 +40,18 @@ namespace KlasyfikacjaMiodu.ViewPanel
 
             form.SizeChanged += form_SizeChanged;
         }
-
+        /// <summary>
+        /// Funkcja wywoływana po zmianie rozmiaru.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void form_SizeChanged(object sender, EventArgs e)
         {
             CenterImage();
         }
-
+        /// <summary>
+        /// Funkcja odpowiedzialna za ustawienie rozmiaru panelu
+        /// </summary>
         private void pollensImage_Layout(object sender, LayoutEventArgs e)
         {
             if (pollensImage.Image != null)
@@ -58,7 +66,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Sets Context events. Listeners should be set again after every Context change in current Session
+        /// Ustawia zdarzenia Contextu. Nasłuchiwacze powinny być ustawione ponownie po każdej zmianie Contextu w aktualnej sesji.
         /// </summary>
         private void SetContextEvents()
         {
@@ -66,15 +74,17 @@ namespace KlasyfikacjaMiodu.ViewPanel
             Session.Context.ScaleChanged += Context_ScaleChanged;
             Session.Context.HoneyTypeAdded += Context_HoneyTypeAdded;
         }
-
+        /// <summary>
+        /// Funkcja obsługująca dodanie nowego typu miodu do Contextu
+        /// </summary>
         private void Context_HoneyTypeAdded(HoneyType honeyType)
         {
 
         }
 
         /// <summary>
-        /// Function responsible for handling Mouse events.
-        /// Should not be invoked manually.
+        /// Funkcja obsługująca zdarzenia myszy.
+        /// Nie powinna być wywoływana manualnie.
         /// </summary>
         private void PollensImage_MouseEnter(object sender, EventArgs e)
         {
@@ -82,8 +92,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Function responsible for handling Mouse events.
-        /// Should not be invoked manually.
+        /// Funkcja obsługująca zdarzenia myszy.
+        /// Nie powinna być wywoływana manualnie.
         /// </summary>
         private void PollensImage_MouseMove(object sender, MouseEventArgs e)
         {
@@ -92,8 +102,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Function responsible for handling Mouse events.
-        /// Should not be invoked manually.
+        /// Funkcja obsługująca zdarzenia myszy.
+        /// Nie powinna być wywoływana manualnie.
         /// </summary>
         private void PollensImage_MouseDown(object sender, MouseEventArgs e)
         {
@@ -103,17 +113,17 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Function responsible for handling Mouse events.
-        /// Should not be invoked manually.
+        /// Funkcja obsługująca zdarzenia myszy.
+        /// Nie powinna być wywoływana manualnie.
         /// </summary>
         private void PollensImage_MouseUp(object sender, MouseEventArgs e)
         {
             mouseDown = false;
         }
 
-        /// <summary>
-        /// Function responsible for handling Mouse events.
-        /// Should not be invoked manually.
+        //// <summary>
+        /// Funkcja obsługująca zdarzenia myszy.
+        /// Nie powinna być wywoływana manualnie.
         /// </summary>
         private void PollensImage_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -137,7 +147,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Scales the pollensImage with proper scale coefficient
+        /// Skaluje obrazki pyłków z odpowiednią skalą.
         /// </summary>
         private void Context_ScaleChanged(float scale)
         {
@@ -161,21 +171,23 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Adjust scale value in current Context.
+        /// Dopasowuje wartość skali w aktualnym Context.
         /// </summary>
         private void AdjustScaleToRealImageSize()
         {
             if (pollensImage.Image != null)
                 Session.Context.Scale = pollensImage.Width / (float)pollensImage.Image.PhysicalDimension.Width;
         }
-
+        /// <summary>
+        /// Funkcja ustawiająca obraz na środku.
+        /// </summary>
         private void CenterImage()
         {
             panel.Location = new Point(form.ClientSize.Width / 2 - panel.Width / 2, form.ClientSize.Height / 2 - panel.Height / 2);
         }
 
-        /// <summary>
-        /// Called when Image in current Context is changing
+        //// <summary>
+        /// Wywoływana gdy obraz w aktualnym Context został zmieniony.
         /// </summary>
         private void Context_ImageChanged(Image image)
         {
@@ -191,7 +203,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Called when Context in current session is changing
+        /// Wywoływana gdy obraz w aktualnej sesji został zmieniony.
         /// </summary>
         private void Session_ContextChanged(Context context)
         {

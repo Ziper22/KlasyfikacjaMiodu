@@ -15,6 +15,10 @@ using KlasyfikacjaMiodu.ViewPanel;
 
 namespace KlasyfikacjaMiodu
 {
+    /// <summary>
+    /// Klasa odpowiedzialna za główne okno programu.
+    /// Klasa wygenerowana automatycznie.
+    /// </summary>
     public partial class MainForm : Form
     {
         private MarkersPanel markersPanel;
@@ -26,7 +30,9 @@ namespace KlasyfikacjaMiodu
         private TopMenuEdit topMenuEdit;
         private TopMenuView topMenuView;
         private SidePanel sidePanel;
-
+        /// <summary>
+        /// Konstruktor klasy MainForm().
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -40,7 +46,9 @@ namespace KlasyfikacjaMiodu
             topMenuEdit = new TopMenuEdit(this, editMenu, undoMenuItem, redoMenuItem);
             topMenuView = new TopMenuView(showPanelMenuItem, centerImageMenuItem, sidePanel, viewPanel);
         }
-
+        /// <summary>
+        /// Funkcja tworząca boczny panel.
+        /// </summary>
         private void PrepareSidePanel()
         {
             sidePanel = new SidePanel(this);
@@ -54,7 +62,9 @@ namespace KlasyfikacjaMiodu
             sidePanel.Location = new Point(Right, Top);
             sidePanel.Show();
         }
-
+        /// <summary>
+        /// Właściwość zwracająca obiekt CreateParams
+        /// </summary>
         protected override CreateParams CreateParams
         {
             get
@@ -66,7 +76,7 @@ namespace KlasyfikacjaMiodu
         }
 
         /// <summary>
-        /// Changes "Enabled" property in sidePanel, changes "Visible" property in mainMenu, pauses timer.
+        /// Funkcja blokuje tryb edycji.
         /// </summary>
         public static void SetEditMode(MainForm mainForm, bool status)
         {
@@ -89,7 +99,11 @@ namespace KlasyfikacjaMiodu
                 mainForm.timeCounter.StartTimer();
         }
        
-       
+       /// <summary>
+       /// Funkcja włączająca tryb edycji.
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
         public void wlaczEdytowanieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MainForm.SetEditMode((MainForm)this,true);

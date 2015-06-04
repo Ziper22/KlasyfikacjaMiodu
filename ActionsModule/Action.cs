@@ -1,17 +1,17 @@
 ﻿namespace KlasyfikacjaMiodu.ActionsModule
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki<para/>
-    /// Abstract model of action witch can be done and eventually undone after that.
+    /// Author: Mariusz Gorzycki. <para/>
+    /// Abstrakcyjny model akcji, która może być wyonana lub cofnięta.
     /// </summary>
     public abstract class Action
     {
         /// <summary>
-        /// Defines what the action can do
+        /// Definiuje jaka może być akcja.
         /// </summary>
         public abstract void Do();
         /// <summary>
-        /// Defines how the changes in Do() method can be undone.
+        /// Definiuje jak zmiany w Do() mogą być cofnięte
         /// </summary>
         public abstract void Undo();
     }

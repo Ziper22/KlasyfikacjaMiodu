@@ -3,6 +3,10 @@ using System.Windows.Forms;
 
 namespace KlasyfikacjaMiodu
 {
+    /// <summary>
+    /// Klasa obsługująca główne okno programu.
+    /// Klasa wygenerowana automatycznie.
+    /// </summary>
     partial class MainForm
     {
         /// <summary>

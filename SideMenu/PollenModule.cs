@@ -5,10 +5,9 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
-    ///     Author: Agata Hammermeister
-    ///     <para />
-    ///     Represents information on each <see cref="HoneyType" />.
-    ///     Displayed on the side panel.
+    ///     Author: Agata Hammermeister.
+    ///     Przechowuje informacje o każdym  <see cref="HoneyType" />.
+    ///     Wyświetlane na bocznym panelu.
     /// </summary>
     public class PollenModule : FlowLayoutPanel
     {
@@ -23,7 +22,9 @@ namespace KlasyfikacjaMiodu.SideMenu
         private Label PollenNumber;
         private Label PollenPercentage;
         private FlowLayoutPanel PollenValues;
-
+        /// <summary>
+        /// Konstruktor klasy.
+        /// </summary>
         public PollenModule()
         {
             MarkerColor = new PictureBox {Enabled = false};
@@ -50,7 +51,10 @@ namespace KlasyfikacjaMiodu.SideMenu
             Session.Changed += Session_Changed;
             Session_Changed(Session.Context);
         }
-
+        /// <summary>
+        /// Konstruktor klasy.
+        /// </summary>
+        /// <param name="honeyType"></param>
         public PollenModule(HoneyType honeyType)
             : this()
         {
@@ -65,7 +69,10 @@ namespace KlasyfikacjaMiodu.SideMenu
             if (honeyType.Dirt) PollenPercentage.Visible = false;
             else PollenPercentage.Text = Percentage + "%";
         }
-
+        /// <summary>
+        ///     Zlicza podział procentowy i numeryczny znaczników typu miodu.
+        /// </summary>
+        /// <param name="context"></param>
         private void Session_Changed(Context context)
         {
             Session.Context.MarkerAdded += Context_MarkerAdded;
@@ -73,7 +80,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        ///     Computes percentage share and number of honey type markers
+        ///     Funkcja wywoływana przy zdzrzeniu dodania znacznika.
         /// </summary>
         private void Context_MarkerAdded(Marker marker)
         {
@@ -83,7 +90,9 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
             ComputeMarkerNumber();
         }
-
+        /// <summary>
+        ///     Funkcja wywoływana przy zdzrzeniu usunięcia znacznika.
+        /// </summary>
         private void Context_MarkerRemoved(Marker marker)
         {
             if (marker.HoneyType.Equals(HoneyType))
@@ -92,7 +101,9 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
             ComputeMarkerNumber();
         }
-
+        /// <summary>
+        ///     Funkcja odpowiedzialna za wyświetlanie liczby i wartości procentowej pyłków.
+        /// </summary>
         private void ComputeMarkerNumber()
         {
             if (HoneyType.Dirt) PollenNumber.Text = "ilość: " + Number;
@@ -112,45 +123,61 @@ namespace KlasyfikacjaMiodu.SideMenu
             else Percentage = 0;
             PollenPercentage.Text = Math.Round(Percentage, 3) + "%";
         }
-
+        /// <summary>
+        ///     Funkja odpowiedzialna za dodanie panelu z pyłkiem.
+        /// </summary>
+        /// <param name="honey"></param>
+        /// <returns></returns>
         public PollenModule Add(HoneyType honey)
         {
             PollenModule newPollen = new PollenModule(honey);
             return newPollen;
         }
-
+        /// <summary>
+        ///     Funkja odpowiedzialna za edycję panelu z pyłkiem.
+        /// </summary>
         public void Edit(HoneyType honey)
         {
             HoneyType = honey;
             MarkerColor.BackColor = honey.MarkerColor;
             HoneyName.Text = honey.Name;
         }
-
+        /// <summary>
+        ///     Funkja odpowiedzialna za podświetlanie panelu z pyłkiem.
+        /// </summary>
         public void Highlight()
         {
             if (chosen) return;
 
             BackColor = Color.PapayaWhip;
         }
-
+        /// <summary>
+        ///     Funkja odpowiedzialna za cofnięcie podświetlenia panelu z pyłkiem.
+        /// </summary>
         public void UnHighlight()
         {
             if (chosen) return;
             BackColor = Color.Empty;
         }
-
+        /// <summary>
+        ///     Funkja odpowiedzialna za wybrnie panelu z pyłkiem.
+        /// </summary>
         public void Choose()
         {
             chosen = true;
             BackColor = Color.NavajoWhite;
         }
-
+        /// <summary>
+        ///     Funkja odpowiedzialna za cofnięcie wyboru panelu z pyłkiem.
+        /// </summary>
         public void UnChoose()
         {
             chosen = false;
             BackColor = Color.Empty;
         }
-
+        /// <summary>
+        /// Funkcja ukrywająca label pokazujący odsetek.
+        /// </summary>
         public void HidePercentage()
         {
             PollenPercentage.Visible = false;

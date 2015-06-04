@@ -3,8 +3,8 @@
 namespace KlasyfikacjaMiodu.ActionsModule
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki<para/>
-    /// Manage all Actions performed and cancelled during the Session lifecycle.
+    /// Author: Mariusz Gorzycki. <para/>
+    /// Zarządza wszystkimi akcjami podczas trwania jednej sesji.
     /// </summary>
     public class Actions
     {
@@ -12,7 +12,7 @@ namespace KlasyfikacjaMiodu.ActionsModule
         private static Stack<Action> unDoneActions = new Stack<Action>();
 
         /// <summary>
-        /// Runs action and allow to undo Action later.
+        /// Wykonuje akacje i pozala na późniejsze jej cofnięcie.
         /// </summary>
         public static void RunAction(Action action)
         {
@@ -21,7 +21,7 @@ namespace KlasyfikacjaMiodu.ActionsModule
         }
 
         /// <summary>
-        /// Rollback changes made by last performed action
+        /// Cofa zmiany wykonane przez ostatnia akcję.
         /// </summary>
         public static void UndoLastAction()
         {
@@ -34,7 +34,7 @@ namespace KlasyfikacjaMiodu.ActionsModule
         }
 
         /// <summary>
-        /// Makes changes done by cancelled Action applicable again
+        /// Przywraca ostatnio cofniętą akcję.
         /// </summary>
         public static void RedoLastUndoneAction()
         {
@@ -47,7 +47,7 @@ namespace KlasyfikacjaMiodu.ActionsModule
         }
 
         /// <summary>
-        /// Returns the amount of actions performed since the program Session start
+        /// Zwraca ilość wykonanych akcji od czasu rozpoczęcia sesji.
         /// </summary>
         public static int DoneActionsAmount
         {
@@ -55,7 +55,7 @@ namespace KlasyfikacjaMiodu.ActionsModule
         }
 
         /// <summary>
-        /// Returns the amount of actions cancelled since the program Session start
+        ///  Zwraca ilość cofniętych akcji od czasu rozpoczęcia sesji.
         /// </summary>
         public static int UnDoneActionsAmount
         {

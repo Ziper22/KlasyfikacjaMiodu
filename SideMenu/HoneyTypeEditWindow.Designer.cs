@@ -1,16 +1,18 @@
 ﻿namespace KlasyfikacjaMiodu.SideMenu
 {
+    /// <summary>
+    /// Klasa odpowiedzialna za okno edycji typów miodu.
+    /// Klasa generowana automatycznie.
+    /// </summary>
     partial class HoneyTypeEditWindow
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Funkcja odpowiedzialna za zwolnienie zasobów.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">Prawda jeśli dane powinny być wyczyszczone.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -23,8 +25,7 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// Funkcja inicjująca komponenty okna.
         /// </summary>
         private void InitializeComponent()
         {

@@ -11,19 +11,25 @@ using System.Text.RegularExpressions;
 
 namespace KlasyfikacjaMiodu.Serialization
 {
+    /// <summary>
+    /// Author: Dawid Ferszter. <para/>
+    /// Klasa serializująca.
+    /// </summary>
     public class Serializer
     {
-
+        /// <summary>
+        /// Konstruktor klasy.
+        /// </summary>
         public Serializer()
         {
 
         }
         
         /// <summary>
-        /// Saves a project.
+        /// Serializuje projekt.
         /// </summary>
-        /// <param name="filePath">Path, which will be used to save the project.</param>
-        /// <returns>String with save state.</returns>
+        /// <param name="filePath">Ścieżka, która będzie użyta do zapisu projektu.</param>
+        /// <returns></returns>
         public string Serialize(string filePath)
         {
             bool imageCorrectlySaved;
@@ -35,10 +41,10 @@ namespace KlasyfikacjaMiodu.Serialization
         }
 
         /// <summary>
-        /// 
+        /// Serializuje zdjęcie.
         /// </summary>
-        /// <param name="imagePath">Path, which will be used to save the image.</param>
-        /// <returns>True - if the image has been properly serialized, False - otherwise.</returns>
+        /// <param name="imagePath">Ścieżka, która będzie użyta do zapisu zdjęcia.</param>
+        /// <returns>True - jeśli zdjęcie poprawnie zostało zserializowane, False - w przeciwnym przypadku.</returns>
         private bool SerializeImage(string imagePath)
         {
             string path = Path.Combine(Path.GetDirectoryName(imagePath), Path.GetFileNameWithoutExtension(imagePath)) + ".jpg";
@@ -55,6 +61,10 @@ namespace KlasyfikacjaMiodu.Serialization
             }
             return true;
         }
+        /// <summary>
+        /// Serializator tekstu.
+        /// </summary>
+        /// <param name="txtPath"></param>
         private void SerializeTxt(string txtPath)
         {
             string honeyTypeString;
@@ -87,7 +97,11 @@ namespace KlasyfikacjaMiodu.Serialization
                 sw.WriteLine("Timer:" + Session.Context.TimeSpan.ToString());
             }
         }
-
+        /// <summary>
+        /// Funkcja deserializująca projekt.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public string Deserialize(string filePath)
         {
             if (!CheckIfProjectImageExists(filePath)) return "Nie znaleziono pliku ze zdjęciem projektu. Sprawdź, czy w folderze istnieje plik .jpg o takiej samej nazwie co plik .txt.";
@@ -106,6 +120,11 @@ namespace KlasyfikacjaMiodu.Serialization
             Session.Context.TimeSpan = context.TimeSpan;
             return "correct";
         }
+        /// <summary>
+        /// Funkcja deserializująca zdjęcie.
+        /// </summary>
+        /// <param name="imagePath"></param>
+        /// <returns></returns>
         private Image DeserializeImage(string imagePath)
         {
             Image img;
@@ -121,6 +140,11 @@ namespace KlasyfikacjaMiodu.Serialization
             return null;
 
         }
+        /// <summary>
+        /// Funkcja deserializująca tekst.
+        /// </summary>
+        /// <param name="txtFilePath"></param>
+        /// <returns></returns>
         private Context DeserializeTxt(string txtFilePath)
         {
             Context context = new Context(true);
@@ -196,9 +220,9 @@ namespace KlasyfikacjaMiodu.Serialization
         }
 
         /// <summary>
-        /// Determines if image within project directory exists.
+        /// Funkcja określa czy obraz istnieje w katalogu projektu.
         /// </summary>
-        /// <param name="txtFilePath">Path with .txt file.</param>
+        /// <param name="txtFilePath">Ścieżka do pliku .txt.</param>
         /// <returns></returns>
         private bool CheckIfProjectImageExists(string txtFilePath)
         {
@@ -209,11 +233,20 @@ namespace KlasyfikacjaMiodu.Serialization
             else return false;
 
         }
-
+        /// <summary>
+        /// Funkcja konwertująca kolor na system heksadecymalny.
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         private String ToHexConverter(System.Drawing.Color c)
         {
             return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }
+        /// <summary>
+        /// Funkcja konwertująca string na kolor.
+        /// </summary>
+        /// <param name="hex"></param>
+        /// <returns></returns>
         private Color ToColorConverter(string hex)
         {
             return System.Drawing.ColorTranslator.FromHtml(hex);

@@ -10,7 +10,7 @@ namespace KlasyfikacjaMiodu
 {
     /// <summary>
     /// Author: Mariusz Gorzycki. <para/>
-    /// A Singleton implementation for <see cref="Context"/>
+    /// Implementacja dla <see cref="Context"/>
     /// </summary>
     public static class Session
     {
@@ -19,7 +19,7 @@ namespace KlasyfikacjaMiodu
         private static Context context = new Context(true);
 
         /// <summary>
-        /// Returns current application <see cref="Context"/>
+        /// Zwraca aktualną aplikację. <see cref="Context"/>
         /// </summary>
         public static Context Context
         {
@@ -27,8 +27,8 @@ namespace KlasyfikacjaMiodu
         }
 
         /// <summary>
-        /// Create new application <see cref="Context"/>.
-        /// Previus Context will be overriden.
+        /// Tworzy nową aplikację. <see cref="Context"/>.
+        /// Poprzedni Context będzie nadpisany.
         /// </summary>
         public static void NewClear()
         {
@@ -37,8 +37,8 @@ namespace KlasyfikacjaMiodu
         }
 
         /// <summary>
-        /// Create new application <see cref="Context"/>.
-        /// Previus Context will be overriden.
+        /// Tworzy nową aplikację. <see cref="Context"/>.
+        /// Poprzedni Context będzie nadpisany.
         /// </summary>
         public static void NewDefault()
         {
@@ -47,7 +47,7 @@ namespace KlasyfikacjaMiodu
         }
 
         /// <summary>
-        /// Executes <see cref="Changed"/> event
+        /// Wykonuje <see cref="Changed"/> zdarzenie
         /// </summary>
         private static void onChanged()
         {

@@ -8,10 +8,17 @@ using System.Windows.Forms;
 
 namespace KlasyfikacjaMiodu.SideMenu
 {
-    /// Author: Mariusz Gorzycki<para/>
-    /// Label with black text when disabled.
+
+    /// <summary>
+    /// Author: Mariusz Gorzycki.   <para/>
+    /// Klasa obsługująca pole tekstowe z czarnym tekstem kiedy nie jest aktywne.
+    /// </summary>
     class BlackLabel : Label
     {
+        /// <summary>
+        /// Funkcja malująca.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
         {
             if (Enabled)

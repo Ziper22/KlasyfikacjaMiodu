@@ -11,14 +11,19 @@ using System.Windows.Forms;
 
 namespace KlasyfikacjaMiodu.BottomBar
 {
-    /// Author: Michał Fornalski, Mariusz Gorzycki<para/>
-    /// Class responsible for calculating the honey kind.
+    /// <summary>
+    ///  Author: Michał Fornalski.   <para/>
+    ///  Klasa informująca użytkownika o wyznaczonym typie miodu.
+    /// </summary>
     class HoneyTypeInformer
     {
         private Label honeyTypeLabel;
         private ToolTip honeyTip;
         private Form form;
-
+        /// <summary>
+        ///     Konstruktor klasy.
+        /// </summary>
+        /// <param name="honeyTypeLabel">Miejsce w którym pojawi się nazwa miodu.</param>
         public HoneyTypeInformer(Label honeyTypeLabel)
         {
             this.honeyTypeLabel = honeyTypeLabel;
@@ -32,7 +37,10 @@ namespace KlasyfikacjaMiodu.BottomBar
             form = honeyTypeLabel.FindForm();
             form.SizeChanged += form_SizeChanged;
         }
-
+        /// <summary>
+        /// Funkcja wywoływana przy edycji typu miodu.
+        /// </summary>
+        /// <param name="honeyType"></param>
         private void Context_HoneyTypeEdited(HoneyType honeyType)
         {
             Dictionary<HoneyType, int> honeyCounter = CountAllMarkers();
@@ -40,7 +48,11 @@ namespace KlasyfikacjaMiodu.BottomBar
 
             SetHoneyTypeLabelText(sortedHoneyTypes);
         }
-
+        /// <summary>
+        /// Funkcja wywoływana po zmianie wielkości.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void form_SizeChanged(object sender, EventArgs e)
         {
             SetLabelText(honeyTip.GetToolTip(honeyTypeLabel));
@@ -48,7 +60,7 @@ namespace KlasyfikacjaMiodu.BottomBar
         }
 
         /// <summary>
-        /// Sets Context events. Listeners should be set again after every Context change in current Session
+        ///     Funkcja ustawia zdarzenie klasy Context.
         /// </summary>
         private void SetContextEvents()
         {
@@ -58,7 +70,7 @@ namespace KlasyfikacjaMiodu.BottomBar
         }
 
         /// <summary>
-        /// Called when Context in current session is changing
+        ///     Funkcja wywoływana podczas każdej zmiany w bieżącej sesji.
         /// </summary>
         private void Session_ContextChanged(Context Context)
         {
@@ -67,7 +79,10 @@ namespace KlasyfikacjaMiodu.BottomBar
 
             SetContextEvents();
         }
-
+        /// <summary>
+        ///     Funkcja wywoływana podczas dodawaniu/usuwaniu znacznika w bieżącej sesji.
+        /// </summary>
+        /// <param name="marker">Znacznik</param>
         private void Context_MarkerAddedOrRemoved(Marker notUsed)
         {
             Dictionary<HoneyType, int> honeyCounter = CountAllMarkers();
@@ -78,14 +93,19 @@ namespace KlasyfikacjaMiodu.BottomBar
 
             AdjustLabelPosition();
         }
-
+        /// <summary>
+        /// Funkcja dopasowująca pozycje pola tekstowego.
+        /// </summary>
         private void AdjustLabelPosition()
         {
             Control parent = honeyTypeLabel.Parent;
 
             parent.Location = new Point(form.ClientSize.Width / 2 - parent.Size.Width / 2, parent.Location.Y);
         }
-
+        /// <summary>
+        /// Funkcja zliczająca wszystkie znaczniki.
+        /// </summary>
+        /// <returns></returns>
         private Dictionary<HoneyType, int> CountAllMarkers()
         {
             Dictionary<HoneyType, int> honeyCounter = new Dictionary<HoneyType, int>();
@@ -105,7 +125,11 @@ namespace KlasyfikacjaMiodu.BottomBar
 
             return honeyCounter;
         }
-
+        /// <summary>
+        /// Funkcja znajdująca posortowane typy miodów.
+        /// </summary>
+        /// <param name="honeyCounter"></param>
+        /// <returns></returns>
         private List<KeyValuePair<HoneyType, int>> FindSortedHoneyTypes(Dictionary<HoneyType, int> honeyCounter)
         {
             int markerAmount = 0;
@@ -126,7 +150,10 @@ namespace KlasyfikacjaMiodu.BottomBar
             sortHoneyTypes(matchingHoneyTypes);
             return matchingHoneyTypes;
         }
-
+        /// <summary>
+        /// Funkcja sortująca typy miodów.
+        /// </summary>
+        /// <param name="honeyTypes"></param>
         private void sortHoneyTypes(List<KeyValuePair<HoneyType, int>> honeyTypes)
         {
             honeyTypes.Sort(
@@ -135,7 +162,9 @@ namespace KlasyfikacjaMiodu.BottomBar
                     return p2.Value - p1.Value;
                 });
         }
-
+        /// <summary>
+        ///     Funkcja generuje i ustala finalną nazwę miodu.
+        /// </summary>
         private void SetHoneyTypeLabelText(List<KeyValuePair<HoneyType, int>> sortedHoneyTypes)
         {
             StringBuilder name = new StringBuilder();
@@ -163,7 +192,10 @@ namespace KlasyfikacjaMiodu.BottomBar
             SetLabelText(name.ToString());
             honeyTip.SetToolTip(honeyTypeLabel, name.ToString());
         }
-
+        /// <summary>
+        /// Funkcja ustawiająca co ostatecznie pojawi się w polu tekstowym.
+        /// </summary>
+        /// <param name="text"></param>
         private void SetLabelText(String text)
         {
             String shortName = text;
