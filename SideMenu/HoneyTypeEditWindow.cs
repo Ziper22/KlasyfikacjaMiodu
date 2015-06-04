@@ -220,7 +220,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         {
             foreach (HoneyType honey in Session.Context.HoneyTypes)
             {
-                if (color == honey.MarkerColor)
+                if (color.ToArgb().Equals(honey.MarkerColor.ToArgb())) 
                 {
                     return true;
                 }
