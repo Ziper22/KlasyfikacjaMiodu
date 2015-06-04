@@ -6,7 +6,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
     /// Author: Marek Borski. <para/>
-    /// Klasa odpowiedzialna za okno edycji typów miodu.
+    /// Klasa odpowiedzialna za okno do dodawania i edycji typów miodu.
     /// </summary>
     public partial class HoneyTypeEditWindow : Form
     {
@@ -18,7 +18,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         bool isHoneyNameFieldRed = false;
 
         /// <summary>
-        /// Konstruktor klasy.
+        /// Konstruktor dodający nowy pyłek.
         /// </summary>
         public HoneyTypeEditWindow()
         {
@@ -101,7 +101,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             SwitchOkButton(CheckIfInputControlsAreFilled());
         }
         /// <summary>
-        /// Funkcja wywoływana przy wciśnięciu klawisza dodającego wartość w polu Percent.
+        /// Funkcja wywoływana przy wciśnięciu klawisza usuwającego wartość w polu Percent.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -153,7 +153,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             SwitchOkButton(CheckIfInputControlsAreFilled());
         }       
         /// <summary>
-        /// Funkcja wywoływana po kliknięciu na obrazek z kolorem.
+        /// Funkcja wywoływana po kliknięciu na kwadracik z kolorem.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

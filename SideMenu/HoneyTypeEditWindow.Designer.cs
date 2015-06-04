@@ -234,6 +234,7 @@
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(272, 193);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "HoneyTypeEditWindow";
             this.Text = "AddEditWindow";
             ((System.ComponentModel.ISupportInitialize)(this.specimenPictureBox)).EndInit();
