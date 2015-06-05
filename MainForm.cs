@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -107,6 +108,16 @@ namespace KlasyfikacjaMiodu
         public void wlaczEdytowanieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MainForm.SetEditMode((MainForm)this,true);
+        }
+
+        private void guideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("notepad.exe", "../../Resources/Guide.txt");
+        }
+
+        private void honeyListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("notepad.exe", "../../Resources/HoneyList.txt");
         }
     }
 }

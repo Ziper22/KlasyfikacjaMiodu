@@ -66,6 +66,9 @@ namespace KlasyfikacjaMiodu
             this.viewMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.showPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.centerImageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.honeyListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pollensImage)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -279,7 +282,8 @@ namespace KlasyfikacjaMiodu
             this.topMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
             this.editMenu,
-            this.viewMenu});
+            this.viewMenu,
+            this.helpToolStripMenuItem});
             this.topMenu.Location = new System.Drawing.Point(0, 0);
             this.topMenu.Name = "topMenu";
             this.topMenu.Size = new System.Drawing.Size(784, 29);
@@ -394,6 +398,30 @@ namespace KlasyfikacjaMiodu
             this.centerImageMenuItem.Size = new System.Drawing.Size(206, 26);
             this.centerImageMenuItem.Text = "Wyśrodkuj zdjęcie";
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.guideToolStripMenuItem,
+            this.honeyListToolStripMenuItem});
+            this.helpToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(70, 25);
+            this.helpToolStripMenuItem.Text = "Pomoc";
+            // 
+            // guideToolStripMenuItem
+            // 
+            this.guideToolStripMenuItem.Name = "guideToolStripMenuItem";
+            this.guideToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.guideToolStripMenuItem.Text = "Przewodnik";
+            this.guideToolStripMenuItem.Click += new System.EventHandler(this.guideToolStripMenuItem_Click);
+            // 
+            // honeyListToolStripMenuItem
+            // 
+            this.honeyListToolStripMenuItem.Name = "honeyListToolStripMenuItem";
+            this.honeyListToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.honeyListToolStripMenuItem.Text = "Lista miodów i pyłków";
+            this.honeyListToolStripMenuItem.Click += new System.EventHandler(this.honeyListToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -461,6 +489,9 @@ namespace KlasyfikacjaMiodu
         private ToolStripMenuItem centerImageMenuItem;
         private Button stoperButton;
         private ToolStripMenuItem wlaczEdytowanieToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem guideToolStripMenuItem;
+        private ToolStripMenuItem honeyListToolStripMenuItem;
     }
 }
 
