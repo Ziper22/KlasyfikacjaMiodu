@@ -47,6 +47,7 @@ namespace KlasyfikacjaMiodu.BottomBar
             List<KeyValuePair<HoneyType, int>> sortedHoneyTypes = FindSortedHoneyTypes(honeyCounter);
 
             SetHoneyTypeLabelText(sortedHoneyTypes);
+            AdjustLabelPosition();
         }
         /// <summary>
         /// Funkcja wywoływana po zmianie wielkości.
