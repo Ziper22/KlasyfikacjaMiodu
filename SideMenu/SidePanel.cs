@@ -94,6 +94,18 @@ namespace KlasyfikacjaMiodu.SideMenu
             Hide();
         }
 
+        /// <summary>
+        /// Blokuje panel.
+        /// </summary>
+        /// <param name="block"></param>
+        public void SetPanel(bool block)
+        {
+            addToolStripMenuItem.Enabled = block;
+            editToolStripMenuItem.Enabled = block;
+            deleteToolStripMenuItem.Enabled = block;
+            orientationToolStripMenuItem.Enabled = block;
+        }
+
         #endregion
 
         #region AddEditDelete
@@ -141,16 +153,21 @@ namespace KlasyfikacjaMiodu.SideMenu
         /// <param name="e"></param>
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (pollenModuleSelector.chosenModule.HoneyType != null)
+            try
             {
-                if (pollenModuleSelector.chosenModule.HoneyType.Name == "Zanieczyszczenie")
+                if (pollenModuleSelector.chosenModule != null)
                 {
-                    return;
+                    if (pollenModuleSelector.chosenModule.HoneyType.Name == "Zanieczyszczenie")
+                    {
+                        return;
+                    }
+                    HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow(Session.Context.SelectedHoneyType);
+                    addEditWindow.OkButtonClicked += HoneyType_Edit;
+                    addEditWindow.ShowDialog();
                 }
-                HoneyTypeEditWindow addEditWindow = new HoneyTypeEditWindow(Session.Context.SelectedHoneyType);
-                addEditWindow.OkButtonClicked += HoneyType_Edit;
-                addEditWindow.ShowDialog();
+                else return;
             }
+            catch (Exception) { return; }
         }
         /// <summary>
         /// Edytowanie istniejącego już typu miodu.
@@ -169,31 +186,36 @@ namespace KlasyfikacjaMiodu.SideMenu
         /// <param name="e"></param>
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (pollenModuleSelector.chosenModule.HoneyType != null)
+            try
             {
-                if (pollenModuleSelector.chosenModule.HoneyType.Name == "Zanieczyszczenie")
+                if (pollenModuleSelector.chosenModule != null)
                 {
-                    return;
-                }
-                const string message = "Czy na pewno chcesz usunąć wybrany znacznik?";
-                const string title = "Znacznik zostanie usunięty";
-
-                DialogResult dialogResult = MessageBox.Show(message, title, MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    PollenModule activeModule = pollenModuleSelector.chosenModule;
-                    if (activeModule != null)
+                    if (pollenModuleSelector.chosenModule.HoneyType.Name == "Zanieczyszczenie")
                     {
-                        panel1.Controls.Remove(activeModule);
-                        Session.Context.RemoveHoneyType(activeModule.HoneyType);
-                        pollenModuleSelector.chosenModule = null;
-                        Session.Context.SelectedHoneyType = null;
+                        return;
+                    }
+                    const string message = "Czy na pewno chcesz usunąć wybrany znacznik?";
+                    const string title = "Znacznik zostanie usunięty";
+
+                    DialogResult dialogResult = MessageBox.Show(message, title, MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        PollenModule activeModule = pollenModuleSelector.chosenModule;
+                        if (activeModule != null)
+                        {
+                            panel1.Controls.Remove(activeModule);
+                            Session.Context.RemoveHoneyType(activeModule.HoneyType);
+                            pollenModuleSelector.chosenModule = null;
+                            Session.Context.SelectedHoneyType = null;
+                        }
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
                     }
                 }
-                else if (dialogResult == DialogResult.No)
-                {
-                }
+                else return;
             }
+            catch (Exception) { return; }
         }
 
         #endregion
@@ -303,7 +325,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             horizontalToolStripMenuItem.Text = "Wyrównaj listę";
             SwapMenuItems();
 
-            AlignSidePanel(); RefreshPanel();           
+            AlignSidePanel(); RefreshPanel();
         }
 
 
@@ -353,15 +375,15 @@ namespace KlasyfikacjaMiodu.SideMenu
                 orientationToolStripMenuItem.DropDownItems.RemoveAt(0);
                 orientationToolStripMenuItem.DropDownItems.Add(tmpItem);
             }
-            if (panel1.FlowDirection==FlowDirection.LeftToRight)
-            {  
+            if (panel1.FlowDirection == FlowDirection.LeftToRight)
+            {
                 doLewejToolStripMenuItem.Visible = false;
                 doPrawejToolStripMenuItem.Visible = false;
             }
             else
             {
                 doLewejToolStripMenuItem.Visible = true;
-                doPrawejToolStripMenuItem.Visible = true; 
+                doPrawejToolStripMenuItem.Visible = true;
             }
 
         }
@@ -404,16 +426,6 @@ namespace KlasyfikacjaMiodu.SideMenu
             ShowDropDownMenuItems();
         }
         #endregion
-        /// <summary>
-        /// Blokuje panel.
-        /// </summary>
-        /// <param name="block"></param>
-        public void SetPanel(bool block)
-        {
-            addToolStripMenuItem.Enabled = block;
-            editToolStripMenuItem.Enabled = block;
-            deleteToolStripMenuItem.Enabled = block;
-            orientationToolStripMenuItem.Enabled = block;
-        }
+
     }
 }
