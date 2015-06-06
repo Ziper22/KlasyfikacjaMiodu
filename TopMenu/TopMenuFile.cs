@@ -141,19 +141,16 @@ namespace KlasyfikacjaMiodu.TopMenu
         /// </summary>
         private void LoadImage_Click(object sender, EventArgs e)
         {
-            Bitmap bmp;
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
+                ofd.FileOk += CheckIfFileHasCorrectExtension;
                 ofd.Filter = "Image Files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        using (var fs = new FileStream(ofd.FileName, FileMode.Open))
-                        {
-                            bmp = new Bitmap(fs);
-                            Session.Context.Image = (Image)bmp.Clone();
-                        }
+                        Session.Context.Image = Image.FromStream(new MemoryStream(File.ReadAllBytes(ofd.FileName)));
+
                         Session.Context.Scale = 0.57F;
                     }
                     catch (Exception)
@@ -216,14 +213,27 @@ namespace KlasyfikacjaMiodu.TopMenu
             if (sender is OpenFileDialog)
             {
                 OpenFileDialog ov = (sender as OpenFileDialog);
-                if (Path.GetExtension(ov.FileName).ToLower() != ".txt")
+                if (ov.Filter == "Image Files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png")
                 {
-                    e.Cancel = true;
-                    MessageBox.Show("Plik musi mieć rozszerzenie .txt", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    if (Path.GetExtension(ov.FileName).ToLower() != ".jpg" &&
+                        Path.GetExtension(ov.FileName).ToLower() != ".png" &&
+                        Path.GetExtension(ov.FileName).ToLower() != ".bmp")
+                    {
+                        e.Cancel = true;
+                        MessageBox.Show("Plik musi mieć rozszerzenie .jpg, .png lub .bmp.", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+                else if (ov.Filter == "Project txt (*.txt)|*.txt")
+                {
+                    if (Path.GetExtension(ov.FileName).ToLower() != ".txt")
+                    {
+                        e.Cancel = true;
+                        MessageBox.Show("Plik musi mieć rozszerzenie .txt.", "Wystąpił błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                 }
             }
-
         }
 
     }
