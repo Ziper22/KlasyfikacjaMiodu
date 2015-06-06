@@ -113,12 +113,12 @@ namespace KlasyfikacjaMiodu
 
         private void guideToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("notepad.exe", "../../Resources/Guide.txt");
+            Process.Start("wordpad.exe", "../../Resources/obsluga_programu.docx");
         }
 
         private void honeyListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("notepad.exe", "../../Resources/HoneyList.txt");
+            Process.Start("wordpad.exe", "../../Resources/lista_miodow_i_pylkow.docx");
         }
     }
 }
