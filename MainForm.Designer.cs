@@ -35,7 +35,6 @@ namespace KlasyfikacjaMiodu
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.viewPanel = new System.Windows.Forms.Panel();
             this.pollensImage = new System.Windows.Forms.PictureBox();
             this.bottomPanel = new System.Windows.Forms.Panel();
@@ -432,7 +431,6 @@ namespace KlasyfikacjaMiodu
             this.Controls.Add(this.topMenu);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.viewPanel);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.topMenu;
             this.MinimumSize = new System.Drawing.Size(480, 239);
             this.Name = "MainForm";
