@@ -46,6 +46,7 @@ namespace KlasyfikacjaMiodu
             topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, loadProjectMenuItem, loadImageMenuItem, quitMenuItem, this);
             topMenuEdit = new TopMenuEdit(this, editMenu, undoMenuItem, redoMenuItem);
             topMenuView = new TopMenuView(showPanelMenuItem, centerImageMenuItem, sidePanel, viewPanel);
+            Icon = Properties.Resources.Icon;
         }
         /// <summary>
         /// Funkcja tworząca boczny panel.

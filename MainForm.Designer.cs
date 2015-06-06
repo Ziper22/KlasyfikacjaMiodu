@@ -35,6 +35,7 @@ namespace KlasyfikacjaMiodu
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.viewPanel = new System.Windows.Forms.Panel();
             this.pollensImage = new System.Windows.Forms.PictureBox();
             this.bottomPanel = new System.Windows.Forms.Panel();
@@ -315,7 +316,7 @@ namespace KlasyfikacjaMiodu
             // 
             this.saveProjectMenuItem.Name = "saveProjectMenuItem";
             this.saveProjectMenuItem.Size = new System.Drawing.Size(185, 26);
-            this.saveProjectMenuItem.Text = "Zapisz";
+            this.saveProjectMenuItem.Text = "Zapisz jako";
             // 
             // loadProjectMenuItem
             // 
@@ -412,7 +413,7 @@ namespace KlasyfikacjaMiodu
             // 
             this.guideToolStripMenuItem.Name = "guideToolStripMenuItem";
             this.guideToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
-            this.guideToolStripMenuItem.Text = "Przewodnik";
+            this.guideToolStripMenuItem.Text = "Obsługa programu";
             this.guideToolStripMenuItem.Click += new System.EventHandler(this.guideToolStripMenuItem_Click);
             // 
             // honeyListToolStripMenuItem
@@ -431,6 +432,7 @@ namespace KlasyfikacjaMiodu
             this.Controls.Add(this.topMenu);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.viewPanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.topMenu;
             this.MinimumSize = new System.Drawing.Size(480, 239);
             this.Name = "MainForm";

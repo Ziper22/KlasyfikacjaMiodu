@@ -137,6 +137,8 @@
     <None Include="Resources\start.jpg" />
     <None Include="Resources\start.bmp" />
     <None Include="Resources\HoneyTypes.txt" />
+    <None Include="Resources\ikonaSmall.png" />
+    <None Include="Resources\Icon.ico" />
     <Content Include="Resources\Marker.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
