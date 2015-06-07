@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
-    ///     Author: Agata Hammermeister.
+    ///     Autor: Agata Hammermeister.
     ///     Klasa odpowiedzialna za boczny panel.
     /// </summary>
     public partial class SidePanel : Form
@@ -33,7 +33,6 @@ namespace KlasyfikacjaMiodu.SideMenu
             this.SizeChanged += SidePanel_SizeChanged;
         }
 
-        #region MainMethods
         /// <summary>
         /// Funkcja wywoływana przy zmianie rozmiaru bocznego panelu.
         /// </summary>
@@ -106,9 +105,6 @@ namespace KlasyfikacjaMiodu.SideMenu
             orientationToolStripMenuItem.Enabled = block;
         }
 
-        #endregion
-
-        #region AddEditDelete
         /// <summary>
         /// Obsługuje zdarzenie przy kliknięciu "Dodaj".
         /// </summary>
@@ -218,11 +214,8 @@ namespace KlasyfikacjaMiodu.SideMenu
             catch (Exception) { return; }
         }
 
-        #endregion
 
-        #region Location&Orientation
-
-        ///<summary>
+        /// <summary>
         /// Wyrównuje panel przy każdej zmianie głównego okna.
         /// </summary>
         void mainForm_SizeChanged(object sender, EventArgs e)
@@ -279,7 +272,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             HideDropDownMenuItems();
         }
 
-        ///<summary>
+        /// <summary>
         /// Ukrywa elementy paska menu.
         /// </summary>
         private void HideDropDownMenuItems()
@@ -290,7 +283,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
-        ///<summary>
+        /// <summary>
         /// Pokazuje elementy paska menu.
         /// </summary>
         private void ShowDropDownMenuItems()
@@ -329,7 +322,7 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
 
-        ///<summary>
+        /// <summary>
         /// Wyrównuje boczny panel do lewej strony zależnie od jego orientacji.
         /// </summary>
         private void AlignSidePanelToLeft()
@@ -346,7 +339,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
-        ///<summary>
+        /// <summary>
         /// Wyrównuje boczny panel do prawej strony zależnie od jego orientacji.
         /// </summary>
         private void AlignSidePanelToRight()
@@ -363,7 +356,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
-        ///<summary>
+        /// <summary>
         /// Zmienia kolejność elementów w menu.
         /// </summary>
         private void SwapMenuItems()
@@ -388,7 +381,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 
         }
 
-        ///<summary>
+        /// <summary>
         /// Odświeża orientację panelu.
         /// </summary>
         private void RefreshPanel()
@@ -400,7 +393,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
         }
 
-        ///<summary>
+        /// <summary>
         /// Wyrównuje panel do lewej.
         /// </summary>
         private void toLeftToolStripMenuItem_Click(object sender, EventArgs e)
@@ -409,7 +402,7 @@ namespace KlasyfikacjaMiodu.SideMenu
             AlignSidePanel();
         }
 
-        ///<summary>
+        /// <summary>
         /// Wyrównuje panel do prawej.
         /// </summary>
         private void toRightToolStripMenuItem_Click(object sender, EventArgs e)
@@ -418,14 +411,13 @@ namespace KlasyfikacjaMiodu.SideMenu
             AlignSidePanel();
         }
 
-        ///<summary>
+        /// <summary>
         /// Funkcja wywoływana po wciśnięciu orientationToolStripMenuItem.
         /// </summary>
         private void orientationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowDropDownMenuItems();
         }
-        #endregion
 
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace KlasyfikacjaMiodu.ActionsModule
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki. <para/>
+    /// Autor: Mariusz Gorzycki. <para/>
     /// Klasa odpowiedzialna ze usuwanie znacznika.
     /// </summary>
     public class RemoveMarkerAction : Action

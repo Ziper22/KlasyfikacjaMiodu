@@ -10,7 +10,7 @@ using KlasyfikacjaMiodu.SideMenu;
 namespace KlasyfikacjaMiodu.TopMenu
 {
     /// <summary>
-    /// Author: Dawid Ferszter. <para/>
+    /// Autor: Dawid Ferszter. <para/>
     /// Klasa odpowiedzialna za przechowywnie zakładki "Widok" w menu.
     /// </summary>
     public class TopMenuView

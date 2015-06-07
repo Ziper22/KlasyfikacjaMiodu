@@ -4,7 +4,7 @@ using System.Drawing;
 namespace KlasyfikacjaMiodu.ViewPanel
 {
     /// <summary>
-    ///     Author: Mariusz Gorzycki. <para/>
+    ///     Autor: Mariusz Gorzycki. <para/>
     ///      Klasa, która cachuje obrazki Markerów dla szybszego działania zaznacznia Markerów.
     /// </summary>
     public static class MarkerImageCache

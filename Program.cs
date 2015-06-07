@@ -13,6 +13,9 @@ namespace KlasyfikacjaMiodu
     /// </summary>
     static class Program
     {
+        /// <summary>
+        /// Metoda startowa programu.
+        /// </summary>
         [STAThread]
         static void Main()
         {

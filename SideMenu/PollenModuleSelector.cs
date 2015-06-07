@@ -4,12 +4,18 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
-    ///     Author: Mariusz Gorzycki. 
+    ///     Autor: Mariusz Gorzycki. 
     ///         Klasa odpowiedzialna za akcje wykonywane na bocznym panelu.
     /// </summary>
     internal class PollenModuleSelector
     {
+        /// <summary>
+        /// Właściwość zwracająca wybrany pyłek.
+        /// </summary>
         public PollenModule chosenModule { get; set; }
+        /// <summary>
+        /// Właściwość zwracająca wyróżniony (podświetlony) pyłek.
+        /// </summary>
         public PollenModule highlightedModule { get; private set; }
         /// <summary>
         /// Funkcja dodająca słuchaczy.

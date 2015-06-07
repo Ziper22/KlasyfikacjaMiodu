@@ -1,7 +1,7 @@
 ﻿namespace KlasyfikacjaMiodu.ActionsModule
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki. <para/>
+    /// Autor: Mariusz Gorzycki. <para/>
     /// Klasa odpowiedzialna za dodawanie nowego Markera.
     /// </summary>
     public class AddMarkerAction : Action

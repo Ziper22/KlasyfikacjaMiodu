@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.BottomBar
 {
     /// <summary>
-    ///  Author: Michał Fornalski.   <para/>
+    ///  Autor: Michał Fornalski.   <para/>
     ///  Klasa informująca użytkownika o wyznaczonym typie miodu.
     /// </summary>
     class HoneyTypeInformer

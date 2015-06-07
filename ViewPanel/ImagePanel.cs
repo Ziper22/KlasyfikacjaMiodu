@@ -9,8 +9,8 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.ViewPanel
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki<para/>
-    /// Class responsible for handling image movement/scale
+    /// Autor: Mariusz Gorzycki<para/>
+    /// Klasa odpowiedzialna za przetrzymywanie zdjęcia i skalowanie go.
     /// </summary>
     class ImagePanel
     {
@@ -20,7 +20,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         private bool mouseDown = false;
         private int xOffset, yOffset;
         /// <summary>
-        /// Konstuktor klasy
+        /// Konstuktor klasy.
         /// </summary>
         public ImagePanel(Panel panel, PictureBox pollensImage, Form form)
         {
@@ -50,7 +50,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
             CenterImage();
         }
         /// <summary>
-        /// Funkcja odpowiedzialna za ustawienie rozmiaru panelu
+        /// Funkcja odpowiedzialna za ustawienie rozmiaru panelu.
         /// </summary>
         private void pollensImage_Layout(object sender, LayoutEventArgs e)
         {
@@ -75,7 +75,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
             Session.Context.HoneyTypeAdded += Context_HoneyTypeAdded;
         }
         /// <summary>
-        /// Funkcja obsługująca dodanie nowego typu miodu do Contextu
+        /// Funkcja obsługująca dodanie nowego typu miodu do Contextu.
         /// </summary>
         private void Context_HoneyTypeAdded(HoneyType honeyType)
         {

@@ -8,7 +8,7 @@ using KlasyfikacjaMiodu.ActionsModule;
 namespace KlasyfikacjaMiodu.ViewPanel
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki. <para/>
+    /// Autor: Mariusz Gorzycki. <para/>
     /// Klasa odpowiadająca za obsłużenie położenia, przemieszczania, skalowania Markerów.
     /// </summary>
     public class MarkersPanel
@@ -329,7 +329,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Author: Mariusz Gorzycki. <para/>
+        /// Autor: Mariusz Gorzycki. <para/>
         /// Klasa przechowująca znaczniki Markerów.
         /// </summary>
         public class MarkerPictureBox : PictureBox

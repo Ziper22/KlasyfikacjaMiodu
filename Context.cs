@@ -10,7 +10,7 @@ using KlasyfikacjaMiodu.Properties;
 namespace KlasyfikacjaMiodu
 {
     /// <summary>
-    ///     Author: Mariusz Gorzycki. 
+    ///     Autor: Mariusz Gorzycki. 
     ///     Wszystkie dane projektu i aktualne stany przechowywane są jako Context programu.
     ///     Każdy Context może być nasłuchiwany przez zdarzenia.
     /// </summary>
@@ -60,7 +60,7 @@ namespace KlasyfikacjaMiodu
         private Image image;
         private bool editMode = true;
         /// <summary>
-        /// Konstuktor tworzący nowy Context
+        /// Konstuktor tworzący nowy Context.
         /// </summary>
         public Context(bool useDefaultHoneyTypes)
         {
@@ -133,7 +133,7 @@ namespace KlasyfikacjaMiodu
             set { editMode = value; }
         }
         /// <summary>
-        /// Zwraca listę Markerów
+        /// Zwraca listę Markerów.
         /// </summary>
         public IList<Marker> Markers
         {

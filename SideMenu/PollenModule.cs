@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
-    ///     Author: Agata Hammermeister.
+    ///     Autor: Agata Hammermeister.
     ///     Przechowuje informacje o każdym  <see cref="HoneyType" />.
     ///     Wyświetlane na bocznym panelu.
     /// </summary>

@@ -3,7 +3,7 @@
 namespace KlasyfikacjaMiodu.ActionsModule
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki. <para/>
+    /// Autor: Mariusz Gorzycki. <para/>
     /// Zarządza wszystkimi akcjami podczas trwania jednej sesji.
     /// </summary>
     public class Actions
@@ -61,7 +61,9 @@ namespace KlasyfikacjaMiodu.ActionsModule
         {
             get { return unDoneActions.Count; }
         }
-
+        /// <summary>
+        /// Funkcja zerująca liczniki wykonanych i cofniętych akcji.
+        /// </summary>
         public static void Clear()
         {
             doneActions.Clear();

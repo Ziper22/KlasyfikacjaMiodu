@@ -5,11 +5,16 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
-    /// Author: Marek Borski. <para/>
+    /// Autor: Marek Borski. <para/>
     /// Klasa odpowiedzialna za okno do dodawania i edycji typów miodu.
     /// </summary>
     public partial class HoneyTypeEditWindow : Form
     {
+        /// <summary>
+        /// Delegat obsługujący zdarzenie po wciśnięciu przycisku OK.
+        /// </summary>
+        /// <param name="honeyType"></param>
+        /// <param name="persistent"></param>
         public delegate void OkButtonClickedDelegate(HoneyType honeyType, bool persistent);
         public event OkButtonClickedDelegate OkButtonClicked;
         private HoneyType honeyType;
@@ -57,7 +62,6 @@ namespace KlasyfikacjaMiodu.SideMenu
             ShowToolTips();
         }
 
-        #region Events
         /// <summary>
         /// Funkcja wywoływana podczas zmiany tekstu w polu NameTextBox.
         /// </summary>
@@ -203,7 +207,6 @@ namespace KlasyfikacjaMiodu.SideMenu
             this.Close();
         }
 
-        #endregion
         /// <summary>
         /// Funkcja sprawdzająca czy został wciśnięty przycisk OK.
         /// </summary>

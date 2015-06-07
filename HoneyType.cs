@@ -9,16 +9,31 @@ using System.Threading.Tasks;
 namespace KlasyfikacjaMiodu
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki. <para/>
+    /// Autor: Mariusz Gorzycki. <para/>
     /// Reprezentuje typ miodu.
     /// </summary>
     [Serializable]
     public class HoneyType
     {
+        /// <summary>
+        /// Właściwość zwracająca nazwę.
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Właściwość zwracająca drugą nazwę.
+        /// </summary>
         public string DescriptionName { get; set; }
+        /// <summary>
+        /// Właściwość zwracająca kolor znacznika.
+        /// </summary>
         public Color MarkerColor { get; set; }
+        /// <summary>
+        /// Właściwość zwracająca minimalny próg procntowy.
+        /// </summary>
         public float MinimalPollensPercentageAmount { get; set; }
+        /// <summary>
+        /// Właściwość zwracająca czy jest to zanieczyszczenie - true, w przeciwnym przypadku - false.
+        /// </summary>
         public bool Dirt { get; set; }
         /// <summary>
         /// Konstruktor HoneyType.
@@ -57,7 +72,7 @@ namespace KlasyfikacjaMiodu
             Dirt = false;
         }
         /// <summary>
-        /// Nadpisana funkcja ToString()
+        /// Nadpisana funkcja ToString().
         /// </summary>
         public override string ToString()
         {
@@ -81,7 +96,7 @@ namespace KlasyfikacjaMiodu
             return Equals((HoneyType)obj);
         }
         /// <summary>
-        /// Funkcja zwracająca HashCode
+        /// Funkcja zwracająca HashCode.
         /// </summary>
         public override int GetHashCode()
         {

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki. <para/>
+    /// Autor: Mariusz Gorzycki. <para/>
     /// Implementacja dla <see cref="Context"/>
     /// </summary>
     public static class Session

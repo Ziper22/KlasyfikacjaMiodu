@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.BottomBar
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki. <para/>
+    /// Autor: Mariusz Gorzycki. <para/>
     /// Klasa odpowiedzialna za przechowywanie położenia znaczników oraz przemieszczania i skalowania obrazów.
     /// </summary>
     class ScaleHandler

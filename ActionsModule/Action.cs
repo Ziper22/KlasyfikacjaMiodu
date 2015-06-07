@@ -1,7 +1,7 @@
 ﻿namespace KlasyfikacjaMiodu.ActionsModule
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki. <para/>
+    /// Autor: Mariusz Gorzycki. <para/>
     /// Abstrakcyjny model akcji, która może być wyonana lub cofnięta.
     /// </summary>
     public abstract class Action

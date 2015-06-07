@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 namespace KlasyfikacjaMiodu.Serialization
 {
     /// <summary>
-    /// Author: Dawid Ferszter. <para/>
+    /// Autor: Dawid Ferszter. <para/>
     /// Klasa serializująca.
     /// </summary>
     public class Serializer

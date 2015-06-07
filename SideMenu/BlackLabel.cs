@@ -10,7 +10,7 @@ namespace KlasyfikacjaMiodu.SideMenu
 {
 
     /// <summary>
-    /// Author: Mariusz Gorzycki.   <para/>
+    /// Autor: Mariusz Gorzycki.   <para/>
     /// Klasa obsługująca pole tekstowe z czarnym tekstem kiedy nie jest aktywne.
     /// </summary>
     class BlackLabel : Label

@@ -65,7 +65,7 @@ namespace KlasyfikacjaMiodu
             sidePanel.Show();
         }
         /// <summary>
-        /// Właściwość zwracająca obiekt CreateParams
+        /// Właściwość zwracająca obiekt CreateParams.
         /// </summary>
         protected override CreateParams CreateParams
         {
@@ -110,12 +110,20 @@ namespace KlasyfikacjaMiodu
         {
             MainForm.SetEditMode((MainForm)this,true);
         }
-
+        /// <summary>
+        /// Funkcja wywoływana po wciśnięciu Pomoc --> Obsługa programu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void guideToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("wordpad.exe", "../../Resources/obsluga_programu.docx");
         }
-
+        /// <summary>
+        /// Funkcja wywoływana po wciśnięciu Pomoc --> Lista miodów i pyłków.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void honeyListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("wordpad.exe", "../../Resources/lista_miodow_i_pylkow.docx");

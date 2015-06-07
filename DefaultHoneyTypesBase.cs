@@ -12,7 +12,7 @@ using System.Resources;
 namespace KlasyfikacjaMiodu
 {
     /// <summary>
-    /// Author: Arek Mackiewicz, Krzysztof Kalisz. 
+    /// Autor: Arek Mackiewicz, Krzysztof Kalisz. 
     ///     Klasa opowiedzialna za pobieranie listy pyłków z bazy.
     /// </summary>
     internal class DefaultHoneyTypesBase

@@ -10,15 +10,27 @@ using KlasyfikacjaMiodu.ViewPanel;
 namespace KlasyfikacjaMiodu
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki. <para/>
+    /// Autor: Mariusz Gorzycki. <para/>
     /// Reprezentuje Marker z <see cref="HoneyType"/>.
     /// </summary>
     [Serializable]
     public class Marker
     {
+        /// <summary>
+        /// Właściwość zwracająca pozycję X.
+        /// </summary>
         public int X { get; set; }
+        /// <summary>
+        /// Właściwość zwracająca pozycję Y.
+        /// </summary>
         public int Y { get; set; }
+        /// <summary>
+        /// Właściwość zwracająca rozmiar.
+        /// </summary>
         public int Size { get; set; }
+        /// <summary>
+        /// Właściwość zwracająca typ miodu.
+        /// </summary>
         public HoneyType HoneyType { get; private set; }
 
         /// <summary>
@@ -63,7 +75,7 @@ namespace KlasyfikacjaMiodu
             return Equals((Marker)obj);
         }
         /// <summary>
-        /// Funckja zwracająca HashCode
+        /// Funckja zwracająca HashCode.
         /// </summary>
         /// <returns>Int HashCode</returns>
         public override int GetHashCode()
@@ -78,7 +90,7 @@ namespace KlasyfikacjaMiodu
             }
         }
         /// <summary>
-        /// Funckja rysująca na ekranie znacznik
+        /// Funckja rysująca na ekranie znacznik.
         /// </summary>
         /// <param name="scale">Skala znacznika</param>
         public void draw(PaintEventArgs e, float scale)
@@ -90,14 +102,14 @@ namespace KlasyfikacjaMiodu
             e.Graphics.DrawImage(image, dest, src, GraphicsUnit.Pixel);
         }
         /// <summary>
-        /// Funkcja zwracająca środek X
+        /// Funkcja zwracająca środek X.
         /// </summary>
         public int CenterX
         {
             get { return X - Size / 2; }
         }
         /// <summary>
-        /// Funkcja zwracająca środek Y
+        /// Funkcja zwracająca środek Y.
         /// </summary>
         public int CenterY
         {
