@@ -3,6 +3,10 @@ using System.Windows.Forms;
 
 namespace KlasyfikacjaMiodu
 {
+    /// <summary>
+    /// Klasa obsługująca główne okno programu.
+    /// Klasa wygenerowana automatycznie.
+    /// </summary>
     partial class MainForm
     {
         /// <summary>
@@ -45,6 +49,7 @@ namespace KlasyfikacjaMiodu
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.workTimeDesc = new System.Windows.Forms.Label();
             this.workTime = new System.Windows.Forms.Label();
+            this.stoperButton = new System.Windows.Forms.Button();
             this.topMenu = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,9 +62,13 @@ namespace KlasyfikacjaMiodu
             this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.undoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wlaczEdytowanieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.showPanelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mousePostion = new System.Windows.Forms.Label();
+            this.centerImageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.honeyListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pollensImage)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -89,7 +98,6 @@ namespace KlasyfikacjaMiodu
             this.pollensImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pollensImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pollensImage.Enabled = false;
-            this.pollensImage.Image = global::KlasyfikacjaMiodu.Properties.Resources.honeyPollens;
             this.pollensImage.Location = new System.Drawing.Point(0, 0);
             this.pollensImage.Margin = new System.Windows.Forms.Padding(0);
             this.pollensImage.Name = "pollensImage";
@@ -146,7 +154,7 @@ namespace KlasyfikacjaMiodu
             this.flowLayoutPanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.flowLayoutPanel2.Location = new System.Drawing.Point(60, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(97, 26);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(97, 25);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
             // scale
@@ -156,7 +164,7 @@ namespace KlasyfikacjaMiodu
             this.scale.Location = new System.Drawing.Point(3, 3);
             this.scale.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.scale.Maximum = new decimal(new int[] {
-            9999,
+            999,
             0,
             0,
             0});
@@ -227,11 +235,11 @@ namespace KlasyfikacjaMiodu
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel1.Controls.Add(this.workTimeDesc);
             this.flowLayoutPanel1.Controls.Add(this.workTime);
+            this.flowLayoutPanel1.Controls.Add(this.stoperButton);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(619, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(588, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(165, 32);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(196, 32);
             this.flowLayoutPanel1.TabIndex = 3;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -240,7 +248,7 @@ namespace KlasyfikacjaMiodu
             this.workTimeDesc.AutoSize = true;
             this.workTimeDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.workTimeDesc.Location = new System.Drawing.Point(0, 6);
-            this.workTimeDesc.Margin = new System.Windows.Forms.Padding(0);
+            this.workTimeDesc.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.workTimeDesc.Name = "workTimeDesc";
             this.workTimeDesc.Size = new System.Drawing.Size(91, 20);
             this.workTimeDesc.TabIndex = 0;
@@ -251,11 +259,22 @@ namespace KlasyfikacjaMiodu
             this.workTime.AutoSize = true;
             this.workTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.workTime.Location = new System.Drawing.Point(91, 6);
-            this.workTime.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.workTime.Margin = new System.Windows.Forms.Padding(0, 6, 3, 0);
             this.workTime.Name = "workTime";
             this.workTime.Size = new System.Drawing.Size(71, 20);
             this.workTime.TabIndex = 1;
             this.workTime.Text = "00:00:00";
+            // 
+            // stoperButton
+            // 
+            this.stoperButton.BackgroundImage = global::KlasyfikacjaMiodu.Properties.Resources.stop;
+            this.stoperButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.stoperButton.Location = new System.Drawing.Point(165, 3);
+            this.stoperButton.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.stoperButton.Name = "stoperButton";
+            this.stoperButton.Size = new System.Drawing.Size(28, 28);
+            this.stoperButton.TabIndex = 3;
+            this.stoperButton.UseVisualStyleBackColor = true;
             // 
             // topMenu
             // 
@@ -263,7 +282,8 @@ namespace KlasyfikacjaMiodu
             this.topMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
             this.editMenu,
-            this.viewMenu});
+            this.viewMenu,
+            this.helpToolStripMenuItem});
             this.topMenu.Location = new System.Drawing.Point(0, 0);
             this.topMenu.Name = "topMenu";
             this.topMenu.Size = new System.Drawing.Size(784, 29);
@@ -295,7 +315,7 @@ namespace KlasyfikacjaMiodu
             // 
             this.saveProjectMenuItem.Name = "saveProjectMenuItem";
             this.saveProjectMenuItem.Size = new System.Drawing.Size(185, 26);
-            this.saveProjectMenuItem.Text = "Zapisz";
+            this.saveProjectMenuItem.Text = "Zapisz jako";
             // 
             // loadProjectMenuItem
             // 
@@ -329,7 +349,8 @@ namespace KlasyfikacjaMiodu
             // 
             this.editMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.undoMenuItem,
-            this.redoMenuItem});
+            this.redoMenuItem,
+            this.wlaczEdytowanieToolStripMenuItem});
             this.editMenu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.editMenu.Name = "editMenu";
             this.editMenu.Size = new System.Drawing.Size(66, 25);
@@ -338,19 +359,28 @@ namespace KlasyfikacjaMiodu
             // undoMenuItem
             // 
             this.undoMenuItem.Name = "undoMenuItem";
-            this.undoMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.undoMenuItem.Size = new System.Drawing.Size(205, 26);
             this.undoMenuItem.Text = "Cofnij (Ctrl+Z)";
             // 
             // redoMenuItem
             // 
             this.redoMenuItem.Name = "redoMenuItem";
-            this.redoMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.redoMenuItem.Size = new System.Drawing.Size(205, 26);
             this.redoMenuItem.Text = "Przywróć (Ctrl+Y)";
+            // 
+            // wlaczEdytowanieToolStripMenuItem
+            // 
+            this.wlaczEdytowanieToolStripMenuItem.Name = "wlaczEdytowanieToolStripMenuItem";
+            this.wlaczEdytowanieToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.wlaczEdytowanieToolStripMenuItem.Text = "Włącz edytowanie";
+            this.wlaczEdytowanieToolStripMenuItem.Visible = false;
+            this.wlaczEdytowanieToolStripMenuItem.Click += new System.EventHandler(this.wlaczEdytowanieToolStripMenuItem_Click);
             // 
             // viewMenu
             // 
             this.viewMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showPanelMenuItem});
+            this.showPanelMenuItem,
+            this.centerImageMenuItem});
             this.viewMenu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.viewMenu.Name = "viewMenu";
             this.viewMenu.Size = new System.Drawing.Size(67, 25);
@@ -359,17 +389,38 @@ namespace KlasyfikacjaMiodu
             // showPanelMenuItem
             // 
             this.showPanelMenuItem.Name = "showPanelMenuItem";
-            this.showPanelMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.showPanelMenuItem.Size = new System.Drawing.Size(206, 26);
             this.showPanelMenuItem.Text = "Ukryj listę";
             // 
-            // mousePostion
+            // centerImageMenuItem
             // 
-            this.mousePostion.AutoSize = true;
-            this.mousePostion.Location = new System.Drawing.Point(695, 381);
-            this.mousePostion.Name = "mousePostion";
-            this.mousePostion.Size = new System.Drawing.Size(77, 13);
-            this.mousePostion.TabIndex = 3;
-            this.mousePostion.Text = "mouse position";
+            this.centerImageMenuItem.Name = "centerImageMenuItem";
+            this.centerImageMenuItem.Size = new System.Drawing.Size(206, 26);
+            this.centerImageMenuItem.Text = "Wyśrodkuj zdjęcie";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.guideToolStripMenuItem,
+            this.honeyListToolStripMenuItem});
+            this.helpToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(70, 25);
+            this.helpToolStripMenuItem.Text = "Pomoc";
+            // 
+            // guideToolStripMenuItem
+            // 
+            this.guideToolStripMenuItem.Name = "guideToolStripMenuItem";
+            this.guideToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.guideToolStripMenuItem.Text = "Obsługa programu";
+            this.guideToolStripMenuItem.Click += new System.EventHandler(this.guideToolStripMenuItem_Click);
+            // 
+            // honeyListToolStripMenuItem
+            // 
+            this.honeyListToolStripMenuItem.Name = "honeyListToolStripMenuItem";
+            this.honeyListToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.honeyListToolStripMenuItem.Text = "Lista miodów i pyłków";
+            this.honeyListToolStripMenuItem.Click += new System.EventHandler(this.honeyListToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -377,12 +428,11 @@ namespace KlasyfikacjaMiodu
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 442);
-            this.Controls.Add(this.mousePostion);
             this.Controls.Add(this.topMenu);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.viewPanel);
             this.MainMenuStrip = this.topMenu;
-            this.MinimumSize = new System.Drawing.Size(400, 240);
+            this.MinimumSize = new System.Drawing.Size(480, 239);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Klasyfikacja Miodu";
@@ -436,7 +486,12 @@ namespace KlasyfikacjaMiodu
         private FlowLayoutPanel flowLayoutPanel2;
         private Label percentDesc;
         private NumericUpDown scale;
-        private Label mousePostion;
+        private ToolStripMenuItem centerImageMenuItem;
+        private Button stoperButton;
+        private ToolStripMenuItem wlaczEdytowanieToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem guideToolStripMenuItem;
+        private ToolStripMenuItem honeyListToolStripMenuItem;
     }
 }
 

@@ -71,64 +71,101 @@ namespace KlasyfikacjaMiodu.Properties {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Akacja
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Zanieczyszczenie
+        ///z
+        ///z
+        ///128
+        ///128
+        ///128
+        ///200
+        ///200
+        ///Akacja
         ///Akacjowy
         ///Akacjowo
-        ///MistyRose
+        ///255
+        ///228
+        ///225
         ///10
         ///30
         ///Facelia
         ///Faceliowy
         ///Faceliowo
-        ///MediumPurple
+        ///147
+        ///112
+        ///219
         ///10
         ///45
         ///Gryka
         ///Gryczany
         ///Grykowo
-        ///Ivory
+        ///255
+        ///255
+        ///240
         ///10
         ///45
         ///Lipa
         ///Lipowy
         ///Lipowo
-        ///GreenYellow
+        ///173
+        ///255
+        ///47
         ///10
         ///20
         ///Malina
         ///Malinowy
         ///Malinowo
-        ///HotPink
+        ///255
+        ///105
+        ///180
         ///10
         ///45
         ///Mniszek
         ///Mniszkowy
         ///Mniszkowo
-        ///Orange
+        ///255
+        ///165
+        ///0
         ///10
         ///45
         ///Nawłoć
         ///Nawłocinowy
         ///Nawłocinowo
-        ///Yellow
+        ///255
+        ///255
+        ///0
         ///10
         ///45
         ///Rzepak
         ///Rzepakowy
         ///Rzepakowo
-        ///Gold
+        ///255
+        ///215
+        ///0
         ///10
         ///45
         ///Wrzos
         ///Wrzosowy
         ///Wrzosowo
-        ///MediumOrchid
+        ///186
+        ///85
+        ///211
         ///10
-        ///45.
+        ///45
+        ///.
         /// </summary>
         internal static string HoneyTypes {
             get {
                 return ResourceManager.GetString("HoneyTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Icon podobny do zasobu (Ikona).
+        /// </summary>
+        internal static System.Drawing.Icon Icon {
+            get {
+                object obj = ResourceManager.GetObject("Icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -138,6 +175,26 @@ namespace KlasyfikacjaMiodu.Properties {
         internal static System.Drawing.Bitmap marker128 {
             get {
                 object obj = ResourceManager.GetObject("marker128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap start {
+            get {
+                object obj = ResourceManager.GetObject("start", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stop {
+            get {
+                object obj = ResourceManager.GetObject("stop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

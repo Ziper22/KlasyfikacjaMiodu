@@ -8,8 +8,8 @@ using KlasyfikacjaMiodu.ActionsModule;
 namespace KlasyfikacjaMiodu.ViewPanel
 {
     /// <summary>
-    /// Author: Mariusz Gorzycki<para/>
-    /// Class responsible for handling Markers placement and movement/scale
+    /// Autor: Mariusz Gorzycki. <para/>
+    /// Klasa odpowiadająca za obsłużenie położenia, przemieszczania, skalowania Markerów.
     /// </summary>
     public class MarkersPanel
     {
@@ -17,7 +17,11 @@ namespace KlasyfikacjaMiodu.ViewPanel
         private PictureBox image;
         private bool mouseDown = false, mouseMovedOnMarker = false, mouseMovedOnPanel = false;
         private int imagePositionX, imagePositionY, lastMarkerSize = 32, mouseX, mouseY;
-
+        /// <summary>
+        /// Konstuktor tworzący nowy panel znaczników.
+        /// </summary>
+        /// <param name="panel">Wybrany panel</param>
+        /// <param name="image">Obraz</param>
         public MarkersPanel(Panel panel, PictureBox image)
         {
             this.panel = panel;
@@ -30,7 +34,9 @@ namespace KlasyfikacjaMiodu.ViewPanel
             image.Paint += image_Paint;
             SetContextEvents();
         }
-
+        /// <summary>
+        /// Funkcja odpowiedzialna za rysowanie obrazka.
+        /// </summary>
         void image_Paint(object sender, PaintEventArgs e)
         {
             foreach (Marker marker in Session.Context.Markers)
@@ -38,24 +44,30 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 marker.draw(e, Session.Context.Scale);
             }
         }
-
+        /// <summary>
+        /// Funkcja rejestrująca ruch myszy na Panelu.
+        /// </summary>
         void panel_MouseMove(object sender, MouseEventArgs e)
         {
             mouseMovedOnPanel = true;
         }
-
+        /// <summary>
+        /// Funkcja rejestrująca ruch myszy na Panelu.
+        /// </summary>
         private void PanelOnMouseUp(object sender, MouseEventArgs mouseEventArgs)
         {
             mouseMovedOnPanel = false;
         }
-
+        /// <summary>
+        /// Funkcja rejestrująca ruch myszy na Panelu.
+        /// </summary>
         void panel_MouseDown(object sender, MouseEventArgs e)
         {
             mouseMovedOnPanel = false;
         }
 
         /// <summary>
-        /// Sets Context events. Listeners should be set again after every Context change in current Session
+        /// Ustawia zdarzenia Contextu. Nasłuchiwacze powinny być ustawione ponownie po każdej zmianie Contextu w aktualnej sesji.
         /// </summary>
         private void SetContextEvents()
         {
@@ -64,12 +76,16 @@ namespace KlasyfikacjaMiodu.ViewPanel
             Session.Context.HoneyTypeRemoved += Context_HoneyTypeRemoved;
             Session.Context.HoneyTypeEdited += Context_HoneyTypeEdited;
         }
-
+        /// <summary>
+        /// Funkcja odpowiedzialna za odświeżenie obrazka z nowym znacznikiem.
+        /// </summary>
         void Context_HoneyTypeEdited(HoneyType honeyType)
         {
             image.Refresh();
         }
-
+        /// <summary>
+        /// Funkcja odpowiedzialna za odświeżenie obrazka po usunięciu znacznika.
+        /// </summary>
         void Context_HoneyTypeRemoved(HoneyType honeyType)
         {
             foreach (Marker marker in Session.Context.Markers.ToArray())
@@ -78,9 +94,12 @@ namespace KlasyfikacjaMiodu.ViewPanel
                     Session.Context.RemoveMarker(marker);
             }
         }
-
+        /// <summary>
+        /// Funkcja obsługująca kliknięcia na znacznik.
+        /// </summary>
         private void Marker_Click(object sender, MouseEventArgs e)
         {
+           
             MarkerPictureBox box = sender as MarkerPictureBox;
             if (box != null && e.Button == MouseButtons.Right)
             {
@@ -91,7 +110,9 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 }
             }
         }
-
+        /// <summary>
+        /// Funkcja obsługująca usunięcie Markera z Contextu.
+        /// </summary>
         private void Context_MarkerRemoved(Marker marker)
         {
             foreach (Control control in panel.Controls)
@@ -105,7 +126,10 @@ namespace KlasyfikacjaMiodu.ViewPanel
             }
             image.Refresh();
         }
-
+        /// <summary>
+        /// Funkcja obsługująca dodanie Markera do Contextu.
+        /// Odświeża obraz z nowym znacznikiem.
+        /// </summary>
         private void Context_MarkerAdded(Marker marker)
         {
             MarkerPictureBox p = new MarkerPictureBox(marker);
@@ -133,9 +157,15 @@ namespace KlasyfikacjaMiodu.ViewPanel
             image.BringToFront();
             image.Refresh();
         }
-
+        /// <summary>
+        /// Funkcja dodająca nowy znacznik na obrazek.
+        /// Odpowiada za odświeżenie obrazka z nowym znacznikiem.
+        /// </summary>
         private void MarkersPanel_Click(object sender, MouseEventArgs e)
         {
+            if (!Session.Context.EditMode || image.Image == null)
+                return;
+
             HoneyType selectedHoneyType = Session.Context.SelectedHoneyType;
             if (selectedHoneyType != null)
             {
@@ -158,8 +188,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Function responsible for handling Mouse events.
-        /// Should not be invoked manually.
+        /// Funkcja obsługująca zdarzenia myszy.
+        /// Nie powinna być wywoływana manualnie.
         /// </summary>
         private void Marker_MouseEnter(object sender, EventArgs e)
         {
@@ -167,42 +197,52 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Function responsible for handling Mouse events.
-        /// Should not be invoked manually.
+        /// Funkcja odpowiedzialna za eventy myszy.
+        /// Nie powinna być wywoływana manualnie.
         /// </summary>
         private void Marker_MouseMove(object sender, MouseEventArgs e)
         {
-            mouseMovedOnMarker = true;
+            if (e.Button != MouseButtons.Left)
+                mouseMovedOnMarker = true;
+
             MarkerPictureBox box = sender as MarkerPictureBox;
             if (box != null && mouseDown)
             {
-                float scale = Session.Context.Scale;
+                mouseMovedOnMarker = true;
+              
+                if (box != null && mouseDown)
+                {
+                    float scale = Session.Context.Scale;
 
-                int x = (int)(imagePositionX - (mouseX - Cursor.Position.X) / scale);
-                int y = (int)(imagePositionY - (mouseY - Cursor.Position.Y) / scale);
+                    int x = (int) (imagePositionX - (mouseX - Cursor.Position.X)/scale);
+                    int y = (int) (imagePositionY - (mouseY - Cursor.Position.Y)/scale);
 
-                x = Math.Max(-box.Marker.Size / 6, x);
-                x = (int) Math.Min(image.Image.PhysicalDimension.Width + box.Marker.Size / 6f, x);
+                    x = Math.Max(-box.Marker.Size/6, x);
+                    x = (int) Math.Min(image.Image.PhysicalDimension.Width + box.Marker.Size/6f, x);
 
-                y = Math.Max(-box.Marker.Size / 6, y);
-                y = (int) Math.Min(image.Image.PhysicalDimension.Height + box.Marker.Size / 6f, y);
+                    y = Math.Max(-box.Marker.Size/6, y);
+                    y = (int) Math.Min(image.Image.PhysicalDimension.Height + box.Marker.Size/6f, y);
 
-                box.Marker.X = x;
-                box.Marker.Y = y;
+                    box.Marker.X = x;
+                    box.Marker.Y = y;
 
-                box.Location = new Point(1, 1);
-                box.Update();
+                    box.Location = new Point(1, 1);
+                    box.Update();
 
-                image.Refresh();
+                    image.Refresh();
+                }
             }
         }
 
         /// <summary>
-        /// Function responsible for handling Mouse events.
-        /// Should not be invoked manually.
+        /// Funkcja odpowiedzialna za eventy myszy.
+        /// Nie powinna być wywoływana manualnie.
         /// </summary>
         private void Marker_MouseDown(object sender, MouseEventArgs e)
         {
+            if (!Session.Context.EditMode)
+                return;
+
             mouseDown = true;
             mouseMovedOnMarker = false;
             MarkerPictureBox box = sender as MarkerPictureBox;
@@ -216,8 +256,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Function responsible for handling Mouse events.
-        /// Should not be invoked manually.
+        /// Funkcja odpowiedzialna za eventy myszy.
+        /// Nie powinna być wywoływana manualnie.
         /// </summary>
         private void Marker_MouseUp(object sender, MouseEventArgs e)
         {
@@ -226,11 +266,14 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Function responsible for handling Mouse events.
-        /// Should not be invoked manually.
+        /// Funkcja odpowiedzialna za eventy myszy.
+        /// Nie powinna być wywoływana manualnie.
         /// </summary>
         private void Marker_MouseWheel(object sender, MouseEventArgs e)
         {
+            if (!Session.Context.EditMode)
+                return;
+
             MarkerPictureBox box = sender as MarkerPictureBox;
             if (box != null)
             {
@@ -238,6 +281,8 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 {
                     box.Marker.Size = (int)(box.Marker.Size * 1.05f);
                     box.Marker.Size++;
+                    if (box.Marker.Size > Math.Min(image.Image.PhysicalDimension.Width, image.Image.PhysicalDimension.Height) / 3)
+                        box.Marker.Size = (int) (Math.Min(image.Image.PhysicalDimension.Width, image.Image.PhysicalDimension.Height) / 3);
                 }
                 else
                 {
@@ -268,7 +313,7 @@ namespace KlasyfikacjaMiodu.ViewPanel
         }
 
         /// <summary>
-        /// Called when Context in current session is changing
+        /// Wywoływana gdy Context w obecnej sesji ulegnie zmianie.
         /// </summary>
         private void MarkersPanel_ContextChanged(Context context)
         {
@@ -283,11 +328,16 @@ namespace KlasyfikacjaMiodu.ViewPanel
             image.Refresh();
         }
 
-
+        /// <summary>
+        /// Autor: Mariusz Gorzycki. <para/>
+        /// Klasa przechowująca znaczniki Markerów.
+        /// </summary>
         public class MarkerPictureBox : PictureBox
         {
             public Marker Marker { get; private set; }
-
+            /// <summary>
+            /// Konstuktor tworzący obrazek Markera.
+            /// </summary>
             public MarkerPictureBox(Marker marker)
             {
                 this.Marker = marker;
@@ -296,13 +346,17 @@ namespace KlasyfikacjaMiodu.ViewPanel
                 this.Layout += MarkerPictureBox_SizeChanged;
                 this.Layout += MarkerPictureBox_LocationChanged;
             }
-
+            /// <summary>
+            /// Funkcja obsługująca zmianę rozmiaru obrazka Markera.
+            /// </summary>
             void MarkerPictureBox_SizeChanged(object sender, EventArgs e)
             {
                 float scale = Session.Context.Scale;
                 Size = new Size((int)(Marker.Size * scale), (int)(Marker.Size * scale));
             }
-
+            /// <summary>
+            /// Funkcja obsługująca zmianę położenia obrazka Markera.
+            /// </summary>
             void MarkerPictureBox_LocationChanged(object sender, EventArgs e)
             {
                 float scale = Session.Context.Scale;

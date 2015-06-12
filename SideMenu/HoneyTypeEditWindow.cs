@@ -5,33 +5,44 @@ using System.Windows.Forms;
 namespace KlasyfikacjaMiodu.SideMenu
 {
     /// <summary>
-    /// Author: Marek Borski<para/>
+    /// Autor: Marek Borski. <para/>
+    /// Klasa odpowiedzialna za okno do dodawania i edycji typów miodu.
     /// </summary>
-    /// 
     public partial class HoneyTypeEditWindow : Form
     {
-        public delegate void OkButtonClickedDelegate(HoneyType honeyType);
+        /// <summary>
+        /// Delegat obsługujący zdarzenie po wciśnięciu przycisku OK.
+        /// </summary>
+        /// <param name="honeyType"></param>
+        /// <param name="persistent"></param>
+        public delegate void OkButtonClickedDelegate(HoneyType honeyType, bool persistent);
         public event OkButtonClickedDelegate OkButtonClicked;
         private HoneyType honeyType;
 
         bool isNameFieldRed = false;
         bool isHoneyNameFieldRed = false;
 
+        /// <summary>
+        /// Konstruktor dodający nowy pyłek.
+        /// </summary>
         public HoneyTypeEditWindow()
         {
             InitializeComponent();
             CenterToScreen();
 
-            //Name = null;
             honeyType = new HoneyType();
             specimenPictureBox.BackColor = DrawColor();
+            nameTextBox.BackColor = Color.FromArgb(245, 174, 174);
+            honeyNameTextBox.BackColor = Color.FromArgb(245, 174, 174);
 
             this.Text = "Dodaj";
             okButton.Enabled = false;
-
-            ShowToolTip();
+            ShowToolTips();
         }
 
+        /// <summary>
+        /// Konstruktor edytujący istniejący pyłek.
+        /// </summary>
         public HoneyTypeEditWindow(HoneyType honeyType)
         {
             InitializeComponent();
@@ -44,12 +55,78 @@ namespace KlasyfikacjaMiodu.SideMenu
             specimenPictureBox.BackColor = honeyType.MarkerColor;
             percentNumericUpDown.Value = (decimal)honeyType.MinimalPollensPercentageAmount;
 
+            Size = new System.Drawing.Size(288, 210);
             this.Text = "Edytuj";
             okButton.Enabled = true;
-
-            ShowToolTip();
+            checkBox.Visible = false;
+            ShowToolTips();
         }
 
+        /// <summary>
+        /// Funkcja wywoływana podczas zmiany tekstu w polu NameTextBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (CheckIfNameWasAssigned(nameTextBox.Text) == true || nameTextBox.TextLength == 0)
+            {
+                nameTextBox.BackColor = Color.FromArgb(245, 174, 174);
+                isNameFieldRed = true;
+            }
+            else
+            {
+                nameTextBox.BackColor = Color.FromArgb(174, 245, 183);
+                isNameFieldRed = false;
+            }
+
+            CheckIfSpaceWasClicked(nameTextBox);
+            SwitchOkButton(CheckIfInputControlsAreFilled());
+        }
+        /// <summary>
+        /// Funkcja wywoływana podczas zmiany tekstu w polu HoneyNameTextBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HoneyNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (CheckIfNameWasAssigned(honeyNameTextBox.Text) == true || honeyNameTextBox.TextLength == 0)
+            {
+                honeyNameTextBox.BackColor = Color.FromArgb(245, 174, 174);
+                isHoneyNameFieldRed = true;
+            }
+            else
+            {
+                honeyNameTextBox.BackColor = Color.FromArgb(174, 245, 183);
+                isHoneyNameFieldRed = false;
+            }
+
+            CheckIfSpaceWasClicked(honeyNameTextBox);
+            SwitchOkButton(CheckIfInputControlsAreFilled());
+        }
+        /// <summary>
+        /// Funkcja wywoływana przy wciśnięciu klawisza usuwającego wartość w polu Percent.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PercentNumericUpDown_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete)
+            {
+                if (percentNumericUpDown.Text.Length == 0)
+                {
+                    percentNumericUpDown.Value = 1;
+                    percentNumericUpDown.Text = "1";
+                }
+            }
+
+            CheckIfInt(percentNumericUpDown);
+        }
+        /// <summary>
+        /// Funkcja wywoływana przy kliknięciu przycisku zmiany koloru.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChooseColorButton_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
@@ -78,44 +155,12 @@ namespace KlasyfikacjaMiodu.SideMenu
             }
 
             SwitchOkButton(CheckIfInputControlsAreFilled());
-        }
-
+        }       
         /// <summary>
-        /// Checks if color which we are going to choose is already assigned to other pollen
+        /// Funkcja wywoływana po kliknięciu na kwadracik z kolorem.
         /// </summary>
-        /// <returns></returns>
-        private bool CheckIfColorWasAssigned(Color color)
-        {
-            foreach (HoneyType honey in Session.Context.HoneyTypes)
-            {
-                if (color == honey.MarkerColor)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Checks if name (names) which we are going to choose is (are) already assigned to other pollen
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        private bool CheckIfNameWasAssigned(string newName)
-        {
-            foreach (HoneyType honey in Session.Context.HoneyTypes)
-            {
-                if (string.Equals(newName, honey.Name, StringComparison.OrdinalIgnoreCase) || string.Equals(newName, honey.DescriptionName, StringComparison.OrdinalIgnoreCase)) 
-                {
-                    if (string.Equals(newName, honeyType.Name, StringComparison.OrdinalIgnoreCase) == false && string.Equals(newName, honeyType.DescriptionName, StringComparison.OrdinalIgnoreCase) == false) 
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SpecimenPictureBox_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -124,14 +169,22 @@ namespace KlasyfikacjaMiodu.SideMenu
 
                 SwitchOkButton(CheckIfInputControlsAreFilled());
             }
+            else if (e.Button == MouseButtons.Left)
+            {
+                ChooseColorButton_Click(sender, e);
+            }
         }
-
+        /// <summary>
+        /// Funkcja wywoływana po wciścięciu przycisku OK.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OkButton_Click(object sender, EventArgs e)
         {
             if (isNameFieldRed == false && isHoneyNameFieldRed == false)
             {
-                honeyType.Name = nameTextBox.Text;
-                honeyType.DescriptionName = honeyNameTextBox.Text;
+                honeyType.Name = nameTextBox.Text.Trim();
+                honeyType.DescriptionName = honeyNameTextBox.Text.Trim();
                 honeyType.MarkerColor = specimenPictureBox.BackColor;
                 honeyType.MinimalPollensPercentageAmount = (float)percentNumericUpDown.Value;
 
@@ -144,66 +197,60 @@ namespace KlasyfikacjaMiodu.SideMenu
                 warningLabel.Visible = true;
             }
         }
-
-        protected virtual void OnOkButtonClicked()
-        {
-            if (OkButtonClicked != null)
-                OkButtonClicked(honeyType);
-        }
-
+        /// <summary>
+        /// Funkcja wywoływana przy wciśnięciu przycisku Anuluj.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void NameTextBox_TextChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Funkcja sprawdzająca czy został wciśnięty przycisk OK.
+        /// </summary>
+        protected virtual void OnOkButtonClicked()
         {
-            if (CheckIfNameWasAssigned(nameTextBox.Text) == true || nameTextBox.TextLength == 0)
-            {
-                nameTextBox.BackColor = Color.FromArgb(245, 174, 174);
-                isNameFieldRed = true;
-            }
-            else
-            {
-                nameTextBox.BackColor = Color.FromArgb(174, 245, 183);
-                isNameFieldRed = false;
-            }
-
-            SwitchOkButton(CheckIfInputControlsAreFilled());
-        }
-
-        private void HoneyNameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (CheckIfNameWasAssigned(honeyNameTextBox.Text) == true || honeyNameTextBox.TextLength == 0)
-            {
-                honeyNameTextBox.BackColor = Color.FromArgb(245, 174, 174);
-                isHoneyNameFieldRed = true;
-            }
-            else
-            {
-                honeyNameTextBox.BackColor = Color.FromArgb(174, 245, 183);
-                isHoneyNameFieldRed = false;
-            }
-
-            SwitchOkButton(CheckIfInputControlsAreFilled());
-        }
-
-        private void PercentNumericUpDown_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete)
-            {
-                if (percentNumericUpDown.Text.Length == 0)
-                {
-                    percentNumericUpDown.Value = 1;
-                    percentNumericUpDown.Text = "1";
-                }
-            }
-
-            CheckIfInt(percentNumericUpDown);
+            if (OkButtonClicked != null)
+                OkButtonClicked(honeyType, checkBox.Checked);
         }
 
         /// <summary>
-        /// Checks if all controls in which information must be set are filled
+        /// Funkcja sprawdza czy wybrany kolor nie jest juz przypisany do innego pyłka.
+        /// </summary>
+        private bool CheckIfColorWasAssigned(Color color)
+        {
+            foreach (HoneyType honey in Session.Context.HoneyTypes)
+            {
+                if (color.ToArgb().Equals(honey.MarkerColor.ToArgb())) 
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Funkcja sprawdza czy wybrana nazwa nie jest juz przypisana do innego pyłka.
+        /// </summary>
+        private bool CheckIfNameWasAssigned(string newName)
+        {
+            foreach (HoneyType honey in Session.Context.HoneyTypes)
+            {
+                if (string.Equals(newName, honey.Name, StringComparison.OrdinalIgnoreCase) || string.Equals(newName, honey.DescriptionName, StringComparison.OrdinalIgnoreCase))
+                {
+                    if (string.Equals(newName, honeyType.Name, StringComparison.OrdinalIgnoreCase) == false && string.Equals(newName, honeyType.DescriptionName, StringComparison.OrdinalIgnoreCase) == false)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Funkcja sprawdzająca czy wszystkie pola zostały wypełnione.
         /// </summary>
         private bool CheckIfInputControlsAreFilled()
         {
@@ -227,7 +274,8 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Checks if the condition to switch on the ok button is satisfied
+        /// Funkcja sprawdzająca czy wszystkie warunki w formularzu zostały spełnione.
+        /// Aktywuje przycisk lub go dezaktywuje.
         /// </summary>
         private void SwitchOkButton(bool areControlsFilled)
         {
@@ -242,7 +290,24 @@ namespace KlasyfikacjaMiodu.SideMenu
         }
 
         /// <summary>
-        /// Doesn't allow to type in digit-type field anything else besides digits
+        /// Funkcja zabezpieczająca przed wciśnięciem spacji na początku lub dwóch spacji pod rząd.
+        /// </summary>
+        private void CheckIfSpaceWasClicked(TextBox control)
+        {
+            if (control.Text.StartsWith(" ") == true)  
+            {
+                control.Text = control.Text.Remove(0, 1);
+            }
+
+            if (control.Text.EndsWith("  ") == true) 
+            {
+                control.Text = control.Text.Remove(control.Text.Length - 1);
+                control.Select(control.Text.Length, 0);
+            }
+        }
+
+        /// <summary>
+        /// Nie pozwala na wpisanie do numerycznego pola niczego innego poza cyframi.
         /// </summary>
         private void CheckIfInt(Control control)
         {
@@ -260,21 +325,16 @@ namespace KlasyfikacjaMiodu.SideMenu
                 {
                     control.Text = control.Text.Remove(control.Text.Length - 1);
 
-                    if (control is TextBox)
-                    {
-                        TextBox temp = (TextBox)control;
-                        temp.Select(temp.Text.Length, 0);
-                    }
-                    else if (control is NumericUpDown)
-                    {
-                        NumericUpDown temp = (NumericUpDown)control;
-                        temp.Select(temp.Text.Length, 0);
-                    }
+                    NumericUpDown temp = (NumericUpDown)control;
+                    temp.Select(temp.Text.Length, 0);
                 }
             }
         }
 
-        private void ShowToolTip()
+        /// <summary>
+        /// Funkcja odpowiedzialna za pokazywanie dymków z podpowiedziami.
+        /// </summary>
+        private void ShowToolTips()
         {
             ToolTip toolTip = new ToolTip();
             toolTip.ShowAlways = true;
@@ -282,12 +342,12 @@ namespace KlasyfikacjaMiodu.SideMenu
 
             toolTip.SetToolTip(nameTextBox, "Nazwa pyłku - w postaci rzeczownika");
             toolTip.SetToolTip(honeyNameTextBox, "Nazwa miodu - w postaci przymiotnika");
-            toolTip.SetToolTip(percentNumericUpDown, "Minimalna procentowa liczba pyłków, wymagana, by dać miód danego rodzaju");
-            toolTip.SetToolTip(specimenPictureBox, "Kliknij prawym przyciskiem myszy, by usunąć kolor");
+            toolTip.SetToolTip(percentNumericUpDown, "Minimalna zawartość procentowa pyłków w miodzie potrzebna do stwierdzenia, że miód jest danego typu");
+            toolTip.SetToolTip(specimenPictureBox, "Kliknij prawym przyciskiem myszy, aby usunąć kolor");
         }
 
         /// <summary>
-        /// Gets a random color
+        /// Funkcja generująca losowy kolor.
         /// </summary>
         /// <returns></returns>
         private Color DrawColor()
@@ -307,6 +367,6 @@ namespace KlasyfikacjaMiodu.SideMenu
             } while (CheckIfColorWasAssigned(color) == true);
 
             return color;
-        }
+        }        
     }
 }

@@ -1,174 +1,219 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Security;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KlasyfikacjaMiodu.BottomBar
 {
+    /// <summary>
+    ///  Autor: Michał Fornalski.   <para/>
+    ///  Klasa informująca użytkownika o wyznaczonym typie miodu.
+    /// </summary>
     class HoneyTypeInformer
     {
-        private int allHoneyTypeAmount = 0;
         private Label honeyTypeLabel;
-        private Dictionary<HoneyType, int> honeyCounter;
-        private ToolTip HoneyTip;
-
+        private ToolTip honeyTip;
+        private Form form;
+        /// <summary>
+        ///     Konstruktor klasy.
+        /// </summary>
+        /// <param name="honeyTypeLabel">Miejsce w którym pojawi się nazwa miodu.</param>
         public HoneyTypeInformer(Label honeyTypeLabel)
         {
             this.honeyTypeLabel = honeyTypeLabel;
-            honeyCounter = new Dictionary<HoneyType, int>();
-            HoneyTip = new ToolTip();
-            HoneyTip.ShowAlways = true;
+            honeyTip = new ToolTip();
+            honeyTip.SetToolTip(honeyTypeLabel, "Nieskasyfikowany");
+            honeyTip.ShowAlways = true;
 
             SetContextEvents();
             Session.Changed += Session_ContextChanged;
+
+            form = honeyTypeLabel.FindForm();
+            form.SizeChanged += form_SizeChanged;
+        }
+        /// <summary>
+        /// Funkcja wywoływana przy edycji typu miodu.
+        /// </summary>
+        /// <param name="honeyType"></param>
+        private void Context_HoneyTypeEdited(HoneyType honeyType)
+        {
+            Dictionary<HoneyType, int> honeyCounter = CountAllMarkers();
+            List<KeyValuePair<HoneyType, int>> sortedHoneyTypes = FindSortedHoneyTypes(honeyCounter);
+
+            SetHoneyTypeLabelText(sortedHoneyTypes);
+            AdjustLabelPosition();
+        }
+        /// <summary>
+        /// Funkcja wywoływana po zmianie wielkości.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void form_SizeChanged(object sender, EventArgs e)
+        {
+            SetLabelText(honeyTip.GetToolTip(honeyTypeLabel));
+            AdjustLabelPosition();
         }
 
         /// <summary>
-        /// Sets Context events. Listeners should be set again after every Context change in current Session
+        ///     Funkcja ustawia zdarzenie klasy Context.
         /// </summary>
         private void SetContextEvents()
         {
-            Session.Context.MarkerAdded += Context_MarkerAdded;
-            Session.Context.MarkerRemoved += Context_MarkerRemoved;
+            Session.Context.HoneyTypeEdited += Context_HoneyTypeEdited;
+            Session.Context.MarkerAdded += Context_MarkerAddedOrRemoved;
+            Session.Context.MarkerRemoved += Context_MarkerAddedOrRemoved;
         }
 
         /// <summary>
-        /// Called when Context in current session is changing
+        ///     Funkcja wywoływana podczas każdej zmiany w bieżącej sesji.
         /// </summary>
         private void Session_ContextChanged(Context Context)
         {
-            allHoneyTypeAmount = 0;
-            honeyCounter.Clear();
             honeyTypeLabel.Text = "Nieskasyfikowany";
+            honeyTip.SetToolTip(honeyTypeLabel, "Nieskasyfikowany");
 
             SetContextEvents();
         }
-
-        private void Context_MarkerAdded(Marker marker)
+        /// <summary>
+        ///     Funkcja wywoływana podczas dodawaniu/usuwaniu znacznika w bieżącej sesji.
+        /// </summary>
+        /// <param name="marker">Znacznik</param>
+        private void Context_MarkerAddedOrRemoved(Marker notUsed)
         {
-            int oldHoneyTypeAmount = 0;
-            if (honeyCounter.ContainsKey(marker.HoneyType))
+            Dictionary<HoneyType, int> honeyCounter = CountAllMarkers();
+
+            List<KeyValuePair<HoneyType, int>> sortedHoneyTypes = FindSortedHoneyTypes(honeyCounter);
+
+            SetHoneyTypeLabelText(sortedHoneyTypes);
+
+            AdjustLabelPosition();
+        }
+        /// <summary>
+        /// Funkcja dopasowująca pozycje pola tekstowego.
+        /// </summary>
+        private void AdjustLabelPosition()
+        {
+            Control parent = honeyTypeLabel.Parent;
+
+            parent.Location = new Point(form.ClientSize.Width / 2 - parent.Size.Width / 2, parent.Location.Y);
+        }
+        /// <summary>
+        /// Funkcja zliczająca wszystkie znaczniki.
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<HoneyType, int> CountAllMarkers()
+        {
+            Dictionary<HoneyType, int> honeyCounter = new Dictionary<HoneyType, int>();
+
+            foreach (Marker marker in Session.Context.Markers)
             {
-                honeyCounter.TryGetValue(marker.HoneyType, out oldHoneyTypeAmount);
-                honeyCounter.Remove(marker.HoneyType);
+                int oldHoneyTypeAmount = 0;
+                if (honeyCounter.ContainsKey(marker.HoneyType))
+                {
+                    honeyCounter.TryGetValue(marker.HoneyType, out oldHoneyTypeAmount);
+                    honeyCounter.Remove(marker.HoneyType);
+                }
+
+                int newHoneyTypeAmount = oldHoneyTypeAmount + 1;
+                honeyCounter.Add(marker.HoneyType, newHoneyTypeAmount);
             }
 
-            int newHoneyTypeAmount = oldHoneyTypeAmount + 1;
-            honeyCounter.Add(marker.HoneyType, newHoneyTypeAmount);
-            allHoneyTypeAmount++;
-
-            setHoneyTypeLabelText();
+            return honeyCounter;
         }
-
-        void Context_MarkerRemoved(Marker marker)
+        /// <summary>
+        /// Funkcja znajdująca posortowane typy miodów.
+        /// </summary>
+        /// <param name="honeyCounter"></param>
+        /// <returns></returns>
+        private List<KeyValuePair<HoneyType, int>> FindSortedHoneyTypes(Dictionary<HoneyType, int> honeyCounter)
         {
-            int oldHoneyTypeAmount = 1; //1 bo gdy nie bedzie ilosci danego typu w slowniku to potem odejmujemy 1 i wychodzi 0
-            if (honeyCounter.ContainsKey(marker.HoneyType))
+            int markerAmount = 0;
+            foreach (Marker marker in Session.Context.Markers)
             {
-                honeyCounter.TryGetValue(marker.HoneyType, out oldHoneyTypeAmount);
-                honeyCounter.Remove(marker.HoneyType);
+                if (!marker.HoneyType.Dirt)
+                    markerAmount++;
             }
 
-            int newHoneyTypeAmount = oldHoneyTypeAmount - 1;
-            honeyCounter.Add(marker.HoneyType, newHoneyTypeAmount);
-            allHoneyTypeAmount--;
-
-            setHoneyTypeLabelText();
-        }
-
-    //----------------------------
-        private string returnName(string txt)  //zwraca nazwe
-        {
-            StringBuilder honeyName = new StringBuilder();
-
-            honeyName.Clear();
-            honeyName.Append(txt);
-            return honeyName.ToString();
-        }
-
-        private string appendName(string lastName, string txt)  //zwraca zlozona nazwe (paro-gatunkowa)
-        {
-            StringBuilder honeyName = new StringBuilder();
-
-            honeyName.Clear();
-            honeyName.Append(lastName);
-            honeyName.Replace('y', 'o', honeyName.Length-1, 1);
-            honeyName.Append("-" + txt);
-            return honeyName.ToString();
-        }
-    //----------------------------
-
-        private void setHoneyTypeLabelText()
-        {
-            string labelName = "";      //do nazwy
-            int honeyNameCounter = 0;
-            bool foundOne = false;      //dla sprawdzenia, że już raz znalaeziono jakiś pyłek 
-            string tipLabel = "";       //honeyTip
-            
-            HoneyType bestType = null;
+            List<KeyValuePair<HoneyType, int>> matchingHoneyTypes = new List<KeyValuePair<HoneyType, int>>();
 
             foreach (KeyValuePair<HoneyType, int> entry in honeyCounter)
             {
-                if (allHoneyTypeAmount != 0 && ((float)entry.Value/allHoneyTypeAmount*100 >= (float)entry.Key.MinimalPollensPercentageAmount))
-                {
-                    
-                    if (bestType != null)                                               //jest bestType i to co znaleziono tez spelnia zalozenia
-                    {                                                                   //, to nazwa sklada sie z kilku
-                        labelName = appendName(labelName, entry.Key.DescriptionName);
-                        honeyTypeLabel.Text = labelName;
-
-                        honeyNameCounter++;
-                        tipLabel = appendName(tipLabel, entry.Key.DescriptionName);
-
-                        if (honeyNameCounter > 3)
-                            bestType = null;                           
-                    }
-
-                    if (bestType == null && honeyNameCounter < 1)                       //pierwszy gatunek, ktory spelnia warunek, wypisuje nazwe
-                    {                                                                   //i ustala bestType
-                        bestType = entry.Key;
-                        labelName = entry.Key.DescriptionName;
-                        honeyTypeLabel.Text = labelName;
-
-                        honeyNameCounter++;
-                        foundOne = true;
-
-                        tipLabel = entry.Key.DescriptionName;
-                    }
-                }
-
-                if (bestType == null)                                                   //nie ma bestType, to "Niesklasyfikowany"
-                {
-                    //labelName = returnName("Niesklasyfikowany");
-                    //honeyTypeLabel.Text = labelName;
-
-                    if (entry.Value >= 1 && honeyNameCounter > 3 && foundOne == true)   //ale jezeli nie ma best type, a byl juz jakis typ wypisany
-                    {                                                                   //oraz bylo wiecej niz 3 gatunki, to "Wielokwiatowy"
-                        labelName = returnName("Wielokwiatowy");
-                        honeyTypeLabel.Text = labelName;
-
-                        if(honeyNameCounter > 4)                                        //Magiczna 4 - poprawia wpisywanie i samopoczucie (honeyTip)
-                            tipLabel = appendName(tipLabel, entry.Key.DescriptionName);
-
-                        honeyNameCounter++;
-                    }
-                    
-                    if(honeyNameCounter < 3)
-                    {
-                        labelName = returnName("Niesklasyfikowany");
-                        honeyTypeLabel.Text = labelName;
-
-                        tipLabel = "Niesklasyfikowany";
-                    }
-                }
-                
+                if (100f * entry.Value / markerAmount >= entry.Key.MinimalPollensPercentageAmount && !entry.Key.Dirt)
+                    matchingHoneyTypes.Add(entry);
             }
-                                                                                        //HoneyTip
-            HoneyTip.SetToolTip(honeyTypeLabel, tipLabel);                              //Podpowiedz pokazująca gatunki gdy "Wielokwiatowy"
-        }
 
+            sortHoneyTypes(matchingHoneyTypes);
+            return matchingHoneyTypes;
+        }
+        /// <summary>
+        /// Funkcja sortująca typy miodów.
+        /// </summary>
+        /// <param name="honeyTypes"></param>
+        private void sortHoneyTypes(List<KeyValuePair<HoneyType, int>> honeyTypes)
+        {
+            honeyTypes.Sort(
+                (KeyValuePair<HoneyType, int> p1, KeyValuePair<HoneyType, int> p2) =>
+                {
+                    return p2.Value - p1.Value;
+                });
+        }
+        /// <summary>
+        ///     Funkcja generuje i ustala finalną nazwę miodu.
+        /// </summary>
+        private void SetHoneyTypeLabelText(List<KeyValuePair<HoneyType, int>> sortedHoneyTypes)
+        {
+            StringBuilder name = new StringBuilder();
+
+            if (sortedHoneyTypes.Count == 0)
+                name.Append("Niesklasyfikowany");
+
+            foreach (KeyValuePair<HoneyType, int> item in sortedHoneyTypes)
+            {
+
+                if (name.Length > 0)
+                {
+                    if (name[name.Length-1] == 'y')
+                    {
+                        name.Remove(name.Length - 1, 1);
+                        name.Append("o-");
+                    }
+                    else
+                        name.Append("-");
+                }
+
+                name.Append(item.Key.DescriptionName);
+            }
+
+            SetLabelText(name.ToString());
+            honeyTip.SetToolTip(honeyTypeLabel, name.ToString());
+        }
+        /// <summary>
+        /// Funkcja ustawiająca co ostatecznie pojawi się w polu tekstowym.
+        /// </summary>
+        /// <param name="text"></param>
+        private void SetLabelText(String text)
+        {
+            String shortName = text;
+            int pixelsPerLetter = 9;
+            int otherLabelsWidth = 450;
+            int maxTextSize = Math.Max(0, (form.ClientSize.Width - otherLabelsWidth) / pixelsPerLetter);
+
+            if (shortName.Length > maxTextSize)
+            {
+                shortName = shortName.Substring(0, maxTextSize);
+                if (shortName.Contains("-"))
+                    shortName = shortName.Substring(0, shortName.LastIndexOf("-")) + "...";
+                else
+                    shortName = "...";
+            }
+
+            honeyTypeLabel.Text = shortName;
+        }
     }
 }

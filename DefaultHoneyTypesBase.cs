@@ -11,13 +11,16 @@ using System.Resources;
 
 namespace KlasyfikacjaMiodu
 {
+    /// <summary>
+    /// Autor: Arek Mackiewicz, Krzysztof Kalisz. 
+    ///     Klasa opowiedzialna za pobieranie listy pyłków z bazy.
+    /// </summary>
     internal class DefaultHoneyTypesBase
     {
         /// <summary>
-        /// Author: Arek Mackiewicz,Krzysztof Kalisz<para/>
-        /// All project data and current state is kept as a program Context.
-        /// Every Context realted action as new project, loading new data etc. can by listened with events.
+        /// Statyczna funkcja odpowiedzialna za powieranie listy pyłków z bazy.
         /// </summary>
+        /// <returns>Listaa pyłkow</returns>
         public static List<HoneyType> GetAllHoneyTypesFromFile()
         {
             List<HoneyType> HoneyList = new List<HoneyType>();
@@ -26,10 +29,17 @@ namespace KlasyfikacjaMiodu
             string HoneyDescriptionName = "";
             string HoneyLinkedName = "";
             Color HoneyMarkerColor = Color.Empty;
+            int r, g, b;
             float HoneyMinimalPollensAmount = 0;
             float HoneyMinimalPollensPercentageAmount = 0;
 
-            using (StringReader reader = new StringReader(Properties.Resources.HoneyTypes))
+            string text;
+            if (File.Exists("../../Resources/HoneyTypes.txt"))
+                text = File.ReadAllText("../../Resources/HoneyTypes.txt");
+            else
+                text = Properties.Resources.HoneyTypes;
+
+            using (StringReader reader = new StringReader(text))
             {
                 while (true)
                 {
@@ -37,14 +47,43 @@ namespace KlasyfikacjaMiodu
                     if (HoneyName == null) break;
                     HoneyDescriptionName = reader.ReadLine();
                     HoneyLinkedName = reader.ReadLine();
-                    HoneyMarkerColor = Color.FromName(reader.ReadLine());
+                    r = Convert.ToInt32(reader.ReadLine());
+                    g = Convert.ToInt32(reader.ReadLine());
+                    b = Convert.ToInt32(reader.ReadLine());
+                    HoneyMarkerColor = Color.FromArgb(r, g, b);
                     HoneyMinimalPollensAmount = Convert.ToSingle(reader.ReadLine());
                     HoneyMinimalPollensPercentageAmount = Convert.ToSingle(reader.ReadLine());
-                    HoneyList.Add(new HoneyType(HoneyName, HoneyDescriptionName, HoneyLinkedName, HoneyMarkerColor,
-                        HoneyMinimalPollensAmount, HoneyMinimalPollensPercentageAmount));
+
+                    HoneyType h = new HoneyType(HoneyName, HoneyDescriptionName, HoneyLinkedName, HoneyMarkerColor,
+                        HoneyMinimalPollensAmount, HoneyMinimalPollensPercentageAmount);
+
+                    if (HoneyName == "Zanieczyszczenie")
+                        h.Dirt = true;
+                        
+                    HoneyList.Add(h);
                 }
             }
             return HoneyList;
+        }
+        /// <summary>
+        /// Dodaje nowy typ miodu do podstawowej bazy.
+        /// </summary>
+        /// <param name="honeyType">HoneyType</param>
+        public static void AddNewHoneyTypeToFile(HoneyType honeyType)
+        {
+            string path = "../../Resources/HoneyTypes.txt";
+          
+            using (StreamWriter writer = new StreamWriter(path, true))
+            {
+                writer.WriteLine(honeyType.Name);
+                writer.WriteLine(honeyType.DescriptionName);
+                writer.WriteLine(honeyType.Name);
+                writer.WriteLine(honeyType.MarkerColor.R);
+                writer.WriteLine(honeyType.MarkerColor.G);
+                writer.WriteLine(honeyType.MarkerColor.B);
+                writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
+                writer.WriteLine(honeyType.MinimalPollensPercentageAmount);
+            }
         }
     }
 }

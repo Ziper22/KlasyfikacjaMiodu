@@ -1,16 +1,18 @@
 ﻿namespace KlasyfikacjaMiodu.SideMenu
 {
+    /// <summary>
+    /// Klasa odpowiedzialna za okno edycji typów miodu.
+    /// Klasa generowana automatycznie.
+    /// </summary>
     partial class HoneyTypeEditWindow
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Funkcja odpowiedzialna za zwolnienie zasobów.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">Prawda jeśli dane powinny być wyczyszczone.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -23,8 +25,7 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// Funkcja inicjująca komponenty okna.
         /// </summary>
         private void InitializeComponent()
         {
@@ -38,6 +39,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.percentNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBox = new System.Windows.Forms.CheckBox();
             this.warningLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -145,6 +147,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkBox);
             this.panel1.Controls.Add(this.warningLabel);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label4);
@@ -162,15 +165,26 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(272, 176);
+            this.panel1.Size = new System.Drawing.Size(272, 193);
             this.panel1.TabIndex = 0;
+            // 
+            // checkBox
+            // 
+            this.checkBox.AutoSize = true;
+            this.checkBox.Location = new System.Drawing.Point(58, 151);
+            this.checkBox.Name = "checkBox";
+            this.checkBox.Size = new System.Drawing.Size(166, 17);
+            this.checkBox.TabIndex = 19;
+            this.checkBox.Text = "Dodaj pyłek do bazy na stałe";
+            this.checkBox.UseVisualStyleBackColor = true;
             // 
             // warningLabel
             // 
+            this.warningLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.warningLabel.AutoSize = true;
             this.warningLabel.BackColor = System.Drawing.SystemColors.Control;
             this.warningLabel.ForeColor = System.Drawing.Color.Red;
-            this.warningLabel.Location = new System.Drawing.Point(9, 154);
+            this.warningLabel.Location = new System.Drawing.Point(10, 171);
             this.warningLabel.Name = "warningLabel";
             this.warningLabel.Size = new System.Drawing.Size(259, 13);
             this.warningLabel.TabIndex = 18;
@@ -218,8 +232,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(272, 176);
+            this.ClientSize = new System.Drawing.Size(272, 193);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "HoneyTypeEditWindow";
             this.Text = "AddEditWindow";
             ((System.ComponentModel.ISupportInitialize)(this.specimenPictureBox)).EndInit();
@@ -247,6 +262,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label warningLabel;
+        private System.Windows.Forms.CheckBox checkBox;
 
     }
 }

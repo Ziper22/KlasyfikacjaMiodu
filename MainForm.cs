@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -15,6 +16,10 @@ using KlasyfikacjaMiodu.ViewPanel;
 
 namespace KlasyfikacjaMiodu
 {
+    /// <summary>
+    /// Klasa odpowiedzialna za główne okno programu.
+    /// Klasa wygenerowana automatycznie.
+    /// </summary>
     public partial class MainForm : Form
     {
         private MarkersPanel markersPanel;
@@ -26,23 +31,26 @@ namespace KlasyfikacjaMiodu
         private TopMenuEdit topMenuEdit;
         private TopMenuView topMenuView;
         private SidePanel sidePanel;
-
+        /// <summary>
+        /// Konstruktor klasy MainForm().
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
             PrepareSidePanel();
             markersPanel = new MarkersPanel(viewPanel, pollensImage);
-            imagePanel = new ImagePanel(viewPanel, pollensImage);
+            imagePanel = new ImagePanel(viewPanel, pollensImage, this);
             scaleHandler = new ScaleHandler(scale);
             honeyTypeInformer = new HoneyTypeInformer(honeyType);
-            timeCounter = new TimeCounter(workTime);
-            topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, loadProjectMenuItem, loadImageMenuItem, quitMenuItem);
+            timeCounter = new TimeCounter(workTime, stoperButton);
+            topMenuFile = new TopMenuFile(newProjectMenuItem, saveProjectMenuItem, loadProjectMenuItem, loadImageMenuItem, quitMenuItem, this);
             topMenuEdit = new TopMenuEdit(this, editMenu, undoMenuItem, redoMenuItem);
-            topMenuView = new TopMenuView(showPanelMenuItem, sidePanel);
-
-            AddMousePositionEvent();
+            topMenuView = new TopMenuView(showPanelMenuItem, centerImageMenuItem, sidePanel, viewPanel);
+            Icon = Properties.Resources.Icon;
         }
-
+        /// <summary>
+        /// Funkcja tworząca boczny panel.
+        /// </summary>
         private void PrepareSidePanel()
         {
             sidePanel = new SidePanel(this);
@@ -51,12 +59,14 @@ namespace KlasyfikacjaMiodu
             sidePanel.Owner = this;
 
             CenterToScreen();
-            Location = new Point(Left - sidePanel.Width/2, Top);
+            Location = new Point(Left - sidePanel.Width / 2, Top);
 
-            sidePanel.Location = new Point(Right,Top);
+            sidePanel.Location = new Point(Right, Top);
             sidePanel.Show();
         }
-
+        /// <summary>
+        /// Właściwość zwracająca obiekt CreateParams.
+        /// </summary>
         protected override CreateParams CreateParams
         {
             get
@@ -67,49 +77,56 @@ namespace KlasyfikacjaMiodu
             }
         }
 
-        private void AddMousePositionEvent()
+        /// <summary>
+        /// Funkcja blokuje tryb edycji.
+        /// </summary>
+        public static void SetEditMode(MainForm mainForm, bool status)
         {
-            GlobalMouseHandler gmh = new GlobalMouseHandler();
-            gmh.TheMouseMoved += new MouseMovedEvent(gmh_TheMouseMoved);
-            Application.AddMessageFilter(gmh);
+            Session.Context.EditMode = status;
+
+            mainForm.sidePanel.SetPanel(status);
+
+            mainForm.showPanelMenuItem.Enabled = status;
+            mainForm.centerImageMenuItem.Enabled = status;
+
+            mainForm.undoMenuItem.Visible = status;
+            mainForm.redoMenuItem.Visible = status;
+
+            mainForm.wlaczEdytowanieToolStripMenuItem.Visible = !status;
+
+            if (mainForm.timeCounter.Running && status == false)
+                mainForm.timeCounter.PauseTimer();
+
+            else if(!mainForm.timeCounter.Running && status == true)
+                mainForm.timeCounter.StartTimer();
         }
-
-        void gmh_TheMouseMoved()
+       
+       /// <summary>
+       /// Funkcja włączająca tryb edycji.
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
+        public void wlaczEdytowanieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Point p = System.Windows.Forms.Cursor.Position;
-            Point pf = new Point(p.X - Left, p.Y - Top);
-            mousePostion.Text = pf.ToString();
+            MainForm.SetEditMode((MainForm)this,true);
         }
-
-        public delegate void MouseMovedEvent();
-
-        public class GlobalMouseHandler : IMessageFilter
+        /// <summary>
+        /// Funkcja wywoływana po wciśnięciu Pomoc --> Obsługa programu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void guideToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            private const int WM_MOUSEMOVE = 0x0200;
-
-            public event MouseMovedEvent TheMouseMoved;
-
-            #region IMessageFilter Members
-
-            public bool PreFilterMessage(ref Message m)
-            {
-                if (m.Msg == WM_MOUSEMOVE)
-                {
-                    if (TheMouseMoved != null)
-                    {
-                        TheMouseMoved();
-                    }
-                }
-                // Always allow message to continue to the next filter control
-                return false;
-            }
-
-            #endregion
+            Process.Start("wordpad.exe", "../../Resources/obsluga_programu.docx");
         }
-
-        private void topMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        /// <summary>
+        /// Funkcja wywoływana po wciśnięciu Pomoc --> Lista miodów i pyłków.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void honeyListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Process.Start("wordpad.exe", "../../Resources/lista_miodow_i_pylkow.docx");
         }
     }
 }
